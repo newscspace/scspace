@@ -3,9 +3,7 @@ import React, {Component} from 'react';
 
 class Banner extends Component{
     render() {return (
-        <section class="banner_part">
-
-        </section>
+      <h1>배너 구현</h1>
       )};
 }
 
