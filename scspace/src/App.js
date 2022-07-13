@@ -1,4 +1,18 @@
 import React, {Component} from 'react';
+import {BrowserRouter, Switch, Route} from 'react-router-dom';
+
+import Header from './Components/Header';
+import Footer from './Components/Footer';
+import Main from './Components/Main';
+import Notice from './Components/Notice';
+import Space from './Components/Space';
+import Ask from './Components/Ask';
+import Introduction from './Components/Introduction';
+import Reservation from './Components/Reservation';
+import Mypage from './Components/Mypage';
+import Manage from './Components/Manage';
+
+
 
 class App extends Component {
   constructor(props){
@@ -10,6 +24,33 @@ class App extends Component {
 
   render() {return (
     <div className="App">
+      <BrowserRouter>
+      <Header>
+      </Header>
+      <Switch>
+        
+        <Route path="/" component={Main} exact/>
+        <Route path="/notice" component={Notice} exact/>
+        <Route path="/space/:name" render={(props) => (
+          <Space key={props.match.params.name} {...props} exact/>
+        )}/>
+        <Route path="/introduction" component={Introduction} exact/>
+        
+        <Route path="/ask/:which" render={(props) => (
+          <Ask key={props.match.params.which} {...props}/>
+        ) } exact/>
+        
+        <Route path="/reservation" component={Reservation} exact/>
+        <Route path="/mypage" component={Mypage} exact/>
+        <Route path="/Manage" component={Manage} exact/>
+        <Route path="*" render={() => (<h1>404 error</h1>)}/>
+      </Switch>
+   
+      
+      <Footer>
+      </Footer>
+      
+      </BrowserRouter>
     </div>
   )};
 }
