@@ -1,9 +1,7 @@
 import React, {Component} from 'react';
 import Datepicker from "react-datepicker";
 import {Link} from 'react-router-dom';
-import "../css/style.css"
-import "../css/bootstrap.min.css"
-import "../css/flaticon.css"
+
 
 class Fast_reservation extends Component{
 
