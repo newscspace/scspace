@@ -5,7 +5,7 @@ import "../css/flaticon.css"
 
 class Footer extends Component{
     render() {return (
-    <h1>Footer</h1>
+    <h1>Footer</h1>)};
 }
 
 export default Footer;
