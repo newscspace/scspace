@@ -2,7 +2,6 @@ import React, {Component, useState} from 'react';
 import {Link} from 'react-router-dom';
 
 class Banner extends Component{
-    componetWillmou
     render() {return (
       
   <section id="hero-static" className="hero-static d-flex align-items-center">
