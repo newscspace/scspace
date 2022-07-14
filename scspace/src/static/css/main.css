@@ -1694,6 +1694,7 @@ section {
   color: var(--color-gray);
 }
 .faq .img {
+  background-image : url('../../../public/img/faq.jpg');
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center center;
