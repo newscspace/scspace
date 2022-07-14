@@ -2797,6 +2797,23 @@ section {
 .introduction {
   line-height: 3.0;
 }
+.menu .menu-flters {
+  padding: 0;
+  margin: 0 auto 30px auto;
+  list-style: none;
+  text-align: center;
+}
+.menu .menu-flters li {
+  cursor: pointer;
+  display: inline-block;
+  padding: 0;
+  font-size: 18px;
+  font-weight: 300;
+  margin: 0 10px;
+  line-height: 1;
+  margin-bottom: 5px;
+  transition: all 0.3s ease-in-out;
+}
 
 /*.breadcrumbs {
   padding: 15px 0;
