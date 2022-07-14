@@ -223,6 +223,7 @@ section {
 # Header
 --------------------------------------------------------------*/
 .header {
+  background-color: rgba(255, 255, 255, 0.75);
   padding: 15px 0;
   transition: all 0.5s;
   z-index: 997;
@@ -2789,3 +2790,39 @@ section {
   background: var(--color-primary);
   text-decoration: none;
 }
+
+/*--------------------------------------------------------------
+# Introduction
+--------------------------------------------------------------*/
+.introduction {
+  line-height: 3.0;
+}
+
+/*.breadcrumbs {
+  padding: 15px 0;
+  background: rgba(var(--color-secondary-rgb), 0.05);
+  min-height: 40px;
+  margin-top: 76px;
+}
+.breadcrumbs h2 {
+  font-size: 30px;
+  font-weight: 300;
+  margin: 0;
+}
+.breadcrumbs ol {
+  display: flex;
+  flex-wrap: wrap;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  font-size: 14px;
+}
+.breadcrumbs ol li + li {
+  padding-left: 10px;
+}
+.breadcrumbs ol li + li::before {
+  display: inline-block;
+  padding-right: 10px;
+  color: var(--color-secondary-light);
+  content: "/";
+}*/
