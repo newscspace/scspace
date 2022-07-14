@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {withRouter} from 'react-router-dom';
-
+import FAQ from './FAQ'
 class Ask extends Component{
     constructor(props){
         super(props);
@@ -17,9 +17,9 @@ class Ask extends Component{
 
     render() {
         return (
-        <div>
-            <h1>{this.state.which}페이지 구현</h1>
-        </div>
+        <section>
+            {this.state.which === 'ask' ? <h1>문의 페이지 구현</h1> : <FAQ></FAQ>}
+        </section>
       )};
 }
 
