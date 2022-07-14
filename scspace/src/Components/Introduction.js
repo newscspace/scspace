@@ -41,13 +41,13 @@ class Introduction extends Component{
             </div>
           </div>
         </div>
-        <section  className="inner-page">
+        <section>
           <div  className="container">
             <div  className="section-header">
               <h2>학생문화공간위원회</h2>
               <p>Student Culture and Space Committee</p>
             </div>
-            
+            <hr></hr>
           
         
           {/* 
@@ -62,7 +62,7 @@ class Introduction extends Component{
           <section id="portfolio"  className="portfolio">
               <div className="container-fluid">
 
-                <div  className="portfolio-isotope" data-portfolio-filter="*" data-portfolio-layout="masonry" data-portfolio-sort="original-order">
+                <div  className="portfolio-isotope">
 
                   <ul  className="portfolio-flters">
           {this.state.info.map((contents, idx) => {
