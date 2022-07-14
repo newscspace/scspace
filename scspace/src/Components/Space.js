@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
 import {withRouter} from 'react-router-dom';
+//individual_practice_room_1','individual_practice_room_2','individual_practice_room_3','piano_room_1','piano_room_2','multipurpose_room','seminar_room_1','seminar_room_2',
+//'dance_studio','group_practice_room','mirae_hall','ullim_hall','open_space','workshop'
 
 class Space extends Component{
     constructor(props){

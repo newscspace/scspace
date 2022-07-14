@@ -1,13 +1,13 @@
 import React, {Component} from 'react';
 import Banner from './Banner'
-import Fast_Reservation from './Fast_reservation';
-
+import Fast_notice from './Fast_notice';
+import FAQ from './FAQ'
 class Header extends Component{
     render() {return (
         <div>
             <Banner></Banner>
-
-            <Fast_Reservation></Fast_Reservation>
+            <Fast_notice></Fast_notice>
+            <FAQ></FAQ>
         </div>
       )};
 }
