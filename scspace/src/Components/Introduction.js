@@ -33,10 +33,10 @@ class Introduction extends Component{
         <div  className="breadcrumbs">
           <div  className="container">
             <div  className="d-flex justify-content-between align-items-center">
-              <h2>소개</h2>
+              <h3>소개</h3>
               <ol>
                 <li><Link to="/">Home</Link></li>
-                <li>소개</li>
+                <li><Link to="/introduction">소개</Link></li>
               </ol>
             </div>
           </div>
@@ -62,7 +62,7 @@ class Introduction extends Component{
           <section id="portfolio"  className="portfolio">
               <div className="container-fluid">
 
-                <div  className="portfolio-isotope">
+                <div  className="portfolio-isotope" >
 
                   <ul  className="portfolio-flters">
           {this.state.info.map((contents, idx) => {
