@@ -3,6 +3,7 @@ import {withRouter} from 'react-router-dom';
 import {Link} from 'react-router-dom';
 //individual_practice_room_1','individual_practice_room_2','individual_practice_room_3','piano_room_1','piano_room_2','multipurpose_room','seminar_room_1','seminar_room_2',
 //'dance_studio','group_practice_room','mirae_hall','ullim_hall','open_space','workshop'
+import Individual from './spaces/Individual/Individual';
 
 class Space extends Component{
     constructor(props){
@@ -22,15 +23,8 @@ class Space extends Component{
         }
     }
 
-    //'개인연습실', '피아노실', '합주실', '무예실', '울림홀', '미래홀', '창작공방', '오픈스페이스'
-    //'/space/individual-practice-room', '/space/piano-room', '/space/group-practice-room', '/space/dance-studio', '/space/ullim-hall', '/space/mirae-hall', '/space/workshop', '/space/open-space'
-    
-
     componentDidMount(){
         const name = this.props.match.params.name.replace(/-/gi, '_');
-        // {this.state.space.map((language, idx) =>{
-        //     if (language[idx].English === e_name) {k_name = language[idx].Korean}  
-        // })}
         this.setState({
             space_name: name,
         })
@@ -46,7 +40,7 @@ class Space extends Component{
                         <h2>{this.state.space[this.state.space_name]}</h2>
                         <ol>
                             <li><Link to="/">Home</Link></li>
-                            <li>{this.state.space[this.state.space_name]}</li>
+                            <li>공간</li>
                         </ol>
                     </div>
 
@@ -56,15 +50,14 @@ class Space extends Component{
 
                 <div class="section-header">
                     <h2>{this.state.space[this.state.space_name]}</h2>
-                    <p>Example inner page template</p>
+                    <p>{this.state.space_name.replace(/_/gi, ' ')}</p>
                 </div>
 
                 <p>
-                {this.state.space_name} 공간소개 페이지 구현
+                <Individual></Individual>
                 </p>
 
             </div>
-            {/* <h1>{this.state.space_name}공간소개 페이지 구현</h1> */}
         </div>
       )};
 }
