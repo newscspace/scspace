@@ -13,13 +13,14 @@ class Space extends Component{
             space : {
                 individual_practice_room: '개인연습실',
                 piano_room: '피아노실',
+                seminar_room : '세미나실',
                 group_practice_room: '합주실',
                 dance_studio: '무예실',
                 ullim_hall: '울림홀',
                 mirae_hall: '미래홀',
                 workshop: '창작공방',
                 open_space: '오픈스페이스'
-            }
+            },
         }
     }
 
@@ -46,18 +47,18 @@ class Space extends Component{
 
                 </div>
             </div>
-            <div class="container">
+            <section>
 
                 <div class="section-header">
                     <h2>{this.state.space[this.state.space_name]}</h2>
                     <p>{this.state.space_name.replace(/_/gi, ' ')}</p>
                 </div>
-
+                <hr/>
                 <p>
                 <Individual></Individual>
                 </p>
 
-            </div>
+            </section>
         </div>
       )};
 }
