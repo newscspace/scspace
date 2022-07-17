@@ -3,9 +3,6 @@ import Introduction from './Introduction';
 import Use from './Use';
 import Caution from './Caution';
 
-
-
-
 class Individual extends Component{
   constructor(props) {
     super();
@@ -33,13 +30,13 @@ class Individual extends Component{
   render() {return (
       <div>
         <section id="about" className="about">
-          <div className="container" >
+          <div className="container">
 
             <div className="row g-4 g-lg-5" data-aos-delay="200">
 
               <div className="col-lg-5">
                 <div className="about-img">
-                  <img src="assets/img/about.jpg" className="img-fluid" alt=""/>
+                  <img src="/img/about.jpg" className="img-fluid" alt=""/>
                 </div>
               </div>
 
