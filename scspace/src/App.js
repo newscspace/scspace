@@ -7,11 +7,12 @@ import Main from './Components/Main';
 import Notice from './Components/Notice';
 import Space from './Components/Space';
 import Ask from './Components/Ask';
+import Faq from './Components/FAQ';
 import Introduction from './Components/Introduction';
 import Reservation from './Components/Reservation';
 import Mypage from './Components/Mypage';
 import Manage from './Components/Manage';
-
+import Calendar from './Components/Calendar';
 
 
 class App extends Component {
@@ -36,13 +37,13 @@ class App extends Component {
         )}/>
         <Route path="/introduction" component={Introduction} exact/>
         
-        <Route path="/ask/:which" render={(props) => (
-          <Ask key={props.match.params.which} {...props}/>
-        ) } exact/>
+        <Route path="/ask" component ={Ask} exact/>
+        <Route path="/faq" component ={Faq} exact/>
         
         <Route path="/reservation" component={Reservation} exact/>
         <Route path="/mypage" component={Mypage} exact/>
-        <Route path="/Manage" component={Manage} exact/>
+        <Route path="/manage" component={Manage} exact/>
+        <Route path="/calendar" component={Calendar} exact/>
         <Route path="*" render={() => (<h1>404 error</h1>)}/>
       </Switch>
    
