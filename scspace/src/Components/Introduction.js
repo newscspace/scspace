@@ -42,11 +42,11 @@ class Introduction extends Component{
           </div>
         </div>
         <section>
-          <div  className="container">
+          
             <div  className="section-header">
               <h2>학생문화공간위원회</h2>
               <p>Student Culture and Space Committee</p>
-            </div>
+            
             <hr></hr>
           
         
