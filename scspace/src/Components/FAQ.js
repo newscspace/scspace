@@ -33,10 +33,12 @@ class FAQ extends Component{
 
     render() {return (
 <div>
-<div  className="breadcrumbs">
+  {!this.props.main ? 
+          (<div>
+          <div  className="breadcrumbs">
           <div  className="container">
             <div  className="d-flex justify-content-between align-items-center">
-              <h3>소개</h3>
+              <h3>FAQ</h3>
               <ol>
                 <li><Link to="/">Home</Link></li>
                 <li><Link to="/introduction">FAQ</Link></li>
@@ -44,13 +46,17 @@ class FAQ extends Component{
             </div>
           </div>
         </div>
-<section id="faq"  className ="faq">
-
-            <div  className="section-header">
+        <section>
+        <div  className="section-header">
               <h2>FAQ</h2>
               <p>FAQ</p>
             </div>
-            <hr></hr>
+            <hr></hr> 
+        </section>
+        </div>) : <div></div> }
+<section id="faq"  className ="faq">
+
+            
 
 <div  className="container-fluid">
   <div  className="row gy-4">

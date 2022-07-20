@@ -7,7 +7,7 @@ class Header extends Component{
         <div>
             <Banner></Banner>
             <Fast_notice></Fast_notice>
-            <FAQ></FAQ>
+            <FAQ main={true}></FAQ>
         </div>
       )};
 }
