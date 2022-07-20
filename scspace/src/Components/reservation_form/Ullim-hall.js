@@ -2,15 +2,15 @@ import React, {Component} from 'react';
 import {post} from 'axios';
 
 
-import Time from './Time';
-import Contents from './Contents';
-import Agree from './Agree';
-import Organization_name from './Organization_name';
-import Number from './Number';
-import Event_name from './Event_name';
-import Event_purpose from './Event_purpose'
-import Food from './Food';
-import Equipment from './Checkbox_list'
+import Time from './form_component/Time';
+import Contents from './form_component/Contents';
+import Agree from './form_component/Agree';
+import Organization_name from './form_component/Organization_name';
+import Number from './form_component/Number';
+import Event_name from './form_component/Event_name';
+import Event_purpose from './form_component/Event_purpose'
+import Food from './form_component/Food';
+import Equipment from './form_component/Checkbox_list'
 
 class Form extends Component{
     constructor(props){

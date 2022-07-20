@@ -2,9 +2,9 @@ import React, {Component} from 'react';
 import {post} from 'axios';
 
 
-import Time from './Time';
-import Agree from './Agree';
-import SpacePick from './SpacePick';
+import Time from './form_component/Time';
+import Agree from './form_component/Agree';
+import SpacePick from './form_component/SpacePick';
 
 class Form extends Component{
     constructor(props){

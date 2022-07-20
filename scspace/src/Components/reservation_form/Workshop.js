@@ -1,11 +1,11 @@
 import React, {Component} from 'react';
 import {post} from 'axios';
 
-import Time from './Time';
-import Contents from './Contents';
-import Agree from './Agree';
-import Organization_name from './Organization_name';
-import Number from './Number';
+import Time from './form_component/Time';
+import Contents from './form_component/Contents';
+import Agree from './form_component/Agree';
+import Organization_name from './form_component/Organization_name';
+import Number from './form_component/Number';
 
 class Form extends Component{
     constructor(props){
