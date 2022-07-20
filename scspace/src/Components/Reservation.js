@@ -44,47 +44,6 @@ class Reservation extends Component{
             Workshop: <Workshop/>,
             Open_space: <Openspace/>
         },
-            /*개인연습실 및 피아노실 */
-            form1 : {
-                space: '',
-                team_id: null ,
-                time_from : '',
-                time_to : '',
-                content : {}
-            } ,
-            /*창작공방, 세미나실 */
-            form2 : {
-                space: '',
-                team_id: null,
-                time_from : '',
-                time_to : '',
-                content : {team_name : '', event_name:'', number : 1, contents:''}
-            },
-            /*무예실, 합주실 */
-            form3 : {
-                space: '',
-                team_id: null,
-                team_list:[],
-                time_from : '',
-                time_to : '',
-                content : {team_name : '', event_name:'', team_member:[], contents:''}
-            }, 
-            /*미래홀, 울림홀*/
-            form3 : {
-                space: '',
-                team_id: null,
-                time_from : '',
-                time_to : '',
-                content : {team_name : '', event_name:'', number:{inner:0, outer:0}, event_purpose:'',contents:'', rehersal_time:{rehersal_from:'', rehersal_to:'', rehersal_lastday_from : '', rehersal_lastday_to:''}, equipment:[], food:false, lobby:false, desk:0, chair:0}
-            }, 
-            /*오픈스페이스*/ 
-            form4 : {
-                space: '',
-                team_id: null,
-                time_from : '',
-                time_to : '',
-                content : {team_name : '', event_name:'', number:{inner:0, outer:0}, event_purpose:'',contents:'', character:[], where:[], rehersal_time:{rehersal_from:'', rehersal_to:''}, food:false, desk:0, chair:0}
-            },
             /*유의 사항*/ 
             notice : [
                 {title : '1', contents:'2'}, 
