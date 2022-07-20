@@ -3,7 +3,9 @@ import {withRouter} from 'react-router-dom';
 import {Link} from 'react-router-dom';
 //individual_practice_room_1','individual_practice_room_2','individual_practice_room_3','piano_room_1','piano_room_2','multipurpose_room','seminar_room_1','seminar_room_2',
 //'dance_studio','group_practice_room','mirae_hall','ullim_hall','open_space','workshop'
-import Individual from './spaces/Individual/Individual';
+import Individual from './spaces/Individual/Individual.js';
+
+
 
 class Space extends Component{
     constructor(props){
@@ -29,9 +31,14 @@ class Space extends Component{
         this.setState({
             space_name: name,
         })
-     }
-
+    }
+    
     render() {
+        // function Capitalize(str) {
+        //     return str.charAt(0).toUpperCase() + str.slice(1);
+        // }
+        const Address = this.state.space_name;
+        
         return (
         <div>
             <div class="breadcrumbs">
@@ -54,9 +61,16 @@ class Space extends Component{
                     <p>{this.state.space_name.replace(/_/gi, ' ')}</p>
                 </div>
                 <hr/>
-                <p>
-                <Individual></Individual>
-                </p>
+                <div>{
+                    (function(){
+                        switch(Address){
+                        case 'individual_practice_room' :
+                            return <p><Individual></Individual></p>
+                        default :
+                            return <p>{Address}</p>
+                    }})()
+                }           
+                </div>
 
             </section>
         </div>
