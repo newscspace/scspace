@@ -27,12 +27,22 @@ class Individual extends Component{
     this.setState({menu: menuIndex});
   }
 
-  render() {return (
+  render() {
+    const settings = {
+      dots: true,
+      infinite: true,
+      speed: 500,
+      slidesToShow: 1,
+      slidesToScroll: 1,
+    };
+    return (
       <div>
         <section id="about" className="about">
+          
           <div className="container">
 
             <div className="row g-4 g-lg-5" data-aos-delay="200">
+              
 
               <div className="col-lg-5">
                 <div className="about-img">
