@@ -46,7 +46,7 @@ class Piano extends Component{
 
               <div className="col-lg-5">
                 <div className="about-img">
-                  <img src="/img/individual-practice-room.jpg" className="img-fluid" alt=""/>
+                  <img src="/img/piano-room.png" className="img-fluid" alt=""/>
                 </div>
               </div>
 

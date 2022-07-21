@@ -46,7 +46,7 @@ class Seminar extends Component{
 
               <div className="col-lg-5">
                 <div className="about-img">
-                  <img src="/img/individual-practice-room.jpg" className="img-fluid" alt=""/>
+                  <img src="/img/seminar-room.jpg" className="img-fluid" alt=""/>
                 </div>
               </div>
 
