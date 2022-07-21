@@ -13,8 +13,8 @@ import Reservation from './Components/Reservation';
 import Mypage from './Components/Mypage';
 import Manage from './Components/Manage';
 import Calendar from './Components/Calendar';
-
-
+import Notice_view from './Components/Notice_view';
+import Notice_write from './Components/Notice_write';
 
 class App extends Component {
   constructor(props){
@@ -46,6 +46,12 @@ class App extends Component {
         <Route path="/mypage" component={Mypage} exact/>
         <Route path="/manage" component={Manage} exact/>
         <Route path="/calendar" component={Calendar} exact/>
+
+        <Route path="/notice-view/:id" render={(props) => (
+          <Notice_view key={props.match.params.name} {...props} exact/>
+        )}/>
+        <Route path="/notice-write" component={Notice_write} exact/>
+
         <Route path="*" render={() => (<h1>404 error</h1>)}/>
       </Switch>
    
