@@ -2806,3 +2806,16 @@ section {
   content: "-";
   margin-right: 0.3em;
 }
+.space .btn-getstarted, .space .btn-getstarted:focus {
+  font-size: 12px;
+  color: var(--color-white);
+  background: var(--color-primary);
+  padding: 5px 10px;
+  border-radius: 4px;
+  transition: 0.3s;
+  font-family: var(--font-secondary);
+}
+.space .btn-getstarted:hover, .space .btn-getstarted:focus:hover {
+  color: var(--color-white);
+  background: rgba(var(--color-primary-rgb), 0.85);
+}
