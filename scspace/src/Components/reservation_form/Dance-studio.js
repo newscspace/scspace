@@ -63,7 +63,7 @@ class Form extends Component{
     }
 
     sendPost = () => {
-      const url = 'http://localhost:5000/api/reservation/create';
+      const url = '/api/reservation/create';
       const config = {
         headers : {
           'Content-Type' : 'application/json'
