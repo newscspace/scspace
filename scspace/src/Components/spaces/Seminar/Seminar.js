@@ -3,7 +3,7 @@ import Introduction from './Introduction';
 import Use from './Use';
 import Caution from './Caution';
 
-class Individual extends Component{
+class Seminar extends Component{
   constructor(props) {
     super();
     this.state = {
@@ -39,12 +39,12 @@ class Individual extends Component{
 
               <div className="col-lg-5">
                 <div className="about-img">
-                  <img src="/img/individual-practice-room.jpg" className="img-fluid" alt=""/>
+                  <img src="/img/seminar-room.jpg" className="img-fluid" alt=""/>
                 </div>
               </div>
 
               <div className="col-lg-7">
-                <h3 className="pt-0 pt-lg-5">자신만의 음악활동을 할 수 있는 공간입니다.<br/> 문을 닫으면 당신만의 공간이 만들어집니다.</h3>
+                <h3 className="pt-0 pt-lg-5">조별과제, 스터디, 회의 등 학생들의 세미나 및<br/>회의활동을 지원하는 공간입니다.</h3>
 
                 <ul className="nav nav-pills mb-3">
                   <li onClick={() => this.changeMenu(0)} className="nav-link active" id="menu0">소개</li>
@@ -66,4 +66,4 @@ class Individual extends Component{
     )};
 }
 
-export default Individual;
+export default Seminar;

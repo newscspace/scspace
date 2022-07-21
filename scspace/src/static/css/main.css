@@ -2793,54 +2793,29 @@ section {
 }
 
 /*--------------------------------------------------------------
-# Introduction
+# Spacelist
 --------------------------------------------------------------*/
-.introduction {
-  line-height: 3.0;
-}
-.menu .menu-flters {
+.space {
   padding: 0;
-  margin: 0 auto 30px auto;
+  position: relative;
+}
+.space ul {
   list-style: none;
-  text-align: center;
 }
-.menu .menu-flters li {
-  cursor: pointer;
-  display: inline-block;
-  padding: 0;
-  font-size: 18px;
-  font-weight: 300;
-  margin: 0 10px;
-  line-height: 1;
-  margin-bottom: 5px;
-  transition: all 0.3s ease-in-out;
+.space li:before {
+  content: "-";
+  margin-right: 0.3em;
 }
-
-/*.breadcrumbs {
-  padding: 15px 0;
-  background: rgba(var(--color-secondary-rgb), 0.05);
-  min-height: 40px;
-  margin-top: 76px;
+.space .btn-getstarted, .space .btn-getstarted:focus {
+  font-size: 12px;
+  color: var(--color-white);
+  background: var(--color-primary);
+  padding: 5px 10px;
+  border-radius: 4px;
+  transition: 0.3s;
+  font-family: var(--font-secondary);
 }
-.breadcrumbs h2 {
-  font-size: 30px;
-  font-weight: 300;
-  margin: 0;
+.space .btn-getstarted:hover, .space .btn-getstarted:focus:hover {
+  color: var(--color-white);
+  background: rgba(var(--color-primary-rgb), 0.85);
 }
-.breadcrumbs ol {
-  display: flex;
-  flex-wrap: wrap;
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  font-size: 14px;
-}
-.breadcrumbs ol li + li {
-  padding-left: 10px;
-}
-.breadcrumbs ol li + li::before {
-  display: inline-block;
-  padding-right: 10px;
-  color: var(--color-secondary-light);
-  content: "/";
-}*/

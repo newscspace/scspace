@@ -9,7 +9,7 @@ class Use extends Component{
                 <i className="bi bi-check2"></i>
                 <h4>상시 개방</h4>
             </div>
-            <p>개인연습실은 예약이 없을 땐 누구나 사용 가능합니다.</p>
+            <p>피아노실은 예약이 없을 땐 누구나 사용 가능합니다.</p>
 
             <div className="d-flex align-items-center mt-4">
                 <i className="bi bi-check2"></i>
@@ -30,7 +30,7 @@ class Use extends Component{
             </ul>
             <p>아래와 같은 경우가 발생했을 경고를 부과합니다.</p>
             <ul>
-                <li>개인연습실 내부 설비 고의 파손 및 안전상의 문제를 야기할 수 있는 행위을 할 경우</li>
+                <li>피아노실 내부 설비 고의 파손 및 안전상의 문제를 야기할 수 있는 행위을 할 경우</li>
                 <li>그 외 학생문화공간위원회가 타인에게 피해를 주는 행위 혹은 악의적인 행위라고 판단될 경우</li>
             </ul>
             <p>주의와 경고는 다음과 같이 처리됩니다.</p>

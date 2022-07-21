@@ -3,7 +3,7 @@ import Introduction from './Introduction';
 import Use from './Use';
 import Caution from './Caution';
 
-class Individual extends Component{
+class Mirae extends Component{
   constructor(props) {
     super();
     this.state = {
@@ -28,6 +28,13 @@ class Individual extends Component{
   }
 
   render() {
+    const settings = {
+      dots: true,
+      infinite: true,
+      speed: 500,
+      slidesToShow: 1,
+      slidesToScroll: 1,
+    };
     return (
       <div>
         <section id="about" className="about">
@@ -39,12 +46,12 @@ class Individual extends Component{
 
               <div className="col-lg-5">
                 <div className="about-img">
-                  <img src="/img/individual-practice-room.jpg" className="img-fluid" alt=""/>
+                  <img src="/img/mirae-hall.jpg" className="img-fluid" alt=""/>
                 </div>
               </div>
 
               <div className="col-lg-7">
-                <h3 className="pt-0 pt-lg-5">자신만의 음악활동을 할 수 있는 공간입니다.<br/> 문을 닫으면 당신만의 공간이 만들어집니다.</h3>
+                <h3 className="pt-0 pt-lg-5">강연, 공연, 상영회 등을 할 수 있는 공간입니다.<br/>공연에 특화되어 있습니다.</h3>
 
                 <ul className="nav nav-pills mb-3">
                   <li onClick={() => this.changeMenu(0)} className="nav-link active" id="menu0">소개</li>
@@ -66,4 +73,4 @@ class Individual extends Component{
     )};
 }
 
-export default Individual;
+export default Mirae;

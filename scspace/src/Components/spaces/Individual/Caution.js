@@ -5,7 +5,7 @@ class Caution extends Component{
     render() {return (
         <div className="tab-pane fade show active">
 
-            <p className="fst-italic">인생..</p>
+            <p className="fst-italic">음료, 스낵, 음식 반입이 금지되어 있습니다.</p>
 
             <div className="d-flex align-items-center mt-4">
                 <i className="bi bi-check2"></i>

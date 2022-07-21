@@ -8,13 +8,13 @@ class Introduction extends Component{
                 <i className="bi bi-check2"></i>
                 <h4>수용 인원</h4>
             </div>
-            <p>3명까지 수용 가능합니다.</p>
+            <p>180명까지 수용 가능합니다.</p>
 
             <div className="d-flex align-items-center mt-4">
                 <i className="bi bi-check2"></i>
                 <h4>구비 물품</h4>
             </div>
-            <p>보면대 및 의자, 공기청정기, 냉난방 시설을 갖추고 있습니다.</p>
+            <p>음향과 조명, 프로젝터와 스크린, 무대, 의자 120개, 냉난방 시설을 갖추고 있습니다.</p>
 
             <div className="d-flex align-items-center mt-4">
                 <i className="bi bi-check2"></i>
