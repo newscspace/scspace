@@ -23,6 +23,17 @@ class Space extends Component{
                 workshop: '창작공방',
                 open_space: '오픈스페이스'
             },
+            space_tag : {
+                individual_practice_room: <Individual/>,
+                piano_room: '<Piano/>',
+                seminar_room : '<Seminar/>',
+                group_practice_room: '<Practice/>',
+                dance_studio: '<Dance/>',
+                ullim_hall: '<Ullim/>',
+                mirae_hall: '<Mirae/>',
+                workshop: '<Workshop/>',
+                open_space: '<Openspace/>'
+            }
         }
     }
 
@@ -34,9 +45,6 @@ class Space extends Component{
     }
     
     render() {
-        // function Capitalize(str) {
-        //     return str.charAt(0).toUpperCase() + str.slice(1);
-        // }
         const Address = this.state.space_name;
         
         return (
@@ -61,16 +69,7 @@ class Space extends Component{
                     <p>{this.state.space_name.replace(/_/gi, ' ')}</p>
                 </div>
                 <hr/>
-                <div>{
-                    (function(){
-                        switch(Address){
-                        case 'individual_practice_room' :
-                            return <p><Individual></Individual></p>
-                        default :
-                            return <p>{Address}</p>
-                    }})()
-                }           
-                </div>
+                <p>{this.state.space_tag[this.state.space_name]}</p>
 
             </section>
         </div>
