@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
 import {post} from 'axios';
 
-class Notice_write extends Component{
+class CreateNotice extends Component{
     constructor(props){
         super(props);
         this.state = {important:false};
@@ -109,4 +109,4 @@ class Notice_write extends Component{
       )};
 }
 
-export default Notice_write;
+export default CreateNotice;

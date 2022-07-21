@@ -3,7 +3,7 @@ import Datepicker from "react-datepicker";
 import {Link} from 'react-router-dom';
 
 
-class Fast_notice extends Component{
+class FastNotice extends Component{
     constructor(props){
         super(props);
 
@@ -46,4 +46,4 @@ class Fast_notice extends Component{
 
 
 
-export default Fast_notice;
+export default FastNotice;

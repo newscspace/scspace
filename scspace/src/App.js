@@ -4,7 +4,9 @@ import {BrowserRouter, Switch, Route} from 'react-router-dom';
 import Header from './Components/Header';
 import Footer from './Components/Footer';
 import Main from './Components/Main';
-import Notice from './Components/Notice';
+import Notice from './Components/notice/Notice';
+import ViewNotice from './Components/notice/ViewNotice';
+import CreateNotice from './Components/notice/CreateNotice';
 import Space from './Components/Space';
 import Ask from './Components/Ask';
 import Faq from './Components/FAQ';
@@ -13,8 +15,6 @@ import Reservation from './Components/Reservation';
 import Mypage from './Components/Mypage';
 import Manage from './Components/Manage';
 import Calendar from './Components/Calendar';
-import Notice_view from './Components/Notice_view';
-import Notice_write from './Components/Notice_write';
 
 class App extends Component {
   constructor(props){
@@ -47,10 +47,10 @@ class App extends Component {
         <Route path="/manage" component={Manage} exact/>
         <Route path="/calendar" component={Calendar} exact/>
 
-        <Route path="/notice-view/:id" render={(props) => (
-          <Notice_view key={props.match.params.name} {...props} exact/>
+        <Route path="/notice/view/:id" render={(props) => (
+          <ViewNotice key={props.match.params.name} {...props} exact/>
         )}/>
-        <Route path="/notice-write" component={Notice_write} exact/>
+        <Route path="/notice/create" component={CreateNotice} exact/>
 
         <Route path="*" render={() => (<h1>404 error</h1>)}/>
       </Switch>

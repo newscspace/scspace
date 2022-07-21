@@ -1,12 +1,12 @@
 import React, {Component} from 'react';
 import Banner from './Banner'
-import Fast_notice from './Fast_notice';
+import FastNotice from './notice/FastNotice';
 import FAQ from './FAQ'
 class Header extends Component{
     render() {return (
         <div>
             <Banner></Banner>
-            <Fast_notice></Fast_notice>
+            <FastNotice></FastNotice>
             <FAQ main={true}></FAQ>
         </div>
       )};

@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
 import {get} from 'axios';
 
-class Notice_view extends Component{
+class ViewNotice extends Component{
 
     constructor(props){
         super(props);
@@ -116,4 +116,4 @@ class Notice_view extends Component{
       )};
 }
 
-export default Notice_view;
+export default ViewNotice;
