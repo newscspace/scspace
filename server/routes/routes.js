@@ -1,103 +1,40 @@
 const express = require('express');
 const router = express.Router();
 const reservation = require('./reservation');
-
+const notice = require('./notice');
+const faq = require('./faq');
+const ask = require('./ask');
 
 router.post('/api/reservation/*', reservation.router);
-router.get('/api/reservation/*', function (req, res) {
-    res.json({
-        'type' : 2, // 공간 코드는 숫자나 enum으로
-        'user' : 1, // UID
-        'from' : new Date('2022-07-17T13:24:00'), //한국시간 기준
-        'to' : new Date('2022-07-17T15:24:00'),
-        'team' : 1, //TEAM id
-        'comment' : null
-    }); // Obviously dummy code
-});
+router.get('/api/reservation/*', reservation.router);
 
-router.get('/api/notice', function (req, res) {
-    res.json([
-        {
-            'id' : 1,
-            'title' : '더워',
-            'date' : new Date('2022-07-17T15:24:00'),
-            'hits' : 43,
-            'important' : false
-        },
-        {
-            'id' : 2,
-            'title' : '38도라고 미쳤어',
-            'date' : new Date('2022-07-17T16:24:00'),
-            'hits' : 4,
-            'important' : true
-        },
-    ]); // Obviously dummy code
-});
-router.get('/api/notice/id', function (req, res) {
-    res.json({
-            'title' : '더워',
-            'date' : new Date('2022-07-17T15:24:00'),
-            'hits' : 43,
-            'important' : false,
-            'content' : '여행 왔는데 폭염이라 나가지도 못하네 가이드투어 버스라도 할걸 근데 버스 해봤자 취소되더라'
-    }); // Obviously dummy code
-});
-router.get('/api/notice/all', function (req, res) {
-    res.json([
-        {
-            'id' : 1,
-            'title' : '더워',
-            'date' : new Date('2022-07-17T15:24:00'),
-            'hits' : 43,
-            'important' : false,
-            'content' : '여행 왔는데 폭염이라 나가지도 못하네 가이드투어 버스라도 할걸 근데 버스 해봤자 취소되더라'
-        },
-        {
-            'id' : 2,
-            'title' : '38도라고 미쳤어',
-            'date' : new Date('2022-07-17T16:24:00'),
-            'hits' : 4,
-            'important' : true,
-            'content' : '건물은 에어컨도 없다? 진짜 안에만 있어도 땀이 나. 심지어 여긴 오후 4시가 가장 더워'
-        },
-    ]); // Obviously dummy code
-});
+router.get('/api/notice/*', notice.router);
+router.post('/api/notice/*', notice.router);
 
-router.get('/api/faq', function (req, res) {
-    res.json([
-        {
-            'id' : 1,
-            'title' : '더워', // FAQ에는 date, hits, important가 없고 question/answer만
-        },
-        {
-            'id' : 2,
-            'title' : '38도라고 미쳤어',
-        },
-    ]); // Obviously dummy code
-});
-router.get('/api/faq/id', function (req, res) {
-    res.json({
-        'title' : '더워',
-        'question' : '그냥 나가면 안되나요?',
-        'answer' : '에어비엔비 호스트마저 만류하더라고요'
-    }); // Obviously dummy code
-});
-router.get('/api/faq/all', function (req, res) {
-    res.json([
-        {
-            'id' : 1,
-            'title' : '더워', // FAQ에는 date, hits, important가 없고 question/answer만
-            'question' : '그냥 나가면 안되나요?',
-            'answer' : '에어비엔비 호스트마저 만류하더라고요'
-        },
-        {
-            'id' : 2,
-            'title' : '38도라고 미쳤어',
-            'question' : '버스는 시원하잖아요..?',
-            'answer' : '독일엔 에어컨버스 따위 없다.'
-        },
-    ]); // Obviously dummy code
-});
+// router.get('/api/faq', function (req, res) {
+//     res.json([
+//         {
+//             'id' : 1,
+//             'title' : '더워', // FAQ에는 date, hits, important가 없고 question/answer만
+//         },
+//         {
+//             'id' : 2,
+//             'title' : '38도라고 미쳤어',
+//         },
+//     ]); // Obviously dummy code
+// });
+// router.get('/api/faq', function (req, res) {
+//     res.json({
+//         'question' : '그냥 나가면 안되나요?',
+//         'answer' : '에어비엔비 호스트마저 만류하더라고요'
+//     }); // Obviously dummy code
+// });
+
+router.get('/api/faq/*', faq.router);
+router.post('/api/faq/*', faq.router);
+
+router.get('/api/ask/*', ask.router);
+router.post('/api/ask/*', ask.router);
 
 router.get('/api/contact', function (req, res) {
     res.json({
