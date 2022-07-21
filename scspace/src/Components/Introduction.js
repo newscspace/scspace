@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
+import Business from './Introduction_content/Business';
 
 class Introduction extends Component{
     constructor(props){
@@ -8,7 +9,7 @@ class Introduction extends Component{
         this.state = {
           info: [
             {which:'소개', text:'1ddd', clicked:true},
-            {which:'사업소개', text:'2sdfs', clicked:false},
+            {which:'사업소개', text:<Business/>, clicked:false},
             {which:'회칙', text:'3sdss', clicked:false}
           ]
         }
