@@ -8,6 +8,7 @@ class Fast_notice extends Component{
         super(props);
 
         this.state = {
+          /* 메인 페이지에 보여줄 공지 */
           fast_notice : [
             {link:"#", title:"sample1", content:"sample1"},
             {link:"#", title:"sample2", content:"sample2"},
