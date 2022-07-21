@@ -1,68 +1,15 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
+import {get} from 'axios';
 
 class Notice extends Component{
 
     constructor(props){
         super(props);
-        this.a = 0;
         this.state = {
             page_number : 1,
-            list : [
-                {id:1, title:"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", date:"2019-12-28 00:26:01", hit:3},
-                {id:2, title:"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", date:"2019-12-28 00:26:01", hit:3},
-                {id:3, title:"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", date:"2019-12-28 00:26:01", hit:3},
-                {id:4, title:"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", date:"2019-12-28 00:26:01", hit:3},
-                {id:5, title:"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", date:"2019-12-28 00:26:01", hit:3},
-                {id:1, title:"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", date:"2019-12-28 00:26:01", hit:3},
-                {id:2, title:"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", date:"2019-12-28 00:26:01", hit:3},
-                {id:3, title:"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", date:"2019-12-28 00:26:01", hit:3},
-                {id:4, title:"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", date:"2019-12-28 00:26:01", hit:3},
-                {id:5, title:"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", date:"2019-12-28 00:26:01", hit:3},
-                {id:1, title:"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", date:"2019-12-28 00:26:01", hit:3},
-                {id:2, title:"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", date:"2019-12-28 00:26:01", hit:3},
-                {id:3, title:"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", date:"2019-12-28 00:26:01", hit:3},
-                {id:4, title:"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", date:"2019-12-28 00:26:01", hit:3},
-                {id:5, title:"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", date:"2019-12-28 00:26:01", hit:3},
-                {id:2, title:"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", date:"2019-12-28 00:26:01", hit:3},
-                {id:3, title:"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", date:"2019-12-28 00:26:01", hit:3},
-                {id:4, title:"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", date:"2019-12-28 00:26:01", hit:3},
-                {id:5, title:"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", date:"2019-12-28 00:26:01", hit:3},
-                {id:1, title:"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", date:"2019-12-28 00:26:01", hit:3},
-                {id:2, title:"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", date:"2019-12-28 00:26:01", hit:3},
-                {id:3, title:"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", date:"2019-12-28 00:26:01", hit:3},
-                {id:4, title:"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", date:"2019-12-28 00:26:01", hit:3},
-                {id:5, title:"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", date:"2019-12-28 00:26:01", hit:3},
-                {id:2, title:"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", date:"2019-12-28 00:26:01", hit:3},
-                {id:3, title:"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", date:"2019-12-28 00:26:01", hit:3},
-                {id:4, title:"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", date:"2019-12-28 00:26:01", hit:3},
-                {id:5, title:"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", date:"2019-12-28 00:26:01", hit:3},
-                {id:1, title:"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", date:"2019-12-28 00:26:01", hit:3},
-                {id:2, title:"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", date:"2019-12-28 00:26:01", hit:3},
-                {id:3, title:"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", date:"2019-12-28 00:26:01", hit:3},
-                {id:4, title:"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", date:"2019-12-28 00:26:01", hit:3},
-                {id:5, title:"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", date:"2019-12-28 00:26:01", hit:3},
-                {id:2, title:"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", date:"2019-12-28 00:26:01", hit:3},
-                {id:3, title:"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", date:"2019-12-28 00:26:01", hit:3},
-                {id:4, title:"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", date:"2019-12-28 00:26:01", hit:3},
-                {id:5, title:"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", date:"2019-12-28 00:26:01", hit:3},
-                {id:1, title:"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", date:"2019-12-28 00:26:01", hit:3},
-                {id:2, title:"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", date:"2019-12-28 00:26:01", hit:3},
-                {id:3, title:"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", date:"2019-12-28 00:26:01", hit:3},
-                {id:4, title:"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", date:"2019-12-28 00:26:01", hit:3},
-                {id:5, title:"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", date:"2019-12-28 00:26:01", hit:3},
-                {id:2, title:"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", date:"2019-12-28 00:26:01", hit:3},
-                {id:3, title:"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", date:"2019-12-28 00:26:01", hit:3},
-                {id:4, title:"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", date:"2019-12-28 00:26:01", hit:3},
-                {id:5, title:"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", date:"2019-12-28 00:26:01", hit:3},
-                {id:1, title:"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", date:"2019-12-28 00:26:01", hit:3},
-                {id:2, title:"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", date:"2019-12-28 00:26:01", hit:3},
-                {id:3, title:"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", date:"2019-12-28 00:26:01", hit:3},
-                {id:4, title:"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", date:"2019-12-28 00:26:01", hit:3},
-                {id:5, title:"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", date:"2019-12-28 00:26:01", hit:3}
-
-            ]
-                
+            list : [],
+            content : ''
             
         }
 
@@ -71,7 +18,17 @@ class Notice extends Component{
     }
 
     componentDidMount(){
+        this.callApi()
+            .then(res => this.setState({list:res}))
+            .catch(err => console.log(err));
+
         this.setState({total_page_number : Math.ceil(this.state.list.length/10)});
+    }
+    
+    callApi= async () => {
+        const res = await get('/api/notice/all');
+        const body = await res.data;
+        return body;
     }
 
     render() {return (
@@ -108,17 +65,21 @@ class Notice extends Component{
         {this.state.list.slice((this.state.page_number-1)*10, this.state.page_number*10).map((contents) => {
             return(
                 <tr>
-                    <td>{contents.id}</td>
-                    <td>{contents.title}</td>
+                    
+                    <td>{contents.important ? <b style={{color:"red"}}>필독</b>:contents.id}</td> {/* 무엇으을 넣으으을까요오*/}
+                    <td><Link to={"/notice-view/"+contents.id}>{contents.title}</Link></td>
                     <td>{contents.date}</td>
-                    <td>{contents.hit}</td>
+                    <td>{contents.hits}</td>
+                    
                 </tr>
+                
             )
 
         })}
             
     </tbody>
 </table>
+
 </div>
 <section className="blog">
         <div className="blog-pagination">
@@ -133,7 +94,9 @@ class Notice extends Component{
                 
               </ul>
             </div>
+            
         </section>
+        
         </section>
         
 

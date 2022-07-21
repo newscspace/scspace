@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
-
+import {get} from 'axios';
 
 class FAQ extends Component{
   constructor(props){
@@ -9,25 +9,30 @@ class FAQ extends Component{
       this.state = {
         /*question : faq 질문, answer : 질문에 대한 답변 */ 
         // TODO : FAQ 요약 로딩하기
-        faq : [
-          {question : "당부", answer : "예약하지 말아주셨으면 좋겠네요", clicked:false},
-          {question : "부탁", answer : "메일보내지마세요", clicked:false},
-          {question : "소원", answer : "신학관 폐쇄 기원", clicked:false},
-          {question : "응애", answer : "나 아기 개발자", clicked:false},
-          {question : "개발", answer : "하기 싫어요", clicked:false}
-          
-        ]
+        id :[],
+        list : []
       }
   }
   /*faq에서 화살표 눌렀을 떄 해당 질문의 답변 보여주기 위한 event 함수 */
   // TODO : FAQ 글 ID로 내용 불러오기
-  OnClickEvent = (idx, e) =>{
-      const copied_faq = [...this.state.faq];
-      copied_faq[idx].clicked = !copied_faq[idx].clicked;
-      this.setState({
-          faq:copied_faq
-      })
-      
+  OnClickEvent = (faq_id, e) =>{
+    let nextstate = Object.assign({}, this.state);
+    nextstate.id.includes(faq_id)?  nextstate.id.pop(faq_id) : nextstate.id.push(faq_id);
+    
+    this.setState(nextstate);
+  }
+
+  componentDidMount(){
+    this.callApi()
+        .then(res => this.setState({list:res}))
+        .catch(err => console.log(err));
+
+  }
+
+  callApi= async () => {
+    const res = await get('/api/faq/all');
+    const body = await res.data;
+    return body;
   }
 
   render() {
@@ -78,16 +83,16 @@ class FAQ extends Component{
 
                 <div className="accordion accordion-flush px-xl-5" id="faqlist">
 
-                  {this.state.faq.map((contents, idx) => {
+                  {this.state.list.map((contents, idx) => {
                     return (
                       <div className="accordion-item" id="mount1">
                         <h3 className="accordion-header">
-                          <button className={"accordion-button " + (contents.clicked ? "" : "collapsed")} onClick={this.OnClickEvent.bind(this, idx)} >
+                          <button className={"accordion-button " + (this.state.id.includes(contents.id)  ? "" : "collapsed")} onClick={this.OnClickEvent.bind(this, contents.id)} >
                             <i className="bi bi-question-circle question-icon"></i>
                             {contents.question}
                           </button>
                         </h3>
-                        <div id="faq-content-1" className={"accordion-collapse " + (contents.clicked ? "" : "collapse")}>
+                        <div id="faq-content-1" className={"accordion-collapse " + (this.state.id.includes(contents.id)  ?  "" : "collapse")}>
                           <div className="accordion-body">
                             {contents.answer}
                           </div>

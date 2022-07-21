@@ -1,9 +1,47 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
+import {post} from 'axios';
 
 class Ask extends Component{
     constructor(props){
         super(props);
+        this.state = {};
+    }
+    
+    sendPost = () => {
+       
+      const url = '/api/ask/create';
+      const config = {
+        headers : {
+          'Content-Type' : 'application/json'
+        }
+      }
+    
+      return post(url, JSON.stringify(this.state), config);
+    }
+    
+    checkSubmit = () =>{
+      return true;
+    }
+
+    handleSubmit = (e) =>{
+      e.preventDefault()
+      const errmsg = ''
+      if(this.checkSubmit()){
+          this.sendPost()
+          .then((res) => {
+            console.log(res.data);
+          })
+
+      } 
+     
+      else{ alert('a') /* error 내용 출력 필요 */}
+    }
+
+    handleValueChange = (e) => {
+      let nextstate = Object.assign({}, this.state);
+      nextstate[e.target.name] = e.target.value;
+      this.setState(nextstate);
     }
 
     render() {
@@ -34,12 +72,12 @@ class Ask extends Component{
       
               <div className="row gy-5 gx-lg-5">
             <div>
-            <form action="forms/api/ask" method="post" role="form" className="php-email-form">
+            <form className="php-email-form" onSubmit={this.handleSubmit}>
             <div className="form-group mt-3">
-                <input type="text" className="form-control" name="title" id="title" placeholder="제목" required/>
+                <input type="text" className="form-control" name="title" placeholder="제목" onChange={this.handleValueChange} required/>
             </div>
             <div className="form-group mt-3">
-                <textarea className="form-control" name="contents" placeholder="문의 내용" required></textarea>
+                <textarea className="form-control" name="content" placeholder="문의 내용" onChange={this.handleValueChange} required></textarea>
               </div>
               
             <div className="text-center"><button type="submit">제출</button></div>
