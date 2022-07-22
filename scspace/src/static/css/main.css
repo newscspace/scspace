@@ -2837,18 +2837,17 @@ section {
 --------------------------------------------------------------*/
 .pdf .viewer {
   overflow: auto;
-  height: 1000px;
+  height: 950px;
   width: 825px;
   margin-bottom: 30px;
+  margin-top: 30px;
 }
 .pdf ul {
   list-style: none;
-  /* text-align: center; */
   float: left;
 }
 .pdf li{
   margin-left: 20px;
-  /* display: inline-block; */
 }
 .pdf button {
   background: var(--color-primary);
@@ -2857,5 +2856,14 @@ section {
   color: var(--color-white);
   transition: 0.4s;
   border-radius: 0;
+}
+.pdf p:hover {
+  color: black;
+}
+.pdf a {
+  color: white;
+}
+.pdf a:hover {
+  color: black;
 }
 

@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import {Link} from 'react-router-dom';
 import { Document, Page, pdfjs } from 'react-pdf';
 import 'react-pdf/dist/esm/entry.webpack';
 import scspace from './KAIST 학생문화공간위원회 회칙 (190320).pdf';
@@ -19,8 +18,6 @@ import goods from './[학생문화공간위원회] 물품대여 규칙 (190502).
 import manage from './장영신 학생회관 운영준칙 (140612).pdf';
 
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
-
-
  
 class Rule extends Component {
   state = {
@@ -39,22 +36,23 @@ class Rule extends Component {
       numPages: null,
       pageNumber: 1,
       file_name: scspace,
+      file_title: "학생문화공간위원회 회칙",
       info: [
-        {which:'학생문화공간위원회 회칙', file: scspace, clicked:true},
-        {which:'공간 운영 세칙', file: space , clicked:false},
-        {which:'- 1. 게시물 관리 규칙', file: post, clicked:false},
-        {which:'- 2. 세미나실 운영 규칙', file: seminar, clicked:false},
-        {which:'- 3. 창작공방 운영 규칙', file: workspace, clicked:false},
-        {which:'- 4. 합주실 운영 규칙', file: practice, clicked:false},
-        {which:'- 5. 무예실 운영 규칙', file: dance, clicked:false},
-        {which:'- 6. 개인연습실 운영 규칙', file: individual, clicked:false},
-        {which:'- 7. 피아노실 운영 규칙', file: piano, clicked:false},
-        {which:'- 8. 울림홀 운영 규칙', file:ullim, clicked:false},
-        {which:'- 9. 미래홀 운영 규칙', file: mirae, clicked:false},
-        {which:'- 10. 오픈스페이스 운영 규칙', file: openspace, clicked:false},
-        {which:'- 11. 단체실 운영 규칙', file: group, clicked:false},
-        {which:'물품 대여사업 운영 규칙', file: goods, clicked:false},
-        {which:'장영신 학생회관 운영 준칙', file: manage, clicked:false},
+        {which:'학생문화공간위원회 회칙', file: scspace, title: "학생문화공간위원회 회칙", clicked:true},
+        {which:'공간 운영 세칙', file: space , title: "공간 운영 세칙", clicked:false},
+        {which:'- 1. 게시물 관리 규칙', file: post, title: "게시물 관리 규칙", clicked:false},
+        {which:'- 2. 세미나실 운영 규칙', file: seminar, title: "세미나실 운영 규칙", clicked:false},
+        {which:'- 3. 창작공방 운영 규칙', file: workspace, title: "창작공방 운영 규칙", clicked:false},
+        {which:'- 4. 합주실 운영 규칙', file: practice, title: "합주실 운영 규칙", clicked:false},
+        {which:'- 5. 무예실 운영 규칙', file: dance, title: "무예실 운영 규칙", clicked:false},
+        {which:'- 6. 개인연습실 운영 규칙', file: individual, title: "개인연습실 운영 규칙", clicked:false},
+        {which:'- 7. 피아노실 운영 규칙', file: piano, title: "피아노실 운영 규칙", clicked:false},
+        {which:'- 8. 울림홀 운영 규칙', file:ullim, title: "울림홀 운영 규칙", clicked:false},
+        {which:'- 9. 미래홀 운영 규칙', file: mirae, title: "미래홀 운영 규칙", clicked:false},
+        {which:'- 10. 오픈스페이스 운영 규칙', file: openspace, title: "오픈스페이스 운영 규칙", clicked:false},
+        {which:'- 11. 단체실 운영 규칙', file: group, title: "단체실 운영 규칙", clicked:false},
+        {which:'물품 대여사업 운영 규칙', file: goods, title: "물품 대여사업 운영 규칙", clicked:false},
+        {which:'장영신 학생회관 운영 준칙', file: manage, title:"장영신 학생회관 운영 준칙", clicked:false},
       ]
     }
 }
@@ -70,7 +68,8 @@ OnClickEvent = (idx, e) =>{
       }
     this.setState({
         info:copied_info,
-        file_name:copied_info[idx].file
+        file_name:copied_info[idx].file,
+        file_title:copied_info[idx].title
     }) 
 }
 
@@ -104,18 +103,20 @@ OnClickEvent = (idx, e) =>{
             </div>
 
             <div className="col-lg-8">
-                <form className="php-email-form" onSubmit={this.handleSubmit}> 
-                  <div className="container viewer img-fluid">
-                    <Document
-                      file={this.state.file_name}
-                      onLoadSuccess={this.onDocumentLoadSuccess}>
-                      {Array.apply(null, Array(numPages))
-                      .map((x, i)=>i+1)
-                      .map(page => <Page pageNumber={page}/>)}
-                    </Document>
-                  </div>
+              <form className="php-email-form"> 
+                <h4>{this.state.file_title}</h4>
+                <div className="container viewer img-fluid">
+                  <Document
+                    file={this.state.file_name}
+                    onLoadSuccess={this.onDocumentLoadSuccess}>
+                    {Array.apply(null, Array(numPages))
+                    .map((x, i)=>i+1)
+                    .map(page => <Page pageNumber={page}/>)}
+                  </Document>
+                </div>
                   
-                <div className="text-end"><button>다운받기</button></div>
+                <div className="text-end"><button>
+                  <a href={this.state.file_name} download>다운받기</a></button></div>
                 
               </form>
             </div>
