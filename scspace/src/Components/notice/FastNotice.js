@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import Datepicker from "react-datepicker";
 import {Link} from 'react-router-dom';
 
 
