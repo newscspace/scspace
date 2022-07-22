@@ -1355,6 +1355,7 @@ section {
   transition: 0s;
   cursor: pointer;
   height: 100%;
+  margin: 30px;
 }
 .features .nav-link i {
   font-size: 32px;
@@ -2819,3 +2820,42 @@ section {
   color: var(--color-white);
   background: rgba(var(--color-primary-rgb), 0.85);
 }
+
+/*--------------------------------------------------------------
+# Business
+--------------------------------------------------------------*/
+.business{
+  text-align: center;
+}
+.business ul{
+  width: 800px;
+  margin: 0 auto;
+}
+
+/*--------------------------------------------------------------
+# PDF
+--------------------------------------------------------------*/
+.pdf .viewer {
+  overflow: auto;
+  height: 1000px;
+  width: 825px;
+  margin-bottom: 30px;
+}
+.pdf ul {
+  list-style: none;
+  /* text-align: center; */
+  float: left;
+}
+.pdf li{
+  margin-left: 20px;
+  /* display: inline-block; */
+}
+.pdf button {
+  background: var(--color-primary);
+  border: 0;
+  padding: 13px 50px;
+  color: var(--color-white);
+  transition: 0.4s;
+  border-radius: 0;
+}
+
