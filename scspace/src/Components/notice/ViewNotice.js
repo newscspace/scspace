@@ -34,7 +34,7 @@ class ViewNotice extends Component{
       return body;
     }
     EditNotice = () =>{
-      this.props.history.push({pathname : '/notice-write', state: this.state});
+      this.props.history.push({pathname : '/notice/create', state: this.state});
     }
 
     DeleteNotice = () => {

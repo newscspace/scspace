@@ -67,7 +67,7 @@ class Notice extends Component{
                 <tr>
                     
                     <td>{contents.important ? <b style={{color:"red"}}>필독</b>:contents.id}</td> {/* 무엇으을 넣으으을까요오*/}
-                    <td><Link to={"/notice-view/"+contents.id}>{contents.title}</Link></td>
+                    <td><Link to={"/notice/view/"+contents.id}>{contents.title}</Link></td>
                     <td>{contents.date}</td>
                     <td>{contents.hits}</td>
                     
