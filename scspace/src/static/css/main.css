@@ -1391,7 +1391,7 @@ section {
 .features .tab-pane h3 {
   font-weight: 600;
   font-size: 36px;
-  color: var(--color-secondary);
+  color: var(--color-primary);
 }
 .features .tab-pane ul {
   list-style: none;
@@ -2822,7 +2822,7 @@ section {
 }
 
 /*--------------------------------------------------------------
-# Business
+# Scspace/Business
 --------------------------------------------------------------*/
 .business{
   text-align: center;
@@ -2830,6 +2830,49 @@ section {
 .business ul{
   width: 800px;
   margin: 0 auto;
+}
+.business button {
+  background: var(--color-primary);
+  border: 0;
+  padding: 10px 30px;
+  color: var(--color-white);
+  transition: 0.4s;
+  border-radius: 0;
+  margin-left: 10px;
+}
+.business a {
+  color: white;
+}
+.in {
+  margin-left: 30px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+.scspace .intro {
+  font-size: 20px;
+}
+.scspace .txtvar{
+  color: var(--color-primary);
+  font-weight: 600;
+}
+.scspace img {
+  max-height: 200px;
+  float: left;
+  margin-right: 30px;
+}
+.scspace .rsquare{
+  width: 13px;
+  height: 13px;
+  background: rgb(231,49,40);
+  float: left;
+  margin-right: 5px;
+}
+.scspace .bsquare{
+  width: 13px;
+  height: 13px;
+  background: rgb(62,58,57);
+  float: left;
+  margin-right: 5px;
 }
 
 /*--------------------------------------------------------------

@@ -2,27 +2,21 @@ import React, {Component} from 'react';
 
 class Guitar extends Component{
     render() {return (
-        <div class="tab-pane active show">
-            <div class="row gy-4">
-                <div class="col-lg-8 order-2 order-lg-1">
-                <h3>Modinest4</h3>
-                <p class="fst-italic">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-                    magna aliqua.
-                </p>
+        <div className="tab-pane active show">
+            <div className="row gy-4">
+                <div className="col-lg-8 order-2 order-lg-1">
+                <h3>기타 업무</h3>
+                <p><b>
+                학생문화공간위원회에서 하는 업무들은 아래와 같습니다.
+                </b></p>
                 <ul>
-                    <li><i class="bi bi-check-circle-fill"></i> Ullamco laboris nisi ut aliquip ex ea commodo consequat.</li>
-                    <li><i class="bi bi-check-circle-fill"></i> Duis aute irure dolor in reprehenderit in voluptate velit.</li>
-                    <li><i class="bi bi-check-circle-fill"></i> Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate trideta storacalaperda mastiro dolore eu fugiat nulla pariatur.</li>
+                    <li><i className="bi bi-check-circle-fill"></i><b>상시 업무</b><br/><p className="in">사무실 상근, 분실문 관리, 합주실 팀 관리, CCTV열람 관리</p></li>
+                    <li><i className="bi bi-check-circle-fill"></i><b>정기 업무</b><br/><p className="in">신학관 반상회</p></li>
+                    <li><i className="bi bi-check-circle-fill"></i><b>비정기 업무</b><br/><p className="in">모임터 사석화 방지</p></li>
                 </ul>
-                <p>
-                    Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-                    velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-                    culpa qui officia deserunt mollit anim id est laborum
-                </p>
                 </div>
-                <div class="col-lg-4 order-1 order-lg-2 text-center">
-                    <img src="/img/features-1.svg" alt="" class="img-fluid"/>
+                <div className="col-lg-4 order-1 order-lg-2 text-center">
+                    <img src="/img/features-1.svg" alt="" className="img-fluid"/> {/*이미지 수정 해야함*/}
                 </div>
             </div>
         </div>

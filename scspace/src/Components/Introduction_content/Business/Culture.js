@@ -2,27 +2,18 @@ import React, {Component} from 'react';
 
 class Culture extends Component{
     render() {return (
-        <div class="tab-pane active show">
-            <div class="row gy-4">
-                <div class="col-lg-8 order-2 order-lg-1">
-                <h3>Modinest3</h3>
-                <p class="fst-italic">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-                    magna aliqua.
-                </p>
-                <ul>
-                    <li><i class="bi bi-check-circle-fill"></i> Ullamco laboris nisi ut aliquip ex ea commodo consequat.</li>
-                    <li><i class="bi bi-check-circle-fill"></i> Duis aute irure dolor in reprehenderit in voluptate velit.</li>
-                    <li><i class="bi bi-check-circle-fill"></i> Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate trideta storacalaperda mastiro dolore eu fugiat nulla pariatur.</li>
-                </ul>
-                <p>
-                    Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-                    velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-                    culpa qui officia deserunt mollit anim id est laborum
-                </p>
+        <div className="tab-pane active show">
+            <div className="row gy-4">
+                <div className="col-lg-8 order-2 order-lg-1">
+                <h3>문화사업 기획</h3>
+                <p><b>
+                학생들이 기획하는 행사 이외에도 공간위가 스스로 기획하는 문화사업도 많이 있습니다. 
+                2015년에는 야잠 컨테스트, 계단에 뽁뽁이 설치, 크리스마스에 대형트리 설치 등 일상의 소소한 문화를 위해 사업을 진행하였습니다. 
+                또한 2016년에는 그림자 만들기, 밤샘책읽기 행사, 영화제 등 규모가 큰 행사도 진행하였습니다.
+                </b></p>
                 </div>
-                <div class="col-lg-4 order-1 order-lg-2 text-center">
-                    <img src="/img/features-1.svg" alt="" class="img-fluid"/>
+                <div className="col-lg-4 order-1 order-lg-2 text-center">
+                    <img src="/img/features-1.svg" alt="" className="img-fluid"/> {/*이미지 수정 해야함*/}
                 </div>
             </div>
         </div>
