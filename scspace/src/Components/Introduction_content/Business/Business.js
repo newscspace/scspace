@@ -33,7 +33,7 @@ class Business extends Component{
         <section id="features" className="features">
             <div className="container">
               
-                <div classNameName="business">
+                <div className="business">
                     <h5>학생문화공간위원회는 학생문화 증진을 위해 여러 가지 활동을 하고 있습니다.<br/>
                         크게 3가지 분야로 나누어본다면 신학관 관리, 학생활동 지원, 문화사업 기획이 있습니다.<br/>
                         공간관리와 학생활동 지원, 문화사업 기획 등의 능동적인 학생문화 창출을 하며 카이스트 내에 올바른 학생문화가 정착할 수 있도록 하고 있습니다.</h5>
