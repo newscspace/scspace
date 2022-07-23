@@ -15,6 +15,7 @@ import Reservation from './Components/Reservation';
 import Mypage from './Components/Mypage';
 import Manage from './Components/Manage';
 import Calendar from './Components/Calendar';
+import CreateTeam from './Components/CreateTeam';
 
 class App extends Component {
   constructor(props){
@@ -51,6 +52,7 @@ class App extends Component {
           <ViewNotice key={props.match.params.name} {...props} exact/>
         )}/>
         <Route path="/notice/create" component={CreateNotice} exact/>
+        <Route path="/teamcreate" component={CreateTeam} exact/>
 
         <Route path="*" render={() => (<h1>404 error</h1>)}/>
       </Switch>
