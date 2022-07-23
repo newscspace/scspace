@@ -104,14 +104,15 @@ OnClickEvent = (idx, e) =>{
 
             <div className="col-lg-8">
               <form className="php-email-form"> 
-                <h4>{this.state.file_title}</h4>
+                <h4><b>{this.state.file_title}</b></h4>
+                <hr></hr>
                 <div className="container viewer img-fluid">
                   <Document
                     file={this.state.file_name}
                     onLoadSuccess={this.onDocumentLoadSuccess}>
                     {Array.apply(null, Array(numPages))
                     .map((x, i)=>i+1)
-                    .map(page => <Page pageNumber={page}/>)}
+                    .map(page => <Page scale={1.2} pageNumber={page}/>)}
                   </Document>
                 </div>
                   

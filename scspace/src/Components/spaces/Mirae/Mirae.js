@@ -14,11 +14,6 @@ class Mirae extends Component{
         2: <Caution />
       }
     }
-    this.menulist = {
-      0: <Introduction />,
-      1: <Use />,
-      2: <Caution />
-    }
   }
 
   changeMenu = (menuIndex) =>{
