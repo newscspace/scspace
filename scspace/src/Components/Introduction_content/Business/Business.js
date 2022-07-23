@@ -72,6 +72,10 @@ class Business extends Component{
                 <div className="tab-content">
                     {this.state.menulist[this.state.menu]}
                 </div>
+                
+                <br/>
+
+                <div className="text-end business">원하는 사업이 없다면<button><Link to="/ask">문의하기</Link></button></div>
 
             </div>
   

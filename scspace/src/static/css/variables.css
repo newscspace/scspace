@@ -20,13 +20,14 @@
 --------------------------------------------------------------*/
 @import url(//fonts.googleapis.com/earlyaccess/jejugothic.css);
 @import url(//fonts.googleapis.com/earlyaccess/jejuhallasan.css);
+@import url(https://hangeul.pstatic.net/hangeul_static/css/nanum-square-round.css);
 
 :root {
 
   /* Fonts */
-  --font-default: 'Jeju Hallasan', 'Open Sans', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-  --font-primary: 'Jeju Hallasan', 'Source Sans Pro', sans-serif;
-  --font-secondary: 'Jeju Hallasan', 'Poppins', sans-serif;
+  --font-default:  'NanumSquareRound', 'Open Sans', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  --font-primary:  'NanumSquareRound', 'Source Sans Pro', sans-serif;
+  --font-secondary:  'NanumSquareRound', 'Poppins', sans-serif;
 
   /* Colors */
   /* The *-rgb color names are simply the RGB converted value of the corresponding color for use in the rgba() function */
