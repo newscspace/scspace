@@ -32,4 +32,4 @@ jobs:
         working-directory: ./scspace
         run: |
           npm ci
-          npm run build
+          CI=false npm run build
