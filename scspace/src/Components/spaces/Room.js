@@ -1,18 +1,21 @@
 import React, {Component} from 'react';
 import Introduction from './Introduction';
-import Use from './Use';
+import Usage from './Usage';
 import Caution from './Caution';
+import SpaceInfo from './SpaceInfo';
 
-class Dance extends Component{
+class Room extends Component{
   constructor(props) {
     super();
+    const roomCode = 2;
     this.state = {
       menu: 0,
       menulist : {
-        0: <Introduction />,
-        1: <Use />,
-        2: <Caution />
-      }
+        0: <Introduction roomCode={roomCode} />,
+        1: <Usage roomCode={roomCode}/>,
+        2: <Caution roomCode={roomCode}/>
+      },
+      spaceinfo: new SpaceInfo()
     }
   }
 
@@ -39,7 +42,7 @@ class Dance extends Component{
               </div>
 
               <div className="col-lg-7">
-                <h3 className="pt-0 pt-lg-5">체육 및 무예활동을 할 수 있는 공간입니다.<br/>열린 형태의 강좌 활동도 진행 가능합니다.</h3>
+                <h3 className="pt-0 pt-lg-5">{this.state.spaceinfo.shortIntro}</h3>
 
                 <ul className="nav nav-pills mb-3">
                   <li onClick={() => this.changeMenu(0)} className="nav-link active" id="menu0">소개</li>
@@ -61,4 +64,4 @@ class Dance extends Component{
     )};
 }
 
-export default Dance;
+export default Room;

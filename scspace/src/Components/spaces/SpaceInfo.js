@@ -1,15 +1,23 @@
 class SpaceInfo{
     user = 'KAISTian';
+    reservable = true;
+    supportsPreBook = true;
+    requireTeam = true;
     kaistReservationsOnly= true;
     noFood = true;
     noDrinks = true;
     noShoes = false;
+    alwaysOpen = true;
     roomcode = 0;
     roomname = 'ERROR';
     availability = '24/7';
     features = '공기청정기';
-    constructor() {
-        
+    shortIntro = '체육 및 무예활동을 할 수 있는 공간입니다. 열린 형태의 강좌 활동도 진행 가능합니다.';
+    
+    constructor(roomCode) {
+        this.roomcode = roomCode;
+        // Fetch room information according to room code
+        // Good luck, backend Engi!
     }
     maxCapacity() {
         return 20;

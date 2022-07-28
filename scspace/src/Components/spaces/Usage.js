@@ -1,18 +1,19 @@
-import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
+import SpaceInfo from './SpaceInfo';
 
 
-class Use extends Component{
-    render() {return (
+function Usage(props){
+    const spaceInfo = new SpaceInfo(props.roomCode);
+    return (
         <div className="tab-pane fade show active space">
 
             <div className="d-flex align-items-center mt-4">
                 <i className="bi bi-check2"></i>
-                <h4>상시 개방</h4>
+                <h4>{spaceInfo.alwaysOpen ? '상시 개방' : '예약 전용'}</h4>
             </div>
-            <p>무예실은 예약이 없을 땐 누구나 사용 가능합니다.</p>
+            <p>{spaceInfo.roomname}은 {spaceInfo.alwaysOpen ? '예약이 없을 때 누구나 사용 가능합니다.' : '예약 후에만 사용 가능합니다.'}</p>
 
-            <div className="d-flex align-items-center mt-4">
+            {spaceInfo.reservable ? (<><div className="d-flex align-items-center mt-4">
                 <i className="bi bi-check2"></i>
                 <h4>상시 예약</h4>
             </div>
@@ -25,16 +26,18 @@ class Use extends Component{
             <ul>
                 <li>사용 14일 전부터 이틀 전 오후 11시 59분까지 예약이 가능합니다.</li>
                 <li>하루에 최대 2시간 예약할 수 있습니다.</li>
-                <li>시험기간 전 주와 시험기간에는 상시 예약이 불가능합니다.</li>
-            </ul>
+                <li>(학사)시험기간 전 주부터는 상시 예약이 불가능합니다.</li>
+            </ul></>) : null}
 
+            {spaceInfo.supportsPreBook ? (<>
             <div className="d-flex align-items-center mt-4">
                 <i className="bi bi-check2"></i>
                 <h4>정기 예약</h4>
             </div>
-            <p>학생들의 정기적 연습 및 무예 활동을 지원하기 위해 한 학기 단위의 정기예약을 받습니다.<br/>
+            <p>가동아리를 비롯한 다양한 단체의 안정적 이용을 위해 한 학기 단위의 정기예약을 받습니다.<br/>
                 예약 기간은 매 학기 2주부터 14주로, 상시 예약보다 우선권을 가집니다.<br/>
-                정기 예약 추첨은 오프라인으로 진행되며, 추첨 시기 및 장소는 1주일 전 sns를 통해 공지됩니다.</p>
+                정기 예약 추첨은 오프라인으로 진행되며, 추첨 시기 및 장소는 1주일 전 공간위 공식 창구를 통해 공지됩니다.</p>
+            </>) : null}
 
             <div className="d-flex align-items-center mt-4">
                 <i className="bi bi-check2"></i>
@@ -62,7 +65,7 @@ class Use extends Component{
             </ul>
 
         </div>
-    )}
+    )
 }
 
-export default Use;
+export default Usage;

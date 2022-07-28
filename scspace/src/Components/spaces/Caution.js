@@ -35,7 +35,7 @@ function Caution(props) {
                 <i className="bi bi-check2"></i>
                 <h4>실외화 착용 금지</h4>
             </div>
-            <p>{this.props.roomname} 내에서는 실외화를 벗어주세요. 실내화는 착용 가능합니다.</p>
+            <p>{props.roomname} 내에서는 실외화를 벗어주세요. 실내화는 착용 가능합니다.</p>
         </div>);
     let standardUsageTnC = (
         <div>
