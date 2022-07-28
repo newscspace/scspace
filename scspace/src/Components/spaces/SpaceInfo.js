@@ -8,14 +8,17 @@ class SpaceInfo{
     noDrinks = true;
     noShoes = false;
     alwaysOpen = true;
-    roomcode = 0;
+    roomcode = '';
     roomname = 'ERROR';
     availability = '24/7';
-    features = '공기청정기';
+    features = [1,2,3];
+    featuresString = '';
     shortIntro = '체육 및 무예활동을 할 수 있는 공간입니다. 열린 형태의 강좌 활동도 진행 가능합니다.';
     
     constructor(roomCode) {
         this.roomcode = roomCode;
+        this.roomname = '데이터 로딩중';
+        this.featuresString = '프로젝터, 컴퓨터, 음향장비';
         // Fetch room information according to room code
         // Good luck, backend Engi!
     }

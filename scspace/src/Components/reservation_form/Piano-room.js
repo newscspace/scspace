@@ -10,7 +10,7 @@ class Form extends Component{
     constructor(props){
         super(props);
         this.state = {
-          space_name: 'pinao-room1',
+          spaceName: 'pinao-room1',
           time_from : '',
           time_to : ''
   

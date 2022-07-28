@@ -7,7 +7,7 @@ import SpaceInfo from './SpaceInfo';
 class Room extends Component{
   constructor(props) {
     super();
-    const roomCode = 2;
+    const roomCode = 'piano_room';
     this.state = {
       menu: 0,
       menulist : {

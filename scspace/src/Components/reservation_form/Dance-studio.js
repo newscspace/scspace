@@ -11,7 +11,7 @@ class Form extends Component{
     constructor(props){
         super(props);
         this.state = {
-            space_name: 'dance-studio',
+            spaceName: 'dance-studio',
             team_id: null,
             time_from : '',
             time_to : '',

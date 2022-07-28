@@ -11,7 +11,7 @@ class Form extends Component{
   constructor(props){
     super(props);
     this.state = {
-        space_name: 'group-practice-room',
+        spaceName: 'group-practice-room',
         team_id: null, /* team_id관련해서 코드 필요 */
         time_from : '',
         time_to : '',
