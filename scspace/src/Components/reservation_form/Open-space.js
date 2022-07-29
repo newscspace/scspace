@@ -16,7 +16,7 @@ class Form extends Component{
     constructor(props){
         super(props);
         this.state = {
-          space_name : 'open-space',
+          spaceName : 'open-space',
           time_from : '',
           time_to : '',
           content : {space : [], organization_name : '', event_name:'', inner_number : 0, outer_number : 0, character:[], event_purpose:'',contents:'', rehersal_from:'', rehersal_to:''}
