@@ -16,11 +16,7 @@ class Form extends Component{
     constructor(props){
         super(props);
         this.state = {
-<<<<<<< .merge_file_a01008
-            space_name : 'mirae-hall',
-=======
             spaceName : 'mirae-hall',
->>>>>>> .merge_file_a14620
             time_from : '',
             time_to : '',
             content : {organization_name : '', event_name:'', inner_number : 0, outer_number : 0, event_purpose:'',contents:'', rehersal_from:'', rehersal_to:'', rehersal_lastday_from : '', rehersal_lastday_to:'', equipment:[], food:''}

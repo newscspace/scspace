@@ -43,13 +43,8 @@ class Space extends Component{
             spaceInfo: new SpaceInfo(this.props.name)
         })
     }
-<<<<<<< .merge_file_a00280
-
-    render() {       
-=======
     
     render() {
->>>>>>> .merge_file_a22796
         return (
         <div>
             <div class="breadcrumbs">

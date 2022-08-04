@@ -20,11 +20,7 @@ class Reservation extends Component{
         this.space_list = ['Individual_practice_room', 'Piano_room','Dance_studio', 'Seminar_room', 'Group_practice_room', 'Ullim_hall', 'Mirae_hall', 'Open_space', 'Workshop'];
         //this.space_list = ['개인연습실', '피아노실', '무예실', '합주실','세미나실', '울림홀', '미래홀', '창작공방', '오픈스페이스' ];
         this.state = {
-<<<<<<< .merge_file_a09856
-            space_name : 'Individual_practice_room',
-=======
             spaceName : 'Individual_practice_room',
->>>>>>> .merge_file_a27908
             
             space : {
               Individual_practice_room: '개인연습실',
@@ -75,13 +71,8 @@ class Reservation extends Component{
             </div> 
             <section>
             <div className="section-header">
-<<<<<<< .merge_file_a09856
-                    <h2>{this.state.space[this.state.space_name]}</h2>
-                    <p>{this.state.space_name.replace(/_/gi, ' ')}</p>
-=======
                     <h2>{this.state.space[this.state.spaceName]}</h2>
                     <p>{this.state.spaceName.replace(/_/gi, ' ')}</p>
->>>>>>> .merge_file_a27908
             </div>
             
             <hr/>
@@ -92,11 +83,7 @@ class Reservation extends Component{
                   <ul  className="portfolio-flters">
                     {this.space_list.map((space) => {
                         return (
-<<<<<<< .merge_file_a09856
-                                <li onClick={() => {this.setState({space_name : space})}}>{this.state.space[space]}</li>
-=======
                                 <li onClick={() => {this.setState({spaceName : space})}}>{this.state.space[space]}</li>
->>>>>>> .merge_file_a27908
                         )
                       } 
                     )}
@@ -130,11 +117,7 @@ class Reservation extends Component{
                   </div>
                 </div>
 
-<<<<<<< .merge_file_a09856
-                {this.state.space_tag[this.state.space_name]}
-=======
                 {this.state.space_tag[this.state.spaceName]}
->>>>>>> .merge_file_a27908
                 
 
               </div>

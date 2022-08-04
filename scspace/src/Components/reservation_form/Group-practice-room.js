@@ -11,11 +11,7 @@ class Form extends Component{
   constructor(props){
     super(props);
     this.state = {
-<<<<<<< .merge_file_a06804
-        space_name: 'group-practice-room',
-=======
         spaceName: 'group-practice-room',
->>>>>>> .merge_file_a02796
         team_id: null, /* team_id관련해서 코드 필요 */
         time_from : '',
         time_to : '',
