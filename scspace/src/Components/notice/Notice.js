@@ -19,10 +19,8 @@ class Notice extends Component{
 
     componentDidMount(){
         this.callApi()
-            .then(res => this.setState({list:res}))
+            .then(res => {this.setState({list:res});  this.setState({total_page_number : Math.ceil(res.length/10)});} )
             .catch(err => console.log(err));
-
-        this.setState({total_page_number : Math.ceil(this.state.list.length/10)});
     }
     
     callApi= async () => {
