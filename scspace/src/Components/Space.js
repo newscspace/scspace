@@ -51,10 +51,8 @@ class Space extends Component{
             space_name: name,
         })
     }
-    
-    render() {
-        const Address = this.state.space_name;
-        
+
+    render() {       
         return (
         <div>
             <div class="breadcrumbs">
