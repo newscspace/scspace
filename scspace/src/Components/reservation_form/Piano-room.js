@@ -10,7 +10,11 @@ class Form extends Component{
     constructor(props){
         super(props);
         this.state = {
+<<<<<<< .merge_file_a16388
           space_name: 'pinao-room1',
+=======
+          spaceName: 'pinao-room1',
+>>>>>>> .merge_file_a21036
           time_from : '',
           time_to : ''
   

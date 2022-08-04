@@ -23,6 +23,7 @@ class Footer extends Component{
               </div>
     
               <div className="col-lg-2 col-md-6 footer-links">
+<<<<<<< .merge_file_a05800
                 <h4>Useful Links</h4>
                 <ul>
                   <li><i className="bi bi-chevron-right"></i> <a href="#">Home</a></li>
@@ -30,10 +31,20 @@ class Footer extends Component{
                   <li><i className="bi bi-chevron-right"></i> <a href="#">Services</a></li>
                   <li><i className="bi bi-chevron-right"></i> <a href="#">Terms of service</a></li>
                   <li><i className="bi bi-chevron-right"></i> <a href="#">Privacy policy</a></li>
+=======
+                <h4>바로가기</h4>
+                <ul>
+                  <li><i className="bi bi-chevron-right"></i> <a href="#">메인 페이지</a></li>
+                  <li><i className="bi bi-chevron-right"></i> <a href="#">공간위에 관해</a></li>
+                  <li><i className="bi bi-chevron-right"></i> <a href="#">예약하기</a></li>
+                  <li><i className="bi bi-chevron-right"></i> <a href="#">공긴에 대하여</a></li>
+                  <li><i className="bi bi-chevron-right"></i> <a href="#">회칙 및 약관</a></li>
+>>>>>>> .merge_file_a16224
                 </ul>
               </div>
     
               <div className="col-lg-3 col-md-6 footer-links">
+<<<<<<< .merge_file_a05800
                 <h4>Our Services</h4>
                 <ul>
                   <li><i className="bi bi-chevron-right"></i> <a href="#">Web Design</a></li>
@@ -41,6 +52,18 @@ class Footer extends Component{
                   <li><i className="bi bi-chevron-right"></i> <a href="#">Product Management</a></li>
                   <li><i className="bi bi-chevron-right"></i> <a href="#">Marketing</a></li>
                   <li><i className="bi bi-chevron-right"></i> <a href="#">Graphic Design</a></li>
+=======
+                <h4>공간위 공간들</h4>
+                <ul>
+                  <li><i className="bi bi-chevron-right"></i> <a href="#">개인연습실</a></li>
+                  <li><i className="bi bi-chevron-right"></i> <a href="#">피아노실</a></li>
+                  <li><i className="bi bi-chevron-right"></i> <a href="#">울림홀</a></li>
+                  <li><i className="bi bi-chevron-right"></i> <a href="#">미래홀</a></li>
+                  <li><i className="bi bi-chevron-right"></i> <a href="#">세미나실</a></li>
+                  <li><i className="bi bi-chevron-right"></i> <a href="#">오픈스페이스</a></li>
+                  <li><i className="bi bi-chevron-right"></i> <a href="#">합주실</a></li>
+                  <li><i className="bi bi-chevron-right"></i> <a href="#">무예실</a></li>
+>>>>>>> .merge_file_a16224
                 </ul>
               </div>
             </div>
@@ -52,11 +75,19 @@ class Footer extends Component{
     
             <div className="d-flex flex-column align-items-center align-items-lg-start">
               <div className="copyright">
+<<<<<<< .merge_file_a05800
                 &copy; Copyright <strong><span>HeroBiz</span></strong>. All Rights Reserved
               </div>
               <div className="credits">
               
                 Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+=======
+                &copy; Copyright <strong><span>학생문화공간위원회</span></strong>. 원본 Herobiz.
+              </div>
+              <div className="credits">
+              
+                <a href="https://bootstrapmade.com/">BootstrapMade</a>의 디자인을 변형함.
+>>>>>>> .merge_file_a16224
               </div>
             </div>
     
