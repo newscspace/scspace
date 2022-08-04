@@ -1,4 +1,7 @@
 # scspace
+<<<<<<< .merge_file_a30580
+학생문화공간위원회 https://scspace.kaist.ac.kr
+=======
 학생문화공간위원회에서 운영하는 공간의 예약 시스템입니다. https://scspace.kaist.ac.kr
 
 본 레포는 머리털 나고 처음으로 자바스크립트 코딩한 공간위 8, 9기의 비극을 담고 있습니다.
@@ -28,3 +31,4 @@
 3. CI/CD 통과 확인 후 PR을 날린다.
 4. **다른 사람이** 문제 없는지 확인 후 Merge한다.
 5. 서버에 git pull한다.
+>>>>>>> .merge_file_a20864

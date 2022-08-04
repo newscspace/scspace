@@ -16,7 +16,7 @@ class Use extends Component{
                 <i className="bi bi-check2"></i>
                 <h4>상시 예약</h4>
             </div>
-            <p>팀 등록 <Link class="btn-getstarted scrollto" to="#">등록하기</Link></p> {/*팀 등록 링크 조정 필요*/}
+            <p>팀 등록 <Link class="btn-getstarted scrollto" to="/teamcreate">등록하기</Link></p>
             <ul>
                 <li>예약을 위하여 최소 3인의 팀 등록이 필요합니다.</li>
                 <li>팀 등록은 매 정규학기가 끝날 때 초기화됩니다.</li>

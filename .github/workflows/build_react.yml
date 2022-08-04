@@ -32,4 +32,8 @@ jobs:
         working-directory: ./scspace
         run: |
           npm ci
+<<<<<<< .merge_file_a12900
+          npm run build
+=======
           CI=false npm run build
+>>>>>>> .merge_file_a13192

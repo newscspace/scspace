@@ -60,7 +60,7 @@ class Rule extends Component {
 OnClickEvent = (idx, e) =>{
     const copied_info = [...this.state.info];
     copied_info[idx].clicked = true;
-    for (let i=0; i<3; i++)
+    for (let i=0; i<15; i++)
       {
         if (i !== idx) {
           copied_info[i].clicked = false;

@@ -23,6 +23,13 @@ class Footer extends Component{
               </div>
     
               <div className="col-lg-2 col-md-6 footer-links">
+                <h4>Useful Links</h4>
+                {/* <ul>
+                  <li><i className="bi bi-chevron-right"></i> <a href="#">Home</a></li>
+                  <li><i className="bi bi-chevron-right"></i> <a href="#">About us</a></li>
+                  <li><i className="bi bi-chevron-right"></i> <a href="#">Services</a></li>
+                  <li><i className="bi bi-chevron-right"></i> <a href="#">Terms of service</a></li>
+                  <li><i className="bi bi-chevron-right"></i> <a href="#">Privacy policy</a></li> */}
                 <h4>바로가기</h4>
                 <ul>
                   <li><i className="bi bi-chevron-right"></i> <a href="#">메인 페이지</a></li>
