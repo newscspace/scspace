@@ -2910,3 +2910,18 @@ section {
   color: black;
 }
 
+/*--------------------------------------------------------------
+# Mypage
+--------------------------------------------------------------*/
+.mypage {
+  margin: 0px 15px;
+  float: left;
+}
+.wrap:after{
+  content:'';
+  display:block;
+  clear:both;
+}
+.noo {
+  float: none;
+}

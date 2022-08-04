@@ -12,7 +12,7 @@ import Ask from './Components/Ask';
 import Faq from './Components/FAQ';
 import Introduction from './Components/Introduction';
 import Reservation from './Components/Reservation';
-import Mypage from './Components/Mypage';
+import Mypage from './Components/mypage/Mypage';
 import Manage from './Components/Manage';
 import Calendar from './Components/Calendar';
 import CreateTeam from './Components/CreateTeam';
