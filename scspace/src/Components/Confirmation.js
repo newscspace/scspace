@@ -22,7 +22,6 @@ class Confirmation extends Component{
                         <div className="info">
                             <h3>(공간이름) 예약 신청이 완료되었습니다.</h3>
                             <br/>
-                            {/* <p>학생문화공간위원회의 모든 사업은 아래<br/>회칙/세칙을 중심으로 진행됩니다.</p> */}
                                 <div className="conf-item txt">
                                     <div>
                                         <h4>장소 및 시간</h4>

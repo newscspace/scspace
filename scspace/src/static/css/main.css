@@ -2913,18 +2913,14 @@ section {
 /*--------------------------------------------------------------
 # Mypage
 --------------------------------------------------------------*/
-.mypage {
-  margin: 0px 15px;
-  float: left;
-}
 .wrap:after{
   content: '';
   display: block;
   clear: both;
 }
 .confirm {
-  padding-right: 150px;
-  padding-left: 150px;
+  padding-right: 200px;
+  padding-left: 200px;
   margin-right: auto; 
   margin-left: auto;
 }
@@ -2965,8 +2961,23 @@ section {
   float: left;
 }
 .confirm .conf-item .ptxt {
-  padding: 10px 0px;
+  padding: 10px 0px 10px 10px;
   margin-bottom: 0;
   font-size: 16px;
   color: var(--color-secondary-light);
+  float: left;
+}
+.confirm .conf-item .pteamtxt {
+  padding: 10px 7px 10px 10px;
+  margin-bottom: 0;
+  font-size: 16px;
+  color: var(--color-secondary);
+  float: left;
+}
+.confirm .conf-item .team {
+  padding: 10px 7px 10px 202px;
+  margin-bottom: 0;
+  font-size: 16px;
+  color: var(--color-secondary);
+  float: left;
 }
