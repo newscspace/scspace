@@ -31,8 +31,9 @@ class CreateNotice extends Component{
             this.sendPost()
             .then((res) => {
               console.log(res.data);
+              this.props.history.push('/notice')
             })
-
+            
         } 
        
         else{ alert('a') /* error 내용 출력 필요 */}
