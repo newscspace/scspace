@@ -31,10 +31,8 @@ class Mypage extends Component{
 
     componentDidMount(){
         this.callApi()
-            .then(res => this.setState({list:res}))
+            .then(res => {this.setState({list:res});  this.setState({total_page_number : Math.ceil(res.length/5)});} )
             .catch(err => console.log(err));
-
-        this.setState({total_page_number : Math.ceil(this.state.list.length/5)});
     }
     
     callApi= async () => {
@@ -94,7 +92,7 @@ class Mypage extends Component{
                             </select>
                             {/* <input type="submit" value="Submit" /> */}
                         </form></th>
-                        <th>신청서</th>
+                        <th>확인서</th>
                     </thead>
 
                     <tbody>
@@ -105,7 +103,7 @@ class Mypage extends Component{
                                     <td>07월 25일 00:20 ~ 07월 25일 01:21</td>
                                     <td>07월 24일 00:18</td>
                                     <td>승인</td>
-                                    <td><Link to={"#"}>보기</Link></td>
+                                    <td><Link to="../Confirmation">보기</Link></td>
                                 </tr>
                             )
                         })}
@@ -146,7 +144,7 @@ class Mypage extends Component{
                         {this.state.list.slice((this.state.page_number-1)*5, this.state.page_number*5).map((contents) => {
                             return(
                                 <tr>
-                                    <td><Link to={"#"}>동그라미세모네모</Link></td>
+                                    <td><Link to="../Team">동그라미세모네모</Link></td>
                                 </tr>
                             )
                         })}
