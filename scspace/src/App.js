@@ -19,6 +19,7 @@ import CreateTeam from './Components/CreateTeam';
 import Confirmation from './Components/Confirmation';
 import Team from './Components/Team';
 
+//
 class App extends Component {
   constructor(props){
     super(props);
