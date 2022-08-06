@@ -1,8 +1,6 @@
 import React, {Component} from 'react';
-import {withRouter} from 'react-router-dom';
 import {Link} from 'react-router-dom';
-import DatePicker from 'react-datepicker';
-import 'react-datepicker/dist/react-datepicker.css';
+
 
 import Individual from './reservation_form/Individual-practice-room';
 import Piano from './reservation_form/Piano-room';
