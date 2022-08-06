@@ -1,39 +1,32 @@
+const db = require('../models/faq');
 
-reservation = {
+faq = {
     create : (req, res) => {
-        console.log('create');
-        console.log(req.body);
+        db.create(req.body)
+            .then (result => { result ? res.send(true) : res.send(false)});
     },
-    
-    read : (req, res) => {
-        res.json([
-            {
-                'id' : 1,
-                'title' : '더워', // FAQ에는 date, hits, important가 없고 question/answer만
-                'question' : '그냥 나가면 안되나요?',
-                'answer' : '에어비엔비 호스트마저 만류하더라고요'
-            },
-            {
-                'id' : 2,
-                'title' : '38도라고 미쳤어',
-                'question' : '버스는 시원하잖아요..?',
-                'answer' : '독일엔 에어컨버스 따위 없다.'
-            },
-        ]); // Obviously dummy code
+
+    read : (req, res) =>{
+        db.read()
+            .then (result => {res.json(result);})
+            .catch (() => {console.log(result);});
     },
 
     update : (req, res) => {
-        console.log('update');
-        console.log(req.body);
+        db.update(req.body)
+            .then (result => { result ? res.send(true) : res.send(false)});
     }, 
 
     delete  : (req, res) => {
-        console.log('delete');
+        db.delete([parseInt(req.query.id)])
+        .then (result => { result ? res.send(true) : res.send(false)});
     }
+
+
 
 
 
 }
 
 
-module.exports = reservation
+module.exports = faq
