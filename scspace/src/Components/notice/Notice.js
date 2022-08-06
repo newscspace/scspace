@@ -57,11 +57,11 @@ class Notice extends Component{
                         </thead>
                 
                         <tbody>
-                            {this.state.list.slice((this.state.page_number-1)*10, this.state.page_number*10).map((contents) => {
+                            {this.state.list.slice((this.state.page_number-1)*10, this.state.page_number*10).map((contents, idx) => {
                                 return(
                                     <tr>
                                         
-                                        <td>{contents.important ? <b style={{color:"red"}}>필독</b>:contents.id}</td> {/* 무엇으을 넣으으을까요오*/}
+                                        <td>{contents.important ? <b style={{color:"red"}}>필독</b>:(this.state.page_number-1)*10 + idx+1}</td> {/* 무엇으을 넣으으을까요오*/}
                                         <td><Link to={"/notice/view/"+contents.id}>{contents.title}</Link></td>
                                         <td>{moment(contents.time_post).format('YYYY-MM-DD HH:mm:ss')}</td>
                                         <td>{contents.hits}</td>
