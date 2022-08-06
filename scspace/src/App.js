@@ -9,13 +9,14 @@ import ViewNotice from './Components/notice/ViewNotice';
 import CreateNotice from './Components/notice/CreateNotice';
 import Space from './Components/Space';
 import Ask from './Components/Ask';
-import Faq from './Components/FAQ';
+import Faq from './Components/faq/FAQ';
 import Introduction from './Components/Introduction';
 import Reservation from './Components/Reservation';
 import Mypage from './Components/mypage/Mypage';
 import Manage from './Components/Manage';
 import Calendar from './Components/Calendar';
 import CreateTeam from './Components/CreateTeam';
+import CreateFaq from './Components/faq/CreateFaq'
 
 //
 class App extends Component {
@@ -43,7 +44,7 @@ class App extends Component {
         
         <Route path="/ask" component ={Ask} exact/>
         <Route path="/faq" component ={Faq} exact/>
-        
+        <Route path="/faqcreate" component ={CreateFaq} exact/>
         <Route path="/reservation" component={Reservation} exact/>
         <Route path="/mypage" component={Mypage} exact/>
         <Route path="/manage" component={Manage} exact/>

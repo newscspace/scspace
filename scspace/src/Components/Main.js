@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import Banner from './Banner'
 import FastNotice from './notice/FastNotice';
-import FAQ from './FAQ'
+import FAQ from './faq/FAQ'
 class Header extends Component{
     render() {return (
         <div>
