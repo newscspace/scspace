@@ -16,6 +16,8 @@ import Mypage from './Components/mypage/Mypage';
 import Manage from './Components/Manage';
 import Calendar from './Components/Calendar';
 import CreateTeam from './Components/CreateTeam';
+import Confirmation from './Components/Confirmation';
+import Team from './Components/Team';
 
 class App extends Component {
   constructor(props){
@@ -53,6 +55,8 @@ class App extends Component {
         )}/>
         <Route path="/notice/create" component={CreateNotice} exact/>
         <Route path="/teamcreate" component={CreateTeam} exact/>
+        <Route path="/confirmation" component={Confirmation} exact/>
+        <Route path="/team" component={Team} exact/>
 
         <Route path="*" render={() => (<h1>404 error</h1>)}/>
       </Switch>

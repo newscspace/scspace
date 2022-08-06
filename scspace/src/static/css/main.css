@@ -2918,10 +2918,55 @@ section {
   float: left;
 }
 .wrap:after{
-  content:'';
-  display:block;
-  clear:both;
+  content: '';
+  display: block;
+  clear: both;
 }
-.noo {
-  float: none;
+.confirm {
+  padding-right: 150px;
+  padding-left: 150px;
+  margin-right: auto; 
+  margin-left: auto;
+}
+@media (min-width: 768px) {
+ .confirm {
+  width: 750px;
+  }
+}
+@media (min-width: 992px) {
+  .confirm {
+    width: 970px
+  }
+}
+@media (min-width: 1200px) {
+  .confirm {
+    width: 1170px;
+  }
+}
+.confirm .txt {
+  text-align: left;
+}
+.confirm .map {
+  margin-bottom: 40px;
+}
+.confirm .conf-item h4 {
+  padding: 0;
+  font-size: 19px;
+  font-weight: 600;
+  margin-bottom: 5px;
+  color: var(--color-secondary);
+}
+.confirm .conf-item .ptitle {
+  padding: 10px 30px 10px 100px;
+  margin-bottom: 0;
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--color-secondary);
+  float: left;
+}
+.confirm .conf-item .ptxt {
+  padding: 10px 0px;
+  margin-bottom: 0;
+  font-size: 16px;
+  color: var(--color-secondary-light);
 }
