@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
 import {get} from 'axios';
+import moment from 'moment';
 
 class ViewNotice extends Component{
 
@@ -75,7 +76,7 @@ class ViewNotice extends Component{
 
               <div className="meta-top">
                 <ul>
-                  <li className="d-flex align-items-center"><i className="bi bi-clock"></i> <a href="blog-details.html"><time>{this.state.content.date}</time></a></li>
+                  <li className="d-flex align-items-center"><i className="bi bi-clock"></i> <a href="blog-details.html"><time>{moment(this.state.content.time_post).format('YYYY-MM-DD HH:mm:ss')}</time></a></li>
                   {/* <li className="d-flex align-items-center"><i className="bi bi-chat-dots"></i> <a href="blog-details.html">12 Comments</a></li> */}
                 </ul>
               </div>

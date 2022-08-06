@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
 import {get} from 'axios';
+import moment from 'moment';
 
 class Notice extends Component{
 
@@ -62,7 +63,7 @@ class Notice extends Component{
                                         
                                         <td>{contents.important ? <b style={{color:"red"}}>필독</b>:contents.id}</td> {/* 무엇으을 넣으으을까요오*/}
                                         <td><Link to={"/notice/view/"+contents.id}>{contents.title}</Link></td>
-                                        <td>{contents.date}</td>
+                                        <td>{moment(contents.time_post).format('YYYY-MM-DD HH:mm:ss')}</td>
                                         <td>{contents.hits}</td>
                                         
                                     </tr>
