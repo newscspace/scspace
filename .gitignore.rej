@@ -1,9 +1,0 @@
-diff a/.gitignore b/.gitignore	(rejected hunks)
-@@ -9,6 +9,7 @@
- 
- # production
- /build
-+scspace/build
- 
- # misc
- .DS_Store
