@@ -73,7 +73,7 @@ class Header extends Component{
           </i>
         </nav>
           
-        <Link className="btn-getstarted scrollto" to="index.html#about">Login</Link>
+        <Link className="btn-getstarted scrollto" to="/login">Login</Link>
   
       </div>
     </header>
