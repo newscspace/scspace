@@ -23,6 +23,9 @@ import ReservationList from './Components/manage/ReservationList';
 import ViewAsk from './Components/manage/ViewAsk';
 
 
+import Login from './Components/auth/Login';
+import Logout from './Components/Logout';
+
 //
 class App extends Component {
   constructor(props){
@@ -62,10 +65,15 @@ class App extends Component {
         <Route path="/teamcreate" component={CreateTeam} exact/>
         <Route path="/confirmation" component={Confirmation} exact/>
         <Route path="/team" component={Team} exact/>
+
         <Route path="/manage/reservation" component={ReservationList} exact/>
         <Route path="/ask/view/:id" render={(props) => (
           <ViewAsk key={props.match.params.name} {...props} exact/>
         )}/>
+
+        <Route path="/login" component={Login} exact/>
+        <Route path="/logout" component={Logout} exact/>
+
 
         <Route path="*" render={() => (<h1>404 error</h1>)}/>
       </Switch>
