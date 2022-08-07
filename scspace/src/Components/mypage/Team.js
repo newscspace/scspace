@@ -3,13 +3,25 @@ import {Link} from 'react-router-dom';
 import {get} from 'axios';
 
 
-class Team extends Component{
+class Mypage extends Component{
     constructor(props) {
-        super(props);
-        this.state = {
-            page_number : 1,
-            list : [],
-        };  
+    super(props);
+    this.state = {
+        value: 'all',
+        page_number : 1,
+        list : [],
+    };  
+
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+    }
+    
+    handleChange(event) { 
+        this.setState({value: event.target.value});
+    }
+    
+    handleSubmit(event) {
+        // 공간별/상태별 보여주는 함수 작성해야할듯
     }
 
     componentDidMount(){
@@ -67,4 +79,4 @@ class Team extends Component{
       )};
 }
 
-export default Team;
+export default Mypage;

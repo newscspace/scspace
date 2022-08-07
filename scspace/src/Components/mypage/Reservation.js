@@ -3,26 +3,21 @@ import {Link} from 'react-router-dom';
 import {get} from 'axios';
 
 
-class Reservation extends Component{
+class Mypage extends Component{
     constructor(props) {
-        super(props);
-        this.state = {
-            value1: 'all',
-            value2: 'all',
-            page_number : 1,
-            list : [],
-        };  
+    super(props);
+    this.state = {
+        value: 'all',
+        page_number : 1,
+        list : [],
+    };  
 
-        this.handleChange1 = this.handleChange1.bind(this);
-        this.handleChange2 = this.handleChange2.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
     }
     
-    handleChange1(event) { 
-        this.setState({value1: event.target.value1});
-    }
-    handleChange2(event) { 
-        this.setState({value2: event.target.value2});
+    handleChange(event) { 
+        this.setState({value: event.target.value});
     }
     
     handleSubmit(event) {
@@ -51,7 +46,7 @@ class Reservation extends Component{
                 <table className="table">
                     <thead>
                         <th><form onSubmit={this.handleSubmit} className="mypage">
-                            <select value={this.state.value} onChange={this.handleChange1}> 
+                            <select value={this.state.value} onChange={this.handleChange}> 
                                 <option value="all">전체 공간</option>
                                 <option value="piano1">피아노실 1</option>
                                 <option value="piano2">피아노실 2</option>
@@ -72,7 +67,7 @@ class Reservation extends Component{
                         <th>시간</th>
                         <th>예약한 시간</th>
                         <th><form onSubmit={this.handleSubmit} className="mypage">
-                            <select value={this.state.value} onChange={this.handleChange2}> 
+                            <select value={this.state.value} onChange={this.handleChange}> 
                                 <option value="all">전체 상태</option>
                                 <option value="approved">승인</option>
                                 <option value="declined">거절</option>
@@ -118,4 +113,4 @@ class Reservation extends Component{
       )};
 }
 
-export default Reservation;
+export default Mypage;
