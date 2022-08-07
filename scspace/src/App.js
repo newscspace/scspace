@@ -19,8 +19,8 @@ import CreateTeam from './Components/CreateTeam';
 import CreateFaq from './Components/faq/CreateFaq'
 import Confirmation from './Components/Confirmation';
 import Team from './Components/Team';
-
-
+import Login from './Components/auth/Login';
+import Logout from './Components/Logout';
 //
 class App extends Component {
   constructor(props){
@@ -60,6 +60,8 @@ class App extends Component {
         <Route path="/teamcreate" component={CreateTeam} exact/>
         <Route path="/confirmation" component={Confirmation} exact/>
         <Route path="/team" component={Team} exact/>
+        <Route path="/login" component={Login} exact/>
+        <Route path="/logout" component={Logout} exact/>
 
         <Route path="*" render={() => (<h1>404 error</h1>)}/>
       </Switch>
