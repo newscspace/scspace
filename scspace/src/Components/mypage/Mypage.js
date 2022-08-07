@@ -13,7 +13,7 @@ class Mypage extends Component{
                     <h3>마이페이지</h3>
                     <ol>
                         <li><Link to="/">Home</Link></li>
-                        <li><Link to="/introduction">마이페이지</Link></li>
+                        <li><Link to="/mypage">마이페이지</Link></li>
                     </ol>
                     </div>
                 </div>
@@ -22,7 +22,7 @@ class Mypage extends Component{
             <Reservation/>
             <Team/>
 
-      </main>
+        </main>
       )};
 }
 
