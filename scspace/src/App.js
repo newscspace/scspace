@@ -24,7 +24,7 @@ import ViewAsk from './Components/manage/ViewAsk';
 
 
 import Login from './Components/auth/Login';
-import Logout from './Components/Logout';
+import Logout from './Components/auth/Logout';
 
 //
 class App extends Component {
