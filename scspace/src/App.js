@@ -13,12 +13,14 @@ import Faq from './Components/faq/FAQ';
 import Introduction from './Components/Introduction';
 import Reservation from './Components/Reservation';
 import Mypage from './Components/mypage/Mypage';
-import Manage from './Components/Manage';
+import Manage from './Components/manage/Manage';
 import Calendar from './Components/Calendar';
 import CreateTeam from './Components/CreateTeam';
 import CreateFaq from './Components/faq/CreateFaq'
 import Confirmation from './Components/Confirmation';
 import Team from './Components/Team';
+import ReservationList from './Components/manage/ReservationList';
+import ViewAsk from './Components/manage/ViewAsk';
 
 
 //
@@ -60,6 +62,10 @@ class App extends Component {
         <Route path="/teamcreate" component={CreateTeam} exact/>
         <Route path="/confirmation" component={Confirmation} exact/>
         <Route path="/team" component={Team} exact/>
+        <Route path="/manage/reservation" component={ReservationList} exact/>
+        <Route path="/ask/view/:id" render={(props) => (
+          <ViewAsk key={props.match.params.name} {...props} exact/>
+        )}/>
 
         <Route path="*" render={() => (<h1>404 error</h1>)}/>
       </Switch>

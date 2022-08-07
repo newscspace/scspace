@@ -2981,3 +2981,59 @@ section {
   color: var(--color-secondary);
   float: left;
 }
+/*--------------------------------------------------------------
+# Manage
+--------------------------------------------------------------*/
+.manage tr:hover {
+  background: rgba(var(--color-secondary-rgb), 0.05);
+}
+.modalButton1 {
+  background: rgba(var(--color-secondary-rgb), 0.8);
+  border: 0;
+  padding: 7px 10px;
+  color: var(--color-white);
+  transition: 0.4s;
+  border-radius: 4px;
+}
+.modalButton2 {
+  background: var(--color-primary);
+  border: 0;
+  padding: 7px 10px;
+  margin-right: 10px;
+  color: var(--color-white);
+  transition: 0.4s;
+  border-radius: 4px;
+}
+.modal-ttl {
+  padding: 0;
+  font-weight: 600;
+  margin-bottom: 5px;
+  color: var(--color-secondary);
+}
+.modal-first {
+  padding: 10px 30px 10px 30px;
+  margin-bottom: 0;
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--color-secondary);
+  float: left;
+}
+.modal-second {
+  padding: 10px 0px 10px 10px;
+  margin-bottom: 0;
+  font-size: 16px;
+  color: var(--color-secondary-light);
+  float: left;
+}
+.modal-chk {
+  padding: 10px 0px 10px 10px;
+  margin-top: 15px;
+  float: left;
+}
+.modal-comment {
+  padding: 10px 0px 10px 10px;
+  margin-top: 5px;
+  float: left;
+  height: 35px;
+  width: 300px;
+}
