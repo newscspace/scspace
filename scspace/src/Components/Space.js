@@ -22,17 +22,6 @@ class Space extends Component{
         super(props);
         this.state = {
             spaceName : '',
-            space : {
-                individual_practice_room: '개인연습실',
-                piano_room: '피아노실',
-                seminar_room : '세미나실',
-                group_practice_room: '합주실',
-                dance_studio: '무예실',
-                ullim_hall: '울림홀',
-                mirae_hall: '미래홀',
-                workshop: '창작공방',
-                open_space: '오픈스페이스'
-            },
             spaceInfo : new SpaceInfo(0)
         }
     }

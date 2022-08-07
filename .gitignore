@@ -9,10 +9,7 @@
 
 # production
 /build
-<<<<<<< .merge_file_a28400
-=======
 scspace/build
->>>>>>> .merge_file_a22928
 
 # misc
 .DS_Store

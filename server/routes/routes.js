@@ -45,29 +45,33 @@ router.get('/api/contact', function (req, res) {
 router.get('/api/spaces', function (req, res) {
     res.json([
         {
-            'type' : 1, // 공간 코드는 숫자나 enum으로
+            'type' : 'piano_room', 
             'name' : '피아노실1', //공식 명칭
+            'id' : 3,
             'isClosed' : false,
             'comment' : null,
             'requirements' : [1,2,3,6] // 필요사항(예약 시간 등) 코드
         },
         {
-            'type' : 1, // 공간 코드는 숫자나 enum으로
+            'type' : 'piano_room', // 공간 코드는 숫자나 enum으로
             'name' : '피아노실2', //공식 명칭
+            'id' : 4,
             'isClosed' : false,
             'comment' : null,
             'requirements' : [1,2,3,6] // 필요사항(예약 시간 등) 코드
         },
         {
-            'type' : 2, // 공간 코드는 숫자나 enum으로
+            'type' : 'mirae_hall', // 공간 코드는 숫자나 enum으로
             'name' : '미래홀', //공식 명칭
+            'id' : 5,
             'isClosed' : false,
             'comment' : null,
             'requirements' : [1,2,3,4,5,6,7] // 필요사항(예약 시간 등) 코드
         },
         {
-            'type' : 3, // 공간 코드는 숫자나 enum으로
+            'type' : 'ullim_hall', // 공간 코드는 숫자나 enum으로
             'name' : '울림홀', //공식 명칭
+            'id' : 6,
             'isClosed' : true,
             'comment' : null,
             'requirements' : [1,2,3,4,5,6,7] // 필요사항(예약 시간 등) 코드
