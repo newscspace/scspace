@@ -50,8 +50,8 @@ class Reservation extends Component{
 
                 <table className="table">
                     <thead>
-                        <th><form onSubmit={this.handleSubmit} className="mypage">
-                            <select value={this.state.value} onChange={this.handleChange1}> 
+                        <th><form onSubmit={this.handleSubmit}>
+                            <select value={this.state.value1} onChange={this.handleChange1}> 
                                 <option value="all">전체 공간</option>
                                 <option value="piano1">피아노실 1</option>
                                 <option value="piano2">피아노실 2</option>
@@ -71,8 +71,8 @@ class Reservation extends Component{
                         </form></th>
                         <th>시간</th>
                         <th>예약한 시간</th>
-                        <th><form onSubmit={this.handleSubmit} className="mypage">
-                            <select value={this.state.value} onChange={this.handleChange2}> 
+                        <th><form onSubmit={this.handleSubmit}>
+                            <select value={this.state.value2} onChange={this.handleChange2}> 
                                 <option value="all">전체 상태</option>
                                 <option value="approved">승인</option>
                                 <option value="declined">거절</option>
