@@ -26,6 +26,11 @@ class Notice extends Component{
         return body;
     }
 
+    onClickHandler = (link) => {
+        console.log(link)
+        this.props.history.push({pathname: link})
+    }
+
     render() {return (
         <div id="main">
             <div  className="breadcrumbs">
@@ -45,8 +50,16 @@ class Notice extends Component{
                 <p>Notice</p>
                     <hr/>
                 </div>
+
                 <div className="container">
-                    <table className="table">
+                <div className="text-end">
+                    <button type="button" className="modalButton1"><Link to="/notice/create">작성하기</Link></button>
+                </div>
+                </div>
+                <br/>
+
+                <div className="container">
+                    <table className="table manage">
                         <thead>
                         <tr>
                             <th>No</th>
@@ -59,10 +72,10 @@ class Notice extends Component{
                         <tbody>
                             {this.state.list.slice((this.state.page_number-1)*10, this.state.page_number*10).map((contents, idx) => {
                                 return(
-                                    <tr>
+                                    <tr key={idx} onClick={(e) => this.onClickHandler("/notice/view/"+contents.id, e)}>
                                         
-                                        <td>{contents.important ? <b style={{color:"red"}}>필독</b>:(this.state.page_number-1)*10 + idx+1}</td> {/* 무엇으을 넣으으을까요오*/}
-                                        <td><Link to={"/notice/view/"+contents.id}>{contents.title}</Link></td>
+                                        <td>{contents.important ? <b style={{color:"var(--color-primary-light)"}}>필독</b>:(this.state.page_number-1)*10 + idx+1}</td> {/* 무엇으을 넣으으을까요오*/}
+                                        <td>{contents.title}</td>
                                         <td>{moment(contents.time_post).format('YYYY-MM-DD HH:mm:ss')}</td>
                                         <td>{contents.hits}</td>
                                         

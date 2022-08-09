@@ -105,9 +105,8 @@ class ViewNotice extends Component{
         <br/>
         <div className="container">
           <div className="text-end">
-            <button type="button" className="btn btn-primary" onClick={this.EditNotice}>수정</button>
-					  &nbsp;
-					  <button type="button" className="btn btn-danger" onClick={this.DeleteNotice}>삭제</button>
+            <button type="button" className="modalButton2" onClick={this.EditNotice}>수정</button>
+					  <button type="button" className="modalButton1" onClick={this.DeleteNotice}>삭제</button>
           </div>
         </div>
 

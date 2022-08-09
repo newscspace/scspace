@@ -2913,7 +2913,7 @@ section {
 /*--------------------------------------------------------------
 # Mypage
 --------------------------------------------------------------*/
-.wrap:after{
+.wrap:after {
   content: '';
   display: block;
   clear: both;
@@ -3004,6 +3004,12 @@ section {
   transition: 0.4s;
   border-radius: 4px;
 }
+.modalButton1 a {
+  color: white;
+}
+.modalButton1 a:hover {
+  color: black;
+}
 .modal-ttl {
   padding: 0;
   font-weight: 600;
@@ -3036,4 +3042,38 @@ section {
   float: left;
   height: 35px;
   width: 300px;
+}
+.manage .wait{
+  width: 13px;
+  height: 13px;
+  background: rgb(242, 43, 80);
+  float: left;
+  margin-right: 8px;
+  margin-top: 6px;
+  border-radius: 50%;
+}
+.manage .accept{
+  width: 13px;
+  height: 13px;
+  background: rgb(245, 205, 61);
+  float: left;
+  margin-right: 8px;
+  margin-top: 6px;
+  border-radius: 50%;
+}
+.manage .solve{
+  width: 13px;
+  height: 13px;
+  background: rgb(79, 211, 46);
+  float: left;
+  margin-right: 8px;
+  margin-top: 6px;
+  border-radius: 50%;
+}
+.ask-handle {
+  width: 100px;
+  height: 35px;
+  margin-bottom: 20px;
+  border: 1px solid rgba(var(--color-secondary-rgb), 0.3);
+  border-radius: 4px;
 }
