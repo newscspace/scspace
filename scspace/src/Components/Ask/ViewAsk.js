@@ -2,14 +2,27 @@ import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
 import {get} from 'axios';
 import moment from 'moment';
+import {VscEye} from 'react-icons/vsc';
+import LeaveComment from '../manage/Ask/LeaveComment';
 
-class ViewNotice extends Component{
+class ViewAsk extends Component{
 
     constructor(props){
         super(props);
         this.state = {
-            content : ''      
+            content : '',
+            handle: {wait: "대기중", accept: "접수됨", solve: "해결됨"},  
         }
+
+        this.handleChange = this.handleChange.bind(this);
+    }
+
+    handleChange(event) {
+        // this.setState({dot: event.target.value});
+    }
+
+    handleSubmit(event) {
+        // 예약처리 저장하는 함수 작성해야할듯
     }
 
     componentDidMount(){
@@ -20,25 +33,26 @@ class ViewNotice extends Component{
     
 
     callApi = async () => {
-        const res = await get('/api/notice/id?id='+ this.props.match.params.id);
+        const res = await get('/api/ask/id?id='+ this.props.match.params.id);
         const body = await res.data;
         return body;
     }
 
-    callApi_delete = async () => {
-      const res = await get('/api/notice/delete?id='+ this.props.match.params.id);
-      const body = await res.data;
-      return body;
-    }
+    // callApi_delete = async () => {
+    //   const res = await get('/api/notice/delete?id='+ this.props.match.params.id);
+    //   const body = await res.data;
+    //   return body;
+    // }
+
     // EditNotice = () =>{
     //   this.props.history.push({pathname : '/notice/create', state: this.state});
     // }
 
-    DeleteNotice = () => {
-      this.callApi_delete()
-        .then(res => this.props.history.push('/notice'))
-        .catch(err => console.log(err));
-    }
+    // DeleteNotice = () => {
+    //   this.callApi_delete()
+    //     .then(res => this.props.history.push('/notice'))
+    //     .catch(err => console.log(err));
+    // }
 
     render() {return (
     <div id="main">
@@ -56,7 +70,7 @@ class ViewNotice extends Component{
         </div>       
         <section className="blog"> 
             <div className="container" >
-                <h4><b>최신 문의사항</b></h4>
+                <h4><b>문의사항</b></h4>
                 <hr/>
                 <div className="row g-5">
                     <div>
@@ -64,8 +78,9 @@ class ViewNotice extends Component{
                             <h2 className="title">{this.state.content.title}</h2>
                             <div className="meta-top">
                                 <ul>
+                                <li class="d-flex align-items-center"><i class="bi bi-person"></i>{this.state.content.writer_id}</li>
                                 <li className="d-flex align-items-center"><i className="bi bi-clock"></i> <time>{moment(this.state.content.time_post).format('YYYY-MM-DD HH:mm:ss')}</time></li>
-                                {/* <li className="d-flex align-items-center"><i className="bi bi-chat-dots"></i> <a href="blog-details.html">12 Comments</a></li> */}
+                                <li className="d-flex align-items-center"><VscEye className="color-secondary-light"/>&nbsp;{this.state.content.hits}</li>
                                 </ul>
                             </div>
                             <div className="content">
@@ -74,25 +89,15 @@ class ViewNotice extends Component{
                                 </p>
 
                             </div>
-                            {/* <div className="meta-bottom">
-                                <i className="bi bi-folder"></i>
-                                <ul className="cats">
-                                <li><a href="#">Ask</a></li>
-                                </ul>
-
-                            </div> */}
+                            <div className="meta-bottom manage">
+                                <p className="cats"><div className={this.state.content.state}/>{this.state.handle[this.state.content.state]}</p>
+                            </div>
                         </article>
                     </div>
                 </div>
 
-        
-            </div>
-            <br/>
-            <div className="container">
-                <div className="text-end">
-                    <button type="button" className="modalButton2" onClick={this.EditNotice}>수정</button>
-                    <button type="button" className="modalButton1" onClick={this.DeleteNotice}>삭제</button>
-                </div>
+                <LeaveComment/>
+                
             </div>
 
         </section>
@@ -101,4 +106,4 @@ class ViewNotice extends Component{
       )};
 }
 
-export default ViewNotice;
+export default ViewAsk;

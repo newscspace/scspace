@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {Modal} from 'react-bootstrap';
 import ReservationPick from './ReservationPick';
-import Comment from './Comment';
+import Comment from './CommentBox';
 
 class ReservModal extends Component{
     constructor(props) {

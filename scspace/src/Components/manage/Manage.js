@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
-import LatestReserv from './LatestReserve';
-import LatestAsk from './LatestAsk';
+import LatestReserv from './Reserve/LatestReserve';
+import LatestAsk from './Ask/LatestAsk';
 
 
 class Manage extends Component{

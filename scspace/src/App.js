@@ -8,7 +8,7 @@ import Notice from './Components/notice/Notice';
 import ViewNotice from './Components/notice/ViewNotice';
 import CreateNotice from './Components/notice/CreateNotice';
 import Space from './Components/Space';
-import Ask from './Components/Ask';
+import Ask from './Components/Ask/Ask';
 import Faq from './Components/faq/FAQ';
 import Introduction from './Components/Introduction';
 import Reservation from './Components/Reservation';
@@ -16,11 +16,12 @@ import Mypage from './Components/mypage/Mypage';
 import Manage from './Components/manage/Manage';
 import Calendar from './Components/Calendar';
 import CreateTeam from './Components/CreateTeam';
-import CreateFaq from './Components/faq/CreateFaq'
+import CreateFaq from './Components/faq/CreateFaq';
 import Confirmation from './Components/Confirmation';
 import Team from './Components/Team';
-import ReservationList from './Components/manage/ReservationList';
-import ViewAsk from './Components/manage/ViewAsk';
+import ReservationList from './Components/manage/Reserve/ReservationList';
+import CreateAsk from './Components/Ask/CreateAsk';
+import ViewAsk from './Components/Ask/ViewAsk';
 
 
 import Login from './Components/auth/Login';
@@ -51,6 +52,11 @@ class App extends Component {
         <Route path="/introduction" component={Introduction} exact/>
         
         <Route path="/ask" component ={Ask} exact/>
+        <Route path="/ask/create" component ={CreateAsk} exact/>
+        <Route path="/ask/view/:id" render={(props) => (
+          <ViewAsk key={props.match.params.name} {...props} exact/>
+        )}/>
+
         <Route path="/faq" component ={Faq} exact/>
         <Route path="/faqcreate" component ={CreateFaq} exact/>
         <Route path="/reservation" component={Reservation} exact/>
@@ -67,9 +73,6 @@ class App extends Component {
         <Route path="/team" component={Team} exact/>
 
         <Route path="/manage/reservation" component={ReservationList} exact/>
-        <Route path="/ask/view/:id" render={(props) => (
-          <ViewAsk key={props.match.params.name} {...props} exact/>
-        )}/>
 
         <Route path="/login" component={Login} exact/>
         <Route path="/logout" component={Logout} exact/>
