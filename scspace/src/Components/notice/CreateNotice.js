@@ -10,7 +10,8 @@ class CreateNotice extends Component{
 
         LoginCheck()
       .then((result) => {
-        if (result !== false || result.type === 'admin') this.setState({login:true, UserInfo:result});
+        if (result === false)this.props.history.push('/login'); 
+        else if (result.type === 'admin') this.setState({login:true, UserInfo:result});
         else this.props.history.push('/notice');
       })
 
