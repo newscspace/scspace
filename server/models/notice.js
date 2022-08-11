@@ -6,7 +6,7 @@ const dbModel = {
     let conn = db.init();
     db.connect(conn);
    
-    let sql = `SELECT * FROM notice ORDER BY important desc, time_edit desc, time_post desc;`;
+    let sql = `SELECT * FROM notice ORDER BY important desc, time_post desc;`;
     let result = await conn.promise().query(sql)
     .catch(err => {console.log(err); db.disconnect(conn); return null;});
       
