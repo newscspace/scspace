@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
-import {get} from 'axios';
+import {get, post} from 'axios';
+import LoginCheck from '../auth/LoginCheck';
 
 class FAQ extends Component{
   constructor(props){
@@ -10,14 +11,21 @@ class FAQ extends Component{
         /*question : faq 질문, answer : 질문에 대한 답변 */ 
         // TODO : FAQ 요약 로딩하기
         id :[],
-        list : []
+        list : [],
+        edit : null
       }
+      LoginCheck()
+      .then((result) => {
+        if (result !== false) this.setState({login:true, UserInfo:result});
+        else this.setState({login:false});
+      })
+
   }
   /*faq에서 화살표 눌렀을 떄 해당 질문의 답변 보여주기 위한 event 함수 */
   // TODO : FAQ 글 ID로 내용 불러오기
-  OnClickEvent = (faq_id, e) =>{
+  OnClickEvent = (idx, e) =>{
     let nextstate = Object.assign({}, this.state);
-    nextstate.id.includes(faq_id)?  nextstate.id.pop(faq_id) : nextstate.id.push(faq_id);
+    nextstate.id.includes(idx)?  nextstate.id.pop(idx) : nextstate.id.push(idx);
     
     this.setState(nextstate);
   }
@@ -35,6 +43,117 @@ class FAQ extends Component{
     return body;
   }
 
+  callApi_edit = async(idx, e) => {
+    const url = '/api/faq/update';
+    const config = {
+      headers : {
+        'Content-Type' : 'application/json'
+      }
+    }
+  
+    post(url, JSON.stringify(this.state.list[idx]), config)
+    .then((res) => {this.setState({edit:null})})
+  }
+
+  callApi_delete = async (faq_id) => {
+    get('/api/faq/delete?id='+ faq_id)
+    .then((res) => {    this.callApi()
+      .then(res => this.setState({list:res}))
+      .catch(err => console.log(err));})
+    
+  }
+
+  callApi_add = (idx, e) => {
+       
+    const url = '/api/faq/create';
+    const config = {
+      headers : {
+        'Content-Type' : 'application/json'
+      }
+    }
+  
+    post(url, JSON.stringify(this.state.list[idx]), config)
+    .then((res) => {    this.callApi()
+      .then(res => this.setState({list:res}))
+      .catch(err => console.log(err));})
+  }
+  
+  AddFaq = (idx) => {
+    let nextstate = Object.assign({}, this.state);
+    if(idx !== null) {
+      
+      nextstate.list.pop();
+      this.setState(nextstate);
+
+    } 
+    else{
+
+      nextstate.list[this.state.list.length]={id:null, title:'제목', question:'Question', answer:'Answer'};
+      this.setState(nextstate);
+    }
+ 
+  }
+  
+  EditFaq = (idx, e) =>{
+    if (this.state.edit === idx){
+      this.setState({edit:null})
+    }
+    else{
+      this.setState({edit:idx})
+    }
+    
+  }
+
+  DeleteFaq = (idx, e) => {
+    console.log(idx);
+    this.callApi_delete(this.state.list[idx].id)
+      .then(res => {/*alert('삭제되었습니다'); */this.props.history.push({pathname : '/'});})
+      .catch(err => console.log(err));
+  }
+
+  changeHandler = (idx, e) => {
+      let nextstate = Object.assign({}, this.state);
+      nextstate.list[idx][e.target.name]= e.target.value;
+      this.setState(nextstate);
+  }
+
+  admin_return = (idx) => {
+
+      if (this.state.login === true && this.state.UserInfo.type==='admin' ){
+        if(this.state.edit === idx){
+          return (
+            <div className="text-end">
+                  <button type="button" className="modalButton2" onClick={this.callApi_edit.bind(this, idx)}>수정 완료</button>
+                  <button type="button" className="modalButton1" onClick={this.EditFaq.bind(this, idx)}>취소</button>
+                  </div>
+          )
+        }
+        else if (this.state.list[idx].id === null){
+          return(
+            <div className="text-end">
+                  <button type="button" className="modalButton2" onClick={this.callApi_add.bind(this, idx)}>추가 완료</button>
+                  <button type="button" className="modalButton1" onClick={this.AddFaq.bind(idx)}>취소</button>
+                  </div>
+          )
+        }
+        else{
+          return(
+            <div className="text-end">
+                  <button type="button" className="modalButton2" onClick={this.EditFaq.bind(this, idx)}>수정</button>
+                  <button type="button" className="modalButton1" onClick={this.DeleteFaq.bind(this, idx)}>삭제</button>
+                  </div>
+                )
+        }
+      
+      }
+      else{
+        return(<div></div>)
+      }
+  }
+
+    
+
+  
   render() {
     let header;
     if (!this.props.main) {
@@ -67,6 +186,7 @@ class FAQ extends Component{
 
 
     return (
+      <section>
       <div>
         {header}
         <section id="faq" className="faq">
@@ -79,27 +199,37 @@ class FAQ extends Component{
                   <p>
                     많이 주신 질문들에 대한 답변입니다.
                   </p>
-                </div>
+          
 
-                <div className="accordion accordion-flush px-xl-5" id="faqlist">
+                </div>
+                {this.state.login === true && this.state.UserInfo.type==='admin' ? 
+                (<div className="text-end">
+                    <button type="button" className="modalButton2" onClick={() => {this.AddFaq(null)}}>추가하기</button>
+                </div>) : (<div></div>)}
+                <div className="accordion accordion-flush px-xl-5">
 
                   {this.state.list.map((contents, idx) => {
                     return (
                       <div className="accordion-item" id="mount1">
                         <h3 className="accordion-header">
-                          <button className={"accordion-button " + (this.state.id.includes(contents.id)  ? "" : "collapsed")} onClick={this.OnClickEvent.bind(this, contents.id)} >
+                          <button className={"accordion-button " + (this.state.id.includes(idx)  ? "" : "collapsed")} onClick={this.OnClickEvent.bind(this, idx)} >
                             <i className="bi bi-question-circle question-icon"></i>
-                            {contents.question}
+                            {this.state.edit === idx || this.state.list[idx].id === null? (<input type="text"  name="question" onChange={this.changeHandler.bind(this, idx)} value ={contents.question}  />): contents.question}
+                            
+                          
                           </button>
                         </h3>
-                        <div id="faq-content-1" className={"accordion-collapse " + (this.state.id.includes(contents.id)  ?  "" : "collapse")}>
+                        <div className={"accordion-collapse " + (this.state.id.includes(idx)  ?  "" : "collapse")}>
                           <div className="accordion-body">
-                            {contents.answer}
+                          {this.state.edit === idx || this.state.list[idx].id === null ? (<input type="text"  name="answer" onChange={this.changeHandler.bind(this, idx)} value ={contents.answer}  />): contents.answer}
+                            
+                            {this.admin_return(idx)}
                           </div>
                         </div>
                       </div>
                     )
                   })}
+                  
                 </div>
 
               </div>
@@ -110,6 +240,7 @@ class FAQ extends Component{
           </div>
         </section>
       </div>
+      </section>
     )
   };
 }

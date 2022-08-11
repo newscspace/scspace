@@ -1,11 +1,20 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
 import {post} from 'axios';
+import LoginCheck from '../auth/LoginCheck';
 
 class CreateFaq extends Component{
     constructor(props){
         super(props);
         this.state = {};
+
+      LoginCheck()
+      .then((result) => {
+        if (result === false) this.props.history.push('/login'); 
+        else if (result.type === 'admin') this.setState({login:true, UserInfo:result});
+        else this.props.history.push('/faq');
+      })
+
     }
     
     sendPost = () => {
@@ -54,7 +63,7 @@ class CreateFaq extends Component{
                       <h3>문의</h3>
                 <ol>
                  <li><Link to="/">Home</Link></li>
-                 <li><Link to="/faqcreate">faq</Link></li>
+                 <li><Link to="/faq/create">faq</Link></li>
                 </ol>
                 </div>
               </div>

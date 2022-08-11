@@ -34,7 +34,7 @@ const dbModel = {
     db.connect(conn);
    
     let sql = `UPDATE faq SET title=?, question=?, answer=? WHERE id=?`;
-    let result = await conn.promise().query(sql, [p.title, p.time_edit, p.important, p.content, p.id])
+    let result = await conn.promise().query(sql, [p.title, p.question, p.answer, p.id])
     .catch(err => {console.log(err); db.disconnect(conn); return false;});
    
     db.disconnect(conn);
