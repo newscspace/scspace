@@ -92,7 +92,6 @@ set_db = {
       
       conn.query(`  CREATE TABLE IF NOT EXISTS faq (
         id	INTEGER	NOT NULL AUTO_INCREMENT,
-        title	varchar(255)	NOT NULL,
         question varchar(255) NOT NULL,
         answer text NOT null,
         PRIMARY KEY (id)
@@ -105,6 +104,12 @@ set_db = {
         if (error) throw error;
         console.log('data: ', rows);
       });
+
+      conn.query(` ALTER TABLE faq DROP IF EXISTS title;`, (error, rows, fields) => {
+        if (error) throw error;
+        console.log('data: ', rows);
+      });
+
     db.disconnect(conn);
 }};
 
