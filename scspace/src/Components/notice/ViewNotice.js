@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
 import {get} from 'axios';
 import moment from 'moment';
+import LoginCheck from '../auth/LoginCheck';
 
 class ViewNotice extends Component{
 
@@ -12,7 +13,11 @@ class ViewNotice extends Component{
             
         }
 
-        
+        LoginCheck()
+      .then((result) => {
+        if (result !== false) this.setState({login:true, UserInfo:result});
+        else this.setState({login:false});
+      })
 
     }
 
@@ -104,10 +109,12 @@ class ViewNotice extends Component{
         </div>
         <br/>
         <div className="container">
-          <div className="text-end">
-            <button type="button" className="modalButton2" onClick={this.EditNotice}>수정</button>
-					  <button type="button" className="modalButton1" onClick={this.DeleteNotice}>삭제</button>
-          </div>
+        {this.state.login === true && this.state.UserInfo.type==='admin' ? 
+                (<div className="text-end">
+                <button type="button" className="modalButton2" onClick={this.EditNotice}>수정</button>
+                <button type="button" className="modalButton1" onClick={this.DeleteNotice}>삭제</button>
+              </div>) : (<div></div>)}
+          
         </div>
 
         </section>
