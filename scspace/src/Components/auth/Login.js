@@ -7,23 +7,16 @@ import LoginCheck from './LoginCheck';
 class Login extends Component{
     constructor(props){
         super(props);
-        this.state = {name:'Queen', student_id:'20210263', email : 'jiyun@kaist.ac.kr', phone:'01000000000', type:'admin'};
+
+        this.location = 'https://iam2.kaist.ac.kr/api/sso/commonLogin?client_id=SCS&state='+new Date().getTime()+'&redirect_url='+encodeURI('http://localhost:5000/api/jwt/login');
+        
     }
     
-    sendPost = async () => {   
-      const url = '/api/jwt/login';
-      const config = {
-        headers : {
-          'Content-Type' : 'application/json',
-        }
-      }
-    
-      return await post(url, JSON.stringify(this.state), config);
-    }
+   
+
     
     checkSubmit = async () =>{
-        if (localStorage.getItem('scspacetoken') !== null){
-            
+        
             let res = await LoginCheck();
             if (res === false){
                 return true;
@@ -31,23 +24,16 @@ class Login extends Component{
             else{
                 return false;
             }
-          }
-        else{
-            return true;
-        }
+          
+        
     }
 
     handleSubmit = (e) =>{
-      e.preventDefault()
-      const errmsg = ''
-      
+
       this.checkSubmit()
         .then (result => {
           if(result){
-              this.sendPost()
-                .then((res) => {
-                localStorage.setItem('scspacetoken', res.data);
-              })
+              window.location.href = this.location;
     
           } 
          
@@ -60,23 +46,9 @@ class Login extends Component{
 
 
     render() {
+        this.handleSubmit()
         return (
         <div id="main">
-          
-            <section>
-            <section id="contact" className="contact">
-            <div className="container">
-      
-              <div className="row gy-5 gx-lg-5">
-            <div>
-            <form className="php-email-form" onSubmit={this.handleSubmit}>
-              
-            <div className="text-center"><button type="submit">로그인</button></div>
-            </form>
-          </div>
-          </div>
-          </div>
-          </section></section>
         </div>
       )};
 }

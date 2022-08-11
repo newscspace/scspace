@@ -34,7 +34,8 @@ set_db = {
         phone	char(20)	NULL,
         email	varchar(255)	NULL,
         type	enum('admin', 'user')	NOT NULL,
-        PRIMARY KEY (id)
+        PRIMARY KEY (id),
+        UNIQUE KEY (student_id)
     );`, (error, rows, fields) => {
         if (error) throw error;
         console.log('data: ', rows);
@@ -100,6 +101,10 @@ set_db = {
         console.log('data: ', rows);
       });
         
+      conn.query(` ALTER TABLE users ADD UNIQUE (student_id);`, (error, rows, fields) => {
+        if (error) throw error;
+        console.log('data: ', rows);
+      });
     db.disconnect(conn);
 }};
 

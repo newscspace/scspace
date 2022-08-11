@@ -7,7 +7,6 @@ async function sendPost() {
   const config = {
     headers : {
       'Content-Type' : 'application/json',
-      'x-access-token': localStorage.getItem('scspacetoken')
     }
   }
 
@@ -16,9 +15,6 @@ async function sendPost() {
 
 
 async function LoginCheck(){
-    if(localStorage.getItem('scspacetoken') === null){
-      return false;
-    }
     
     let res = await sendPost();
     let body = await res.data;

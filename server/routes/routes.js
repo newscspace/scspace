@@ -4,6 +4,7 @@ const reservation = require('./reservation');
 const notice = require('./notice');
 const faq = require('./faq');
 const ask = require('./ask');
+const jwt = require('./jwt');
 
 router.post('/api/reservation/*', reservation.router);
 router.get('/api/reservation/*', reservation.router);
@@ -35,6 +36,10 @@ router.post('/api/faq/*', faq.router);
 
 router.get('/api/ask/*', ask.router);
 router.post('/api/ask/*', ask.router);
+
+router.get('/api/jwt/*', jwt.router);
+router.post('/api/jwt/*', jwt.router);
+
 
 router.get('/api/contact', function (req, res) {
     res.json({
