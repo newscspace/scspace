@@ -1,12 +1,14 @@
-import React, {Component, useEffect, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {Link} from 'react-router-dom';
 import {post} from 'axios';
+import LoginCheck from '../auth/LoginCheck';
 
 function CreateNotice(props){
-  const [_state, _setState] = useState({
-    important: false
-  })
+  const [_state, _setState] = useState({});
+  const [userInfo, setuserInfo] = useState({});
 
+
+  
   const sendPost = () => {
     const url = '/api/notice/' + _state.mode ;
     console.log(url)
@@ -49,6 +51,13 @@ function CreateNotice(props){
   }
 
   useEffect(() => {
+    LoginCheck() 
+    .then((result) => {
+      if (result === false) {props.history.push('/login'); }
+      else if (result.type === 'admin') {setuserInfo({login:true, UserInfo:result});}
+      else {props.history.push('/notice');}
+    })
+
     if(props.location.state) {
       props.location.state.content.mode = 'update'
       _setState(props.location.state.content);
