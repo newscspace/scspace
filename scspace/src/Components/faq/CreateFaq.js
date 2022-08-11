@@ -83,9 +83,7 @@ class CreateFaq extends Component{
               <div className="row gy-5 gx-lg-5">
             <div>
             <form className="php-email-form" onSubmit={this.handleSubmit}>
-            <div className="form-group mt-3">
-                <input type="text" className="form-control" name="title" placeholder="제목" onChange={this.handleValueChange} required/>
-            </div>
+
             <div className="form-group mt-3">
                 <input type="text" className="form-control" name="question" placeholder="질문" onChange={this.handleValueChange} required/>
             </div>

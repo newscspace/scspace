@@ -19,8 +19,8 @@ const dbModel = {
     let conn = db.init();
     db.connect(conn);
    
-    let sql = `INSERT INTO faq (title, question, answer) VALUES (?, ?, ?);`;
-    let result = await conn.promise().query(sql, [p.title, p.question, p.answer])
+    let sql = `INSERT INTO faq (question, answer) VALUES (?, ?);`;
+    let result = await conn.promise().query(sql, [p.question, p.answer])
     .catch(err => {console.log(err); db.disconnect(conn); return false;});
    
     db.disconnect(conn);
@@ -33,8 +33,8 @@ const dbModel = {
     let conn = db.init();
     db.connect(conn);
    
-    let sql = `UPDATE faq SET title=?, question=?, answer=? WHERE id=?`;
-    let result = await conn.promise().query(sql, [p.title, p.question, p.answer, p.id])
+    let sql = `UPDATE faq SET question=?, answer=? WHERE id=?`;
+    let result = await conn.promise().query(sql, [p.question, p.answer, p.id])
     .catch(err => {console.log(err); db.disconnect(conn); return false;});
    
     db.disconnect(conn);

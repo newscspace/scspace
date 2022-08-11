@@ -88,7 +88,7 @@ class FAQ extends Component{
     } 
     else{
 
-      nextstate.list[this.state.list.length]={id:null, title:'제목', question:'Question', answer:'Answer'};
+      nextstate.list[this.state.list.length]={id:null, question:'Question', answer:'Answer'};
       this.setState(nextstate);
     }
  
