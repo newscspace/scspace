@@ -84,7 +84,7 @@ class Notice extends Component{
                                         
                                         <td>{contents.important ? <b style={{color:"var(--color-primary-light)"}}>필독</b>:(this.state.page_number-1)*10 + idx+1}</td> {/* 무엇으을 넣으으을까요오*/}
                                         <td>{contents.title}</td>
-                                        <td>{moment(contents.time_post).format('YYYY-MM-DD HH:mm:ss')}</td>
+                                        <td>{moment(contents.time_edit === null ? contents.time_post : contents.time_edit).format('YYYY-MM-DD HH:mm:ss')}</td>
                                         <td>{contents.hits}</td>
                                         
                                     </tr>

@@ -3,6 +3,7 @@ import {Link} from 'react-router-dom';
 import {get} from 'axios';
 import moment from 'moment';
 import LoginCheck from '../auth/LoginCheck';
+import {VscEye} from 'react-icons/vsc';
 
 class ViewNotice extends Component{
 
@@ -81,8 +82,8 @@ class ViewNotice extends Component{
 
               <div className="meta-top">
                 <ul>
-                  <li className="d-flex align-items-center"><i className="bi bi-clock"></i> <time>{moment(this.state.content.time_post).format('YYYY-MM-DD HH:mm:ss')}</time></li>
-                  {/* <li className="d-flex align-items-center"><i className="bi bi-chat-dots"></i> <a href="blog-details.html">12 Comments</a></li> */}
+                  <li className="d-flex align-items-center"><i className="bi bi-clock"></i> <time>{moment( this.state.content.time_edit === null ? this.state.content.time_post : this.state.content.time_edit).format('YYYY-MM-DD HH:mm:ss')}</time></li>
+                  <li className="d-flex align-items-center"><VscEye className="color-secondary-light"/>&nbsp;{this.state.content.hits}</li>
                 </ul>
               </div>
 
