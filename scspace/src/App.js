@@ -68,7 +68,7 @@ class App extends Component {
           <ViewNotice key={props.match.params.name} {...props} exact/>
         )}/>
         <Route path="/notice/create" component={CreateNotice} exact/>
-        <Route path="/teamcreate" component={CreateTeam} exact/>
+        <Route path="/team" component={CreateTeam} exact/>
         <Route path="/confirmation" component={Confirmation} exact/>
         <Route path="/team" component={Team} exact/>
 
