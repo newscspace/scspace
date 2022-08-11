@@ -48,8 +48,8 @@ const dbModel = {
     let conn = db.init();
     db.connect(conn);
    
-    let sql = `INSERT INTO ask (title, time_post, content, state, writer_id) VALUES (?, ?, ?, 'wait', '12345678');`;
-    let result = await conn.promise().query(sql, [p.title, p.time_post, p.content])
+    let sql = `INSERT INTO ask (title, time_post, content, state, writer_id) VALUES (?, ?, ?, ?, ?);`;
+    await conn.promise().query(sql, [p.title, p.time_post, p.content, 'wait' , p.writer_id])
     .catch(err => {console.log(err); db.disconnect(conn); return false;});
    
     db.disconnect(conn);

@@ -1,11 +1,22 @@
 const db = require('../models/ask');
+const auth = require('./Jwt');
 
 ask = {
-    create : (req, res) => {
+    create :(req, res) => {
         let p = req.body;
         p.time_post = new Date();
-        db.create(p)
-            .then (result => { result ? res.send(true) : res.send(false)});
+        if(!('scspacetoken' in req.cookies)){
+            res.send(false)
+        }
+        
+        auth.get_data(req.cookies.scspacetoken)
+        .then(result=> {
+            p.writer_id = result.student_id;
+            db.create(p)
+                .then (result => { result ? res.send(true) : res.send(false)});
+        })
+        .catch((err) => {console.log(err)});
+       
     },
     
     read_id : (req, res) => {

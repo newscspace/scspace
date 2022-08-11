@@ -63,8 +63,23 @@ auth = {
                 res.send(false);
             }
         });
-    }
+    }},
 
+    get_data : async (token) => {
+        let secretKey = process.env.JWT_KEY;    
+        let result;
+        jwt.verify(Buffer.from(token, "base64").toString('utf8'), secretKey, 
+        function(err, decoded){
+            if(err === null){
+                result = decoded;
+            }
+            else{
+                
+                result = false;
+            }
+        });
+
+        return result;
     },
 
     logout : (req,res) => {

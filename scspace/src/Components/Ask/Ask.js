@@ -10,8 +10,7 @@ class Ask extends Component{
         this.state = {
             page_number : 1,
             list : [],
-            content : '',
-            handle: {wait: "대기중", accept: "접수됨", solve: "해결됨"}, 
+            handle: {wait: "대기중", receive: "접수됨", solve: "해결됨"}, 
         }
     }
 
@@ -77,7 +76,7 @@ class Ask extends Component{
                                 return(
                                     <tr key={idx} onClick={(e) => this.onClickHandler("/ask/view/"+contents.id, e)}>
                                         
-                                        <td>{(this.state.page_number-1)*10 + idx+1}</td> {/* 무엇으을 넣으으을까요오*/}
+                                        <td>{(this.state.page_number-1)*10 + idx+1}</td> 
                                         <td><div className={contents.state}/>{this.state.handle[contents.state]}</td>
                                         <td>{contents.title}</td>
                                         <td>{contents.writer_id}</td>
