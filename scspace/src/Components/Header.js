@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
+import LoginCheck from './auth/LoginCheck';
+import Dropdown from 'react-bootstrap/Dropdown';
 
 import '../static/vendor/bootstrap/css/bootstrap.min.css'
 import '../static/vendor/bootstrap-icons/bootstrap-icons.css'
@@ -23,7 +25,15 @@ class Header extends Component{
           {name:'문의사항', sub_menu:['FAQ', '문의하기'], menu_link : '#', sub_menu_link : ['/faq', '/ask']} ], 
           
         }
+      
+        LoginCheck()
+      .then((result) => {
+        if (result !== false) this.setState({login:true, UserInfo:result});
+        else this.setState({login:false});
+      })
+
     }
+
 
     /* onClickEvent , onClickEvent는 모바일일 떄 햄버거바 표시를 위한 이벤트 함수  */
     onClickEvent = (e) =>{
@@ -72,8 +82,28 @@ class Header extends Component{
             
           </i>
         </nav>
-          
-        <Link className="btn-getstarted scrollto" to="/login">Login</Link>
+        
+        {this.state.login === true ? 
+         (
+            <Dropdown >
+              <Dropdown.Toggle className="btn-getstarted scrollto" id="dropdown-basic">
+                {this.state.UserInfo.name}님
+              </Dropdown.Toggle>
+        
+              <Dropdown.Menu>
+                <Dropdown.Item as={Link} to="/mypage">Mypage</Dropdown.Item>
+                {this.state.UserInfo.type === 'admin' ? (<Dropdown.Item as={Link} to="/manage">Manage</Dropdown.Item>) : (<div></div>)}
+                <Dropdown.Divider />
+                <Dropdown.Item as={Link} to="/logout">Logout</Dropdown.Item>
+            
+              </Dropdown.Menu>
+            </Dropdown>
+          )
+        
+        
+        : (<Link className="btn-getstarted scrollto" to="/login">Login</Link>)}
+        
+       
   
       </div>
     </header>

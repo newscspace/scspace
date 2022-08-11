@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
 import {get} from 'axios';
 import moment from 'moment';
+import LoginCheck from '../auth/LoginCheck';
 
 class Notice extends Component{
 
@@ -12,6 +13,11 @@ class Notice extends Component{
             list : [],
             content : ''
         }
+        LoginCheck()
+      .then((result) => {
+        if (result !== false) this.setState({login:true, UserInfo:result});
+        else this.setState({login:false});
+      })
     }
 
     componentDidMount(){
@@ -52,9 +58,11 @@ class Notice extends Component{
                 </div>
 
                 <div className="container">
-                <div className="text-end">
+                {this.state.login === true && this.state.UserInfo.type==='admin' ? 
+                (<div className="text-end">
                     <button type="button" className="modalButton1"><Link to="/notice/create">작성하기</Link></button>
-                </div>
+                </div>) : (<div></div>)}
+                
                 </div>
                 <br/>
 
