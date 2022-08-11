@@ -58,7 +58,7 @@ class App extends Component {
         )}/>
 
         <Route path="/faq" component ={Faq} exact/>
-        <Route path="/faqcreate" component ={CreateFaq} exact/>
+        <Route path="/faq/create" component ={CreateFaq} exact/>
         <Route path="/reservation" component={Reservation} exact/>
         <Route path="/mypage" component={Mypage} exact/>
         <Route path="/manage" component={Manage} exact/>
