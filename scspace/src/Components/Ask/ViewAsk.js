@@ -11,7 +11,7 @@ class ViewAsk extends Component{
         super(props);
         this.state = {
             content : '',
-            handle: {wait: "대기중", accept: "접수됨", solve: "해결됨"},  
+            handle: {wait: "대기중", receive: "접수됨", solve: "해결됨"},  
         }
 
         this.handleChange = this.handleChange.bind(this);

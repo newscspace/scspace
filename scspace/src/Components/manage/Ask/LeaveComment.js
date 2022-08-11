@@ -63,7 +63,7 @@ class LeaveComment extends Component{
                             <form>
                                 <select value={this.state.dot} onChange={this.handleChange} className="ask-handle"> 
                                     <option value="wait">대기중</option>
-                                    <option value="accept">접수됨</option>
+                                    <option value="receive">접수됨</option>
                                     <option value="solve">해결됨</option>
                                 </select>
                                 {/* <input type="submit" value="Submit" /> */}
