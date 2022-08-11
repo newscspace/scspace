@@ -4,6 +4,7 @@
 /.pnp
 .pnp.js
 /scspace/node_modules/
+/server/.env
 # testing
 /coverage
 
