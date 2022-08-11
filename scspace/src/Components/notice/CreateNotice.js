@@ -1,11 +1,20 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
 import {post} from 'axios';
+import LoginCheck from '../auth/LoginCheck';
 
 class CreateNotice extends Component{
     constructor(props){
         super(props);
         this.state = {important:false};
+
+        LoginCheck()
+      .then((result) => {
+        if (result !== false || result.type === 'admin') this.setState({login:true, UserInfo:result});
+        else this.props.history.push('/notice');
+      })
+
+
     }
 
     sendPost = () => {
