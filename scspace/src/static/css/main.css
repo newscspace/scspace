@@ -1746,6 +1746,13 @@ section {
   box-shadow: none;
 }
 
+.faq input{
+  border: 0;
+  padding: 4px;
+  border-radius: 4px;
+  width: calc(100% - 40px);
+}
+
 /*--------------------------------------------------------------
 # Portfolio Section
 --------------------------------------------------------------*/
