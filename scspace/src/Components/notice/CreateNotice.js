@@ -11,7 +11,6 @@ function CreateNotice(props){
   
   const sendPost = () => {
     const url = '/api/notice/' + _state.mode ;
-    console.log(url)
     const config = {
       headers : {
         'Content-Type' : 'application/json'
@@ -31,7 +30,6 @@ function CreateNotice(props){
     if(checkSubmit()){
       sendPost()
       .then((res) => {
-      console.log(res.data);
       props.history.push('/notice')})
     }
     else{ alert('a') /*error 내용 출력 필요*/}
