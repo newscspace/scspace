@@ -6,11 +6,11 @@ const ask = require('../controllers/Ask');
 
 
 
-router.get('/api/ask/all', ask.read_all);
+router.get('/api/ask/all', ask.readAll);
 
-router.get('/api/ask/id', ask.read_id);
+router.get('/api/ask/id', ask.readId);
 
-router.get('/api/ask/mine', ask.read_mine);
+router.get('/api/ask/mine', ask.readMine);
 
 router.post('/api/ask/create',ask.create);
 

@@ -19,19 +19,19 @@ ask = {
        
     },
     
-    read_id : (req, res) => {
+    readId : (req, res) => {
         db.readId([parseInt(req.query.id)])
             .then(result => {res.json(result);})
             .catch (() => {console.log(result);})
     },
 
-    read_all : (req, res) =>{
+    readAll : (req, res) =>{
         db.readAll()
             .then (result => {res.json(result);})
             .catch (() => {console.log(result);});
     },
 
-    read_mine : (req, res) =>{
+    readMine : (req, res) =>{
         db.readMine([parseInt(req.query.writer_id)])
             .then (result => {res.json(result);})
             .catch (() => {console.log(result);});
