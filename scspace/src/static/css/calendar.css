@@ -1,0 +1,283 @@
+/*
+*
+* ==========================================
+* CUSTOM UTIL CLASSES
+* ==========================================
+*
+*/
+.clearfix::after,
+.calendar ol::after {
+  content: ".";
+  display: block;
+  height: 0;
+  clear: both;
+  visibility: hidden;
+}
+
+/* ================
+Calendar Styling */
+.calendar {
+  border-radius: 10px;
+}
+
+.month {
+  font-size: 2rem;
+}
+
+@media (min-width: 992px) {
+  .month {
+    font-size: 3.5rem;
+  }
+}
+
+.calendar ol li {
+  float: left;
+  width: 14.28571%;
+}
+
+.calendar .day-names {
+  border-bottom: 1px solid #eee;
+}
+
+.calendar .day-names li {
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+}
+
+.calendar .days li {
+  border-bottom: 1px solid #eee;
+  min-height: 8rem;
+}
+
+.calendar .days li .date {
+  margin: 0.5rem 0;
+}
+
+
+
+.calendar .days li .event.span-2 {
+  width: 200%;
+}
+
+.calendar .days li .event.begin {
+  border-radius: 1rem 0 0 1rem;
+}
+
+.calendar .days li .event.end {
+  border-radius: 0 1rem 1rem 0;
+}
+
+.calendar .days li .event.clear {
+  background: none;
+}
+
+.calendar .days li:nth-child(n+29) {
+  border-bottom: none;
+}
+
+.calendar .days li.outside .date {
+  color: #ddd;
+}
+
+.calendar .select { 
+  float:left;
+}
+
+.calendar .day {
+  background-color:rgba(233, 233, 233, 0.486);
+}
+
+.calendar .date:hover {
+  background-color:rgba(156, 223, 243, 0.212);
+}
+
+
+
+.calendar .individual {
+  display: block;
+  background-color: red;
+  width: 12px;
+  height: 12px;
+  margin-right: 2px;
+  margin-bottom: 2px;
+
+}
+
+.calendar .individual_wait {
+  display: block;
+  background-color: red;
+  width: 12px;
+  height: 12px;
+  border-radius: 4rem;
+  margin-right : 2px;
+  margin-bottom: 2px;
+
+}
+
+.calendar .piano {
+  display: block;
+  background-color: orange;
+  width: 12px;
+  height: 12px;
+  margin-right: 2px;
+  margin-bottom: 2px;
+
+}
+
+.calendar .piano_wait {
+  display: block;
+  background-color: orange;
+  width: 12px;
+  height: 12px;
+  border-radius: 4rem;
+  margin-right : 2px;
+  margin-bottom: 2px;
+
+}
+
+
+.calendar .seminar {
+  display: block;
+  background-color: yellow;
+  width: 12px;
+  height: 12px;
+  margin-right: 2px;
+  margin-bottom: 2px;
+
+}
+
+.calendar .seminar_wait {
+  display: block;
+  background-color: yellow;
+  width: 12px;
+  height: 12px;
+  border-radius: 4rem;
+  margin-right : 2px;
+  margin-bottom: 2px;
+
+}
+
+.calendar .group {
+  display: block;
+  background-color: green;
+  width: 12px;
+  height: 12px;
+  margin-right: 2px;
+  margin-bottom: 2px;
+
+}
+
+.calendar .group_wait {
+  display: block;
+  background-color: green;
+  width: 12px;
+  height: 12px;
+  border-radius: 4rem;
+  margin-right : 2px;
+  margin-bottom: 2px;
+
+}
+
+.calendar .dance{
+  display: block;
+  background-color: blue;
+  width: 12px;
+  height: 12px;
+  margin-right: 2px;
+  margin-bottom: 2px;
+
+}
+
+.calendar .dance_wait {
+  display: block;
+  background-color: blue;
+  width: 12px;
+  height: 12px;
+  border-radius: 4rem;
+  margin-right : 2px;
+  margin-bottom: 2px;
+
+}
+
+.calendar .ullim {
+  display: block;
+  background-color: skyblue;
+  width: 12px;
+  height: 12px;
+  margin-right: 2px;
+  margin-bottom: 2px;
+
+}
+
+.calendar .ullim_wait {
+  display: block;
+  background-color: skyblue;
+  width: 12px;
+  height: 12px;
+  border-radius: 4rem;
+  margin-right : 2px;
+  margin-bottom: 2px;
+
+}
+
+.calendar .mirae {
+  display: block;
+  background-color: purple;
+  width: 12px;
+  height: 12px;
+  margin-right: 2px;
+  margin-bottom: 2px;
+
+}
+
+.calendar .mirae_wait {
+  display: block;
+  background-color: purple;
+  width: 12px;
+  height: 12px;
+  border-radius: 4rem;
+  margin-right : 2px;
+  margin-bottom: 2px;
+
+}
+
+.calendar .workshop {
+  display: block;
+  background-color: black;
+  width: 12px;
+  height: 12px;
+  margin-right: 2px;
+  margin-bottom: 2px;
+
+}
+
+.calendar .workshop_wait {
+  display: block;
+  background-color: black;
+  width: 12px;
+  height: 12px;
+  border-radius: 4rem;
+  margin-right : 2px;
+  margin-bottom: 2px;
+
+}
+
+.calendar .open {
+  display: block;
+  background-color: pink;
+  width: 12px;
+  height: 12px;
+  margin-right: 2px;
+  margin-bottom: 2px;
+
+}
+.calendar .open_wait {
+  display: block;
+  background-color: pink;
+  width: 12px;
+  height: 12px;
+  border-radius: 4rem;
+  margin-right : 2px;
+  margin-bottom: 2px;
+
+}
