@@ -44,8 +44,11 @@ class CreateTeam extends Component{
     if(this.checkSubmit()){
       this.sendPost()
       .then((res) => {
-        console.log(res)
-        //this.props.history.push({pathname : '/team', teamresult: this.state.teamdata });
+        console.log(res.data)
+        if(res.data.teamid){
+          this.props.history.push({pathname : '/team', state: res.data.teamid });
+        }
+        else{alert('Error Occured')}
       })
     }
     else{ alert('a') /*error 내용 출력 필요*/}
@@ -74,7 +77,7 @@ class CreateTeam extends Component{
       nextstate.teamdata.team_name = e.target.value;
     }
     else{
-      nextstate.teamdata[idx][e.target.name] = e.target.value;
+      nextstate.teamdata.member[idx][e.target.name] = e.target.value;
     }
     this.setState(nextstate);
   }
@@ -96,7 +99,7 @@ class CreateTeam extends Component{
         </div>
 
         <section>
-        <section id="cta" className="cta">
+        <section className="cta">
         <div className="container aos-init aos-animate">
 
         <div className="row g-5">

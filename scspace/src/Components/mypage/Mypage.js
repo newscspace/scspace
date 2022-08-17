@@ -20,7 +20,7 @@ class Mypage extends Component{
             </div>
 
             <Reservation/>
-            <Team/>
+            <Team history={this.props.history}/>
 
         </main>
       )};

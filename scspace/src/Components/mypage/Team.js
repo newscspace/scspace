@@ -10,6 +10,8 @@ class Team extends Component{
             page_number : 1,
             list : [],
         };  
+
+        
     }
 
     componentDidMount(){
@@ -19,7 +21,7 @@ class Team extends Component{
     }
     
     callApi= async () => {
-        const res = await get('/api/notice/all');
+        const res = await get('/api/team/mine');
         const body = await res.data;
         return body;
     }
@@ -30,16 +32,16 @@ class Team extends Component{
                 <h4><b>내 팀</b></h4>
                 <hr></hr>
 
-                <table className="table">
+                <table className="table manage">
                     <thead>
                         <th>팀 이름</th>
                     </thead>
 
                     <tbody>
-                        {this.state.list.slice((this.state.page_number-1)*5, this.state.page_number*5).map((contents) => {
+                        {this.state.list.slice((this.state.page_number-1)*5, this.state.page_number*5).map((contents, idx) => {
                             return(
-                                <tr>
-                                    <td><Link to="../Team">동그라미세모네모</Link></td>
+                                <tr onClick={() => {this.props.history.push({pathname:'/team', state:contents.id})}}>
+                                    <td>{contents.name}</td>
                                 </tr>
                             )
                         })}

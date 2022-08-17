@@ -17,7 +17,7 @@ set_db = {
         console.log('data: ', rows);
       });
       conn.query(` CREATE TABLE IF NOT EXISTS member (
-        id	INTEGER	NOT NULL,
+        id	INTEGER	NOT NULL AUTO_INCREMENT,
         teamid	INTEGER	NOT NULL,
         name	varchar(255)	NOT NULL,
         student_id	CHAR(8)	NOT NULL,
@@ -100,15 +100,15 @@ set_db = {
         console.log('data: ', rows);
       });
         
-      conn.query(` ALTER TABLE users ADD UNIQUE (student_id);`, (error, rows, fields) => {
-        if (error) throw error;
-        console.log('data: ', rows);
-      });
+      // conn.query(` ALTER TABLE users ADD UNIQUE (student_id);`, (error, rows, fields) => {
+      //   if (error) throw error;
+      //   console.log('data: ', rows);
+      // });
 
-      conn.query(` ALTER TABLE faq DROP IF EXISTS title;`, (error, rows, fields) => {
-        if (error) throw error;
-        console.log('data: ', rows);
-      });
+      // conn.query(` ALTER TABLE faq DROP IF EXISTS title;`, (error, rows, fields) => {
+      //   if (error) throw error;
+      //   console.log('data: ', rows);
+      // });
 
     db.disconnect(conn);
 }};
