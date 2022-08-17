@@ -96,6 +96,20 @@ const dbModel = {
     return result[0][0];
   },
 
+  latestRead : async() => {
+    let conn = db.init();
+    db.connect(conn);
+    let return_result;
+
+    let sql = `SELECT * FROM ask WHERE (time_post BETWEEN DATE_ADD(NOW(),INTERVAL -1 MONTH ) AND NOW()) AND state='wait';`;
+    await conn.promise().query(sql)
+    .then((result) => { db.disconnect(conn); return_result = result[0];})
+    .catch(err => {console.log(err); db.disconnect(conn); return_result = null;});
+      
+    db.disconnect(conn);
+    return return_result;
+  }
+
 
 };
 

@@ -15,15 +15,14 @@ class LatestAsk extends Component{
             wait: 0,
         };  
     }
-
     componentDidMount(){
         this.callApi()
-            .then(res => {this.setState({list:res});  this.setState({total_page_number : Math.ceil(res.length/5)});} )
+            .then(res => {console.log(res); this.setState({list:res, wait:res.length});  this.setState({total_page_number : Math.ceil(res.length/5)});} )
             .catch(err => console.log(err));
     }
     
     callApi= async () => {
-        const res = await get('/api/ask/all');
+        const res = await get('/api/ask/latest');
         const body = await res.data;
         return body;
     }
@@ -32,6 +31,8 @@ class LatestAsk extends Component{
         console.log(link)
         this.props.history.push({pathname: link})
     }
+
+   
     render() {return (
         <main id="main">
             <div className="container">
@@ -63,6 +64,21 @@ class LatestAsk extends Component{
                 </table> 
 
             </div>
+            <section className="blog">
+                    <div className="blog-pagination">
+                        <ul className="justify-content-center">
+
+                            {
+                                [...Array(this.state.total_page_number)].map((v,i) => i+1).map((page_num) => {
+                                    return(<li className={this.state.page_number === page_num ? "active" : ""}onClick={() => {this.setState({page_number : page_num})}}><Link to="#" >{page_num}</Link></li>)
+
+                                })
+                                
+                            }
+                            
+                        </ul>
+                    </div>
+                </section>
       </main>
       )};
 }

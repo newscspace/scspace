@@ -68,6 +68,11 @@ ask = {
             .catch (() => {console.log(result);})
     },
 
+    latestRead : (req, res) => {
+        db.latestRead()
+            .then(result => {res.json(result);})
+            .catch (() => {console.log(result);})
+    },
 
 }
 

@@ -20,6 +20,8 @@ router.post('/api/ask/create',ask.create);
 
 router.get('/api/ask/delete', ask.delete);
 
+router.get('/api/ask/latest', ask.latestRead);
+
 module.exports = {router};
 
 
