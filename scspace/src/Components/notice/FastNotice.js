@@ -20,7 +20,7 @@ class FastNotice extends Component{
 
     render() {return (
 
-      <section id="featured-services" className="featured-services">
+      <section className="featured-services">
         <div className="container">
   
           <div className="row gy-4">
