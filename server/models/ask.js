@@ -69,6 +69,33 @@ const dbModel = {
     
     return true;
   },
+  
+  createComment: async (p) => {  
+    let conn = db.init();
+    db.connect(conn);
+   
+    let sql = `UPDATE ask SET comment=?, state=? WHERE id=?`;
+    await conn.promise().query(sql, [p.comment, p.dot, p.id])
+    .catch(err => {console.log(err); db.disconnect(conn); return false;});
+   
+    db.disconnect(conn);
+    
+    return true;
+  },
+
+  readComment : async (p) => {
+    let conn = db.init();
+    db.connect(conn);
+   
+    let sql = `SELECT comment, state FROM ask where id=?;`;
+    let result = await conn.promise().query(sql, p)
+    .catch(err => {console.log(err); db.disconnect(conn); return null;});
+   
+    db.disconnect(conn);
+    
+    return result[0][0];
+  },
+
 
 };
 

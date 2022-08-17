@@ -8,7 +8,7 @@ import Notice from './Components/notice/Notice';
 import ViewNotice from './Components/notice/ViewNotice';
 import CreateNotice from './Components/notice/CreateNotice';
 import Space from './Components/Space';
-import Ask from './Components/Ask/Ask';
+import Ask from './Components/ask/Ask';
 import Faq from './Components/faq/FAQ';
 import Introduction from './Components/Introduction';
 import Reservation from './Components/Reservation';
@@ -20,8 +20,8 @@ import CreateFaq from './Components/faq/CreateFaq';
 import Confirmation from './Components/Confirmation';
 import Team from './Components/team/Team';
 import ReservationList from './Components/manage/Reserve/ReservationList';
-import CreateAsk from './Components/Ask/CreateAsk';
-import ViewAsk from './Components/Ask/ViewAsk';
+import CreateAsk from './Components/ask/CreateAsk';
+import ViewAsk from './Components/ask/ViewAsk';
 
 
 import Login from './Components/auth/Login';

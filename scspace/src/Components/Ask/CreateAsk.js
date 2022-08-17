@@ -1,11 +1,19 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
 import {post} from 'axios';
-
+import LoginCheck  from '../auth/LoginCheck';
 class CreateAsk extends Component{
     constructor(props){
         super(props);
         this.state = {};
+
+        LoginCheck()
+        .then((result) => {
+          if (result === false) this.props.history.push('/login'); 
+          else this.setState({login:true, UserInfo:result});
+
+        })
+  
     }
     
     sendPost = () => {

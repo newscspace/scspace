@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
 import {get} from 'axios';
 import moment from 'moment';
+import LoginCheck from '../auth/LoginCheck';
 
 class Ask extends Component{
 
@@ -12,6 +13,11 @@ class Ask extends Component{
             list : [],
             handle: {wait: "대기중", receive: "접수됨", solve: "해결됨"}, 
         }
+        LoginCheck()
+        .then((result) => {
+          if (result !== false) this.setState({login:true, UserInfo:result});
+          else this.setState({login:false});
+        })
     }
 
     componentDidMount(){
@@ -27,7 +33,6 @@ class Ask extends Component{
     }
 
     onClickHandler = (link) => {
-        console.log(link)
         this.props.history.push({pathname: link})
     }
 
@@ -53,7 +58,7 @@ class Ask extends Component{
 
                 <div className="container">
                 <div className="text-end">
-                    <button type="button" className="modalButton1"><Link to="/ask/create">작성하기</Link></button>
+                    {this.state.login ? (<button type="button" className="modalButton1"><Link to="/ask/create">작성하기</Link></button>) : (<div/>)}
                 </div>
                 </div>
                 <br/>
