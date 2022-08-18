@@ -28,8 +28,8 @@ class Space extends Component{
 
     componentDidMount(){
         this.setState({
-            spaceName: this.props.name,
-            spaceInfo: new SpaceInfo(this.props.name)
+            spaceName: this.props.match.params.name,
+            spaceInfo: new SpaceInfo(this.props.match.params.name)
         })
     }
     
