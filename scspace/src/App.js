@@ -7,7 +7,7 @@ import Main from './Components/Main';
 import Notice from './Components/notice/Notice';
 import ViewNotice from './Components/notice/ViewNotice';
 import CreateNotice from './Components/notice/CreateNotice';
-import Space from './Components/Space';
+import Space from './Components/spaces/Space';
 import Ask from './Components/Ask/Ask';
 import Faq from './Components/faq/FAQ';
 import Introduction from './Components/Introduction';

@@ -1,91 +1,166 @@
-import SpaceInfo from './SpaceInfo';
-
-function UserTarget(user) { return (<>
-    <div className="d-flex align-items-center mt-4">
-        <i className="bi bi-check2"></i>
-        <h4>사용자</h4>
-    </div>
-    <p>{user == 'all' ? 'KAIST 학내 구성원만 사용할 수 있습니다.' : '모두가 사용할 수 있습니다.'}</p>
-</>)}
-
-const ReservationLimitedKAIST = (<>
-    <div className="d-flex align-items-center mt-4">
-        <i className="bi bi-check2"></i>
-        <h4>예약 사용자</h4>
-    </div>
-    <p>예약 사용자는 KAIST 학내 구성원으로 제한하나, 다음의 경우에는 학생문화공간위원회와의 협의 하에 사용 가능합니다.</p>
-    <ul>
-        <li>KAIST 학부 총학생회 또는 총학생회 산하 단체가 주최하는 경우</li>
-        <li>KAIST 학부 총학생회 회원 전체를 대상으로 열려있는 행사의 경우</li>
-        <li>행사의 내용이 KAIST 학생 문화 발전에 기여하는데 도움이 된다고 판단하는 경우</li>
-    </ul>
-</>);
+import React, {Component} from 'react';
 
 
-function Caution(props) {
-    const spaceInfo = new SpaceInfo(props.roomCode)
-    const noFoodNorDrinks = (<p className="fst-italic">음료, 스낵, 음식 반입이 금지되어 있습니다.</p>);
-    const noDrinks = (<p className="fst-italic">물을 제외한 음료는 반입이 불가능 합니다.</p>);
-    const noFood = (<p className="fst-italic">간식을 포함한 모든 음식의 반입을 금지합니다.</p>);
-    const noShoes = (
-        <div>
+class Introduction extends Component {
+
+    constructor(props){
+        super(props);
+        this.state = {  edit : false, add:[]}
+        this.state.roomData = JSON.parse(JSON.stringify(this.props.roomData))
+
+    }
+
+
+
+
+  
+  editContent = (mode, idx=null) => {
+    let nextstate = Object.assign({}, this.state);
+    if(mode === 'cancel') {
+      nextstate.roomData = JSON.parse(JSON.stringify(this.props.roomData))
+      nextstate.edit = false;
+      this.setState(nextstate);
+
+    } 
+    else if (mode === 'add') {
+      nextstate.roomData.content[this.state.roomData.content.length]={title:'', body:{head:'', list:[]}};
+      this.setState(nextstate);
+    }
+
+    else if (mode === 'edit'){
+        nextstate.edit = true;
+        this.setState(nextstate);
+    }
+
+    else if (mode === 'delete'){
+        nextstate.roomData.content.splice(idx, 1);
+        this.setState(nextstate);
+    }
+
+    else if (mode === 'complete'){
+        nextstate.edit = false;
+        this.setState(nextstate);
+
+        this.props.callApi(this.state.roomData, 'caution');
+    }
+    else if (mode === 'listadd'){
+        nextstate.roomData.content[idx].body.list.push(' ');
+        this.setState(nextstate);
+    }
+    else if (mode === 'listdelete'){
+        nextstate.roomData.content[idx].body.list.pop();
+        this.setState(nextstate);
+    }
+  }
+ 
+  changeHandler = (idx, e) => {
+      let nextstate = Object.assign({}, this.state);
+      if (e.target.name === 'intro'){
+        nextstate.roomData.intro = e.target.value;
+      }
+      else if (e.target.name === 'title'){ 
+        nextstate.roomData.content[idx][e.target.name]= e.target.value; 
+      }
+      else if (e.target.name === 'head') {
+        nextstate.roomData.content[idx]['body'][e.target.name]= e.target.value; 
+      }
+      else if (e.target.name === 'list'){
+        nextstate.roomData.content[idx]['body'][e.target.name][parseInt( e.target.id)]= e.target.value; 
+      }
+      this.setState(nextstate);
+      
+  }
+
+  admin_return = (mode, idx=null) => {
+
+      if (this.props.login === true && this.props.UserInfo.type==='admin' ){
+        if(this.state.edit === true && mode === 'edit'){
+          return (
+            <div className="text-end">
+                  <button type="button" className="modalButton2" onClick={() => {this.editContent('complete')}}>수정 완료</button>
+                  <button type="button" className="modalButton1" onClick={() => {this.editContent('cancel')}}>취소</button>
+                  </div>
+          )
+        }
+        else if (this.state.edit === false && mode === 'edit'){
+          return(
+            <div className="text-end">  
+                  <button type="button" className="modalButton2" onClick={() => {this.editContent('edit')}}>수정하기</button>
+                  </div>
+          )
+        }
+        else if(this.state.edit === true && mode ==='add') {
+            return(
+                <div className="text-end">
+                <button type="button" className="modalButton2" onClick={() => {this.editContent('add')}}>추가하기</button>
+                <hr/>
+                 </div>
+            )
+        }
+
+        else if(this.state.edit === true && mode ==='list') {
+            return(
+                <div className="text-end">
+                <button type="button" className="modalButton2 " onClick={() => {this.editContent('listadd',idx )}}>li 추가</button>
+                <button type="button" className="modalButton2 " onClick={() => {this.editContent('listdelete',idx )}}>li 삭제</button>
+                 </div>
+            )
+        }
+
+
+
+        else if (this.state.edit === true && mode === 'delete'){
+          return(
+            <div className="text-end">
+                  <button type="button" className="modalButton1" onClick={() => {this.editContent('delete', idx)}}>삭제</button>
+            </div>
+                )
+        }
+
+       
+      
+      }
+      else{
+        return(<div/>)
+      }
+  }
+
+
+   render(){ return (
+        <div className="tab-pane fade show active space">
+        
+        <p class="fst-italic">{this.state.edit ? (<textarea name="intro" onChange={this.changeHandler.bind(this, 0)} value ={this.state.roomData.intro} />): this.state.roomData.intro}</p>
+
+      
+
+        {this.state.roomData.content.map((contents, idx) => {
+            return (
+            <div>
             <div className="d-flex align-items-center mt-4">
                 <i className="bi bi-check2"></i>
-                <h4>실외화 착용 금지</h4>
+                <h4>{this.state.edit ? (<input type="text"  name="title" onChange={this.changeHandler.bind(this, idx)} value ={contents.title}  required/>): contents.title}</h4>
             </div>
-            <p>{spaceInfo.roomname} 내에서는 실외화를 벗어주세요. 실내화는 착용 가능합니다.</p>
-        </div>);
-    let standardUsageTnC = (<>
-        <div className="d-flex align-items-center mt-4">
-            <i className="bi bi-check2"></i>
-            <h4>목적의 제한</h4>
+            {this.admin_return('list', idx)}
+            <p>{this.state.edit ? (<textarea name="head" onChange={this.changeHandler.bind(this, idx)} value ={contents.body.head} required />): contents.body.head}</p>
+            <ul>
+                {contents.body.list.map((list, idx2) => {
+                    return(
+                        <li>{this.state.edit ? (<textarea  name="list" id={idx2} onChange={this.changeHandler.bind(this, idx)} value ={list} required />): list}</li>
+                    )
+                })}
+            </ul>
+            {this.admin_return('delete', idx)}
+            </div>
+            )})
+        }
+        <br/>
+        <hr/>
+        {this.admin_return('add')}      
+        {this.admin_return('edit')}
+
         </div>
-        <p>다음의 경우 사용이 불가능합니다. 자세한 사항은 문의해주시기 바랍니다.</p>
-        <ul>
-            <li>정치, 종교적인 행사 및 행위</li>
-            <li>열리를 목적으로 하는 행사 및 행위</li>
-            <li>공공질서와 미풍양속을 해칠 우려가 있는 행사 및 행위</li>
-            <li>시설 또는 설비의 관리에 지장을 줄 수 있는 행사 및 행위</li>
-        </ul>
-        <div className="d-flex align-items-center mt-4">
-            <i className="bi bi-check2"></i>
-            <h4>예약과 불일치</h4>
-        </div>
-        <p>예약과 실제 사용이 다를 경우 예약 제한 등의 패널티가 부과됩니다.</p>
+        
+    )}
+}
 
-        <div className="d-flex align-items-center mt-4">
-            <i className="bi bi-check2"></i>
-            <h4>분실물의 처리</h4>
-        </div>
-        <p>사용 후 남겨진 분실물은 학생문화공간위원회에서 1달 간 보관합니다.</p>
-
-        <div className="d-flex align-items-center mt-4">
-            <i className="bi bi-check2"></i>
-            <h4>정리정돈</h4>
-        </div>
-        <p>사용 후에는 장비와 조명을 끄고 케이블을 정리해주시기 바랍니다.</p>
-        </>);
-    let disallowedList = '';
-    if (spaceInfo.noFood && spaceInfo.noDrinks)
-        disallowedList += noFoodNorDrinks;
-    else if (spaceInfo.noFood)
-        disallowedList += noFood;
-    else if (spaceInfo.noDrinks)
-        disallowedList += noDrinks;
-    if (spaceInfo.noShoes)
-        disallowedList += noShoes;
-
-    return (
-    <div className="tab-pane fade show active space">
-
-        {disallowedList}
-
-        {UserTarget(spaceInfo.user)}
-
-        {spaceInfo.kaistReservationsOnly ? ReservationLimitedKAIST : null}
-
-        {standardUsageTnC}
-
-    </div>
-)}
-export default Caution;
+export default Introduction;

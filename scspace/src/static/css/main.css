@@ -2828,6 +2828,18 @@ section {
   background: rgba(var(--color-primary-rgb), 0.85);
 }
 
+.space textarea{
+  padding: 4px;
+  border-radius: 4px;
+  width: calc(100% - 30px);
+}
+
+.space{
+  white-space: pre-wrap;
+}
+
+
+
 /*--------------------------------------------------------------
 # Scspace/Business
 --------------------------------------------------------------*/

@@ -1,71 +1,166 @@
-import {Link} from 'react-router-dom';
-import SpaceInfo from './SpaceInfo';
+import React, {Component} from 'react';
 
 
-function Usage(props){
-    const spaceInfo = new SpaceInfo(props.roomCode);
-    return (
+class Introduction extends Component {
+
+    constructor(props){
+        super(props);
+        this.state = {  edit : false, add:[]}
+        this.state.roomData = JSON.parse(JSON.stringify(this.props.roomData))
+
+    }
+
+
+
+
+  
+  editContent = (mode, idx=null) => {
+    let nextstate = Object.assign({}, this.state);
+    if(mode === 'cancel') {
+      nextstate.roomData = JSON.parse(JSON.stringify(this.props.roomData))
+      nextstate.edit = false;
+      this.setState(nextstate);
+
+    } 
+    else if (mode === 'add') {
+      nextstate.roomData.content[this.state.roomData.content.length]={title:'', body:{head:'', list:[]}};
+      this.setState(nextstate);
+    }
+
+    else if (mode === 'edit'){
+        nextstate.edit = true;
+        this.setState(nextstate);
+    }
+
+    else if (mode === 'delete'){
+        nextstate.roomData.content.splice(idx, 1);
+        this.setState(nextstate);
+    }
+
+    else if (mode === 'complete'){
+        nextstate.edit = false;
+        this.setState(nextstate);
+
+        this.props.callApi(this.state.roomData, 'usage');
+    }
+    else if (mode === 'listadd'){
+        nextstate.roomData.content[idx].body.list.push(' ');
+        this.setState(nextstate);
+    }
+    else if (mode === 'listdelete'){
+        nextstate.roomData.content[idx].body.list.pop();
+        this.setState(nextstate);
+    }
+  }
+ 
+  changeHandler = (idx, e) => {
+      let nextstate = Object.assign({}, this.state);
+      if (e.target.name === 'intro'){
+        nextstate.roomData.intro = e.target.value;
+      }
+      else if (e.target.name === 'title'){ 
+        nextstate.roomData.content[idx][e.target.name]= e.target.value; 
+      }
+      else if (e.target.name === 'head') {
+        nextstate.roomData.content[idx]['body'][e.target.name]= e.target.value; 
+      }
+      else if (e.target.name === 'list'){
+        nextstate.roomData.content[idx]['body'][e.target.name][parseInt( e.target.id)]= e.target.value; 
+      }
+      this.setState(nextstate);
+      
+  }
+
+  admin_return = (mode, idx=null) => {
+
+      if (this.props.login === true && this.props.UserInfo.type==='admin' ){
+        if(this.state.edit === true && mode === 'edit'){
+          return (
+            <div className="text-end">
+                  <button type="button" className="modalButton2" onClick={() => {this.editContent('complete')}}>수정 완료</button>
+                  <button type="button" className="modalButton1" onClick={() => {this.editContent('cancel')}}>취소</button>
+                  </div>
+          )
+        }
+        else if (this.state.edit === false && mode === 'edit'){
+          return(
+            <div className="text-end">  
+                  <button type="button" className="modalButton2" onClick={() => {this.editContent('edit')}}>수정하기</button>
+                  </div>
+          )
+        }
+        else if(this.state.edit === true && mode ==='add') {
+            return(
+                <div className="text-end">
+                <button type="button" className="modalButton2" onClick={() => {this.editContent('add')}}>추가하기</button>
+                <hr/>
+                 </div>
+            )
+        }
+
+        else if(this.state.edit === true && mode ==='list') {
+            return(
+                <div className="text-end">
+                <button type="button" className="modalButton2 " onClick={() => {this.editContent('listadd',idx )}}>li 추가</button>
+                <button type="button" className="modalButton2 " onClick={() => {this.editContent('listdelete',idx )}}>li 삭제</button>
+                 </div>
+            )
+        }
+
+
+
+        else if (this.state.edit === true && mode === 'delete'){
+          return(
+            <div className="text-end">
+                  <button type="button" className="modalButton1" onClick={() => {this.editContent('delete', idx)}}>삭제</button>
+            </div>
+                )
+        }
+
+       
+      
+      }
+      else{
+        return(<div/>)
+      }
+  }
+
+
+   render(){ return (
         <div className="tab-pane fade show active space">
+        
+        <p class="fst-italic">{this.state.edit ? (<textarea name="intro" onChange={this.changeHandler.bind(this, 0)} value ={this.state.roomData.intro} />): this.state.roomData.intro}</p>
 
+      
+
+        {this.state.roomData.content.map((contents, idx) => {
+            return (
+            <div>
             <div className="d-flex align-items-center mt-4">
                 <i className="bi bi-check2"></i>
-                <h4>{spaceInfo.alwaysOpen ? '상시 개방' : '예약 전용'}</h4>
+                <h4>{this.state.edit ? (<input type="text"  name="title" onChange={this.changeHandler.bind(this, idx)} value ={contents.title}  required/>): contents.title}</h4>
             </div>
-            <p>{spaceInfo.roomname}은 {spaceInfo.alwaysOpen ? '예약이 없을 때 누구나 사용 가능합니다.' : '예약 후에만 사용 가능합니다.'}</p>
-
-            {spaceInfo.reservable ? (<><div className="d-flex align-items-center mt-4">
-                <i className="bi bi-check2"></i>
-                <h4>상시 예약</h4>
+            {this.admin_return('list', idx)}
+            <p>{this.state.edit ? (<textarea name="head" onChange={this.changeHandler.bind(this, idx)} value ={contents.body.head} required />): contents.body.head}</p>
+            <ul>
+                {contents.body.list.map((list, idx2) => {
+                    return(
+                        <li>{this.state.edit ? (<textarea  name="list" id={idx2} onChange={this.changeHandler.bind(this, idx)} value ={list} required />): list}</li>
+                    )
+                })}
+            </ul>
+            {this.admin_return('delete', idx)}
             </div>
-            <p>팀 등록 <Link class="btn-getstarted scrollto" to="#">등록하기</Link></p> {/*팀 등록 링크 조정 필요*/}
-            <ul>
-                <li>예약을 위하여 최소 3인의 팀 등록이 필요합니다.</li>
-                <li>팀 등록은 매 정규학기가 끝날 때 초기화됩니다.</li>
-            </ul>
-            <p>예약 가능 시간</p>
-            <ul>
-                <li>사용 14일 전부터 이틀 전 오후 11시 59분까지 예약이 가능합니다.</li>
-                <li>하루에 최대 2시간 예약할 수 있습니다.</li>
-                <li>(학사)시험기간 전 주부터는 상시 예약이 불가능합니다.</li>
-            </ul></>) : null}
-
-            {spaceInfo.supportsPreBook ? (<>
-            <div className="d-flex align-items-center mt-4">
-                <i className="bi bi-check2"></i>
-                <h4>정기 예약</h4>
-            </div>
-            <p>가동아리를 비롯한 다양한 단체의 안정적 이용을 위해 한 학기 단위의 정기예약을 받습니다.<br/>
-                예약 기간은 매 학기 2주부터 14주로, 상시 예약보다 우선권을 가집니다.<br/>
-                정기 예약 추첨은 오프라인으로 진행되며, 추첨 시기 및 장소는 1주일 전 공간위 공식 창구를 통해 공지됩니다.</p>
-            </>) : null}
-
-            <div className="d-flex align-items-center mt-4">
-                <i className="bi bi-check2"></i>
-                <h4>패널티</h4>
-            </div>
-            <p>아래와 같은 경우가 발생했을 시 주의를 부과합니다.</p>
-            <ul>
-                <li>물을 제외한 음식물을 반입할 경우</li>
-                <li>예약을 취소하지 않고 공간을 사용하지 않을 경우</li>
-                <li>뒷정리가 미흡할 경우</li>
-                <li>실외화를 착용하고 사용할 경우</li>
-            </ul>
-            <p>아래와 같은 경우가 발생했을 경고를 부과합니다.</p>
-            <ul>
-                <li>예약과 실제 사용이 다를 경우</li>
-                <li>개인연습실 내부 설비 고의 파손 및 안전상의 문제를 야기할 수 있는 행위을 할 경우</li>
-                <li>그 외 학생문화공간위원회가 타인에게 피해를 주는 행위 혹은 악의적인 행위라고 판단될 경우</li>
-            </ul>
-            <p>주의와 경고는 다음과 같이 처리됩니다.</p>
-            <ul>
-                <li>주의 2회가 누적된 경우, 경고 1회로 대체한다</li>
-                <li>경고 1회가 누적된 경우 경고 부과일로부터 30일 동안 해당 공간의 예약이 불가하다. 정기예약의 경우 해당 학기 정기예약이 취소된다</li>
-                <li>경고 2회 이상 누적된 경우 경고 부과일로부터 90일 동안 해당 공간의 예약이 불가하다</li>
-                <li>경고 및 주의는 매년 봄학기 개강일을 기준으로 초기화된다</li>
-            </ul>
+            )})
+        }
+        <br/>
+        <hr/>
+        {this.admin_return('add')}      
+        {this.admin_return('edit')}
 
         </div>
-    )
+        
+    )}
 }
 
-export default Usage; 
+export default Introduction;
