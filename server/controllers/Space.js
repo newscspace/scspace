@@ -1,6 +1,6 @@
 const db = require('../models/space');
 
-faq = {
+space = {
     read : (req, res) =>{
         let p = req.query.space;
         let return_result = {roomName:p};
@@ -46,4 +46,4 @@ faq = {
 }
 
 
-module.exports = faq
+module.exports = space
