@@ -5,10 +5,10 @@ import {post} from 'axios';
 import Time from './form_component/Time';
 import Contents from './form_component/Contents';
 import Agree from './form_component/Agree';
-import Organization_name from './form_component/Organization_name';
+import OrganizationName from './form_component/Organization_name';
 import Number from './form_component/Number';
-import Event_name from './form_component/Event_name';
-import Event_purpose from './form_component/Event_purpose'
+import EventName from './form_component/Event_name';
+import EventPurpose from './form_component/Event_purpose'
 import Food from './form_component/Food';
 import Checkbox from './form_component/Checkbox_list';
 
@@ -17,26 +17,50 @@ class Form extends Component{
         super(props);
         this.state = {
           spaceName : 'open-space',
-          time_from : '',
-          time_to : '',
-          content : {space : [], organization_name : '', event_name:'', inner_number : 0, outer_number : 0, character:[], event_purpose:'',contents:'', rehersal_from:'', rehersal_to:''}
+          timeFrom : '',
+          timeTo : '',
+          content : {space : [], organizationName : '', eventName:'', innerNumber : 0, outerNumber : 0, character:[], eventPurpose:'',contents:'', rehersalFrom:null, rehersalTo:null}
       }
+
+      
+    // 예약 가능 날짜 관련 변수
+    this.limitdate = {mindays:5, maxdays:45, maxUseHour:336}
 
 
     }
     checkSubmit = () =>{
+      if (this.state.content.space.length === 0 ){
+        return '공간을 선택해주세요';
+      }
+
+       
+      if(new Date(this.state.timeFrom).getTime() >= new Date(this.state.timeTo).getTime()){
+        return '시작 시간과 종료 시간을 올바르게 선택해주세요';
+      }
+
+      if (this.state.content.rehersalFrom !== null || this.state.content.rehersalTo !== null){
+        if ( new Date(this.state.timeFrom.getFullYear(),this.state.timeFrom.getMonth(), this.state.timeFrom.getDate()).getDate() !== new Date(this.state.content.rehersalFrom.getFullYear(),this.state.content.rehersalFrom.getMonth(), this.state.content.rehersalFrom.getDate()).getDate() ){
+          return '리허설 시간을 확인해주세요';
+        }
+        else if(new Date(this.state.content.rehersalFrom).getTime() >= new Date(this.state.content.rehersalTo).getTime()){
+          return '당일 리허설 시작 시간과 종료 시간을 올바르게 선택해주세요';
+        }
+
+      }
+    
       return true;
     }
     
     handleSubmit = (e) =>{
       e.preventDefault()
-      const error_content = this.checkSubmit() ? 
+      const error = this.checkSubmit();
+      error === true ? 
       this.sendPost()
         .then((res) => {
           console.log(res.data);
         })
-      : alert('a') /* error 내용 출력 필요 */
-    }
+        : alert(error) 
+      }
     
     handleValueChange = (e) => {
       let nextstate = Object.assign({}, this.state);
@@ -81,12 +105,12 @@ class Form extends Component{
              <form className="php-email-form" onSubmit={this.handleSubmit}>
             
                 <Checkbox checkboxlist = {{옥상:"rooftop", '커뮤니티 마당':"community", 전시계단:"stair", '미디어 스페이스':'media', '2층 로비':"second_lobby", '3층 로비':"third_lobby", 모임터:'meeting'}} head="장소" name="space" onChangeHandler = {this.handleValueChange_checkbox}/>
-                <Organization_name onChangeHandler={this.handlevalueChange_content}/>
-                <Event_name onChangeHandler={this.handleValueChange_content}/>
-                <Time time_from = {this.state.time_from} time_to = {this.state.time_to} rehersal={true} rehersal_lastday={false} rehersal_from={this.state.content.rehersal_from} rehersal_to={this.state.content.rehersal_to} onChangeHandler = {this.handleValueChange_time}/>
+                <OrganizationName onChangeHandler={this.handlevalueChange_content}/>
+                <EventName onChangeHandler={this.handleValueChange_content}/>
+                <Time rehersal={true} limitdate={this.limitdate} onChangeHandler = {this.handleValueChange_time}/>
                 <Number onChangeHandler={this.handleValueChange_content} type={false}/>
                 <Contents onChangeHandler = {this.handleValueChange_content}/>
-                <Event_purpose onChangeHandler = {this.handleValueChange_content}/>
+                <EventPurpose onChangeHandler = {this.handleValueChange_content}/>
                 <Checkbox checkboxlist = {{종교적:"religion", 영리성:"rentability", 정치적:"politic"}} head="성격" name="character" onChangeHandler = {this.handleValueChange_checkbox}/>
                 <Food onChangeHandler={this.handleValueChange_content}/>
                 <Agree/>

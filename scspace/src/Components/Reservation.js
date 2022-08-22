@@ -1,40 +1,68 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import SpaceInfo from './spaces/SpaceInfo';
-import Room from './spaces/Room';
+
+import Individual from './reservation_form/Individual-practice-room';
+import Piano from './reservation_form/Piano-room';
+import Dance from './reservation_form/Dance-studio';
+import Group from './reservation_form/Group-practice-room';
+import Seminar from './reservation_form/Seminar-room';
+import Ullim from './reservation_form/Ullim-hall';
+import Mirae from './reservation_form/Mirae-hall';
+import Openspace from './reservation_form/Open-space';
+import Workshop from './reservation_form/Workshop';
+
+import ReservationNotice from './reservation_form/Reservation-notice';
+import LoginCheck from './auth/LoginCheck';
 
 class Reservation extends Component {
   constructor(props) {
     super(props);
-    this.space_list = ['Individual_practice_room', 'Piano_room', 'Dance_studio', 'Seminar_room', 'Group_practice_room', 'Ullim_hall', 'Mirae_hall', 'Open_space', 'Workshop'];
-    //this.space_list = ['개인연습실', '피아노실', '무예실', '합주실','세미나실', '울림홀', '미래홀', '창작공방', '오픈스페이스' ];
-    this.state = {
-      spaceName: 'Individual_practice_room',
+   
 
-      space: {
-        Individual_practice_room: '개인연습실',
-        Piano_room: '피아노실',
-        Seminar_room: '세미나실',
-        Group_practice_room: '합주실',
-        Dance_studio: '무예실',
-        Ullim_hall: '울림홀',
-        Mirae_hall: '미래홀',
-        Workshop: '창작공방',
-        Open_space: '오픈스페이스'
-      },
-      spaceInfo: new SpaceInfo('Individual_practice_room'),
-      /*유의 사항*/
-      notice: [
-        { title: '1', contents: '2' },
-        { title: '3', contents: '4' },
-        { title: '5', contents: '6' }
-      ]
+    this.state = {
+      spaceName: 'individual-practice-room',
+
+    }
+
+    LoginCheck()
+    .then((result) => {
+      if (result === false) this.props.history.push('/login'); 
+      else {
+        this.setState({login:true, UserInfo:result});
+        
+        this.spaceTag = {
+          'individual-practice-room': <Individual login={true} UserInfo={result}/>,
+          'piano-room': <Piano login={true} UserInfo={result}/>,
+          'seminar-room': <Seminar login={true} UserInfo={result}/>,
+          'group-practice-room': <Group login={true} UserInfo={result}/>,
+          'dance-studio': <Dance login={true} UserInfo={result}/>,
+          'ullim-hall': <Ullim login={true} UserInfo={result}/>,
+          'mirae-hall': <Mirae login={true} UserInfo={result}/>,
+          'workshop': <Workshop login={true} UserInfo={result}/>,
+          'open-space': <Openspace login={true} UserInfo={result}/>
+        }
+      }
+    })
+
+    this.spaceDict = {
+      'individual-practice-room': '개인연습실',
+      'piano-room': '피아노실',
+      'group-practice-room': '합주실',
+      'dance-studio': '무예실',
+      'ullim-hall': '울림홀',
+      'mirae-hall': '미래홀',
+      'seminar-room': '세미나실',
+      'workshop': '창작공방',
+      'open-space': '오픈스페이스'
     }
 
 
+  
+
   }
-  /*예약 수정시 백엔드에 요청해서 기존 에약 내역 받아와서 state.form에 넣는 기능 구현해야함, 이때 props로 <Form1>태그에 전달하면 Form1.js에서 처리하게 하면 될듯*/
-  /*Form1이요..? 이름 제대로 해주세요ㅠㅠ*/
+
+
+
   render() {
     return (
       <main id="main">
@@ -51,8 +79,8 @@ class Reservation extends Component {
         </div>
         <section>
           <div className="section-header">
-            <h2>{this.state.space[this.state.spaceName]}</h2>
-            <p>{this.state.spaceName.replace(/_/gi, ' ')}</p>
+            <h2>{this.spaceDict[this.state.spaceName]}</h2>
+            <p>{this.state.spaceName.replace(/-/gi, ' ')}</p>
           </div>
 
           <hr />
@@ -61,9 +89,9 @@ class Reservation extends Component {
             <div className="container-fluid">
               <div className="portfolio-isotope" >
                 <ul className="portfolio-flters">
-                  {this.space_list.map((space) => {
+                  {Object.keys(this.spaceDict).map((space) => {
                     return (
-                      <li onClick={() => { this.setState({ spaceName: space, spaceInfo: new SpaceInfo(space) }) }}>{this.state.spaceInfo.roomname}</li>
+                      <li onClick={() => { this.setState({ spaceName: space}) }}>{this.spaceDict[space]}</li>
                     )
                   }
                   )}
@@ -77,27 +105,9 @@ class Reservation extends Component {
 
               <div className="row gy-5 gx-lg-5">
 
-                <div className="col-lg-4">
-
-                  <div className="info">
-                    <h3>유의사항</h3>
-                    <p>유의사항을 잘 읽어주시면 굉장히 감사하겠네요</p>
-                    {this.state.notice.map((contents, idx) => {
-                      return (
-                        <div className="info-item d-flex">
-                          <div>
-                            <h4>{contents.title}</h4>
-                            <p>{contents.contents}</p>
-                          </div>
-                        </div>
-                      )
-                    }
-                    )}
-
-                  </div>
-                </div>
-
-                <Room roomCode={this.state.spaceInfo.roomcode}/>
+                
+                <ReservationNotice/>
+                {this.state.login ? this.spaceTag[this.state.spaceName] : (<div/>)}
 
 
               </div>

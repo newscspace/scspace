@@ -13,7 +13,7 @@ class Form extends Component{
         <div>
             <div className="form-group mt-3">
                 <h5>행사 목적</h5>
-                <input type="text" name="event_purpose" class="form-control" onChange={this.props.onChangeHandler} required/>
+                <input type="text" name="eventPurpose" class="form-control" onChange={this.props.onChangeHandler} required/>
               </div>
               <hr/><br/>
       </div>

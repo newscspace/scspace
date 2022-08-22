@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {post} from 'axios';
+import {get, post} from 'axios';
 
 import Team from './form_component/Team';
 import Member from './form_component/Checkbox_list';
@@ -8,80 +8,141 @@ import Contents from './form_component/Contents';
 import Agree from './form_component/Agree';
 
 class Form extends Component{
-    constructor(props){
-        super(props);
-        this.state = {
-            spaceName: 'dance-studio',
-            team_id: null,
-            time_from : '',
-            time_to : '',
-            content : {team_name : '', event_name:'', team_member:[], contents:''}
+  constructor(props){
+    super(props);
+    this.state = {
+        spaceName: 'dance-studio',
+        teamId: null, 
+        timeFrom : '',
+        timeTo : '',
+        content : {teamMember:[], contents:''},
 
-        }
-        this.teamlist = ['a', 'b', 'c'];
-        this.memberlist = {c:0, d:1, e:3}; /* 멤버 이름 : UID */
-        /* 팀 선택과 멤버 선택 코드는 추후 수정이 필요하다. */
-
+        teamlist : [],
+        memberlist : {}
     }
 
-    checkSubmit = () =>{
-      return true;
-    }
+    // 예약 가능 날짜 관련 변수
+    this.limitdate = {mindays:2, maxdays:14, maxUseHour:2}
+    
+    this.callApi_team()
+    .then(res => {
+        this.setState({teamlist:res, teamId:res[0].id})
+  
+        this.callApi_member(res[0].id)
+            .then(res2 => 
+              {
+                let memberlist = {}
+                res2.member.map((member) => {
+                  memberlist[member.name] = member.id;
+                })
+                this.setState({'memberlist':memberlist});
+                
+              })
+            .catch(err => console.log(err));
+    })
+    .catch(err => console.log(err));
 
-    handleSubmit = (e) =>{
-      e.preventDefault()
-      const error_content = this.checkSubmit() ? 
-      this.sendPost()
-        .then((res) => {
-          console.log(res.data);
-        })
-      : alert('a') /* error 내용 출력 필요 */
-    }
 
-    handleValueChange = (e) => {
-      let nextstate = Object.assign({}, this.state);
-      nextstate[e.target.name] = e.target.value;
-      this.setState(nextstate);
-    }
 
-    handleValueChange_time = (what, date)=> {
-      let nextstate = Object.assign({}, this.state);
-      nextstate[what] = date;
-      this.setState(nextstate);
-    }
-    handleValueChange_content = (e) => {
-      let nextstate = Object.assign({}, this.state);
-      nextstate['content'][e.target.name] = e.target.value;
-      this.setState(nextstate);
-    }
 
-    handleValueChange_checkbox = (e) => {
-      let nextstate = Object.assign({}, this.state);
-      nextstate.content[e.target.name].includes(e.target.value)?  nextstate.content[e.target.name].pop(e.target.value) : nextstate.content[e.target.name].push(e.target.value);
+}
+
+
+callApi_team= async () => {
+  const res = await get('/api/team/mine');
+  const body = await res.data;
+  return body;
+}
+
+callApi_member= async (teamId) => {
+  const res = await get('/api/team/id?id='+teamId);
+  const body = await res.data;
+  return body;
+}
+
+
+
+checkSubmit = () =>{
+  if (this.state.content.teamMember.length === 0){
+    return '팀 멤버를 선택해주세요';
+  }
+
+  else if(new Date(this.state.timeFrom).getTime() >= new Date(this.state.timeTo).getTime()){
+    return '시작 시간과 종료 시간을 올바르게 선택해주세요';
+  }
+  
+
+  return true;
+}
+
+handleSubmit = (e) =>{
+  e.preventDefault()
+  const error = this.checkSubmit();
+  error === true ? 
+  this.sendPost()
+    .then((res) => {
+      console.log(res.data);
+    })
+    : alert(error) 
+  }
+
+handleValueChange = (e) => {
+  let nextstate = Object.assign({}, this.state);
+  nextstate[e.target.name] = e.target.value;
+  this.setState(nextstate);
+
+  this.callApi_member(e.target.value)
+  .then(res => 
+    {
+      let memberlist = {}
+      res.member.map((member) => {
+        memberlist[member.name] = member.id;
+      })
+      this.setState({'memberlist':memberlist});
       
-      this.setState(nextstate);
-    }
+    })
+  .catch(err => console.log(err));
+}
 
-    sendPost = () => {
-      const url = '/api/reservation/create';
-      const config = {
-        headers : {
-          'Content-Type' : 'application/json'
-        }
-      }
+handleValueChange_time = (what, date)=> {
+  let nextstate = Object.assign({}, this.state);
+  nextstate[what] = date;
+  this.setState(nextstate);
+}
+handleValueChange_content = (e) => {
+  let nextstate = Object.assign({}, this.state);
+  nextstate['content'][e.target.name] = e.target.value;
+  this.setState(nextstate);
+}
 
-      return post(url, JSON.stringify(this.state), config);
+handleValueChange_checkbox = (e) => {
+  let nextstate = Object.assign({}, this.state);
+  nextstate.content[e.target.name].includes(e.target.value)?  nextstate.content[e.target.name].pop(e.target.value) : nextstate.content[e.target.name].push(e.target.value);
+  
+  this.setState(nextstate);
+}
+
+sendPost = () => {
+  const url = '/api/reservation/create';
+  const config = {
+    headers : {
+      'Content-Type' : 'application/json'
     }
+  }
+
+  return post(url, JSON.stringify(this.state), config);
+}
+    
 
     render() {
         return (
 
-        <div className="col-lg-8">
+          <div className="col-lg-8">
             <form className="php-email-form" onSubmit={this.handleSubmit}> 
                 
-              <Team teamlist= {this.teamlist} onChangeHandler = {this.handleValueChange_content}/>
-              <Member checkboxlist = {this.memberlist} head="멤버" name="member" onChangeHandler = {this.handleValueChange_checkbox}/>
-              <Time time_from = {this.state.time_from} time_to = {this.state.time_to} onChangeHandler = {this.handleValueChange_time}/>
+              <Team teamlist= {this.state.teamlist} onChangeHandler = {this.handleValueChange}/>
+              <Member checkboxlist = {this.state.memberlist} head="멤버" name="teamMember" onChangeHandler = {this.handleValueChange_checkbox}/>
+              <Time onChangeHandler = {this.handleValueChange_time} limitdate={this.limitdate}/>
               <Contents onChangeHandler = {this.handleValueChange_content}/>
               <Agree/>
               <div className="text-end"><button type="submit">예약하기</button></div>

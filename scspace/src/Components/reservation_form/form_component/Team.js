@@ -13,10 +13,10 @@ class Form extends Component{
             <div>
               <div className="col-md-6 form-group">
                 <h5 >팀</h5>
-                <select className="form-control" name="team_name" onChange={this.props.onChangeHandler} required> 
+                <select className="form-control" name="teamId" onChange={this.props.onChangeHandler} required> 
 			            {this.props.teamlist.map((team) =>{
                       return (
-                        <option key={team} value={team}>{team}</option>
+                        <option key={team.id} value={team.id}>{team.name}</option>
                       )
                   })}
 		            </select>

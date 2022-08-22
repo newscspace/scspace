@@ -10,26 +10,37 @@ class Form extends Component{
     constructor(props){
         super(props);
         this.state = {
-          spaceName: 'pinao-room1',
-          time_from : '',
-          time_to : ''
+          spaceName: 'piano-room1',
+          timeFrom : '',
+          timeTo : ''
   
+          
       }
+
+
+      // 예약 가능 날짜 관련 변수
+      this.limitdate = {mindays:1, maxdays:14, maxUseHour:2}
+
+
     }
     
     checkSubmit = () =>{
+      if(new Date(this.state.timeFrom).getTime() >= new Date(this.state.timeTo).getTime()){
+        return '시작 시간과 종료 시간을 올바르게 선택해주세요';
+      }
       return true;
     }
     
     handleSubmit = (e) =>{
       e.preventDefault()
-      const error_content = this.checkSubmit() ? 
+      const error = this.checkSubmit();
+      error === true ? 
       this.sendPost()
         .then((res) => {
           console.log(res.data);
         })
-      : alert('a') /* error 내용 출력 필요 */
-    }
+        : alert(error) 
+      }
     
     handleValueChange = (e) => {
       let nextstate = Object.assign({}, this.state);
@@ -70,8 +81,8 @@ class Form extends Component{
 
         <div className="col-lg-8">
             <form className="php-email-form" onSubmit={this.handleSubmit}> 
-                <SpacePick spacelist={{피아노실1 : 'piano-room1', 피아노실2 : 'piano-room2'}} onChangeHandler={this.handleValueChange}  />
-                <Time time_from = {this.state.time_from} time_to = {this.state.time_to} onChangeHandler = {this.handleValueChange_time}/>
+            <SpacePick spacelist={{피아노실1 : 'piano-room1', 피아노실2 : 'piano-room2'}} onChangeHandler={this.handleValueChange}  />
+            <Time onChangeHandler = {this.handleValueChange_time} limitdate={this.limitdate}/>
                 <Agree/>
             <div className="text-end"><button type="submit">예약하기</button></div>
           </form>

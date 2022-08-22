@@ -5,7 +5,7 @@ import Time from './form_component/Time';
 import Contents from './form_component/Contents';
 import Agree from './form_component/Agree';
 import SpacePick from './form_component/SpacePick';
-import Organization_name from './form_component/Organization_name';
+import OrganizationName from './form_component/Organization_name';
 import Number from './form_component/Number';
 
 class Form extends Component{
@@ -13,27 +13,35 @@ class Form extends Component{
         super(props);
         this.state = {
           spaceName: 'seminar-room1',
-          time_from : '',
-          time_to : '',
-          content : {organization_name : '', event_name:'', number : 1, contents:''}
+          timeFrom : '',
+          timeTo : '',
+          content : {organizationName : '', eventName:'', number : 1, contents:''}
       }
+
+      
+      // 예약 가능 날짜 관련 변수
+      this.limitdate = {mindays:2, maxdays:14, maxUseHour:3}
 
     }
     
 
     checkSubmit = () =>{
+      if(new Date(this.state.timeFrom).getTime() >= new Date(this.state.timeTo).getTime()){
+        return '시작 시간과 종료 시간을 올바르게 선택해주세요';
+      }
       return true;
     }
     
     handleSubmit = (e) =>{
       e.preventDefault()
-      const error_content = this.checkSubmit() ? 
+      const error = this.checkSubmit();
+      error === true ? 
       this.sendPost()
         .then((res) => {
           console.log(res.data);
         })
-      : alert('a') /* error 내용 출력 필요 */
-    }
+        : alert(error) 
+      }
     
     handleValueChange = (e) => {
       let nextstate = Object.assign({}, this.state);
@@ -77,8 +85,8 @@ class Form extends Component{
             <form className="php-email-form" onSubmit={this.handleSubmit}>
               
             <SpacePick spacelist={{세미나실1 : 'seminar-room1', 세미나실2 : 'seminar-room2'}} onChangeHandler={this.handleValueChange}  />
-            <Organization_name onChangeHandler={this.handlevalueChange_content}/>
-            <Time time_from = {this.state.time_from} time_to = {this.state.time_to} onChangeHandler = {this.handleValueChange_time}/>
+            <OrganizationName onChangeHandler={this.handlevalueChange_content}/>
+            <Time onChangeHandler = {this.handleValueChange_time} limitdate={this.limitdate}/>
             <Number onChangeHandler={this.handleValueChange_content} type={true}/>
             <Contents onChangeHandler = {this.handleValueChange_content}/>
             <Agree/>

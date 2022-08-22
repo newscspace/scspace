@@ -1,11 +1,12 @@
-const db = require('../models/notice');
+const db = require('../models/reservation');
 
 reservation = {
     create : (req, res) => {
       let p = req.body;
       p.time_request = new Date();
-      db.create(p)
-         .then (result => { result ? res.send(true) : res.send(false)});
+      console.log(p)
+      //  db.create(p)
+      //     .then (result => { result ? res.send(true) : res.send(false)});
     },
     
     read : (req, res) =>{
