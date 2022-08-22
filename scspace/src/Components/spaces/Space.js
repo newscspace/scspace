@@ -150,7 +150,7 @@ class Space extends Component{
 
                 <div class="section-header">
                     <h2>{this.spaceDict[this.state.spaceInfo.roomName]}</h2>
-                    <p>{this.state.spaceInfo.roomName} </p>
+                    <p>{this.state.spaceInfo.roomName.replace(/-/g, ' ')} </p>
                 </div>
                 <hr/>
         
