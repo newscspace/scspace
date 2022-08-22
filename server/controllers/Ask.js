@@ -32,7 +32,7 @@ ask = {
     },
 
     readMine : (req, res) =>{
-        db.readMine([parseInt(req.query.writer_id)])
+        db.readMine([parseInt(req.query.id)])
             .then (result => {res.json(result);})
             .catch (() => {console.log(result);});
     },
