@@ -44,13 +44,14 @@ set_db = {
     conn.query(` CREATE TABLE IF NOT EXISTS reservation (
         id	INTEGER	NOT NULL AUTO_INCREMENT,
         reserver_id	Char(8)	NOT NULL,
+        reserver_name Char(128) NOT NULL,
         space	enum('individual-practice-room1','individual-practice-room2','individual-practice-room3','piano-room1','piano-room2','seminar-room1','seminar-room2','dance-studio','group-practice-room','mirae-hall','ullim-hall','open-space','workshop')	NOT NULL,
         team_id	Integer	NULL,
         time_from	datetime	NOT NULL,
         time_to	datetime	NOT NULL,
         time_request	datetime	NOT NULL,
         time_last_modified	datetime	NULL,
-        content	json	NOT NULL,
+        content	json	NULL,
         comment	varchar(420)	NULL,
         state enum('grant', 'wait', 'rejected'),
         PRIMARY KEY (id)

@@ -101,7 +101,7 @@ const dbModel = {
     db.connect(conn);
     let return_result;
 
-    let sql = `SELECT * FROM ask WHERE (time_post BETWEEN DATE_ADD(NOW(),INTERVAL -1 MONTH ) AND NOW()) AND state='wait';`;
+    let sql = `SELECT * FROM ask WHERE (time_post BETWEEN DATE_ADD(NOW(),INTERVAL -1 MONTH ) AND NOW()) AND state='wait' ORDER BY time_post DESC; `;
     await conn.promise().query(sql)
     .then((result) => { db.disconnect(conn); return_result = result[0];})
     .catch(err => {console.log(err); db.disconnect(conn); return_result = null;});

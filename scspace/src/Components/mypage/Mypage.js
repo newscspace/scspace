@@ -2,9 +2,25 @@ import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
 import Reservation from './Reservation';
 import Team from './Team';
-
+import LoginCheck from '../auth/LoginCheck';
 
 class Mypage extends Component{
+    constructor(props){
+        super(props);
+
+        this.state = {
+            login:false,
+            UserInfo : {}
+        }
+        
+        LoginCheck()
+    .then((result) => {
+      if (result === false) this.props.history.push('/login'); 
+      else {
+        this.setState({login:true, UserInfo:result});
+      }})
+    }
+
     render() {return (
         <main id="main">
             <div  className="breadcrumbs">
@@ -19,7 +35,7 @@ class Mypage extends Component{
                 </div>
             </div>
 
-            <Reservation/>
+            {this.state.login ? (<Reservation  history={this.props.history}/>) : (<div/>) }
             <Team history={this.props.history}/>
 
         </main>
