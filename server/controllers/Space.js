@@ -7,8 +7,8 @@ space = {
         db.read([p])
             .then ((result) => {
                 result.map((contents) => {
-                    if (contents.menu === 'shortintro') {return_result.shortintro = JSON.parse(contents.info).shortintro;}
-                    else {return_result[contents.menu] = JSON.parse(contents.info)}
+                    if (contents.menu === 'shortintro') {return_result.shortintro = contents.info.shortintro;}
+                    else {return_result[contents.menu] = contents.info}
                 })
                 res.json(return_result);
             })
@@ -25,8 +25,8 @@ space = {
                     db.read([p])
                     .then ((result2) => {
                         result2.map((contents) => {
-                            if (contents.menu === 'shortintro') {return_result.shortintro = JSON.parse(contents.info).shortintro;}
-                            else {return_result[contents.menu] = JSON.parse(contents.info)}
+                            if (contents.menu === 'shortintro') {return_result.shortintro = contents.info.shortintro;}
+                            else {return_result[contents.menu] = contents.info}
                         })
                         res.json(return_result);
                     })
