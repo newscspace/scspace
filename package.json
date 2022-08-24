@@ -11,5 +11,5 @@
     "mysql2": "^2.3.3",
     "nodemon": "^2.0.19"
   },
-  "proxy": "http://localhost:5000"
+  "proxy": "http://scspace.ksjit.com:5000"
 }
