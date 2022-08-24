@@ -1,19 +1,60 @@
 const db = require('../models/reservation');
+const auth = require('./Jwt');
 
 reservation = {
     create : (req, res) => {
-      let p = req.body;
-      p.time_request = new Date();
-      console.log(p)
-      //  db.create(p)
-      //     .then (result => { result ? res.send(true) : res.send(false)});
+      if(!('scspacetoken' in req.cookies)){
+        res.send(false)
+    }
+
+    auth.get_data(req.cookies.scspacetoken)
+        .then((result) => {
+            let p = {};
+          
+            p.reserver_id = result.student_id;
+            p.reserver_name = result.name;
+            p.space = req.body.spaceName;
+            p.team_id = req.body.teamId;
+            p.time_from = req.body.timeFrom;
+            p.time_to = req.body.timeTo;
+            p.time_request = new Date();
+            p.content = req.body.content;
+            p.state = 'wait';
+
+            db.create(p)
+            .then ((result) => {
+                res.json({'reserveId':result});
+            });
+        })
     },
-    
-    read : (req, res) =>{
-     db.readAll()
-       .then (result => {res.json(result);})
-       .catch (() => {console.log(result);});
-    },
+
+
+    readMine : (req, res) =>{
+      if(!('scspacetoken' in req.cookies)){
+        res.send(false)
+    }
+
+    auth.get_data(req.cookies.scspacetoken)
+        .then((result) => {
+            let p = result.student_id;
+            db.readMine(p)
+                .then(result => {res.json(result);})
+                .catch ((err) => {console.log(err); res.json(false)})
+        })
+  },
+
+  
+    readId : (req, res) => {
+      db.readId([parseInt(req.query.id)])
+          .then(result => {res.json(result);})
+          .catch ((err) => {console.log(err); res.json(false)})
+  },
+
+  read : (req, res) => {
+    db.read([parseInt(req.query.id)])
+        .then(result => {res.json(result);})
+        .catch ((err) => {console.log(err); res.json(false)})
+},
 
     update : (req, res) => {
       let p = req.body;
@@ -25,7 +66,13 @@ reservation = {
   delete  : (req, res) => {
       db.delete([parseInt(req.query.id)])
       .then (result => { result ? res.send(true) : res.send(false)});
-  }
+  },
+
+  latestRead : (req, res) => {
+    db.latestRead()
+        .then(result => {res.json(result);})
+        .catch ((err) => {console.log(err); res.json(false)})
+},
 
 
 
@@ -34,21 +81,3 @@ reservation = {
 
 module.exports = reservation
 
-// {
-//     'type' : 2, // 공간 코드는 숫자나 enum으로
-//     'user' : 1, // UID
-//     'from' : new Date('2022-07-17T13:24:00'), //한국시간 기준
-//     'to' : new Date('2022-07-17T15:24:00'),
-//     'team' : 1, //TEAM id
-//     'comment' : null,
-//     'state' : 'granted'
-// },
-// {
-//     'type' : 2, // 공간 코드는 숫자나 enum으로
-//     'user' : 1, // UID
-//     'from' : new Date('2022-07-18T13:24:00'), //한국시간 기준
-//     'to' : new Date('2022-07-19T15:24:00'),
-//     'team' : 1, //TEAM id
-//     'comment' : null,
-//     'state' : 'wait'
-// },

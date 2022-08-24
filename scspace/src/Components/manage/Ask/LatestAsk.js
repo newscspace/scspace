@@ -64,7 +64,7 @@ class LatestAsk extends Component{
                 </table> 
 
             </div>
-            <section className="blog">
+            <div className="blog">
                     <div className="blog-pagination">
                         <ul className="justify-content-center">
 
@@ -78,7 +78,8 @@ class LatestAsk extends Component{
                             
                         </ul>
                     </div>
-                </section>
+                    <br/>
+                </div>
       </main>
       )};
 }

@@ -43,7 +43,6 @@ class CreateTeam extends Component{
     if(this.checkSubmit()){
       this.sendPost()
       .then((res) => {
-        console.log(res.data)
         if(res.data.teamid){
           this.props.history.push({pathname : '/team', state: res.data.teamid });
         }

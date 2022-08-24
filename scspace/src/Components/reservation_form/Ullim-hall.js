@@ -63,7 +63,9 @@ class Form extends Component{
       error === true ? 
       this.sendPost()
         .then((res) => {
-          console.log(res.data);
+          if(res.data.reserveId){
+            this.props.history.push({pathname : '/confirmation', state: res.data.reserveId });
+          }
         })
         : alert(error) 
       }

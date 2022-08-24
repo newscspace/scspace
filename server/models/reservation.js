@@ -6,7 +6,7 @@ const dbModel = {
     let conn = db.init();
     db.connect(conn);
    
-    let sql = `SELECT * FROM notice;`;
+    let sql = `SELECT * FROM reservation;`;
     let result = await conn.promise().query(sql)
     .catch(err => {console.log(err); db.disconnect(conn); return null;});
       
@@ -17,32 +17,46 @@ const dbModel = {
   readId: async (p) => {
     let conn = db.init();
     db.connect(conn);
-   
-    let sql = `SELECT * FROM notice where id=?;`;
-    let result = await conn.promise().query(sql, p)
-    .catch(err => {console.log(err); db.disconnect(conn); return null;});
-   
-    sql = `UPDATE notice SET hits = hits + 1 where id=?`;
+    let return_result;
+
+    let sql = `SELECT * FROM reservation where id=?;`;
     await conn.promise().query(sql, p)
-    .catch(err => {console.log(err); db.disconnect(conn); return null;});
-   
+    .then((result) => {return_result = result[0][0]})
+    .catch(err => {console.log(err); return_result = null;});
+
     db.disconnect(conn);
     
-    return result[0][0];
+    return return_result;
+  },
+
+  readMine: async (p) => {
+    let conn = db.init();
+    db.connect(conn);
+    let return_result;
+
+    let sql = `SELECT * FROM reservation where reserver_id=? ORDER BY time_request desc;`;
+    await conn.promise().query(sql, p)
+    .then((result) => {return_result = result[0];})
+    .catch(err => {console.log(err); return_result = null;});
+      
+    db.disconnect(conn);
+    return return_result;
   },
 
   create: async (p) => {
     
     let conn = db.init();
     db.connect(conn);
-   
-    let sql = `INSERT INTO notice (title, time_post, important, content) VALUES (?, ?, ?, ?);`;
-    let result = await conn.promise().query(sql, [p.title, p.time_post, p.important, p.content])
-    .catch(err => {console.log(err); db.disconnect(conn); return false;});
+
+
+    let sql = `INSERT INTO reservation (reserver_id, reserver_name, space, team_id, time_to, time_from, time_request, content, state) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);`;
+    await conn.promise().query(sql, [p.reserver_id, p.reserver_name, p.space, p.team_id, new Date(p.time_to), new Date(p.time_from), p.time_request, JSON.stringify(p.content), p.state])
+      .then((result) => {return_result = result[0].insertId;})
+      .catch(err => {console.log(err); return_result =  false;});
    
     db.disconnect(conn);
     
-    return true;
+    return return_result;
   },
 
   update: async (p) => {
@@ -72,6 +86,20 @@ const dbModel = {
     
     return true;
   },
+
+  latestRead : async() => {
+    let conn = db.init();
+    db.connect(conn);
+    let return_result;
+
+    let sql = `SELECT * FROM reservation WHERE (time_request BETWEEN DATE_ADD(NOW(),INTERVAL -1 MONTH ) AND NOW()) AND state='wait' ORDER BY time_request DESC;`;
+    await conn.promise().query(sql)
+    .then((result) => { db.disconnect(conn); return_result = result[0];})
+    .catch(err => {console.log(err); db.disconnect(conn); return_result = null;});
+      
+    db.disconnect(conn);
+    return return_result;
+  }
 };
 
 module.exports =  dbModel;

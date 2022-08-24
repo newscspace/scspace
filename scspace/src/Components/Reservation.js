@@ -31,15 +31,15 @@ class Reservation extends Component {
         this.setState({login:true, UserInfo:result});
         
         this.spaceTag = {
-          'individual-practice-room': <Individual login={true} UserInfo={result}/>,
-          'piano-room': <Piano login={true} UserInfo={result}/>,
-          'seminar-room': <Seminar login={true} UserInfo={result}/>,
-          'group-practice-room': <Group login={true} UserInfo={result}/>,
-          'dance-studio': <Dance login={true} UserInfo={result}/>,
-          'ullim-hall': <Ullim login={true} UserInfo={result}/>,
-          'mirae-hall': <Mirae login={true} UserInfo={result}/>,
-          'workshop': <Workshop login={true} UserInfo={result}/>,
-          'open-space': <Openspace login={true} UserInfo={result}/>
+          'individual-practice-room': <Individual login={true} UserInfo={result} history={this.props.history}/>,
+          'piano-room': <Piano login={true} UserInfo={result} history={this.props.history}/>,
+          'seminar-room': <Seminar login={true} UserInfo={result} history={this.props.history}/>,
+          'group-practice-room': <Group login={true} UserInfo={result} history={this.props.history}/>,
+          'dance-studio': <Dance login={true} UserInfo={result} history={this.props.history}/>,
+          'ullim-hall': <Ullim login={true} UserInfo={result} history={this.props.history}/>,
+          'mirae-hall': <Mirae login={true} UserInfo={result} history={this.props.history}/>,
+          'workshop': <Workshop login={true} UserInfo={result} history={this.props.history}/>,
+          'open-space': <Openspace login={true} UserInfo={result} history={this.props.history}/>
         }
       }
     })
