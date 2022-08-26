@@ -20,7 +20,6 @@ team = {
 
                 db.create(p)
                 .then ((result) => {
-                    console.log(result);
                     res.json({teamid:result});
                 });
             })
@@ -37,7 +36,7 @@ team = {
                 let p = result.student_id;
                 db.readMine(p)
                     .then(result => {res.json(result);})
-                    .catch (() => {console.log('error');})
+                    .catch ((err) => {console.log(err);})
             })
     },
 
@@ -50,8 +49,8 @@ team = {
             .then((result) => {
                 let p = req.query.id;
                 db.readId([p])
-                    .then(result => {console.log(result); res.json(result);})
-                    .catch (() => {console.log('error');})
+                    .then(result => {res.json(result);})
+                    .catch ((err) => {console.log(err);})
             })
     },
 

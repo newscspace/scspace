@@ -19,7 +19,7 @@ https.createServer({
 
 app.use(cookieParser());
 
-db.set_db();
+// db.set_db();
 
 app.use(cors());
 

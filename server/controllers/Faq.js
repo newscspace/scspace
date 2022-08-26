@@ -9,7 +9,7 @@ faq = {
     read : (req, res) =>{
         db.read()
             .then (result => {res.json(result);})
-            .catch (() => {console.log(result);});
+            .catch ((err) => {console.log(err);});
     },
 
     update : (req, res) => {

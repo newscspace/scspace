@@ -11,13 +11,13 @@ notice = {
     read_id : (req, res) => {
         db.readId([parseInt(req.query.id)])
             .then(result => {res.json(result);})
-            .catch (() => {console.log(result);})
+            .catch ((err) => {console.log(err);})
     },
 
     read_all : (req, res) =>{
         db.readAll()
             .then (result => {res.json(result);})
-            .catch (() => {console.log(result);});
+            .catch ((err) => {console.log(err);});
     },
 
     update : (req, res) => {

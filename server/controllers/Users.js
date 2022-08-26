@@ -5,7 +5,6 @@ users = {
         let p = req.query.id;
         db.readId([p])
             .then ((result) => {
-                console.log(result)
                 res.json(result);
             })
             .catch ((err) => {console.log(err); res.json(false)});

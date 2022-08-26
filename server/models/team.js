@@ -19,7 +19,6 @@ const dbModel = {
     let conn = db.init();
     db.connect(conn);
     let return_result = {team_name : '', member:[]};
-    console.log(p)
     let sql = `SELECT * FROM team WHERE id=?`;
     await conn.promise().query(sql, p)
     .then(async (result) => {
@@ -44,7 +43,6 @@ const dbModel = {
     await conn.promise().query(sql, [p])
     .then((result) => {
       return_result = result[0]; 
-        console.log(return_result);
     })
     .catch(err => {console.log(err); db.disconnect(conn); return_result= null;});
       

@@ -37,7 +37,6 @@ reservation = {
                 return_result.push({id:reservation.id, space:reservation.space,startDate : reservation.time_from, endDate : reservation.time_to, content : reservation.content, text:reservation.content ?reservation.content.eventName : null, description:reservation.content?reservation.content.contents : null, recurrenceRule : reservation.content ? reservation.content.recurrenceRule : null})
                 
             })
-            console.log(return_result);
             res.json(return_result);
         })
         .catch ((err) => {console.log(err); res.json(false)})

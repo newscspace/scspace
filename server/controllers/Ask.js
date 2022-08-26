@@ -22,19 +22,19 @@ ask = {
     readId : (req, res) => {
         db.readId([parseInt(req.query.id)])
             .then(result => {res.json(result);})
-            .catch (() => {console.log(result);})
+            .catch ((err) => {console.log(err);})
     },
 
     readAll : (req, res) =>{
         db.readAll()
             .then (result => {res.json(result);})
-            .catch (() => {console.log(result);});
+            .catch ((err) => {console.log(err);});
     },
 
     readMine : (req, res) =>{
         db.readMine([parseInt(req.query.id)])
             .then (result => {res.json(result);})
-            .catch (() => {console.log(result);});
+            .catch ((err) => {console.log(err);});
     },
 
     delete  : (req, res) => {
@@ -65,13 +65,13 @@ ask = {
     readComment : (req, res) => {
         db.readComment([parseInt(req.query.id)])
             .then(result => {res.json(result);})
-            .catch (() => {console.log(result);})
+            .catch ((err) => {console.log(err);})
     },
 
     latestRead : (req, res) => {
         db.latestRead()
             .then(result => {res.json(result);})
-            .catch (() => {console.log(result);})
+            .catch ((err) => {console.log(err);})
     },
 
 }
