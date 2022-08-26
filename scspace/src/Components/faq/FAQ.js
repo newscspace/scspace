@@ -78,9 +78,9 @@ class FAQ extends Component{
       .catch(err => console.log(err));})
   }
   
-  AddFaq = (idx) => {
+  AddFaq = (mode) => {
     let nextstate = Object.assign({}, this.state);
-    if(idx !== null) {
+    if(mode === 'cancel') {
       
       nextstate.list.pop();
       this.setState(nextstate);
@@ -132,7 +132,7 @@ class FAQ extends Component{
           return(
             <div className="text-end">
                   <button type="button" className="modalButton2" onClick={this.callApi_add.bind(this, idx)}>추가 완료</button>
-                  <button type="button" className="modalButton1" onClick={this.AddFaq.bind(idx)}>취소</button>
+                  <button type="button" className="modalButton1" onClick={() => {this.AddFaq('cancel')}}>취소</button>
                   </div>
           )
         }
@@ -204,7 +204,7 @@ class FAQ extends Component{
                 </div>
                 {this.state.login === true && this.state.UserInfo.type==='admin' ? 
                 (<div className="text-end">
-                    <button type="button" className="modalButton2" onClick={() => {this.AddFaq(null)}}>추가하기</button>
+                    <button type="button" className="modalButton2" onClick={() => {this.AddFaq('add')}}>추가하기</button>
                 </div>) : (<div></div>)}
                 <div className="accordion accordion-flush px-xl-5">
 
