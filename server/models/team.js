@@ -3,25 +3,25 @@ const db =  require('../config/db_config');
 
 const dbModel = {
 
-  readAll: async () => {
-    let conn = db.init();
-    db.connect(conn);
+  // readAll: async () => {
+  //   let conn = db.init();
+  //   db.connect(conn);
    
-    let sql = `SELECT * FROM ask ORDER BY time_post desc;`;
-    let result = await conn.promise().query(sql)
-    .catch(err => {console.log(err); db.disconnect(conn); return null;});
+  //   let sql = `SELECT * FROM ask ORDER BY time_post desc;`;
+  //   let result = await conn.promise().query(sql)
+  //   .catch(err => {console.log(err); db.disconnect(conn); return null;});
       
-    db.disconnect(conn);
-    return result[0];
-  },
+  //   db.disconnect(conn);
+  //   return result[0];
+  // },
 
   readId: async (p) => {
     let conn = db.init();
     db.connect(conn);
-
     let return_result = {team_name : '', member:[]};
+    console.log(p)
     let sql = `SELECT * FROM team WHERE id=?`;
-    await conn.promise().query(sql, [p])
+    await conn.promise().query(sql, p)
     .then(async (result) => {
       return_result.team_name = result[0][0].name;
       sql = `SELECT * FROM member WHERE teamid=?`
@@ -75,18 +75,18 @@ const dbModel = {
   
 
 
-  delete: async (p) => { 
-    let conn = db.init();
-    db.connect(conn);
+  // delete: async (p) => { 
+  //   let conn = db.init();
+  //   db.connect(conn);
    
-    let sql = `DELETE FROM ask WHERE id=?`;
-    let result = await conn.promise().query(sql, p)
-    .catch(err => {console.log(err); db.disconnect(conn); return false;});
+  //   let sql = `DELETE FROM ask WHERE id=?`;
+  //   let result = await conn.promise().query(sql, p)
+  //   .catch(err => {console.log(err); db.disconnect(conn); return false;});
    
-    db.disconnect(conn);
+  //   db.disconnect(conn);
     
-    return true;
-  },
+  //   return true;
+  // },
   
   createComment: async (p) => {  
     let conn = db.init();

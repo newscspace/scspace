@@ -1,4 +1,5 @@
 const db = require('../models/team');
+const auth = require('./Jwt');
 
 team = {
     create : (req, res) => {
@@ -48,29 +49,29 @@ team = {
         auth.get_data(req.cookies.scspacetoken)
             .then((result) => {
                 let p = req.query.id;
-                db.readId(p)
-                    .then(result => {res.json(result);})
+                db.readId([p])
+                    .then(result => {console.log(result); res.json(result);})
                     .catch (() => {console.log('error');})
             })
     },
 
-    read_all : (req, res) =>{
-        db.readAll()
-            .then (result => {res.json(result);})
-            .catch (() => {console.log(result);});
-    },
+    // read_all : (req, res) =>{
+    //     db.readAll()
+    //         .then (result => {res.json(result);})
+    //         .catch (() => {console.log(result);});
+    // },
 
-    update : (req, res) => {
-        let p = req.body;
-        p.time_edit = new Date();
-        db.update(p)
-            .then (result => { result ? res.send(true) : res.send(false)});
-    }, 
+    // update : (req, res) => {
+    //     let p = req.body;
+    //     p.time_edit = new Date();
+    //     db.update(p)
+    //         .then (result => { result ? res.send(true) : res.send(false)});
+    // }, 
 
-    delete  : (req, res) => {
-        db.delete([parseInt(req.query.id)])
-        .then (result => { result ? res.send(true) : res.send(false)});
-    }
+    // delete  : (req, res) => {
+    //     db.delete([parseInt(req.query.id)])
+    //     .then (result => { result ? res.send(true) : res.send(false)});
+    // }
 
 
 }
