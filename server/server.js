@@ -11,15 +11,15 @@ const db = require('./models/set_db');
 const app = express();
 
 https.createServer({
-	key: fs.readFileSync("../../server.key"),
-	cert: fs.readFileSync("../../server.cert"),
+        key: fs.readFileSync("/home/ec2-user/.acme.sh/gonggan.kaist.ac.kr/gonggan.kaist.ac.kr.key"),
+        cert: fs.readFileSync("/home/ec2-user/.acme.sh/gonggan.kaist.ac.kr/fullchain.cer"),
 }, app).listen(443, function() {
-	console.log("server running on PORT 443");
+        console.log("server running on PORT 443");
 });
 
 app.use(cookieParser());
 
-// db.set_db();
+//db.set_db();
 
 app.use(cors());
 
