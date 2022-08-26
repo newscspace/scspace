@@ -17,7 +17,7 @@ class LatestAsk extends Component{
     }
     componentDidMount(){
         this.callApi()
-            .then(res => {console.log(res); this.setState({list:res, wait:res.length});  this.setState({total_page_number : Math.ceil(res.length/5)});} )
+            .then(res => { this.setState({list:res, wait:res.length});  this.setState({total_page_number : Math.ceil(res.length/5)});} )
             .catch(err => console.log(err));
     }
     

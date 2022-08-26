@@ -15,13 +15,16 @@ import Checkbox from './form_component/Checkbox_list';
 class Form extends Component{
     constructor(props){
         super(props);
-        this.state = {
+        
+
+        this.state =  this.props.reserveData ? 
+        this.props.reserveData :
+        {
           spaceName : 'open-space',
           timeFrom : '',
           timeTo : '',
           content : {space : [], organizationName : '', eventName:'', innerNumber : 0, outerNumber : 0, character:[], eventPurpose:'',contents:'', rehersalFrom:null, rehersalTo:null}
-      }
-
+      } 
       
     // 예약 가능 날짜 관련 변수
     this.limitdate = {mindays:5, maxdays:45, maxUseHour:336}
@@ -90,7 +93,8 @@ class Form extends Component{
     }
     
     sendPost = () => {
-      const url = '/api/reservation/create';
+      let mode = this.props.reserveData ? 'update' : 'create';
+      const url = '/api/reservation/'+ mode;
       const config = {
         headers : {
           'Content-Type' : 'application/json'
@@ -107,14 +111,14 @@ class Form extends Component{
              <form className="php-email-form" onSubmit={this.handleSubmit}>
             
                 <Checkbox checkboxlist = {{옥상:"rooftop", '커뮤니티 마당':"community", 전시계단:"stair", '미디어 스페이스':'media', '2층 로비':"second_lobby", '3층 로비':"third_lobby", 모임터:'meeting'}} head="장소" name="space" onChangeHandler = {this.handleValueChange_checkbox}/>
-                <OrganizationName onChangeHandler={this.handlevalueChange_content}/>
-                <EventName onChangeHandler={this.handleValueChange_content}/>
+                <OrganizationName onChangeHandler={this.handleValueChange_content} value={this.state.content.organizationName}/>
+                <EventName onChangeHandler={this.handleValueChange_content} value={this.state.content.eventName}/>
                 <Time rehersal={true} limitdate={this.limitdate} onChangeHandler = {this.handleValueChange_time}/>
                 <Number onChangeHandler={this.handleValueChange_content} type={false}/>
-                <Contents onChangeHandler = {this.handleValueChange_content}/>
-                <EventPurpose onChangeHandler = {this.handleValueChange_content}/>
+                <Contents onChangeHandler = {this.handleValueChange_content} value={this.state.content.contents}/>
+                <EventPurpose onChangeHandler = {this.handleValueChange_content} value={this.state.content.eventPurpose}/>
                 <Checkbox checkboxlist = {{종교적:"religion", 영리성:"rentability", 정치적:"politic"}} head="성격" name="character" onChangeHandler = {this.handleValueChange_checkbox}/>
-                <Food onChangeHandler={this.handleValueChange_content}/>
+                <Food onChangeHandler={this.handleValueChange_content} value={this.state.content.food}/>
                 <Agree/>
                 
               

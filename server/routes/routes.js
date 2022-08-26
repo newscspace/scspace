@@ -7,6 +7,7 @@ const ask = require('./ask');
 const jwt = require('./jwt');
 const team = require('./team');
 const space = require('./space');
+const users = require('./users');
 
 router.post('/api/reservation/*', reservation.router);
 router.get('/api/reservation/*', reservation.router);
@@ -47,6 +48,9 @@ router.get('/api/team/*', team.router);
 
 router.post('/api/space/*', space.router);
 router.get('/api/space/*', space.router);
+
+router.get('/api/users/*', users.router);
+router.post('/api/users/*', users.router);
 
 router.get('/api/contact', function (req, res) {
     res.json({

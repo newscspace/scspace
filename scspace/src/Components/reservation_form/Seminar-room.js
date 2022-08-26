@@ -11,7 +11,8 @@ import Number from './form_component/Number';
 class Form extends Component{
     constructor(props){
         super(props);
-        this.state = {
+        this.state =  this.props.reserveData ? 
+        this.props.reserveData :{
           spaceName: 'seminar-room1',
           timeFrom : '',
           timeTo : '',
@@ -70,7 +71,9 @@ class Form extends Component{
     }
     
     sendPost = () => {
-      const url = '/api/reservation/create';
+      let mode = this.props.reserveData ? 'update' : 'create';
+      const url = '/api/reservation/'+ mode;
+      console.log(url);
       const config = {
         headers : {
           'Content-Type' : 'application/json'
@@ -87,10 +90,10 @@ class Form extends Component{
             <form className="php-email-form" onSubmit={this.handleSubmit}>
               
             <SpacePick spacelist={{세미나실1 : 'seminar-room1', 세미나실2 : 'seminar-room2'}} onChangeHandler={this.handleValueChange}  />
-            <OrganizationName onChangeHandler={this.handlevalueChange_content}/>
+            <OrganizationName onChangeHandler={this.handleValueChange_content} value={this.state.content.organizationName}/>
             <Time onChangeHandler = {this.handleValueChange_time} limitdate={this.limitdate}/>
             <Number onChangeHandler={this.handleValueChange_content} type={true}/>
-            <Contents onChangeHandler = {this.handleValueChange_content}/>
+                <Contents onChangeHandler = {this.handleValueChange_content} value={this.state.content.contents}/>
             <Agree/>
             <div className="text-end"><button type="submit">예약하기</button></div>
           </form>

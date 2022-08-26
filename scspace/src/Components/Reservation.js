@@ -20,7 +20,7 @@ class Reservation extends Component {
    
 
     this.state = {
-      spaceName: 'individual-practice-room',
+      spaceName: this.props.location.state ? this.props.location.state.space.replace(/[0-9]/g, '') : 'individual-practice-room',
 
     }
 
@@ -31,15 +31,15 @@ class Reservation extends Component {
         this.setState({login:true, UserInfo:result});
         
         this.spaceTag = {
-          'individual-practice-room': <Individual login={true} UserInfo={result} history={this.props.history}/>,
-          'piano-room': <Piano login={true} UserInfo={result} history={this.props.history}/>,
-          'seminar-room': <Seminar login={true} UserInfo={result} history={this.props.history}/>,
-          'group-practice-room': <Group login={true} UserInfo={result} history={this.props.history}/>,
-          'dance-studio': <Dance login={true} UserInfo={result} history={this.props.history}/>,
-          'ullim-hall': <Ullim login={true} UserInfo={result} history={this.props.history}/>,
-          'mirae-hall': <Mirae login={true} UserInfo={result} history={this.props.history}/>,
-          'workshop': <Workshop login={true} UserInfo={result} history={this.props.history}/>,
-          'open-space': <Openspace login={true} UserInfo={result} history={this.props.history}/>
+          'individual-practice-room': <Individual login={true} UserInfo={result} history={this.props.history} reserveData={this.props.location.state}/>,
+          'piano-room': <Piano login={true} UserInfo={result} history={this.props.history}  reserveData={this.props.location.state}/>,
+          'seminar-room': <Seminar login={true} UserInfo={result} history={this.props.history}  reserveData={this.props.location.state}/>,
+          'group-practice-room': <Group login={true} UserInfo={result} history={this.props.history}  reserveData={this.props.location.state}/>,
+          'dance-studio': <Dance login={true} UserInfo={result} history={this.props.history}  reserveData={this.props.location.state}/>,
+          'ullim-hall': <Ullim login={true} UserInfo={result} history={this.props.history}  reserveData={this.props.location.state}/>,
+          'mirae-hall': <Mirae login={true} UserInfo={result} history={this.props.history}  reserveData={this.props.location.state}/>,
+          'workshop': <Workshop login={true} UserInfo={result} history={this.props.history}  reserveData={this.props.location.state}/>,
+          'open-space': <Openspace login={true} UserInfo={result} history={this.props.history}  reserveData={this.props.location.state}/>
         }
       }
     })

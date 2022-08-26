@@ -15,7 +15,8 @@ import Equipment from './form_component/Checkbox_list'
 class Form extends Component{
     constructor(props){
         super(props);
-        this.state = {
+        this.state =  this.props.reserveData ? 
+        this.props.reserveData :{
             spaceName : 'mirae-hall',
             timeFrom : '',
             timeTo : '',
@@ -96,7 +97,8 @@ class Form extends Component{
     }
     
     sendPost = () => {
-      const url = '/api/reservation/create';
+      let mode = this.props.reserveData ? 'update' : 'create';
+      const url = '/api/reservation/'+ mode;
       const config = {
         headers : {
           'Content-Type' : 'application/json'
@@ -110,15 +112,15 @@ class Form extends Component{
 
         <div className="col-lg-8">
            <form className="php-email-form" onSubmit={this.handleSubmit}>
-                <OrganizationName onChangeHandler={this.handlevalueChange_content}/>
-                <EventName onChangeHandler={this.handleValueChange_content}/>
+                <OrganizationName onChangeHandler={this.handleValueChange_content} value={this.state.content.organizationName}/>
+                <EventName onChangeHandler={this.handleValueChange_content} value={this.state.content.eventName}/>
                 <Time rehersal={true} rehersalLastday={true} limitdate={this.limitdate} onChangeHandler = {this.handleValueChange_time}/>
                 <Number onChangeHandler={this.handleValueChange_content} type={false}/>
-                <Contents onChangeHandler = {this.handleValueChange_content}/>
-                <EventPurpose onChangeHandler = {this.handleValueChange_content}/>
+                <Contents onChangeHandler = {this.handleValueChange_content} value={this.state.content.contents}/>
+                <EventPurpose onChangeHandler = {this.handleValueChange_content}value={this.state.content.eventPurpose}/>
                 <Equipment checkboxlist = {{조명:"light", 음향:"sound", 프로젝터:"projector"}} head="장비 사용" name="equipment" onChangeHandler = {this.handleValueChange_checkbox}/>
 
-              <Food onChangeHandler={this.handleValueChange_content}/>
+              <Food onChangeHandler={this.handleValueChange_content} value={this.state.content.food}/>
 
               <Agree/>
               

@@ -1,48 +1,140 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
-import {get} from 'axios';
-
+import {get, post} from 'axios';
+import ReservModal from './ReserveModal';
+import moment from 'moment'
 
 class ReservationList extends Component{
     constructor(props) {
         super(props);
         this.state = {
-            value1: 'all',
-            value2: 'all',
             page_number : 1,
             list : [],
-        };  
-
-        this.handleChange1 = this.handleChange1.bind(this);
-        this.handleChange2 = this.handleChange2.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this);
-    }
-    
-    handleChange1(event) { 
-        this.setState({value1: event.target.value1});
-    }
-    handleChange2(event) { 
-        this.setState({value2: event.target.value2});
-    }
-    
-    handleSubmit(event) {
-        // 공간별/상태별 보여주는 함수 작성해야할듯
+            selectedList : [],
+            showHide : false,
+            reservation : null,    
+            spaceFilter : 'all',
+            stateFilter : 'all',
+            handle: {wait: "대기중", grant: "승인됨", rejected: "거절됨"},  
+            
+        }; 
+        
+        
+        this.spaceDict = {
+            'all' : '전체',
+            'individual-practice-room1': '개인연습실 1',
+            'individual-practice-room2': '개인연습실 2',
+            'individual-practice-room3': '개인연습실 3',
+            'piano-room1': '피아노실 1',
+            'piano-room2': '피아노실 2',
+            'group-practice-room': '합주실',
+            'dance-studio': '무예실',
+            'ullim-hall': '울림홀',
+            'mirae-hall': '미래홀',
+            'seminar-room1': '세미나실 1',
+            'seminar-room2': '세미나실 2',
+            'workshop': '창작공방',
+            'open-space': '오픈스페이스'
+          }
+        
     }
 
     componentDidMount(){
         this.callApi()
-            .then(res => {this.setState({list:res});  this.setState({total_page_number : Math.ceil(res.length/10)});} )
+            .then(res => {this.setState({list:res, selectedList:res});  this.setState({total_page_number : Math.ceil(res.length/10)});} )
             .catch(err => console.log(err));
     }
     
     callApi= async () => {
-        const res = await get('/api/notice/all');
+        const res = await get('/api/reservation/all');
         const body = await res.data;
         return body;
     }
+
+    handleModalShowHide = (contents, e) => {
+        this.setState({
+            showHide: !this.state.showHide,            
+        })
+    }
+
+    callApi_user= async (id) => {
+        const res = await get('/api/users/id?id='+id);
+        const body = await res.data;
+        return body;
+    }
+
+    setInfo = (contents, e) => {
+        
+        this.callApi_user(contents.reserver_id)
+            .then(res => {
+                this.setState({
+                    reservation: contents,
+                    reserverInfo : res,
+                    showHide: !this.state.showHide,            
+                })
+            } )
+            .catch(err => console.log(err));
+    
+      
+    }
+
+    handleValueChange = (e) => {
+        let nextstate = Object.assign({}, this.state);
+        nextstate['reservation'][e.target.name] = e.target.value;
+        this.setState(nextstate);
+    }
+
+
+    handleChange = (e) => {
+        let nextstate = Object.assign({}, this.state);
+        nextstate[e.target.name] = e.target.value;
+        nextstate.selectedList = [];
+        
+        this.state.list.map((contents) => {
+        if ((nextstate.spaceFilter === contents.space || nextstate.spaceFilter === 'all') && (nextstate.stateFilter === contents.state || nextstate.stateFilter === 'all')){
+                nextstate.selectedList.push(contents)
+        }   
+        })
+
+        nextstate.total_page_number = Math.ceil(nextstate.selectedList.length / 5)
+        this.setState(nextstate);
+      }
+
+      
+    sendPost = () => {
+        const url = '/api/reservation/comment/create';
+        const config = {
+          headers : {
+            'Content-Type' : 'application/json'
+          }
+        }
+      
+        return post(url, JSON.stringify(this.state.reservation), config);
+      }
+
+      
+   
+      handleSubmit = (e) =>{
+        e.preventDefault()
+        const errmsg = ''
+        if(this.checkSubmit()){
+            this.sendPost()
+            .then((res) => {
+              this.setState({showHide:!this.state.showHide})
+            })
+  
+        } 
+       
+        else{ alert('a') /* error 내용 출력 필요 */}
+      }
+
+      checkSubmit = () => {
+        return true;
+      }
+      
     render() {return (
         <main id="main">
-            <div  className="breadcrumbs">
+             <div  className="breadcrumbs">
                 <div  className="container">
                     <div  className="d-flex justify-content-between align-items-center">
                     <h3>관리자 페이지</h3>
@@ -53,80 +145,70 @@ class ReservationList extends Component{
                     </div>
                 </div>
             </div>
-
-            <div className='container'>
+            <div className="container">
                 <br/>
                 <h4><b>최신 예약신청 목록</b></h4>
                 <hr></hr>
 
-                <table className="table">
+                <table className="table manage">
                     <thead>
-                        <th><form onSubmit={this.handleSubmit} className="mypage">
-                            <select value={this.state.value} onChange={this.handleChange1}> 
-                                <option value="all">전체 공간</option>
-                                <option value="piano1">피아노실 1</option>
-                                <option value="piano2">피아노실 2</option>
-                                <option value="individual1">개인연습실 1</option>
-                                <option value="individual2">개인연습실 2</option>
-                                <option value="individual3">개인연습실 3</option>
-                                <option value="practice">합주실</option>
-                                <option value="dance">무예실</option>
-                                <option value="ullim">울림홀</option>
-                                <option value="mirae">미래홀</option>
-                                <option value="seminar1">세미나실1</option>
-                                <option value="seminar2">세미나실2</option>
-                                <option value="work">창작공방</option>
-                                <option value="openspace">오픈스페이스</option>
-                            </select>
-                            {/* <input type="submit" value="Submit" /> */}
-                        </form></th>
+                        <th> 
+                            <select name="spaceFilter" value={this.state.space} onChange={this.handleChange}> 
+                                {
+                                    Object.keys(this.spaceDict).map((space) => {
+                                        return (<option value={space}>{this.spaceDict[space]}</option>)
+                                    })
+
+                                }
+        
+                                
+                            </select></th>
                         <th>예약자</th>
-                        <th>예약 시간</th>
+                        <th>예약 id</th>
+                        <th>시간</th>
                         <th>예약한 시간</th>
-                        <th><form onSubmit={this.handleSubmit} className="mypage">
-                            <select value={this.state.value} onChange={this.handleChange2}> 
+                        <th> <select name="stateFilter"value={this.state.state} onChange={this.handleChange}> 
                                 <option value="all">전체 상태</option>
-                                <option value="approved">승인</option>
-                                <option value="declined">거절</option>
+                                <option value="grant">승인</option>
+                                <option value="rejected">거절</option>
                                 <option value="wait">대기 중</option>
-                            </select>
-                            {/* <input type="submit" value="Submit" /> */}
-                        </form></th>
+                            </select></th>
                     </thead>
 
                     <tbody>
-                        {this.state.list.slice((this.state.page_number-1)*10, this.state.page_number*10).map((contents) => {
+                        {this.state.selectedList.slice((this.state.page_number-1)*10, this.state.page_number*10).map((contents) => {
                             return(
-                                <tr>
-                                    <td>개인연습실 1</td>
-                                    <td>김네모</td>
-                                    <td>07월 25일 00:20 ~ 07월 25일 01:21</td>
-                                    <td>07월 24일 00:18</td>
-                                    <td>승인</td>
+                                <tr onClick={(e) => this.setInfo(contents, e)}>
+                                    <td>{this.spaceDict[contents.space]}</td>
+                                    <td>{contents.reserver_id}</td>
+                                    <td>{contents.id}</td>
+                                    <td>{moment(contents.time_from).format('MM월 DD일 HH:mm') + '~' + moment(contents.time_to).format('MM월 DD일 HH:mm')}</td>
+                                    <td>{moment(contents.time_request).format('MM월 DD일 HH:mm')}</td>
+                                    <td>{this.state.handle[contents.state]}</td>
                                 </tr>
                             )
                         })}
                     </tbody>
                 </table>
             </div>
-
             <section className="blog">
-                <div className="blog-pagination">
-                    <ul className="justify-content-center">
-                        
-                        {
-                            [...Array(this.state.total_page_number)].map((v,i) => i+1).map((page_num) => {
-                                return(<li className={this.state.page_number === page_num ? "active" : ""}onClick={() => {this.setState({page_number : page_num})}}><Link to="#" >{page_num}</Link></li>)
+                    <div className="blog-pagination">
+                        <ul className="justify-content-center">
 
-                            })
+                            {
+                                [...Array(this.state.total_page_number)].map((v,i) => i+1).map((page_num) => {
+                                    return(<li className={this.state.page_number === page_num ? "active" : ""}onClick={() => {this.setState({page_number : page_num})}}><Link to="#" >{page_num}</Link></li>)
+
+                                })
+                                
+                            }
                             
-                        }
-                        
-                    </ul>
-                </div>
-            </section>
-            
-        </main>
+                        </ul>
+                    </div>
+                </section>
+                <ReservModal modal={this.state} onClickHandler={this.handleModalShowHide} handleSubmit={this.handleSubmit}onChangeHandler2={this.handleValueChange} onChangeHandler3={this.handleValueChange}/>
+
+      </main>
       )};
 }
 

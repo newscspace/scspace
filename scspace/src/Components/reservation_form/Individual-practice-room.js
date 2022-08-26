@@ -9,7 +9,8 @@ import SpacePick from './form_component/SpacePick';
 class Form extends Component{
     constructor(props){
         super(props);
-        this.state = {
+        this.state =  this.props.reserveData ? 
+        this.props.reserveData :{
           spaceName: 'individual-practice-room1',
           timeFrom : '',
           timeTo : '',
@@ -70,7 +71,8 @@ class Form extends Component{
     }
     
     sendPost = () => {
-      const url = '/api/reservation/create';
+      let mode = this.props.reserveData ? 'update' : 'create';
+      const url = '/api/reservation/'+ mode;
       const config = {
         headers : {
           'Content-Type' : 'application/json'

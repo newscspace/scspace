@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
-import {get} from 'axios';
+import {get, post} from 'axios';
 import ReservModal from './ReserveModal';
 import moment from 'moment'
 
@@ -12,8 +12,8 @@ class LatestReserve extends Component{
             list : [],
             showHide : false,
             wait : 0,
-            reservation : {place: '우하하', reservationState : 'accept', comment : ''},    
-            handle: {wait: "대기중", grant: "승인됨", rejected: "거절됨"},  
+            reservation : null,    
+            handle: {wait: "대기중", grant: "승인", rejected: "거절"},  
             
         }; 
         
@@ -54,13 +54,25 @@ class LatestReserve extends Component{
         })
     }
 
+    callApi_user= async (id) => {
+        const res = await get('/api/users/id?id='+id);
+        const body = await res.data;
+        return body;
+    }
+
     setInfo = (contents, e) => {
-        const copied_reservation = {...this.state.reservation};
-        copied_reservation.place = contents.title;
-        this.setState({
-            reservation: copied_reservation,
-            showHide: !this.state.showHide,            
-        })
+        
+        this.callApi_user(contents.reserver_id)
+            .then(res => {
+                this.setState({
+                    reservation: contents,
+                    reserverInfo : res,
+                    showHide: !this.state.showHide,            
+                })
+            } )
+            .catch(err => console.log(err));
+    
+      
     }
 
     handleValueChange = (e) => {
@@ -69,11 +81,37 @@ class LatestReserve extends Component{
         this.setState(nextstate);
     }
 
-    handleValueChange_comment = (e) => {
-        let nextstate = Object.assign({}, this.state);
-        nextstate['reservation'][e.target.name] = e.target.value;
-        this.setState(nextstate);
-    }
+
+    sendPost = () => {
+        const url = '/api/reservation/comment/create';
+        const config = {
+          headers : {
+            'Content-Type' : 'application/json'
+          }
+        }
+      
+        return post(url, JSON.stringify(this.state.reservation), config);
+      }
+
+      
+   
+      handleSubmit = (e) =>{
+        e.preventDefault()
+        const errmsg = ''
+        if(this.checkSubmit()){
+            this.sendPost()
+            .then((res) => {
+              this.setState({showHide:!this.state.showHide})
+            })
+  
+        } 
+       
+        else{ alert('a') /* error 내용 출력 필요 */}
+      }
+
+      checkSubmit = () => {
+        return true;
+      }
 
     render() {return (
         <main id="main">
@@ -124,7 +162,7 @@ class LatestReserve extends Component{
                         </ul>
                     </div>
                 </div>
-            <ReservModal modal={this.state} onClickHandler={this.handleModalShowHide} onChangeHandler2={this.handleValueChange} onChangeHandler3={this.handleValueChange_comment}/>
+            <ReservModal modal={this.state} onClickHandler={this.handleModalShowHide} handleSubmit={this.handleSubmit}onChangeHandler2={this.handleValueChange} onChangeHandler3={this.handleValueChange}/>
 
       </main>
       )};

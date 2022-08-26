@@ -6,11 +6,13 @@ import Member from './form_component/Checkbox_list';
 import Time from './form_component/Time';
 import Contents from './form_component/Contents';
 import Agree from './form_component/Agree';
+import EventName from './form_component/Event_name';
 
 class Form extends Component{
   constructor(props){
     super(props);
-    this.state = {
+    this.state =  this.props.reserveData ? 
+    this.props.reserveData :{
         spaceName: 'group-practice-room',
         teamId: null, 
         timeFrom : '',
@@ -125,7 +127,8 @@ handleValueChange_checkbox = (e) => {
 }
 
 sendPost = () => {
-  const url = '/api/reservation/create';
+  let mode = this.props.reserveData ? 'update' : 'create';
+  const url = '/api/reservation/'+ mode;
   const config = {
     headers : {
       'Content-Type' : 'application/json'
@@ -141,11 +144,11 @@ sendPost = () => {
 
           <div className="col-lg-8">
             <form className="php-email-form" onSubmit={this.handleSubmit}> 
-                
-              <Team teamlist= {this.state.teamlist} onChangeHandler = {this.handleValueChange}/>
+              <EventName onChangeHandler={this.handleValueChange_content} value={this.state.content.eventName}/>
+              <Team teamlist= {this.state.teamlist} onChangeHandler = {this.handleValueChange} value={this.props.reserveData ? this.props.reserveData.team_id : null}/>
               <Member checkboxlist = {this.state.memberlist} head="멤버" name="teamMember" onChangeHandler = {this.handleValueChange_checkbox}/>
               <Time onChangeHandler = {this.handleValueChange_time} limitdate={this.limitdate}/>
-              <Contents onChangeHandler = {this.handleValueChange_content}/>
+              <Contents onChangeHandler = {this.handleValueChange_content} value={this.state.content.contents}/>
               <Agree/>
               <div className="text-end"><button type="submit">예약하기</button></div>
             </form>

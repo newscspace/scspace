@@ -74,7 +74,7 @@ class Reservation extends Component{
 
                 <table className="table">
                     <thead>
-                        <th><form onSubmit={this.handleSubmit}>
+                        <th>
                             <select name="spaceFilter" value={this.state.space} onChange={this.handleChange}> 
                                 {
                                     Object.keys(this.spaceDict).map((space) => {
@@ -85,7 +85,7 @@ class Reservation extends Component{
         
                                 
                             </select>
-                        </form></th>
+                            </th>
                         <th>시간</th>
                         <th>예약한 시간</th>
                         <th><form onSubmit={this.handleSubmit}>

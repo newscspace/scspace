@@ -28,6 +28,78 @@ reservation = {
         })
     },
 
+    readCalendar : (req, res) => {
+        let p = new Date(req.query.date);
+        let return_result = [];
+        db.readCalendar(p)
+        .then(result => {
+            result.map((reservation) => {
+                return_result.push({id:reservation.id, space:reservation.space,startDate : reservation.time_from, endDate : reservation.time_to, content : reservation.content, text:reservation.content ?reservation.content.eventName : null, description:reservation.content?reservation.content.contents : null, recurrenceRule : reservation.content ? reservation.content.recurrenceRule : null})
+                
+            })
+            console.log(return_result);
+            res.json(return_result);
+        })
+        .catch ((err) => {console.log(err); res.json(false)})
+    },
+
+
+    createCalendar : (req, res) => {
+        if(!('scspacetoken' in req.cookies)){
+            res.send(false)
+        }
+    
+        auth.get_data(req.cookies.scspacetoken)
+            .then((result) => {
+                let p = {};
+              
+                p.reserver_id = result.student_id;
+                p.reserver_name = '관리자';
+                p.space = req.body.space;
+                p.team_id = null;
+                p.time_from = new Date(req.body.startDate);
+                p.time_to = new Date(req.body.endDate);
+                p.time_request = new Date();
+                p.content = {'eventName':req.body.text, 'recurrenceRule':req.body.recurrenceRule?req.body.recurrenceRule : null, 'contents':req.body.description};
+                p.state = 'grant';
+    
+                db.createCalendar(p)
+                .then ((result) => {
+                    result ? res.send(true)  : res.send(false)
+                });
+            })
+    },
+
+    updateCalendar : (req, res) => {
+
+        if(!('scspacetoken' in req.cookies)){
+            res.send(false)
+        }
+        auth.get_data(req.cookies.scspacetoken)
+            .then((result) => {
+                let p = {};
+                p.space = req.body.space;
+                p.time_from = new Date(req.body.startDate);
+                p.time_to = new Date(req.body.endDate);
+                p.time_last_modified = new Date();
+                p.content = req.body.content ? req.body.content : {};
+                p.content['eventName'] = req.body.text;
+                p.content['recurrenceRule'] = req.body.recurrenceRule ? req.body.recurrenceRule : null;
+                p.content['contents'] = req.body.description;
+                p.id = req.body.id
+                p.state = 'wait';
+    
+                db.updateCalendar(p)
+                .then ((result) => {
+                    result ? res.send(true)  : res.send(false)
+                })
+                .catch((err) => res.send(false))
+            })
+
+
+
+    },
+
 
     readMine : (req, res) =>{
       if(!('scspacetoken' in req.cookies)){
@@ -50,17 +122,37 @@ reservation = {
           .catch ((err) => {console.log(err); res.json(false)})
   },
 
-  read : (req, res) => {
-    db.read([parseInt(req.query.id)])
+  readAll : (req, res) => {
+    db.readAll()
         .then(result => {res.json(result);})
         .catch ((err) => {console.log(err); res.json(false)})
 },
 
+ 
     update : (req, res) => {
-      let p = req.body;
-      p.time_edit = new Date();
-      db.update(p)
-          .then (result => { result ? res.send(true) : res.send(false)});
+        if(!('scspacetoken' in req.cookies)){
+            res.send(false)
+        }
+        auth.get_data(req.cookies.scspacetoken)
+            .then((result) => {
+                let p = {};
+              
+                p.reserver_id = result.student_id;
+                p.reserver_name = result.name;
+                p.space = req.body.spaceName;
+                p.team_id = req.body.teamId;
+                p.time_from = req.body.timeFrom;
+                p.time_to = req.body.timeTo;
+                p.time_last_modified = new Date();
+                p.content = req.body.content;
+                p.id = req.body.id;
+                p.state = 'wait';
+    
+                db.update(p)
+                .then ((result) => {
+                    res.json({'reserveId':result});
+                });
+            })
   }, 
 
   delete  : (req, res) => {
@@ -73,6 +165,27 @@ reservation = {
         .then(result => {res.json(result);})
         .catch ((err) => {console.log(err); res.json(false)})
 },
+createComment : (req, res) => {
+    let p = req.body;
+    if(!('scspacetoken' in req.cookies)){
+        res.send(false)
+    }
+    
+    auth.get_data(req.cookies.scspacetoken)
+    .then(result=> {
+        if (result.type === 'admin'){
+            db.createComment(p)
+            .then (result => { result ? res.send(true) : res.send(false)});
+        }
+        else{
+            res.send(false);
+        }
+
+    })
+    .catch((err) => {console.log(err)});
+   
+},
+
 
 
 
