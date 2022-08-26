@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import '../static/css/calendar.css';
 import {get} from 'axios';
+import Dropdown from 'react-bootstrap/Dropdown';
 
 class Calendar extends Component {
 
@@ -14,7 +15,7 @@ class Calendar extends Component {
       month : new Date().getMonth(),
       date : new Date().getDate(),
       day : new Date().getDay(),
-      filter : null,
+      filter : '전체',
       reservation_list : [] 
     }
 
@@ -64,8 +65,8 @@ class Calendar extends Component {
     }
   }
 
-  SpaceHandler = (e) => {
-    this.setState({filter:e.target.value})
+  SpaceHandler = (space) => {
+    this.setState({filter:space})
   }
 componentDidMount(){
     this.callApi()
@@ -94,13 +95,24 @@ callApi= async () => {
 
     <div className="select col-lg-5">
     <div className="col-md-4">   
-        <select className="form-control" name="team_name" onChange={this.SpaceHandler} required> 
-			      {Object.keys(this.spacelist).map((team) =>{
-              return (
-                <option key={team} value={team} >{team}</option>
-              )
-            })}
-		            </select>
+       
+                <Dropdown >
+              <Dropdown.Toggle className="btn-getstarted scrollto" id="dropdown-basic" >
+                {this.state.filter}
+              </Dropdown.Toggle>
+        
+              <Dropdown.Menu>
+                {Object.keys(this.spacelist).map((team) =>{
+                  return (
+                    <Dropdown.Item onClick={() =>{this.SpaceHandler(team) }}>{team}</Dropdown.Item>
+                  )
+                })}
+                
+              
+                
+            
+              </Dropdown.Menu>
+            </Dropdown>
                     
     </div>
     </div>
@@ -138,6 +150,7 @@ callApi= async () => {
                   {new Date(this.state.year, this.state.month, this.firstday+index).getDate()}
                    
                 </div>
+                <i className="piano"></i>
               </li>)}) 
     }
   </ol>

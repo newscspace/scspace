@@ -14,7 +14,6 @@ import Introduction from './Components/Introduction';
 import Reservation from './Components/Reservation';
 import Mypage from './Components/mypage/Mypage';
 import Manage from './Components/manage/Manage';
-import Calendar from './Components/Calendar';
 import CreateTeam from './Components/team/CreateTeam';
 import CreateFaq from './Components/faq/CreateFaq';
 import Confirmation from './Components/Confirmation';
@@ -22,7 +21,7 @@ import Team from './Components/team/Team';
 import ReservationList from './Components/manage/Reserve/ReservationList';
 import CreateAsk from './Components/Ask/CreateAsk';
 import ViewAsk from './Components/Ask/ViewAsk';
-
+import Calendar from './Components/Calendar/Calendar'; 
 
 import Login from './Components/auth/Login';
 import Logout from './Components/auth/Logout';

@@ -3098,28 +3098,28 @@ section {
 }
 
 /*--------------------------------------------------------------
-# TeamCreate
+# Calendar
 --------------------------------------------------------------*/
-.delete {
-  color: var(--color-secondary);
-  margin-top: 5px;
+
+.dx-menu-item-content span {
+  margin-right: 5px;
 }
-.add {
+
+.dx-menu-item-has-submenu .dx-icon-spinright {
+  position: absolute;
+  top: 7px;
+  right: 2px;
+}
+
+.item-badge {
+  text-align: center;
   float: left;
-  padding-right: 20px;
+  margin-right: 12px;
+  color: white;
+  width: 18px;
+  height: 18px;
+  font-size: 19.5px;
+  border-radius: 18px;
+  margin-top: 2px;
 }
-.add button {
-  color: var(--color-white);
-  font-weight: 500;
-  font-size: 16px;
-  display: inline-block;
-  padding: 10px 35px;
-  border-radius: 5px;
-  margin-top: 10px;
-  border: 0;
-  outline: 0;
-  background: rgba(var(--color-primary-dark-rgb), 0.9);
-}
-.add button:hover {
-  background: var(--color-primary);
-}
+
