@@ -3,7 +3,7 @@ import {Link} from 'react-router-dom';
 import {get} from 'axios';
 import moment from 'moment';
 import { et } from 'date-fns/locale';
-
+import {withTranslation} from "react-i18next";
 
 class Reservation extends Component{
     constructor(props) {
@@ -65,11 +65,14 @@ class Reservation extends Component{
         return body;
     }
 
-    render() {return (
+    render() {
+        const {t} = this.props;
+
+        return (
         <main id="main">
             <div className='container'>
                 <br/>
-                <h4><b>내 예약</b></h4>
+                <h4><b>{t('내 예약')}</b></h4>
                 <hr></hr>
 
                 <table className="table">
@@ -78,7 +81,7 @@ class Reservation extends Component{
                             <select name="spaceFilter" value={this.state.space} onChange={this.handleChange}> 
                                 {
                                     Object.keys(this.spaceDict).map((space) => {
-                                        return (<option value={space}>{this.spaceDict[space]}</option>)
+                                        return (<option value={space}>{t(this.spaceDict[space])}</option>)
                                     })
 
                                 }
@@ -86,17 +89,17 @@ class Reservation extends Component{
                                 
                             </select>
                             </th>
-                        <th>시간</th>
-                        <th>예약한 시간</th>
+                        <th>{t('시간')}</th>
+                        <th>{t('예약한 시간')}</th>
                         <th><form onSubmit={this.handleSubmit}>
                             <select name="stateFilter"value={this.state.state} onChange={this.handleChange}> 
-                                <option value="all">전체 상태</option>
-                                <option value="grant">승인</option>
-                                <option value="rejected">거절</option>
-                                <option value="wait">대기 중</option>
+                                <option value="all">{t('전체 상태')}</option>
+                                <option value="grant">{t('승인됨')}</option>
+                                <option value="rejected">{t('거절됨')}</option>
+                                <option value="wait">{t('대기중')}</option>
                             </select>
                         </form></th>
-                        <th>확인서</th>
+                        <th>{t('확인서')}</th>
                     </thead>
 
                     <tbody>
@@ -133,4 +136,4 @@ class Reservation extends Component{
       )};
 }
 
-export default Reservation;
+export default withTranslation()(Reservation);

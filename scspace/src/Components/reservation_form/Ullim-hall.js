@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {post} from 'axios';
+import {withTranslation} from "react-i18next";
 
 
 import Time from './form_component/Time';
@@ -108,6 +109,7 @@ class Form extends Component{
       return post(url, JSON.stringify(this.state), config);
     }
     render() {
+      const {t} = this.props;
         return (
 
         <div className="col-lg-8">
@@ -121,13 +123,13 @@ class Form extends Component{
                 <Equipment checkboxlist = {{조명:"light", 음향:"sound", 프로젝터:"projector"}} head="장비 사용" name="equipment" onChangeHandler = {this.handleValueChange_checkbox}/>
 
               <div className="row">
-              <h5>책상과 의자</h5>
+              <h5>{t('책상과 의자')}</h5>
                 <div className="col-md-6 form-group">
-                  책상 수
+                  {t('책상 수')}
                   <input type='number' className="form-control" name="desk" min='0' max='200' step='1' onChange={this.handleValueChange_content}/>
                 </div>
                 <div className="col-md-6 form-group mt-3 mt-md-0">
-                  의자 수
+                  {t('의자 수')}
                   <input type='number' className="form-control" name="chair" min='0' max='200' step='1' onChange={this.handleValueChange_content}/>
                 </div>
               </div>
@@ -136,7 +138,7 @@ class Form extends Component{
               <h5>로비</h5>
                 <div className="form-check form-check-inline">
                   <input className="form-check-input" type="checkbox" name = "lobby" id="inlineCheckbox1" value={true} onChange={this.handleValueChange_checkbox}/>
-                  <label className="form-check-label" for="inlineCheckbox1">울림홀 앞 1층 로비를 사용합니다. </label>
+                  <label className="form-check-label" for="inlineCheckbox1">{t('울림홀 앞 1층 로비를 사용합니다.')}</label>
                 </div>
                 <hr/><br/>
 
@@ -144,11 +146,11 @@ class Form extends Component{
 
               <Agree/>
               
-            <div className="text-end"><button type="submit">예약하기</button></div>
+            <div className="text-end"><button type="submit">{t('예약하기')}</button></div>
           </form>
         </div>
         
       )};
 }
 
-export default Form;
+export default withTranslation()(Form);

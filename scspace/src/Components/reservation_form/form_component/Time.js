@@ -2,6 +2,8 @@ import React, {useEffect, useState} from 'react';
 import DatePicker from 'react-datepicker';
 import {setHours, setMinutes} from "date-fns";
 import 'react-datepicker/dist/react-datepicker.css';
+import {withTranslation} from "react-i18next";
+
 
     const calcDate = (date, days) => {
       let startdate = new Date(date);
@@ -30,6 +32,8 @@ import 'react-datepicker/dist/react-datepicker.css';
  
 
     const Time = (props) => {
+
+      const{t} = props;
 
       const [startDate, setStartDate] = useState();
       const [endDate, setEndDate] = useState();
@@ -79,9 +83,9 @@ import 'react-datepicker/dist/react-datepicker.css';
       return (
         <div>
             <div className="row">
-            <h5>시간</h5>
+            <h5>{t('시간')}</h5>
             <div className="col-md-6 form-group">
-            시작 시간<DatePicker
+            {t('시작 시간')}<DatePicker
               onChange = {(date) => {setStartDate(date); props.onChangeHandler('timeFrom', date)}}
               selected = {startDate}
               minDate={calcDate(new Date(), props.limitdate.mindays)}
@@ -100,7 +104,7 @@ import 'react-datepicker/dist/react-datepicker.css';
 
             { startDate ? 
             (<div className="col-md-6 form-group mt-3 mt-md-0">
-            종료 시간<DatePicker
+            {t('종료 시간')}<DatePicker
               onChange = {(date) => {setEndDate(date); props.onChangeHandler('timeTo', date)}}
               selected={endDate}
 
@@ -121,7 +125,7 @@ import 'react-datepicker/dist/react-datepicker.css';
             </div>
           ) : (
             <div className="col-md-6 form-group mt-3 mt-md-0">
-            종료 시간<DatePicker
+            {t('종료 시간')}<DatePicker
               className="form-control"
               disabled
               required/>
@@ -133,7 +137,7 @@ import 'react-datepicker/dist/react-datepicker.css';
           {props.rehersal?
           (<div className="row">
             <div className="col-md-6 form-group">
-            당일 리허설 시작 시간<DatePicker
+            {t('당일 리허설 시작 시간')}<DatePicker
               onChange = {(date) => {setrehersalStartDate(date); props.onChangeHandler('rehersalFrom', date, true)}}
               selected = {rehersalStartDate}
               minDate={calcDate(new Date(), props.limitdate.mindays)}
@@ -152,7 +156,7 @@ import 'react-datepicker/dist/react-datepicker.css';
 
             { rehersalStartDate ? 
             (<div className="col-md-6 form-group mt-3 mt-md-0">
-            당일 리허설 종료 시간<DatePicker
+            {t('당일 리허설 종료 시간')}<DatePicker
               onChange = {(date) => {setrehersalEndDate(date); props.onChangeHandler('rehersalTo', date, true)}}
               selected={rehersalEndDate}
 
@@ -173,7 +177,7 @@ import 'react-datepicker/dist/react-datepicker.css';
             </div>
           ) : (
             <div className="col-md-6 form-group mt-3 mt-md-0">
-            당일 리허설 종료 시간<DatePicker
+            {t('당일 리허설 종료 시간')}<DatePicker
               className="form-control"
               disabled
               />
@@ -187,7 +191,7 @@ import 'react-datepicker/dist/react-datepicker.css';
           (
             <div className="row">
             <div className="col-md-6 form-group">
-            전날 리허설 시작 시간<DatePicker
+            {t('전날 리허설 시작 시간')}<DatePicker
               onChange = {(date) => {setlastrehersalStartDate(date); props.onChangeHandler('rehersalLastdayFrom', date, true)}}
               selected = {lastRehersalStartDate}
               minDate={calcDate(new Date(), props.limitdate.mindays-1)}
@@ -206,7 +210,7 @@ import 'react-datepicker/dist/react-datepicker.css';
 
             { lastRehersalStartDate ? 
             (<div className="col-md-6 form-group mt-3 mt-md-0">
-            전날 리허설 종료 시간<DatePicker
+            {t('전날 리허설 종료 시간')}<DatePicker
               onChange = {(date) => {setlastrehersalEndDate(date); props.onChangeHandler('rehersalLastdayTo', date, true)}}
               selected={lastRehersalEndDate}
 
@@ -227,7 +231,7 @@ import 'react-datepicker/dist/react-datepicker.css';
             </div>
           ) : (
             <div className="col-md-6 form-group mt-3 mt-md-0">
-            전날 리허설 종료 시간<DatePicker
+            {t('전날 리허설 종료 시간')}<DatePicker
               className="form-control"
               disabled
               />
@@ -245,4 +249,4 @@ import 'react-datepicker/dist/react-datepicker.css';
      
 
 
-export default Time;
+export default withTranslation()(Time);

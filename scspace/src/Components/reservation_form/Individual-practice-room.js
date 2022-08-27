@@ -6,6 +6,8 @@ import Time from './form_component/Time';
 import Agree from './form_component/Agree';
 import SpacePick from './form_component/SpacePick';
 
+import {withTranslation} from "react-i18next";
+
 class Form extends Component{
     constructor(props){
         super(props);
@@ -82,18 +84,19 @@ class Form extends Component{
       return post(url, JSON.stringify(this.state), config);
     }
     render() {
+      const {t} = this.props;
         return (
 
         <div className="col-lg-8">
             <form className="php-email-form" onSubmit={this.handleSubmit}> 
-                <SpacePick spacelist={{개인연습실1 : 'individual-practice-room1', 개인연습실2 : 'individual-practice-room2', 개인연습실3 : 'individual-practice-room3'}} onChangeHandler={this.handleValueChange}  />
+                <SpacePick spacelist={{'개인연습실 1' : 'individual-practice-room1', '개인연습실 2' : 'individual-practice-room2', '개인연습실 3' : 'individual-practice-room3'}} onChangeHandler={this.handleValueChange}  />
                 <Time onChangeHandler = {this.handleValueChange_time} limitdate={this.limitdate}/>
                 <Agree/>
-            <div className="text-end"><button type="submit">예약하기</button></div>
+            <div className="text-end"><button type="submit">{t('예약하기')}</button></div>
           </form>
         </div>
         
       )};
 }
 
-export default Form;
+export default withTranslation()(Form);

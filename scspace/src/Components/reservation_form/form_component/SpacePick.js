@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import {withTranslation} from "react-i18next";
 
 class Form extends Component{
     constructor(props){
@@ -7,14 +8,15 @@ class Form extends Component{
 
 
     render() {
+        const {t} = this.props;
         return (
         <div>
-            <h5 >장소</h5>
+            <h5 >{t('장소')}</h5>
             {Object.keys(this.props.spacelist).map((space) => {
                 return (
                     <div className="form-check form-check-inline">
                     <input className="form-check-input" type="radio" name="spaceName" id="inlineRadio1" onChange={this.props.onChangeHandler} value={this.props.spacelist[space]} required/>
-                    <label className="form-check-label" for="inlineRadio1">{space}</label>
+                    <label className="form-check-label" for="inlineRadio1">{t(space)}</label>
                 </div>
                 )
             })}
@@ -24,4 +26,4 @@ class Form extends Component{
       )};
 }
 
-export default Form;
+export default withTranslation()(Form);

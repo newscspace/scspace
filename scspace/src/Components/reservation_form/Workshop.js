@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {post} from 'axios';
+import {withTranslation} from "react-i18next";
 
 import Time from './form_component/Time';
 import Contents from './form_component/Contents';
@@ -80,6 +81,8 @@ class Form extends Component{
     }
 
     render() {
+      const {t} = this.props;
+
         return (
 
         <div className="col-lg-8">
@@ -89,11 +92,11 @@ class Form extends Component{
             <Number onChangeHandler={this.handleValueChange_content} type={true}/>
             <Contents onChangeHandler = {this.handleValueChange_content} value={this.state.content.contents}/>
             <Agree/>
-            <div className="text-end"><button type="submit">예약하기</button></div>
+            <div className="text-end"><button type="submit">{t('예약하기')}</button></div>
           </form>
         </div>
         
       )};
 }
 
-export default Form;
+export default withTranslation()(Form);

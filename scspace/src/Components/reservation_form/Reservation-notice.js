@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import {withTranslation} from "react-i18next";
 
 
 class ReservationNotice extends Component {
@@ -20,13 +21,14 @@ class ReservationNotice extends Component {
 
   
   render() {
+    const {t} = this.props;
     return (
       
          <div className="col-lg-4">
 
             <div className="info">
-                <h3>유의사항</h3>
-                <p>유의사항을 잘 읽어주시면 굉장히 감사하겠네요</p>
+                <h3>{t('유의사항')}</h3>
+                <p>유의사항을 잘 확인해주세요.</p>
             
             {this.state.notice.map((contents, idx) => {
                 return (
@@ -44,4 +46,4 @@ class ReservationNotice extends Component {
   };
 }
 
-export default ReservationNotice;
+export default withTranslation()(ReservationNotice);

@@ -3,6 +3,7 @@ import {Link} from 'react-router-dom';
 import moment from 'moment';
 import LoginCheck from './auth/LoginCheck';
 import {get} from 'axios';
+import {withTranslation} from "react-i18next";
 
 class Confirmation extends Component{
 
@@ -207,31 +208,34 @@ class Confirmation extends Component{
 
 
 callApi_team= async () => {
-    const res = await get('https://gonggan.kaist.ac.kr/api/team/id?id='+this.state.reserveData.team_id);
+    const res = await get('/api/team/id?id='+this.state.reserveData.team_id);
     const body = await res.data;
     return body;
 }
     callApi= async () => {
-        const res = await get('https://gonggan.kaist.ac.kr/api/reservation/id?id='+this.props.location.state);
+        const res = await get('/api/reservation/id?id='+this.props.location.state);
         const body = await res.data;
         return body;
     }
 
     callApi_delete = async() => {
-        const res = await get('https://gonggan.kaist.ac.kr/api/reservation/delete?id=' + this.props.location.state);
+        const res = await get('/api/reservation/delete?id=' + this.props.location.state);
         const body = await res.data;
         return body; 
     }
 
-    render() {return (
+    render() {
+        const {t} = this.props;
+
+        return (
         <main id="main">
             <div  className="breadcrumbs">
                 <div  className="container">
                     <div  className="d-flex justify-content-between align-items-center">
-                    <h3>예약확인서</h3>
+                    <h3>{t('예약확인서')}</h3>
                     <ol>
                         <li><Link to="/">Home</Link></li>
-                        <li><Link to="/introduction">예약확인서</Link></li>
+                        <li><Link to="/introduction">{t('예약확인서')}</Link></li>
                     </ol>
                     </div>
                 </div>
@@ -241,11 +245,11 @@ callApi_team= async () => {
                 <div className="contact">
                     <div className="confirm">            
                         <div className="info">
-                            <h3>예약 신청이 완료되었습니다.</h3>
+                            <h3>{t('예약 신청이 완료되었습니다.')}</h3>
                             <br/>
                                 <div className="conf-item txt">
                                     <div>
-                                        <h4>예약자 정보</h4>
+                                        <h4>{t('예약자 정보')}</h4>
                                         <hr/>
                                         <div className="wrap">
                                             <p className="ptitle">예약자 이름</p>
@@ -260,7 +264,7 @@ callApi_team= async () => {
                                     
 
                                     <div>
-                                        <h4>장소 및 시간</h4>
+                                        <h4>{t('장소 및 시간')}</h4>
                                         <hr/>
                                         <div className="wrap">
                                             <p className="ptitle">장소</p>
@@ -280,7 +284,7 @@ callApi_team= async () => {
                                     {
                                         this.state.reserveData && this.state.reserveData.content !== null ? 
                                       (<div>
-                                        <h4>예약 내용</h4>
+                                        <h4>{t('예약 내용')}</h4>
                                         <hr/>
                                             {this.reservationContent()}
                                         <hr/>
@@ -290,7 +294,7 @@ callApi_team= async () => {
                                     
 
                                     <div>
-                                        <h4>예약 처리</h4>
+                                        <h4>{t('예약 처리')}</h4>
                                         <hr/>
                                         <div className="wrap">
                                             <p className="ptitle">상태</p>
@@ -302,8 +306,8 @@ callApi_team= async () => {
                                         </div>
                                     </div>
                                     <div className="text-end pdf">
-                                    <button onClick= {() => {this.props.history.push({pathname : '/reservation', state:this.state.reserveData})}}>예약 수정</button>&nbsp;&nbsp;
-                                    <button onClick= {() => {this.callApi_delete() .then((res) => {this.props.history.push('/mypage')}) .catch((err) => {console.log(err)})}}>예약 취소</button>
+                                    <button onClick= {() => {this.props.history.push({pathname : '/reservation', state:this.state.reserveData})}}>{t('예약 수정')}</button>&nbsp;&nbsp;
+                                    <button onClick= {() => {this.callApi_delete() .then((res) => {this.props.history.push('/mypage')}) .catch((err) => {console.log(err)})}}>{t('예약 취소')}</button>
                                     </div>
                                     
                                 </div>
@@ -315,4 +319,4 @@ callApi_team= async () => {
     )};
 }
 
-export default Confirmation;
+export default withTranslation()(Confirmation);

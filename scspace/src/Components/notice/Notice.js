@@ -3,8 +3,11 @@ import {Link} from 'react-router-dom';
 import {get} from 'axios';
 import moment from 'moment';
 import LoginCheck from '../auth/LoginCheck';
+import {withTranslation} from "react-i18next";
 
 function Notice(props){
+    const {t} = props;
+
     const [pageNumber, setPageNumber] = useState(1);
     const [totalPageNumber, setTPN] = useState(1);
     const [list, setList] = useState([]);
@@ -43,17 +46,17 @@ function Notice(props){
             <div  className="breadcrumbs">
                 <div  className="container">
                     <div  className="d-flex justify-content-between align-items-center">
-                        <h3>공지사항</h3>
+                        <h3>{t('공지사항')}</h3>
                         <ol>
                             <li><Link to="/">Home</Link></li>
-                            <li><Link to="/notice">공지사항</Link></li>
+                            <li><Link to="/notice">{t('공지사항')}</Link></li>
                         </ol>
                     </div>
                 </div>
             </div>
             <section>
                 <div  className="section-header">
-                    <h2>공지사항</h2>
+                    <h2>{t('공지사항')}</h2>
                     <p>Notice</p>
                     <hr/>
                 </div>
@@ -70,9 +73,9 @@ function Notice(props){
                         <thead>
                         <tr>
                             <th>No</th>
-                            <th>제목</th>
-                            <th>날짜</th>
-                            <th>조회수</th>
+                            <th>{t('제목')}</th>
+                            <th>{t('날짜')}</th>
+                            <th>{t('조회수')}</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -224,4 +227,4 @@ class Notice extends Component{
 }
 */
 
-export default Notice;
+export default withTranslation()(Notice);

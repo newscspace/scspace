@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
 import LoginCheck from './auth/LoginCheck';
 import Dropdown from 'react-bootstrap/Dropdown';
+import {withTranslation} from "react-i18next";
 
 import '../static/vendor/bootstrap/css/bootstrap.min.css'
 import '../static/vendor/bootstrap-icons/bootstrap-icons.css'
@@ -47,7 +48,10 @@ class Header extends Component{
       document.querySelector('#'+'ul'+idx).classList.toggle('dropdown-active');
 
     }
-    render() {return (
+    render() {
+      const {t} = this.props;
+
+      return (
       <header id="header" className="header fixed-top" data-scrollto-offset="0">
       <div className="container-fluid d-flex align-items-center justify-content-between">
   
@@ -63,12 +67,12 @@ class Header extends Component{
             {
               this.state.menu.map((menu, idx) =>{
                 return (menu.sub_menu.length === 0
-                  ? (<li keys={idx}><Link className="nav-link scrollto" to={menu.menu_link}>{menu.name}</Link></li>) 
-                  : (<li keys = {idx} className="dropdown megamenu" onClick={this.onClickEvent2.bind(this, idx)}><Link to={menu.menu_link}><span>{menu.name}</span> <i id={"button"+idx}className="bi bi-chevron-down dropdown-indicator" ></i></Link>
+                  ? (<li keys={idx}><Link className="nav-link scrollto" to={menu.menu_link}>{t(menu.name)}</Link></li>) 
+                  : (<li keys = {idx} className="dropdown megamenu" onClick={this.onClickEvent2.bind(this, idx)}><Link to={menu.menu_link}><span>{t(menu.name)}</span> <i id={"button"+idx}className="bi bi-chevron-down dropdown-indicator" ></i></Link>
                   <ul id={"ul"+idx}className="">
                     <li>
                       {menu.sub_menu.map((sub_name, idx2) => {
-                        return (<Link to={menu.sub_menu_link[idx2]}>{sub_name}</Link>)
+                        return (<Link to={menu.sub_menu_link[idx2]}>{t(sub_name)}</Link>)
                       })}
                     </li>
                   </ul>
@@ -111,4 +115,4 @@ class Header extends Component{
       )};
 }
 
-export default Header;
+export default withTranslation()(Header);

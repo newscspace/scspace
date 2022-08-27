@@ -7,6 +7,7 @@ import {get, post} from 'axios';
 import LoginCheck from '../auth/LoginCheck';
 import Dropdown from 'react-bootstrap/Dropdown';
 import moment from 'moment';
+import {withTranslation} from "react-i18next";
 
 //import AppointmentTooltip from './AppointmentTooltip';
 
@@ -14,6 +15,7 @@ const views = ['week', 'month', 'agenda'];
 
 const appointmentClassName = '.dx-scheduler-appointment';
 const cellClassName = '.dx-scheduler-date-table-cell';
+
 
 
 const resourcesData = [
@@ -48,7 +50,7 @@ const spaceDict = {
     'open-space': '오픈스페이스'
   }
 
-class App extends React.Component {
+class Calendar extends React.Component {
   constructor(props) {
     super(props);
     this.scheduler = React.createRef();
@@ -87,7 +89,7 @@ class App extends React.Component {
     const {
       contextMenuItems, target, disabled, currentDate, groups, crossScrollingEnabled, editing, filter, data
     } = this.state;
-
+    const {t} = this.props;
     
     return (
       <div className="container py-5">
@@ -96,13 +98,13 @@ class App extends React.Component {
       <React.Fragment>
       <Dropdown >
               <Dropdown.Toggle className="btn-getstarted scrollto" id="dropdown-basic" >
-                {spaceDict[this.state.filter]}
+                {t(spaceDict[this.state.filter])}
               </Dropdown.Toggle>
         
               <Dropdown.Menu>
                 {Object.keys(spaceDict).map((space) =>{
                   return (
-                    <Dropdown.Item onClick={() =>{this.setState({filter:space}) }}>{spaceDict[space]}</Dropdown.Item>
+                    <Dropdown.Item onClick={() =>{this.setState({filter:space}) }}>{t(spaceDict[space])}</Dropdown.Item>
                   )
                 })}
               </Dropdown.Menu>
@@ -310,4 +312,4 @@ class App extends React.Component {
   }
 }
 
-export default App;
+export default withTranslation()(Calendar);

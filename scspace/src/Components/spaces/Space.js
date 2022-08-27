@@ -6,6 +6,7 @@ import Usage from './Usage';
 import Caution from './Caution';
 import {get, post} from 'axios';
 import LoginCheck from '../auth/LoginCheck';
+import {withTranslation} from "react-i18next";
 
 //individual_practice_room_1','individual_practice_room_2','individual_practice_room_3','piano_room_1','piano_room_2','multipurpose_room','seminar_room_1','seminar_room_2',
 //'dance_studio','group_practice_room','mirae_hall','ullim_hall','open_space','workshop'
@@ -131,16 +132,19 @@ class Space extends Component{
   }
 
     render() {
+
+      const {t} = this.props;
+
         return (
         <div>
             <div class="breadcrumbs">
                 <div class="container">
 
                     <div class="d-flex justify-content-between align-items-center">
-                        <h2>{this.spaceDict[this.state.spaceInfo.roomName]}</h2>
+                        <h2>{t(this.spaceDict[this.state.spaceInfo.roomName])}</h2>
                         <ol>
                             <li><Link to="/">Home</Link></li>
-                            <li>공간</li>
+                            <li>{t('공간')}</li>
                         </ol>
                     </div>
 
@@ -149,7 +153,7 @@ class Space extends Component{
             <section>
 
                 <div class="section-header">
-                    <h2>{this.spaceDict[this.state.spaceInfo.roomName]}</h2>
+                    <h2>{t(this.spaceDict[this.state.spaceInfo.roomName])}</h2>
                     <p>{this.state.spaceInfo.roomName.replace(/-/g, ' ')} </p>
                 </div>
                 <hr/>
@@ -171,9 +175,9 @@ class Space extends Component{
                 <h3 className="pt-0 pt-lg-5">{this.state.edit ? (<input type="text"  name="title" onChange={this.changeHandler.bind(this)} value ={this.state.shortintro}  required/>): this.state.spaceInfo.shortintro}</h3>
                 {this.admin_return('edit')}
                 <ul className="nav nav-pills mb-3">
-                  <li onClick={() => this.changeMenu(0)} className="nav-link active" id="menu0">소개</li>
-                  <li onClick={() => this.changeMenu(1)} className="nav-link" id="menu1">사용방법</li>
-                  <li onClick={() => this.changeMenu(2)} className="nav-link" id="menu2">주의사항</li>
+                  <li onClick={() => this.changeMenu(0)} className="nav-link active" id="menu0">{t('소개')}</li>
+                  <li onClick={() => this.changeMenu(1)} className="nav-link" id="menu1">{t('사용방법')}</li>
+                  <li onClick={() => this.changeMenu(2)} className="nav-link" id="menu2">{t('주의사항')}</li>
                 </ul>
 
                 <div className="tab-content">
@@ -193,4 +197,4 @@ class Space extends Component{
       )};
 }
 
-export default withRouter(Space);
+export default withTranslation()(withRouter(Space));

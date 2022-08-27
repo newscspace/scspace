@@ -8,15 +8,18 @@
     "@testing-library/user-event": "^13.5.0",
     "@zach.codes/react-calendar": "^0.3.1",
     "axios": "^0.27.2",
+    "base-64": "^1.0.0",
     "bootstrap": "^5.2.0",
     "date-fns": "^2.28.0",
     "devextreme-react": "^22.1.4",
+    "i18next": "^21.9.1",
     "jquery": "^3.6.0",
     "react": "^18.2.0",
     "react-big-calendar": "^1.4.2",
     "react-bootstrap": "^2.5.0",
     "react-datepicker": "^4.8.0",
     "react-dom": "^18.2.0",
+    "react-i18next": "^11.18.5",
     "react-icons": "^4.4.0",
     "react-markdown": "^8.0.3",
     "react-pdf": "^5.7.2",
@@ -50,5 +53,5 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "https://gonggan.kaist.ac.kr/"
+  "proxy": "http://localhost:5000/"
 }

@@ -8,6 +8,8 @@ import Contents from './form_component/Contents';
 import Agree from './form_component/Agree';
 import EventName from './form_component/Event_name';
 
+import {withTranslation} from "react-i18next";
+
 class Form extends Component{
   constructor(props){
     super(props);
@@ -140,6 +142,7 @@ sendPost = () => {
     
 
     render() {
+      const {t} = this.props;
         return (
 
           <div className="col-lg-8">
@@ -150,11 +153,11 @@ sendPost = () => {
               <Time onChangeHandler = {this.handleValueChange_time} limitdate={this.limitdate}/>
               <Contents onChangeHandler = {this.handleValueChange_content} value={this.state.content.contents}/>
               <Agree/>
-              <div className="text-end"><button type="submit">예약하기</button></div>
+              <div className="text-end"><button type="submit">{t('예약하기')}</button></div>
             </form>
         </div>
         
       )};
 }
 
-export default Form;
+export default withTranslation()(Form);

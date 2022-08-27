@@ -3,6 +3,7 @@ import {Link} from 'react-router-dom';
 import Scspace from './Introduction_content/Scspace';
 import Business from './Introduction_content/Business/Business';
 import Rule from './Introduction_content/Rule/Rule';
+import {withTranslation} from "react-i18next";
 
 class Introduction extends Component{
     constructor(props){
@@ -31,12 +32,16 @@ class Introduction extends Component{
         }) 
     }
 
-    render() {return (
+    render() {
+      const {t} = this.props;
+
+      return (
+      
       <main id="main">
         <div  className="breadcrumbs">
           <div  className="container">
             <div  className="d-flex justify-content-between align-items-center">
-              <h3>소개</h3>
+              <h3>{t('소개')}</h3>
               <ol>
                 <li><Link to="/">Home</Link></li>
                 <li><Link to="/introduction">소개</Link></li>
@@ -80,4 +85,4 @@ class Introduction extends Component{
       )};
 }
 
-export default Introduction;
+export default withTranslation()(Introduction);

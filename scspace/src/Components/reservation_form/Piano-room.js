@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {post} from 'axios';
+import {withTranslation} from "react-i18next";
 
 
 import Time from './form_component/Time';
@@ -82,18 +83,19 @@ class Form extends Component{
       return post(url, JSON.stringify(this.state), config);
     }
     render() {
+      const {t} = this.props;
         return (
 
         <div className="col-lg-8">
             <form className="php-email-form" onSubmit={this.handleSubmit}> 
-            <SpacePick spacelist={{피아노실1 : 'piano-room1', 피아노실2 : 'piano-room2'}} onChangeHandler={this.handleValueChange}  />
+            <SpacePick spacelist={{'피아노실 1' : 'piano-room1', '피아노실 2' : 'piano-room2'}} onChangeHandler={this.handleValueChange}  />
             <Time onChangeHandler = {this.handleValueChange_time} limitdate={this.limitdate}/>
                 <Agree/>
-            <div className="text-end"><button type="submit">예약하기</button></div>
+            <div className="text-end"><button type="submit">{t('예약하기')}</button></div>
           </form>
         </div>
         
       )};
 }
 
-export default Form;
+export default withTranslation()(Form);

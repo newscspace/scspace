@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {post} from 'axios';
+import {withTranslation} from "react-i18next";
 
 
 import Time from './form_component/Time';
@@ -11,6 +12,7 @@ import EventName from './form_component/Event_name';
 import EventPurpose from './form_component/Event_purpose'
 import Food from './form_component/Food';
 import Equipment from './form_component/Checkbox_list'
+
 
 class Form extends Component{
     constructor(props){
@@ -108,6 +110,7 @@ class Form extends Component{
       return post(url, JSON.stringify(this.state), config);
     }
     render() {
+      const {t} = this.props;
         return (
 
         <div className="col-lg-8">
@@ -124,11 +127,11 @@ class Form extends Component{
 
               <Agree/>
               
-            <div className="text-end"><button type="submit">예약하기</button></div>
+            <div className="text-end"><button type="submit">{t('예약하기')}</button></div>
           </form>
         </div>
         
       )};
 }
 
-export default Form;
+export default withTranslation()(Form);

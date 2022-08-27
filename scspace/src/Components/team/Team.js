@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
 import LoginCheck from '../auth/LoginCheck';
 import {get} from 'axios';
+import {withTranslation} from "react-i18next";
 
 class Team extends Component{
     constructor(props){
@@ -31,15 +32,18 @@ class Team extends Component{
         return body;
     }
 
-    render() {return (
+    render() {
+        const {t} = this.props;
+
+        return (
         <main id="main">
             <div  className="breadcrumbs">
                 <div  className="container">
                     <div  className="d-flex justify-content-between align-items-center">
-                    <h3>나의 팀</h3>
+                    <h3>{t('나의 팀')}</h3>
                     <ol>
                         <li><Link to="/">Home</Link></li>
-                        <li><Link to="/introduction">나의 팀</Link></li>
+                        <li><Link to="/introduction">{t('나의 팀')}</Link></li>
                     </ol>
                     </div>
                 </div>
@@ -49,45 +53,45 @@ class Team extends Component{
                 <div className="contact">
                     <div className="confirm">            
                         <div className="info">
-                            <h3>등록된 팀의 정보입니다.</h3>
+                            <h3>{t('등록된 팀의 정보입니다.')}</h3>
                             <br/>
                                 <div className="conf-item txt">
                                     <div>
-                                        <h4>팀 정보</h4>
+                                        <h4>{t('팀 정보')}</h4>
                                         <hr/>
                                         <div className="wrap">
-                                            <p className="ptitle">팀 이름</p>
+                                            <p className="ptitle">{t('팀 이름')}</p>
                                             <p className="ptxt">{this.state.teamdata.team_name}</p>
                                         </div>
                                         <div>
                                             <div className="wrap">
-                                                <p className="ptitle">팀 대표자</p>
+                                                <p className="ptitle">{t('팀 대표자')}</p>
                                                 <p className="pteamtxt">{this.state.login ? this.state.UserInfo.name : (<div/>)}</p>
                                                 <p className="ptxt"></p>
                                             </div>
                                             <div className="wrap">
-                                                <p className="team">학번</p>
+                                                <p className="team">{t('학번')}</p>
                                                 <p className="ptxt">{this.state.login ? this.state.UserInfo.student_id: (<div/>)}</p>
                                             </div>
                                             <div className="wrap">
-                                                <p className="team">전화번호</p>
+                                                <p className="team">{t('전화번호')}</p>
                                                 <p className="ptxt">{this.state.login ? this.state.UserInfo.phone : (<div/>)}</p>
                                             </div>
                                             <div className="wrap">
-                                                <p className="team">이메일</p>
+                                                <p className="team">{t('이메일')}</p>
                                                 <p className="ptxt">{this.state.login ? this.state.UserInfo.email : (<div/>)}</p>
                                             </div>
                                         </div>
                                     </div>
                                     <br/><br/>
                                     <div>
-                                        <h4>팀원 정보</h4>
+                                        <h4>{t('팀원 정보')}</h4>
                                         <hr/>
                                         <table className="table">
                                             <thead>
                                                 <th>#</th>
-                                                <th>이름</th>
-                                                <th>학번</th>
+                                                <th>{t('이름')}</th>
+                                                <th>{t('학번')}</th>
                                             </thead>
                                             <tbody>
                                                 {this.state.teamdata.member.map((member, idx) => {
@@ -112,4 +116,4 @@ class Team extends Component{
     )};
 }
 
-export default Team;
+export default withTranslation()(Team);

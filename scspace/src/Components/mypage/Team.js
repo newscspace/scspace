@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
 import {get} from 'axios';
-
+import {withTranslation} from "react-i18next";
 
 class Team extends Component{
     constructor(props) {
@@ -26,15 +26,17 @@ class Team extends Component{
         return body;
     }
 
-    render() {return (
+    render() {
+        const {t} = this.props;
+        return (
         <main id="main">
             <div className="container">
-                <h4><b>내 팀</b></h4>
+                <h4><b>{t('내 팀')}</b></h4>
                 <hr></hr>
 
                 <table className="table manage">
                     <thead>
-                        <th>팀 이름</th>
+                        <th>{t('팀 이름')}</th>
                     </thead>
 
                     <tbody>
@@ -69,4 +71,4 @@ class Team extends Component{
       )};
 }
 
-export default Team;
+export default withTranslation() (Team);

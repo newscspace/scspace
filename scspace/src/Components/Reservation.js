@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import {withTranslation} from "react-i18next";
 
 import Individual from './reservation_form/Individual-practice-room';
 import Piano from './reservation_form/Piano-room';
@@ -64,22 +65,24 @@ class Reservation extends Component {
 
 
   render() {
+    const {t} = this.props;
+
     return (
       <main id="main">
         <div className="breadcrumbs">
           <div className="container">
             <div className="d-flex justify-content-between align-items-center">
-              <h3>예약</h3>
+              <h3>{t('예약')}</h3>
               <ol>
                 <li><Link to="/">Home</Link></li>
-                <li><Link to="/reservation">예약</Link></li>
+                <li><Link to="/reservation">{t('예약')}</Link></li>
               </ol>
             </div>
           </div>
         </div>
         <section>
           <div className="section-header">
-            <h2>{this.spaceDict[this.state.spaceName]}</h2>
+            <h2>{t(this.spaceDict[this.state.spaceName])}</h2>
             <p>{this.state.spaceName.replace(/-/gi, ' ')}</p>
           </div>
 
@@ -91,7 +94,7 @@ class Reservation extends Component {
                 <ul className="portfolio-flters">
                   {Object.keys(this.spaceDict).map((space) => {
                     return (
-                      <li onClick={() => { this.setState({ spaceName: space}) }}>{this.spaceDict[space]}</li>
+                      <li onClick={() => { this.setState({ spaceName: space}) }}>{t(this.spaceDict[space])}</li>
                     )
                   }
                   )}
@@ -119,4 +122,4 @@ class Reservation extends Component {
   };
 }
 
-export default Reservation;
+export default withTranslation()(Reservation);

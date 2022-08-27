@@ -3,6 +3,8 @@ import {Link} from 'react-router-dom';
 import Reservation from './Reservation';
 import Team from './Team';
 import LoginCheck from '../auth/LoginCheck';
+import {withTranslation} from "react-i18next";
+
 
 class Mypage extends Component{
     constructor(props){
@@ -21,15 +23,18 @@ class Mypage extends Component{
       }})
     }
 
-    render() {return (
+    render() {
+        const {t} = this.props;
+
+        return (
         <main id="main">
             <div  className="breadcrumbs">
                 <div  className="container">
                     <div  className="d-flex justify-content-between align-items-center">
-                    <h3>마이페이지</h3>
+                    <h3>{t('마이페이지')}</h3>
                     <ol>
                         <li><Link to="/">Home</Link></li>
-                        <li><Link to="/mypage">마이페이지</Link></li>
+                        <li><Link to="/mypage">{t('마이페이지')}</Link></li>
                     </ol>
                     </div>
                 </div>
@@ -42,4 +47,4 @@ class Mypage extends Component{
       )};
 }
 
-export default Mypage;
+export default withTranslation() (Mypage);
