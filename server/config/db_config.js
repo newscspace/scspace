@@ -21,8 +21,6 @@ const db = {
       conn.connect((err) => {
         if (err) {
           console.log('mysql connect error' + err);
-        } else {
-          console.log('mysql connect success');          
         }
       });
     },
@@ -31,8 +29,6 @@ const db = {
       conn.end((err) => {
         if (err) {
           console.log('mysql close error' + err);
-        } else {
-          console.log('mysql close success');
         }
       });
     },
