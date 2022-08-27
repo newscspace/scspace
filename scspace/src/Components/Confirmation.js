@@ -3,7 +3,6 @@ import {Link} from 'react-router-dom';
 import moment from 'moment';
 import LoginCheck from './auth/LoginCheck';
 import {get} from 'axios';
-import { isThisSecond } from 'date-fns';
 
 class Confirmation extends Component{
 
@@ -208,14 +207,20 @@ class Confirmation extends Component{
 
 
 callApi_team= async () => {
-    const res = await get('/api/team/id?id='+this.state.reserveData.team_id);
+    const res = await get('https://gonggan.kaist.ac.kr/api/team/id?id='+this.state.reserveData.team_id);
     const body = await res.data;
     return body;
 }
     callApi= async () => {
-        const res = await get('/api/reservation/id?id='+this.props.location.state);
+        const res = await get('https://gonggan.kaist.ac.kr/api/reservation/id?id='+this.props.location.state);
         const body = await res.data;
         return body;
+    }
+
+    callApi_delete = async() => {
+        const res = await get('https://gonggan.kaist.ac.kr/api/reservation/delete?id=' + this.props.location.state);
+        const body = await res.data;
+        return body; 
     }
 
     render() {return (
@@ -297,8 +302,8 @@ callApi_team= async () => {
                                         </div>
                                     </div>
                                     <div className="text-end pdf">
-                                    <button><a href="#">예약 수정</a></button>&nbsp;&nbsp;
-                                    <button><a href="#">예약 취소</a></button>
+                                    <button onClick= {() => {this.props.history.push({pathname : '/reservation', state:this.state.reserveData})}}>예약 수정</button>&nbsp;&nbsp;
+                                    <button onClick= {() => {this.callApi_delete() .then((res) => {this.props.history.push('/mypage')}) .catch((err) => {console.log(err)})}}>예약 취소</button>
                                     </div>
                                     
                                 </div>

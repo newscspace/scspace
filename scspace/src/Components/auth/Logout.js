@@ -3,7 +3,7 @@ import React, {Component} from 'react';
 class Logout extends Component{
     constructor(props){
         super(props);
-        this.location = 'https://iam2.kaist.ac.kr/api/sso/logout/?client_id=SCS&redirect_url='+encodeURI('http://localhost:5000/api/jwt/logout');
+        this.location = 'https://iam2.kaist.ac.kr/api/sso/logout/?client_id=SCS&redirect_url='+encodeURI('https://gonggan.kaist.ac.kr/api/jwt/logout');
     }
     
 
