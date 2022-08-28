@@ -2843,6 +2843,7 @@ section {
   border-radius: 4px;
   transition: 0.3s;
   font-family: var(--font-secondary);
+  margin-left: 10px;
 }
 .space .btn-getstarted:hover, .space .btn-getstarted:focus:hover {
   color: var(--color-white);

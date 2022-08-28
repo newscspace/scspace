@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {withTranslation} from "react-i18next";
+import {Link} from 'react-router-dom';
 
 class Form extends Component{
     constructor(props){
@@ -22,6 +23,9 @@ class Form extends Component{
                       )
                   })}
 		            </select>
+                <br/>
+              
+              <p className="space">{t('팀이 없으면 팀 등록을 해주세요.')}<Link className="btn-getstarted scrollto" to="/team/create">&nbsp;{t('등록하기')}</Link></p>
                     
               </div>
               <hr/><br/>

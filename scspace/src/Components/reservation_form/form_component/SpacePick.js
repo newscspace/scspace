@@ -17,6 +17,7 @@ class Form extends Component{
                     <div className="form-check form-check-inline">
                     <input className="form-check-input" type="radio" name="spaceName" id="inlineRadio1" onChange={this.props.onChangeHandler} value={this.props.spacelist[space]} required/>
                     <label className="form-check-label" for="inlineRadio1">{t(space)}</label>
+                    sdfsdfdsf
                 </div>
                 )
             })}

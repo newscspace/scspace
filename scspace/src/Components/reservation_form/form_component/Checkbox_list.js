@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import {withTranslation} from "react-i18next";
 
 class Form extends Component{
     constructor(props){
@@ -9,9 +10,10 @@ class Form extends Component{
 
 
     render() {
+      const {t} = this.props;
         return (
         <div>
-            <h5 >{this.props.head}</h5>
+            <h5 >{t(this.props.head)}</h5>
             {Object.keys(this.props.checkboxlist).map((member) =>{
           return (
             <div className="form-check form-check-inline">
@@ -26,4 +28,4 @@ class Form extends Component{
       )};
 }
 
-export default Form;
+export default withTranslation()(Form);

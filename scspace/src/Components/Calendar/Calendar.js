@@ -19,19 +19,19 @@ const cellClassName = '.dx-scheduler-date-table-cell';
 
 
 const resourcesData = [
-  {text: '개인연습실 1',id: 'individual-practice-room1', color: 'red',}, 
-  {text: '개인연습실 2',id: 'individual-practice-room2', color: 'red',},
-  {text: '개인연습실 3',id: 'individual-practice-room3', color: 'red',},  
-  {text: '피아노실 1', id: 'piano-room1', color: 'orange',}, 
-  {text: '피아노실 2', id: 'piano-room2', color: 'orange',}, 
-  {text: '합주실', id: 'group-practice-room', color: 'yellow',}, 
-  {text: '무예실', id: 'dance-studio', color: 'green',}, 
-  {text: '울림홀', id: 'ullim-hall', color: 'blue',},
-  {text: '미래홀',id: 'mirae-hall',color: 'skyblue',},
-  {text: '세미나실 1',id: 'seminar-room1',color: 'purple',},
-  {text: '세미나실 2',id: 'seminar-room2',color: 'purple',},
-  {text: '창작공방',id: 'workshop',color: 'black',},
-  {text: '오픈스페이스',id: 'open-space',color: 'pink',},
+  {text: '개인연습실 1',id: 'individual-practice-room1', color: '#D81159',}, 
+  {text: '개인연습실 2',id: 'individual-practice-room2', color: '#D81159',},
+  {text: '개인연습실 3',id: 'individual-practice-room3', color: '#D81159',},  
+  {text: '피아노실 1', id: 'piano-room1', color: '#FF773D',}, 
+  {text: '피아노실 2', id: 'piano-room2', color: '#FF773D',}, 
+  {text: '합주실', id: 'group-practice-room', color: '#4B644A',}, 
+  {text: '무예실', id: 'dance-studio', color: '#717EC3',}, 
+  {text: '울림홀', id: 'ullim-hall', color: '#0EB1D2',},
+  {text: '미래홀',id: 'mirae-hall',color: '#192A51',},
+  {text: '세미나실 1',id: 'seminar-room1',color: '#B0228C',},
+  {text: '세미나실 2',id: 'seminar-room2',color: '#B0228C',},
+  {text: '창작공방',id: 'workshop',color: '#858786',},
+  {text: '오픈스페이스',id: 'open-space',color: '#221E22',},
 ];
 
 const spaceDict = {
