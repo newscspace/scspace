@@ -254,6 +254,8 @@ section {
   border-radius: 4px;
   transition: 0.3s;
   font-family: var(--font-secondary);
+  border: 0;
+  outline: 0;
 }
 .header .btn-getstarted:hover, .header .btn-getstarted:focus:hover {
   color: var(--color-white);
@@ -931,8 +933,23 @@ section {
   background: var(--color-primary);
   font-family: var(--font-secondary);
 }
+.hero-static .btn-get-started2 {
+  font-size: 16px;
+  font-weight: 400;
+  display: inline-block;
+  padding: 10px 28px;
+  border-radius: 4px;
+  transition: 0.5s;
+  color: var(--color-white);
+  background: var(--color-secondary);
+  font-family: var(--font-secondary);
+  margin-left: 10px;
+}
 .hero-static .btn-get-started:hover {
   background: rgba(var(--color-primary-rgb), 0.8);
+}
+.hero-static .btn-get-started2:hover {
+  background: rgba(var(--color-secondary-rgb), 0.8);
 }
 .hero-static .btn-watch-video {
   font-size: 16px;
@@ -966,6 +983,10 @@ section {
   .hero-static .btn-get-started, .hero-static .btn-watch-video {
     font-size: 14px;
   }
+}
+.main-photo {
+  width: auto;
+  height: 300px;
 }
 
 /*--------------------------------------------------------------
@@ -2879,17 +2900,31 @@ section {
   float: left;
   margin-right: 30px;
 }
-.scspace .rsquare{
+.scspace .square1{
   width: 13px;
   height: 13px;
-  background: rgb(231,49,40);
+  background: rgb(127,114,98);
   float: left;
   margin-right: 5px;
 }
-.scspace .bsquare{
+.scspace .square2{
   width: 13px;
   height: 13px;
-  background: rgb(62,58,57);
+  background: rgb(123,158,182);
+  float: left;
+  margin-right: 5px;
+}
+.scspace .square3{
+  width: 13px;
+  height: 13px;
+  background: rgb(34,31,25);
+  float: left;
+  margin-right: 5px;
+}
+.scspace .square4{
+  width: 13px;
+  height: 13px;
+  background: rgb(212,218,221);
   float: left;
   margin-right: 5px;
 }
@@ -3124,6 +3159,14 @@ section {
 }
 
 /*--------------------------------------------------------------
+# newLine
+--------------------------------------------------------------*/
+
+.newline {
+  white-space: pre-wrap;
+}
+
+/*--------------------------------------------------------------
 # TeamCreate
 --------------------------------------------------------------*/
 .delete {
@@ -3150,10 +3193,15 @@ section {
   background: var(--color-primary);
 } 
 
-/*
-
-*/
-
-.newline {
-  white-space: pre-wrap;
+.space-filter {
+  color: var(--color-white);
+  font-weight: 500;
+  font-size: 16px;
+  display: inline-block;
+  padding: 8px 20px;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  border: 0;
+  outline: 0;
+  background: var(--color-primary);
 }
