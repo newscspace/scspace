@@ -10,8 +10,7 @@ class Banner extends Component{
     <p>학생문화공간위원회 홈페이지에 오신걸 환영합니다.</p>
     <div className="d-flex">
       <Link to="/reservation" className="btn-get-started scrollto">예약하기</Link>
-      <a href="https://www.youtube.com/watch?v=sfclu_8ZkgU" className="glightbox btn-watch-video d-flex align-items-center"><i className="bi bi-play-circle"></i><span>KAIST</span></a>
-    {/*여기 뭐넣으면 좋을지 의견좀.. 안그러면 뺨때린거 넣을거야 */}
+      <Link to="/calendar" className="glightbox btn-watch-video d-flex align-items-center"><i className="bi bi-play-circle"></i><span>예약 현황</span></Link>
     </div>
   </div>
 </section>

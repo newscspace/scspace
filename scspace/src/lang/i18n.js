@@ -21,7 +21,7 @@ i18n.use(initReactI18next).init({
   lng: language,
   fallbackLng: "ko",
 
-  debug: true,
+  debug: false,
   keySeparator: ".", // we do not use keys in form messages.welcome
   interpolation: {
     escapeValue: false, // react already safes from xss

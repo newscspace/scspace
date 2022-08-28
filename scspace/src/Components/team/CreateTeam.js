@@ -149,7 +149,7 @@ class CreateTeam extends Component{
                   <button onClick={() => {this.Addmember(null)}}>+</button>
                   </div>
                   <div className="add">
-                  <button>등록</button>
+                  <button>{t('등록')}</button>
                   </div>
                 </div>
                   

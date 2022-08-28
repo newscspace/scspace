@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-
+import {Link} from 'react-router-dom';
 
 class Footer extends Component{
     render() {return (
@@ -25,32 +25,32 @@ class Footer extends Component{
               <div className="col-lg-2 col-md-6 footer-links">
                 <h4>Useful Links</h4>
                 {/* <ul>
-                  <li><i className="bi bi-chevron-right"></i> <a href="#">Home</a></li>
-                  <li><i className="bi bi-chevron-right"></i> <a href="#">About us</a></li>
-                  <li><i className="bi bi-chevron-right"></i> <a href="#">Services</a></li>
-                  <li><i className="bi bi-chevron-right"></i> <a href="#">Terms of service</a></li>
-                  <li><i className="bi bi-chevron-right"></i> <a href="#">Privacy policy</a></li> */}
+                  <li><i className="bi bi-chevron-right"></i> <Link to="#">Home</Link></li>
+                  <li><i className="bi bi-chevron-right"></i> <Link to="#">About us</Link></li>
+                  <li><i className="bi bi-chevron-right"></i> <Link to="#">Services</Link></li>
+                  <li><i className="bi bi-chevron-right"></i> <Link to="#">Terms of service</Link></li>
+                  <li><i className="bi bi-chevron-right"></i> <Link to="#">Privacy policy</Link></li> */}
                 <h4>바로가기</h4>
                 <ul>
-                  <li><i className="bi bi-chevron-right"></i> <a href="#">메인 페이지</a></li>
-                  <li><i className="bi bi-chevron-right"></i> <a href="#">공간위에 관해</a></li>
-                  <li><i className="bi bi-chevron-right"></i> <a href="#">예약하기</a></li>
-                  <li><i className="bi bi-chevron-right"></i> <a href="#">공긴에 대하여</a></li>
-                  <li><i className="bi bi-chevron-right"></i> <a href="#">회칙 및 약관</a></li>
+                  <li><i className="bi bi-chevron-right"></i> <Link to="/">메인 페이지</Link></li>
+                  <li><i className="bi bi-chevron-right"></i> <Link to="/introduction">공간위에 관해</Link></li>
+                  <li><i className="bi bi-chevron-right"></i> <Link to="/reservation">예약하기</Link></li>
+                  <li><i className="bi bi-chevron-right"></i> <Link to="/introduction">회칙 및 약관</Link></li>
                 </ul>
               </div>
     
               <div className="col-lg-3 col-md-6 footer-links">
                 <h4>공간위 공간들</h4>
                 <ul>
-                  <li><i className="bi bi-chevron-right"></i> <a href="#">개인연습실</a></li>
-                  <li><i className="bi bi-chevron-right"></i> <a href="#">피아노실</a></li>
-                  <li><i className="bi bi-chevron-right"></i> <a href="#">울림홀</a></li>
-                  <li><i className="bi bi-chevron-right"></i> <a href="#">미래홀</a></li>
-                  <li><i className="bi bi-chevron-right"></i> <a href="#">세미나실</a></li>
-                  <li><i className="bi bi-chevron-right"></i> <a href="#">오픈스페이스</a></li>
-                  <li><i className="bi bi-chevron-right"></i> <a href="#">합주실</a></li>
-                  <li><i className="bi bi-chevron-right"></i> <a href="#">무예실</a></li>
+                  <li><i className="bi bi-chevron-right"></i> <Link to="/space/individual-practice-room">개인연습실</Link></li>
+                  <li><i className="bi bi-chevron-right"></i> <Link to="/space/piano-room">피아노실</Link></li>
+                  <li><i className="bi bi-chevron-right"></i> <Link to="/space/ullim-hall">울림홀</Link></li>
+                  <li><i className="bi bi-chevron-right"></i> <Link to="/space/mirae-hall">미래홀</Link></li>
+                  <li><i className="bi bi-chevron-right"></i> <Link to="/space/seminar-room">세미나실</Link></li>
+                  <li><i className="bi bi-chevron-right"></i> <Link to="/space/open-space">오픈스페이스</Link></li>
+                  <li><i className="bi bi-chevron-right"></i> <Link to="/space/group-practice-room">합주실</Link></li>
+                  <li><i className="bi bi-chevron-right"></i> <Link to="/space/dance-studio">무예실</Link></li>
+                  <li><i className="bi bi-chevron-right"></i> <Link to="/space/workshop">창작공방</Link></li>
                 </ul>
               </div>
             </div>
