@@ -48,10 +48,16 @@ class Scspace extends Component{
                         <div>
                             <h3>CI 소개</h3>
                             <p className="intro"><b>학생문화공간위원회 CI는 학생, 문화, 그리고 공간의 세 가치를 담았습니다.</b></p>
-                            <p>공간위가 추구하는 세 가치의 영문 이니셜 양 끝의 알파벳 S의 형태를 변형함으로써 조형적으로 대칭을 이루는 동시에, 
-                                한글 이니셜의 모음 및 받침을 표현하였습니다. 그 주위에 있는 ㅎ, ㅁ, ㄱ 세 자음 글자가 한글 이니셜을 완성하는 구조입니다.</p>
-                            <img src="/img/CI.jpg" alt="" className="img-fluid"/>
-                            <p><div className="rsquare"></div>RGB (231,49,40)<br/><div className="bsquare"></div>RGB (62,58,57)</p>
+                            <p>학생, 문화, 그리고 공간. 저희 단체가 항상 노력하는 세 가지를 각각 푸르른 청춘, 붉은 장영신학생회관, 그리고 깨끗한 푸른빛 백색에 담아 제작하였습니다.<br/>
+                                장영신학생회관을 형상화한 로고에서 하이라이트된 ㄱㄱㅇ 모양은 해당 장소와 같이 성장해온 저희 단체의 이야기를 말해줍니다.
+                            </p>
+                            <img src="img/logo.svg" alt="" className="img-fluid"/>
+                            <p>
+                                <div className="square1"></div>RGB (127,114,98)<br/>
+                                <div className="square2"></div>RGB (123,158,182)<br/>
+                                <div className="square3"></div>RGB (34,31,25)<br/>
+                                <div className="square4"></div>RGB (212,218,221)
+                            </p>
                         </div>
                     </div>
                 </div>
