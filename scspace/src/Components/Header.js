@@ -56,14 +56,12 @@ class Header extends Component{
       <div className="container-fluid d-flex align-items-center justify-content-between">
   
         <Link to="/" className="logo d-flex align-items-center scrollto me-auto me-lg-0">
-          
-          <img src="assets/img/logo.png" alt=""/>
-          <h1>Scspace<span>.</span></h1>
+          <img src="img/logo.svg" alt=""/>
+          <h1>         </h1>
         </Link>
   
         <nav id="navbar" className="navbar">
           <ul>
-  
             {
               this.state.menu.map((menu, idx) =>{
                 return (menu.sub_menu.length === 0
@@ -82,13 +80,12 @@ class Header extends Component{
 
             }
           </ul>
-          <i id='nav_menu' className="bi bi-list mobile-nav-toggle d-none" onClick={this.onClickEvent.bind(this)}> {/* 햄버거바 */}
-            
-          </i>
         </nav>
+
+        <i id='nav_menu' className="bi bi-list mobile-nav-toggle d-none" onClick={this.onClickEvent.bind(this)}>{/* 햄버거바 */}</i>
         
         {this.state.login === true ? 
-         (
+        (
             <Dropdown >
               <Dropdown.Toggle className="btn-getstarted scrollto" id="dropdown-basic">
                 {this.state.UserInfo.name}님
@@ -107,8 +104,6 @@ class Header extends Component{
         
         : (<Link className="btn-getstarted scrollto" to="/login">Login</Link>)}
         
-       
-  
       </div>
     </header>
   
@@ -116,3 +111,4 @@ class Header extends Component{
 }
 
 export default withTranslation()(Header);
+

@@ -97,7 +97,7 @@ class Calendar extends React.Component {
 
       <React.Fragment>
       <Dropdown >
-              <Dropdown.Toggle className="btn-getstarted scrollto" id="dropdown-basic" >
+              <Dropdown.Toggle className="space-filter" id="dropdown-basic" >
                 {t(spaceDict[this.state.filter])}
               </Dropdown.Toggle>
         
