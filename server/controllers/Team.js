@@ -15,9 +15,8 @@ team = {
                 p.time_register = new Date();
                 p.member = [[result.name, result.student_id]];
                 for (let i=0; i<req.body.member.length; i++){
-                    p.member.push(Object.values(req.body.member[i]))
+                    p.member.push(Object.values(req.body.member[i]).slice(1,))
                 }
-
                 db.create(p)
                 .then ((result) => {
                     res.json({teamid:result});
