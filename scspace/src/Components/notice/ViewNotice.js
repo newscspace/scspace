@@ -83,7 +83,7 @@ function ViewNotice(props){
                     <li className="d-flex align-items-center"><VscEye className="color-secondary-light"/>&nbsp;{content.hits}</li>
                   </ul>
                 </div>
-                <div className="content">
+                <div className="content newline">
                   <p>
                     {content.content}
                   </p>

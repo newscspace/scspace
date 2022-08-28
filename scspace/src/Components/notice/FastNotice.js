@@ -21,7 +21,7 @@ function FastNotice(props){
               <div className="service-item position-relative">
                 <div className="icon"><i className="bi bi-broadcast icon"></i></div>
                   <h4><Link to={contents.link} className="stretched-link">{contents.title}</Link></h4>
-                  <p>{contents.content}</p>
+                  <p className="newline">{contents.content}</p>
                 </div>
               </div>)
             })

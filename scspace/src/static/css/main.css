@@ -3149,3 +3149,11 @@ section {
 .add button:hover {
   background: var(--color-primary);
 } 
+
+/*
+
+*/
+
+.newline {
+  white-space: pre-wrap;
+}
