@@ -3,74 +3,78 @@ const db =  require('../config/db_config');
 
 const dbModel = {
   readAll: async () => {
-    let conn = db.init();
-    db.connect(conn);
-   
-    let sql = `SELECT * FROM notice ORDER BY important desc, time_post desc;`;
-    let result = await conn.promise().query(sql)
-    .catch(err => {console.log(err); db.disconnect(conn); return null;});
-      
-    db.disconnect(conn);
-    return result[0];
+    let return_result;
+      let sql = `SELECT * FROM notice ORDER BY important desc, time_post desc;`;
+
+    let conn = db.getConnection().promise();
+
+
+    await conn.query(sql)
+      .then((result) => {return_result = result[0];})
+      .catch((err) => {console.log(err); return_result = null;})
+
+    
+    return return_result;
   },
 
   readId: async (p) => {
-    let conn = db.init();
-    db.connect(conn);
-   
+    let conn = db.getConnection().promise();    
+    let return_result;
     let sql = `SELECT * FROM notice where id=?;`;
-    let result = await conn.promise().query(sql, p)
-    .catch(err => {console.log(err); db.disconnect(conn); return null;});
+
+    await conn.query(sql, p)
+      .then((result) => {return_result = result[0][0];})
+      .catch(err => {console.log(err); return_result =  null;});
    
     sql = `UPDATE notice SET hits = hits + 1 where id=?`;
-    await conn.promise().query(sql, p)
-    .catch(err => {console.log(err); db.disconnect(conn); return null;});
-   
-    db.disconnect(conn);
+      
+      await conn.query(sql, p)
+      .catch(err => {console.log(err);});
+
+
     
-    return result[0][0];
+    return return_result;
   },
 
   create: async (p) => {
     
-    let conn = db.init();
-    db.connect(conn);
+    let conn = db.getConnection().promise();    
+    let return_result;
    
     let sql = `INSERT INTO notice (title, time_post, important, content) VALUES (?, ?, ?, ?);`;
-    let result = await conn.promise().query(sql, [p.title, p.time_post, p.important, p.content])
-    .catch(err => {console.log(err); db.disconnect(conn); return false;});
+    await conn.query(sql, [p.title, p.time_post, p.important, p.content])
+      .then(() => {return_result = true;})
+      .catch(err => {console.log(err); return_result = false;});
    
-    db.disconnect(conn);
     
-    return true;
+    return return_result;
   },
 
   update: async (p) => {
     
-    let conn = db.init();
-    db.connect(conn);
+    let conn = db.getConnection().promise();    
+    let return_result;
    
     let sql = `UPDATE notice SET title=?, time_edit=?, important=?, content=? WHERE id=?`;
-    let result = await conn.promise().query(sql, [p.title, p.time_edit, p.important, p.content, p.id])
-    .catch(err => {console.log(err); db.disconnect(conn); return false;});
-   
-    db.disconnect(conn);
+    await conn.query(sql, [p.title, p.time_edit, p.important, p.content, p.id])
+      .then(() => {return_result = true})
+      .catch(err => {console.log(err); return_result = false;});
     
-    return true;
+    return return_result;
   },
 
   delete: async (p) => {
     
-    let conn = db.init();
-    db.connect(conn);
+    let conn = db.getConnection().promise();    
+    let return_result;
    
     let sql = `DELETE FROM notice WHERE id=?`;
-    let result = await conn.promise().query(sql, p)
-    .catch(err => {console.log(err); db.disconnect(conn); return false;});
+    await conn.query(sql, p)
+      .then(() => {return_result = true;})
+    .catch(err => {console.log(err);return_result = false;});
    
-    db.disconnect(conn);
     
-    return true;
+    return return_result;
   },
 };
 

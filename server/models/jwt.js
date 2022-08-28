@@ -3,42 +3,44 @@ const db =  require('../config/db_config');
 
 const dbModel = {
   Is_admin: async (p) => {
-    let conn = db.init();
-    db.connect(conn);
+    let conn = db.getConnection().promise();    
+    let return_result;
    
     let sql = `SELECT type FROM users where student_id=?;`;
-    let result = await conn.promise().query(sql, p.mail)
-    .catch(err => {console.log(err); db.disconnect(conn); return null;});
+    await conn.query(sql, p.mail)
+      .then((result) => {return_result= (result[0][0].type === 'admin')})
+    .catch(err => {console.log(err); return_result =  null});
       
-    db.disconnect(conn);
-    return result[0][0];
+    return return_result;
   },
 
   login: async (p) => {
-    let conn = db.init();
-    db.connect(conn);
+    let conn = db.getConnection().promise();    
+    let return_result;
    
     let sql = `INSERT IGNORE INTO users (student_id,  name,  phone, email, type) VALUES (?,?,?,?,?);`;
-    let result = await conn.promise().query(sql, [p.ku_std_no, p.ku_kname, p.mobile, p.mail, 'user'])
-    .catch(err => {console.log(err); db.disconnect(conn); return false;});
+    await conn.query(sql, [p.ku_std_no, p.ku_kname, p.mobile, p.mail, 'user'])
+      .catch(err => {console.log(err); return_result = false;});
  
     sql = `SELECT * FROM users WHERE student_id=? ORDER BY id DESC LIMIT 1;`;
-    result = await conn.promise().query(sql, [p.ku_std_no])
-    .catch(err => {console.log(err); db.disconnect(conn); return false;});
+    await conn.query(sql, [p.ku_std_no])
+      .then((result) => {return_result = result[0][0]})
+      .catch(err => {console.log(err); return_result = false;});
     
-    return result[0][0];
+    return return_result;
     
   },
 
   get_data : async (p) => {
+    let conn = db.getConnection().promise();    
+    let return_result;
+
     sql = `SELECT * FROM users WHERE student_id=? ORDER BY id DESC LIMIT 1;`
-    result = await conn.promise().query(sql, [p.ku_std_no])
-    .catch(err => {console.log(err); db.disconnect(conn); return null;});
-
-
-    db.disconnect(conn);
+    await conn.query(sql, [p.ku_std_no])
+      .then((result) => {return_result = result[0][0]})
+      .catch(err => {console.log(err); return_result =  null;});
     
-    return result[0][0];
+    return return_result;
   }
 
  

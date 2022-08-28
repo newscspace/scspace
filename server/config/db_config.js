@@ -7,31 +7,18 @@ const db_info = {
     port : process.env.DB_PORT,
     user : process.env.DB_USER,
     password : process.env.DB_PWD,
-    database : process.env.DB_NAME
+    database : process.env.DB_NAME,
+    connectionLimit : 30
 };
 
+const pool = mysql.createPool(db_info);
 
 
-const db = {
-    init: () => {
-      return mysql.createConnection(db_info);
-    },
-    
-    connect: (conn) => {
-      conn.connect((err) => {
-        if (err) {
-          console.log('mysql connect error' + err);
-        }
-      });
+const db = {    
+    getConnection: () => {
+      return pool;
     },
 
-    disconnect: (conn) => {
-      conn.end((err) => {
-        if (err) {
-          console.log('mysql close error' + err);
-        }
-      });
-    },
   };
   
   module.exports = db;
