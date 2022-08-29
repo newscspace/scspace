@@ -17,38 +17,27 @@ const appointmentClassName = '.dx-scheduler-appointment';
 const cellClassName = '.dx-scheduler-date-table-cell';
 
 
-
+// 꺄악 상수라니
 const resourcesData = [
-  {text: '개인연습실 1',id: 'individual-practice-room1', color: '#D81159',}, 
-  {text: '개인연습실 2',id: 'individual-practice-room2', color: '#D81159',},
-  {text: '개인연습실 3',id: 'individual-practice-room3', color: '#D81159',},  
+  {text: '개인연습실 1', id: 'individual-practice-room1', color: '#D81159',}, 
+  {text: '개인연습실 2', id: 'individual-practice-room2', color: '#D81159',},
+  {text: '개인연습실 3', id: 'individual-practice-room3', color: '#D81159',},  
   {text: '피아노실 1', id: 'piano-room1', color: '#FF773D',}, 
   {text: '피아노실 2', id: 'piano-room2', color: '#FF773D',}, 
   {text: '합주실', id: 'group-practice-room', color: '#4B644A',}, 
   {text: '무예실', id: 'dance-studio', color: '#717EC3',}, 
   {text: '울림홀', id: 'ullim-hall', color: '#0EB1D2',},
-  {text: '미래홀',id: 'mirae-hall',color: '#192A51',},
-  {text: '세미나실 1',id: 'seminar-room1',color: '#B0228C',},
-  {text: '세미나실 2',id: 'seminar-room2',color: '#B0228C',},
-  {text: '창작공방',id: 'workshop',color: '#858786',},
-  {text: '오픈스페이스',id: 'open-space',color: '#221E22',},
+  {text: '미래홀', id: 'mirae-hall',color: '#192A51',},
+  {text: '세미나실 1', id: 'seminar-room1',color: '#B0228C',},
+  {text: '세미나실 2', id: 'seminar-room2',color: '#B0228C',},
+  {text: '창작공방', id: 'workshop',color: '#858786',},
+  {text: '오픈스페이스', id: 'open-space',color: '#221E22',},
 ];
 
-const spaceDict = {
-    'individual-practice-room1': '개인연습실 1',
-    'individual-practice-room2': '개인연습실 2',
-    'individual-practice-room3': '개인연습실 3',
-    'piano-room1': '피아노실 1',
-    'piano-room2': '피아노실 2',
-    'group-practice-room': '합주실',
-    'dance-studio': '무예실',
-    'ullim-hall': '울림홀',
-    'mirae-hall': '미래홀',
-    'seminar-room1': '세미나실 1',
-    'seminar-room2': '세미나실 2',
-    'workshop': '창작공방',
-    'open-space': '오픈스페이스'
-  }
+const spaceDict = {};
+resourcesData.forEach(resource => {
+  spaceDict[resource.id] = resource.text;
+} );
 
 class Calendar extends React.Component {
   constructor(props) {
