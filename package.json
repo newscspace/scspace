@@ -11,5 +11,8 @@
     "mysql2": "^2.3.3",
     "nodemon": "^2.0.19"
   },
-  "proxy": "http://gonggan.kaist.ac.kr"
+  "proxy": "http://gonggan.kaist.ac.kr",
+  "optionalDependencies": {
+    "fsevents": "^2.3.2"
+  }
 }
