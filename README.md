@@ -1,4 +1,8 @@
-# scspace
+![Logo](https://scspace-public.s3.ap-northeast-2.amazonaws.com/%EB%A1%9C%EA%B3%A0(%EB%8B%A4%ED%81%AC%EB%AA%A8%EB%93%9C).png)
+
+# GONGGAN
+General Open Nomination for Guestspace & Granular Access Network
+
 학생문화공간위원회에서 운영하는 공간의 예약 시스템입니다. https://scspace.kaist.ac.kr
 
 본 레포는 머리털 나고 처음으로 자바스크립트 코딩한 공간위 8, 9기의 비극을 담고 있습니다.
@@ -14,7 +18,7 @@
 본 레포에는 회칙을 비롯한 일부 문서가 포함되어 있지 않습니다. 이와 더불어 일부 하드링크가 존재할 수 있습니다.
 
 ## 보안 문제, 버그 신고
-버그가 발견되었을 경우 issue 제기 후 **반드시** 공간위 공식 창구(이메일 : scspace@카이스트 주소)로 연락해주세요. 민감한 보안 문제의 경우 공개 issue 제기 전 따로 연락 부탁드립니다.
+버그가 발견되었을 경우 issue 제기 후 **반드시** 공간위 공식 창구(이메일 : scspace@카이스트 주소)로 연락해주세요.
 
 ## 개발시 주의사항
 - *매뉴얼 정독*
