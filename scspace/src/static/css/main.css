@@ -1779,7 +1779,7 @@ section {
 --------------------------------------------------------------*/
 .portfolio .portfolio-flters {
   padding: 0;
-  margin: -30px auto 30px auto;
+  margin: 30px auto 0px auto;
   list-style: none;
   text-align: center;
 }
@@ -1791,7 +1791,6 @@ section {
   font-weight: 300;
   margin: 0 10px;
   line-height: 1;
-  margin-bottom: 5px;
   transition: all 0.3s ease-in-out;
 }
 .portfolio .portfolio-flters li:hover, .portfolio .portfolio-flters li.filter-active {
@@ -2865,12 +2864,43 @@ section {
 /*--------------------------------------------------------------
 # Scspace/Business
 --------------------------------------------------------------*/
+.business-container {
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto; 
+  margin-left: auto;
+}
+.business-container ul{
+  width: 1500px;
+  text-align: center;
+  margin: 0 auto;
+}
+@media (max-width: 500px) {
+  .business-container ul {
+    width: 30em;
+  }
+}
+ @media (max-width: 1000px)
+ and (min-width: 500px) {
+   .business-container ul {
+     width: 50em;
+   }
+ }
+ @media (max-width: 1500px)
+ and (min-width: 1000px) {
+   .business-container ul {
+     width: 60em;
+   }
+ }
+
 .business{
   text-align: center;
 }
 .business ul{
-  width: 800px;
+  display: inline-block;
+  width: 50em;
   margin: 0 auto;
+  
 }
 .business button {
   background: var(--color-primary);
