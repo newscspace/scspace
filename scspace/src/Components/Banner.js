@@ -7,7 +7,7 @@ class Banner extends Component{
     super(props);
   }
     render() {
-      const t = this.props;
+      const {t} = this.props;
       return (
       
   <section className="hero-static d-flex align-items-center">
