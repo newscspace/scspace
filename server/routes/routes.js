@@ -9,6 +9,8 @@ const team = require('./team');
 const space = require('./space');
 const users = require('./users');
 
+
+
 router.post('/api/reservation/*', reservation.router);
 router.get('/api/reservation/*', reservation.router);
 
@@ -33,6 +35,7 @@ router.get('/api/space/*', space.router);
 router.get('/api/users/*', users.router);
 router.post('/api/users/*', users.router);
 
+router.get('/*', (req, res) => {res.send(express.static('../../scspace/build/index.html'))});
 
 
 

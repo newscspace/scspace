@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 
 
-class Introduction extends Component {
+class Usage extends Component {
 
     constructor(props){
         super(props);
@@ -14,7 +14,7 @@ class Introduction extends Component {
 
 
   
-  editContent = (mode, idx=null) => {
+  editContent = (mode, idx=null, idxHead=null) => {
     let nextstate = Object.assign({}, this.state);
     if(mode === 'cancel') {
       nextstate.roomData = JSON.parse(JSON.stringify(this.props.roomData))
@@ -23,7 +23,7 @@ class Introduction extends Component {
 
     } 
     else if (mode === 'add') {
-      nextstate.roomData.content[this.state.roomData.content.length]={title:'', body:{head:'', list:[]}};
+      nextstate.roomData.content[this.state.roomData.content.length]={title:'', body:[{head:'', list:[]}]};
       this.setState(nextstate);
     }
 
@@ -44,16 +44,24 @@ class Introduction extends Component {
         this.props.callApi(this.state.roomData, 'usage');
     }
     else if (mode === 'listadd'){
-        nextstate.roomData.content[idx].body.list.push(' ');
+        nextstate.roomData.content[idx].body[idxHead].list.push(' ');
         this.setState(nextstate);
     }
     else if (mode === 'listdelete'){
-        nextstate.roomData.content[idx].body.list.pop();
+        nextstate.roomData.content[idx].body[idxHead].list.pop();
         this.setState(nextstate);
+    }
+    else if (mode === 'headadd'){
+      nextstate.roomData.content[idx].body.push({head:'sdf', list:['sdf']});
+      this.setState(nextstate);
+    }
+    else if (mode === 'headdelete'){
+      nextstate.roomData.content[idx].body.pop();
+      this.setState(nextstate);
     }
   }
  
-  changeHandler = (idx, e) => {
+  changeHandler = (idx, idxHead=null, e) => {
       let nextstate = Object.assign({}, this.state);
       if (e.target.name === 'intro'){
         nextstate.roomData.intro = e.target.value;
@@ -62,16 +70,17 @@ class Introduction extends Component {
         nextstate.roomData.content[idx][e.target.name]= e.target.value; 
       }
       else if (e.target.name === 'head') {
-        nextstate.roomData.content[idx]['body'][e.target.name]= e.target.value; 
+        console.log(idxHead)
+        nextstate.roomData.content[idx]['body'][idxHead][e.target.name]= e.target.value; 
       }
       else if (e.target.name === 'list'){
-        nextstate.roomData.content[idx]['body'][e.target.name][parseInt( e.target.id)]= e.target.value; 
+        nextstate.roomData.content[idx]['body'][idxHead][e.target.name][parseInt(e.target.id)]= e.target.value; 
       }
       this.setState(nextstate);
       
   }
 
-  admin_return = (mode, idx=null) => {
+  admin_return = (mode, idx=null, idxHead=null) => {
 
       if (this.props.login === true && this.props.UserInfo.type==='admin' ){
         if(this.state.edit === true && mode === 'edit'){
@@ -101,8 +110,8 @@ class Introduction extends Component {
         else if(this.state.edit === true && mode ==='list') {
             return(
                 <div className="text-end">
-                <button type="button" className="modalButton2 " onClick={() => {this.editContent('listadd',idx )}}>li 추가</button>
-                <button type="button" className="modalButton2 " onClick={() => {this.editContent('listdelete',idx )}}>li 삭제</button>
+                <button type="button" className="modalButton2 " onClick={() => {this.editContent('listadd',idx, idxHead )}}>li 추가</button>
+                <button type="button" className="modalButton2 " onClick={() => {this.editContent('listdelete',idx, idxHead )}}>li 삭제</button>
                  </div>
             )
         }
@@ -114,6 +123,15 @@ class Introduction extends Component {
             <div className="text-end">
                   <button type="button" className="modalButton1" onClick={() => {this.editContent('delete', idx)}}>삭제</button>
             </div>
+                )
+        }
+
+        else if (this.state.edit === true && mode === 'head'){
+          return(
+            <div className="text-end">
+                <button type="button" className="modalButton2 " onClick={() => {this.editContent('headadd',idx)}}>설명 추가</button>
+                <button type="button" className="modalButton2 " onClick={() => {this.editContent('headdelete',idx)}}>설명 삭제</button>
+                 </div>
                 )
         }
 
@@ -129,27 +147,42 @@ class Introduction extends Component {
    render(){ return (
         <div className="tab-pane fade show active space">
         
-        <p class="fst-italic">{this.state.edit ? (<textarea name="intro" onChange={this.changeHandler.bind(this, 0)} value ={this.state.roomData.intro} />): this.state.roomData.intro}</p>
+        <p class="fst-italic">{this.state.edit ? (<textarea name="intro" onChange={this.changeHandler.bind(this, 0, null)} value ={this.state.roomData.intro} />): this.state.roomData.intro}</p>
 
       
 
         {this.state.roomData.content.map((contents, idx) => {
             return (
             <div>
+                    {this.admin_return('head', idx)}
             <div className="d-flex align-items-center mt-4">
                 <i className="bi bi-check2"></i>
-                <h4>{this.state.edit ? (<input type="text"  name="title" onChange={this.changeHandler.bind(this, idx)} value ={contents.title}  required/>): contents.title}</h4>
+                <h4>{this.state.edit ? (<input type="text"  name="title" onChange={this.changeHandler.bind(this, idx, null)} value ={contents.title}  required/>): contents.title}</h4>
             </div>
-            {this.admin_return('list', idx)}
-            <p>{this.state.edit ? (<textarea name="head" onChange={this.changeHandler.bind(this, idx)} value ={contents.body.head} required />): contents.body.head}</p>
-            <ul>
-                {contents.body.list.map((list, idx2) => {
-                    return(
-                        <li>{this.state.edit ? (<textarea  name="list" id={idx2} onChange={this.changeHandler.bind(this, idx)} value ={list} required />): list}</li>
-                    )
-                })}
-            </ul>
-            {this.admin_return('delete', idx)}
+            
+            {contents.body.map((head, idx2) => {
+
+                return(
+                  <div>
+              
+                    {this.admin_return('list', idx, idx2)}
+                  <p>{this.state.edit ? (<textarea name="head" onChange={this.changeHandler.bind(this, idx, idx2)} value ={head.head} required />): head.head}</p>
+                  <ul>
+                      {head.list.map((list, idx3) => {
+                          return(
+                              <li>{this.state.edit ? (<textarea  name="list" id={idx3} onChange={this.changeHandler.bind(this, idx, idx2)} value ={list} required />): list}</li>
+                          )
+                      })}
+                  </ul>
+                  {this.admin_return('delete', idx, null)}
+                  <br/>
+                  </div>
+
+                )
+
+
+            })}
+     
             </div>
             )})
         }
@@ -163,4 +196,4 @@ class Introduction extends Component {
     )}
 }
 
-export default Introduction;
+export default Usage;

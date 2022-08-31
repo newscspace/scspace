@@ -172,7 +172,7 @@ class Space extends Component{
               </div>
 
               <div className="col-lg-7">
-                <h3 className="pt-0 pt-lg-5">{this.state.edit ? (<input type="text"  name="title" onChange={this.changeHandler.bind(this)} value ={this.state.shortintro}  required/>): this.state.spaceInfo.shortintro}</h3>
+                <h3 className="pt-0 pt-lg-5 newline">{this.state.edit ? (<textarea name="title" onChange={this.changeHandler.bind(this)} value ={this.state.shortintro}  required/>): this.state.spaceInfo.shortintro}</h3>
                 {this.admin_return('edit')}
                 <ul className="nav nav-pills mb-3">
                   <li onClick={() => this.changeMenu(0)} className="nav-link active" id="menu0">{t('소개')}</li>
