@@ -194,7 +194,7 @@ class FAQ extends Component{
             <div className="row gy-4">
               <div className="col-lg-7 d-flex flex-column justify-content-center align-items-stretch  order-2 order-lg-1">
 
-                <div id="mount0" className="content px-xl-5">
+                <div className="content px-xl-5">
                   <h3>Frequently Asked <strong>Questions</strong></h3>
                   <p>
                     많이 주신 질문들에 대한 답변입니다.
@@ -210,7 +210,7 @@ class FAQ extends Component{
 
                   {this.state.list.map((contents, idx) => {
                     return (
-                      <div className="accordion-item" id="mount1">
+                      <div className="accordion-item" >
                         <h3 className="accordion-header">
                           <button className={"accordion-button " + (this.state.id.includes(idx)  ? "" : "collapsed")} onClick={this.OnClickEvent.bind(this, idx)} >
                             <i className="bi bi-question-circle question-icon"></i>
@@ -234,7 +234,7 @@ class FAQ extends Component{
 
               </div>
 
-              <div id="mount3" className="col-lg-5 align-items-stretch order-1 order-lg-2 img" >&nbsp;</div>
+              <div className="col-lg-5 align-items-stretch order-1 order-lg-2 img" >&nbsp;</div>
             </div>
 
           </div>

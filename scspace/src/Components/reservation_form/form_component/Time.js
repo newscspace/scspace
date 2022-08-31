@@ -108,8 +108,8 @@ import {withTranslation} from "react-i18next";
               onChange = {(date) => {setEndDate(date); props.onChangeHandler('timeTo', date)}}
               selected={endDate}
 
-              minDate={startDate}
-              maxDate={calcDate(new Date(), props.limitdate.maxdays)}
+              // minDate={startDate}
+              // maxDate={calcDate(new Date(), props.limitdate.maxdays)}
               //minTime = {startDate}
               //maxTime={getTime(startDate, 2)}
               dateFormat="MM/dd/yyyy h:mm aa"
@@ -160,8 +160,8 @@ import {withTranslation} from "react-i18next";
               onChange = {(date) => {setrehersalEndDate(date); props.onChangeHandler('rehersalTo', date, true)}}
               selected={rehersalEndDate}
 
-              minDate={rehersalStartDate}
-              maxDate={calcDate(new Date(), props.limitdate.maxdays)}
+              // minDate={rehersalStartDate}
+              // maxDate={calcDate(new Date(), props.limitdate.maxdays)}
               //minTime = {startDate}
               //maxTime={getTime(startDate, 2)}
               dateFormat="MM/dd/yyyy h:mm aa"
@@ -214,8 +214,8 @@ import {withTranslation} from "react-i18next";
               onChange = {(date) => {setlastrehersalEndDate(date); props.onChangeHandler('rehersalLastdayTo', date, true)}}
               selected={lastRehersalEndDate}
 
-              minDate={lastRehersalStartDate}
-              maxDate={calcDate(new Date(), props.limitdate.maxdays)}
+              // minDate={lastRehersalStartDate}
+              // maxDate={calcDate(new Date(), props.limitdate.maxdays)}
               //minTime = {startDate}
               //maxTime={getTime(startDate, 2)}
               dateFormat="MM/dd/yyyy h:mm aa"
