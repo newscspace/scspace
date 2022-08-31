@@ -17,11 +17,11 @@ class Banner extends Component{
     <p>{t('학생문화공간위원회 홈페이지에 오신걸 환영합니다.')}</p>
     <div className="d-flex">
       <Link to="/reservation" className="btn-get-started scrollto">{t('예약하기')}</Link>
-      <Link to="/calendar" className="btn-get-started2">{t('예약현황')}</Link>
+      <Link to="/calendar" className="btn-get-started2">{t('예약 현황')}</Link>
     </div>
   </div>
 </section>
       )};
 }
 
-export default withTranslatoin()(Banner);
+export default withTranslation()(Banner);
