@@ -29,14 +29,17 @@ auth = {
                     function(err,token){
                         if(err) console.log(err);
                         else {res.cookie('scspacetoken', Buffer.from(token).toString('base64'), {
+                            domain : 'gonggan.kaist.ac.kr',
                             maxAge: 60*60*1000,
                             httpOnly: true,
-                            path:'/'
+                            path:'/',
+                            sameSite : 'Lax',
+                            secure : 'true'
                         });
                         
                         }
                         
-                        res.redirect('http://localhost:3000/');
+                        res.redirect('/');
                     });
 
             })
@@ -84,8 +87,13 @@ auth = {
 
     logout : (req,res) => {
 
-        res.clearCookie('scspacetoken', { path: '/' }); 
-        res.redirect('http://localhost:3000/');
+        res.clearCookie('scspacetoken', {                            
+            domain : 'gonggan.kaist.ac.kr',
+            httpOnly: true,
+            path:'/',
+            sameSite : 'Lax',
+            secure : 'true'}); 
+        res.redirect('/');
 
     }
   
