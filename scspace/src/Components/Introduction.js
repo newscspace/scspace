@@ -58,21 +58,17 @@ class Introduction extends Component{
             </div>
             <hr></hr>
 
-            <section id="portfolio"  className="portfolio">
+            <div id="portfolio"  className="portfolio">
               <div className="container-fluid">
-
-                <div  className="portfolio-isotope" >
-
-                  <ul  className="portfolio-flters">
-                      {this.state.info.map((contents, idx) => {
-                        return (
-                            <li onClick={this.OnClickEvent.bind(this, idx)}>{contents.which}</li>
-                        )
-                      })}
-                  </ul>
-                </div>
+                <ul  className="portfolio-flters">
+                    {this.state.info.map((contents, idx) => {
+                      return (
+                          <li onClick={this.OnClickEvent.bind(this, idx)}>{contents.which}</li>
+                      )
+                    })}
+                </ul>
               </div>
-            </section>
+            </div>
     
             <p>
               {this.state.info.map((contents, idx) =>{
