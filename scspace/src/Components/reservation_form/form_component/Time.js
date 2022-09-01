@@ -85,7 +85,7 @@ import {withTranslation} from "react-i18next";
             <div className="row">
             <h5>{t('시간')}</h5>
             <div className="col-md-6 form-group">
-            {t('시작 시간')}<DatePicker
+              <DatePicker
               onChange = {(date) => {setStartDate(date); props.onChangeHandler('timeFrom', date)}}
               selected = {startDate}
               minDate={calcDate(new Date(), props.limitdate.mindays)}
@@ -93,7 +93,7 @@ import {withTranslation} from "react-i18next";
               dateFormat="MM/dd/yyyy h:mm aa"
               className="form-control" 
               selectsStart
-
+              placeholderText={t('시작 시간')+ " ~"}
               timeIntervals={10}
               // startDate={startDate}
               // endDate={endDate}
@@ -106,18 +106,19 @@ import {withTranslation} from "react-i18next";
             (<div className="col-md-6 form-group mt-3 mt-md-0">
             {t('종료 시간')}<DatePicker
               onChange = {(date) => {setEndDate(date); props.onChangeHandler('timeTo', date)}}
-              selected={endDate}
+              selected={startDate}
 
               // minDate={startDate}
               // maxDate={calcDate(new Date(), props.limitdate.maxdays)}
               //minTime = {startDate}
               //maxTime={getTime(startDate, 2)}
-              dateFormat="MM/dd/yyyy h:mm aa"
+              dateFormat="yyyy/MM/dd h:mm aa"
               className="form-control"
               selectsEnd
               //includeTimes={calcTime(startDate, props.limitdate.maxUseHour)}
               // startDate={startDate}
-              // endDate={endDate}
+              // endDate={endDate}a
+              placeholderText={"~ " + t('종료 시간')}
               filterTime ={filterTime}
               timeIntervals={10}
               showTimeSelect
