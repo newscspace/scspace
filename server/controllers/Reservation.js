@@ -19,6 +19,17 @@ reservation = {
             p.time_to = req.body.timeTo;
             p.time_request = new Date();
             p.content = req.body.content;
+
+            
+            let autoGrantList = ['individual-practice-room1', 'individual-practice-room2', 'individual-practice-room3', 'piano-room1', 'piano-room2', 'group-practice-room', 'seminar-room1', 'seminar-room2', 'dance-studio', 'workshop']
+            if (autoGrantList.includes(p.space)){
+                p.state = 'grant'; 
+            }
+            else{
+                p.state='wait';
+            }
+
+
             p.state = 'wait';
 
             db.create(p)
@@ -86,7 +97,7 @@ reservation = {
                 p.content['recurrenceRule'] = req.body.recurrenceRule ? req.body.recurrenceRule : null;
                 p.content['contents'] = req.body.description;
                 p.id = req.body.id
-                p.state = 'wait';
+                p.state = 'grant';
     
                 db.updateCalendar(p)
                 .then ((result) => {
