@@ -34,7 +34,7 @@ reservation = {
         db.readCalendar(p)
         .then(result => {
             result.map((reservation) => {
-                return_result.push({id:reservation.id, space:reservation.space,startDate : reservation.time_from, endDate : reservation.time_to, content : reservation.content, text:reservation.content ?reservation.content.eventName : null, description:reservation.content?reservation.content.contents : null, recurrenceRule : reservation.content ? reservation.content.recurrenceRule : null})
+                return_result.push({id:reservation.id, space:reservation.space,startDate : reservation.time_from, endDate : reservation.time_to, content : reservation.content, text:reservation.content ?(reservation.content.eventName ? reservation.content.eventName : reservation.content.organizatipnName) : null, description:reservation.content?reservation.content.contents : null, recurrenceRule : reservation.content ? reservation.content.recurrenceRule : null})
                 
             })
             res.json(return_result);
