@@ -43,7 +43,7 @@ class ReservModal extends Component{
                     <p className="modal-first">멤버</p>
                     <p className="modal-second">
                     {this.state.teamData.member.map((member) => {
-                        if (this.props.modal.reservation.teamMember.includes(String(member.id))){
+                        if (this.props.modal.reservation.content.teamMember.includes(String(member.id))){
                             return(
                                 <div>학번 : {member.student_id} &nbsp; &nbsp; 이름 : {member.name}<br/></div>
                             )
