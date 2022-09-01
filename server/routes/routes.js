@@ -36,9 +36,8 @@ router.get('/api/users/*', users.router);
 router.post('/api/users/*', users.router);
 
 // router.get('/*', (req, res) => {res.send(express.static('../../scspace/build/index.html'))});
-router.get('*', (res, req) => {
+router.get('*', (req, res) => {
     res.redirect('https://scspace.kaist.ac.kr/');
-    res.send(false);
 })
 
 
