@@ -30,8 +30,6 @@ reservation = {
             }
 
 
-            p.state = 'wait';
-
             db.create(p)
             .then ((result) => {
                 res.json({'reserveId':result});
