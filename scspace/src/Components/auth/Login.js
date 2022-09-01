@@ -8,7 +8,7 @@ class Login extends Component{
     constructor(props){
         super(props);
 
-        this.location = 'https://iam2.kaist.ac.kr/api/sso/commonLogin?client_id=SCS&state='+new Date().getTime()+'&redirect_url='+encodeURI('https://gonggan.kaist.ac.kr/api/jwt/login');
+        this.location = 'https://iam2.kaist.ac.kr/api/sso/commonLogin?client_id=SCS&state='+new Date().getTime()+'&redirect_url='+encodeURI('https://scspace.kaist.ac.kr/api/jwt/login');
         
     }
     
