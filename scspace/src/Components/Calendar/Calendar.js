@@ -252,14 +252,14 @@ class Calendar extends React.Component {
       disabled: false,
       contextMenuItems: [
         {
-          text: 'New Appointment',
+          text: '새 예약',
           onItemClick: () => scheduler.showAppointmentPopup(
             { startDate: cellData.startDate },
             true,
           ),
         },
         {
-          text: 'New Recurring Appointment',
+          text: '새 정기예약',
           onItemClick: () => scheduler.showAppointmentPopup(
             {
               startDate: cellData.startDate,
@@ -269,7 +269,7 @@ class Calendar extends React.Component {
           ),
         },
         {
-          text: 'Group by Room/Ungroup',
+          text: '팀 예약',
           beginGroup: true,
           onItemClick: () => {
             if (this.groups) {
@@ -288,7 +288,7 @@ class Calendar extends React.Component {
           },
         },
         {
-          text: 'Go to Today',
+          text: '오늘',
           onItemClick: () => {
             this.setState((currentState) => ({
               ...currentState,
