@@ -10,7 +10,7 @@
 
 # production
 /build
-
+scspace/build
 
 # misc
 .DS_Store
