@@ -123,7 +123,7 @@ const dbModel = {
 
     let sql = `SELECT * FROM reservation WHERE (time_request BETWEEN DATE_ADD(NOW(),INTERVAL -1 MONTH ) AND NOW()) AND state='wait' ORDER BY time_request DESC;`;
     await conn.query(sql)
-    .then((result) => { db.disconnect(conn); return_result = result[0];})
+    .then((result) => {return_result = result[0];})
     .catch(err => {console.log(err); return_result = null;});
       
     return return_result;
