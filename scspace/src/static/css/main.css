@@ -223,10 +223,11 @@ section {
 # Header
 --------------------------------------------------------------*/
 .header {
-  background-color: rgba(255, 255, 255, 0.75);
+  background-color: white;
   padding: 15px 0;
   transition: all 0.5s;
   z-index: 997;
+  margin-bottom: 100px;
 }
 .header.sticked {
   background: var(--color-white);
@@ -2020,7 +2021,7 @@ section {
 .contact .info {
   padding: 40px;
   box-shadow: 0px 2px 15px rgba(var(--color-black-rgb), 0.1);
-  overflow: hidden;
+  overflow: auto;
 }
 .contact .info h3 {
   font-weight: 600;
@@ -2028,6 +2029,7 @@ section {
 }
 .contact .info p {
   color: var(--color-secondary-light);
+  white-space: pre-wrap;
   margin-bottom: 30px;
   font-size: 15px;
 }
@@ -2980,11 +2982,18 @@ section {
 .pdf button {
   background: var(--color-primary);
   border: 0;
-  padding: 13px 50px;
+  padding: 0.8em 2em;
   color: var(--color-white);
   transition: 0.4s;
   border-radius: 0;
+  margin-left: 20px;
+  margin-bottom: 10px;
 }
+ @media (max-width: 700px) {
+  .pdf button {
+    margin-left: 12em;
+   }
+ }
 .pdf p:hover {
   color: black;
 }
@@ -3004,24 +3013,33 @@ section {
   clear: both;
 }
 .confirm {
-  padding-right: 200px;
-  padding-left: 200px;
+  box-sizing: border-box;
+  width: 800px;
   margin-right: auto; 
   margin-left: auto;
+  white-space: normal;
 }
-@media (min-width: 768px) {
+@media (max-width: 500px) {
  .confirm {
-  width: 750px;
+  width: 25em;
   }
 }
-@media (min-width: 992px) {
-  .confirm {
-    width: 970px
+@media (max-width: 700px)
+and (min-width: 500px) {
+ .confirm {
+  width: 30em;
   }
 }
-@media (min-width: 1200px) {
+@media (max-width: 1000px)
+and (min-width: 700px) {
   .confirm {
-    width: 1170px;
+    width: 600px
+  }
+}
+@media (max-width: 1500px)
+and (min-width: 1000px) {
+  .confirm {
+    width: 800px;
   }
 }
 .confirm .txt {
@@ -3038,7 +3056,7 @@ section {
   color: var(--color-secondary);
 }
 .confirm .conf-item .ptitle {
-  padding: 10px 30px 10px 100px;
+  padding: 10px 30px 10px 20px;
   margin-bottom: 0;
   font-size: 16px;
   font-weight: 600;
@@ -3128,7 +3146,7 @@ section {
   height: 35px;
   width: 300px;
 }
-.manage .wait{
+.wait{
   width: 13px;
   height: 13px;
   background: rgb(242, 43, 80);
@@ -3137,7 +3155,7 @@ section {
   margin-top: 6px;
   border-radius: 50%;
 }
-.manage .receive{
+.receive{
   width: 13px;
   height: 13px;
   background: rgb(245, 205, 61);
@@ -3146,7 +3164,25 @@ section {
   margin-top: 6px;
   border-radius: 50%;
 }
-.manage .solve{
+.rejected{
+  width: 13px;
+  height: 13px;
+  background: rgb(245, 205, 61);
+  float: left;
+  margin-right: 8px;
+  margin-top: 6px;
+  border-radius: 50%;
+}
+.solve{
+  width: 13px;
+  height: 13px;
+  background: rgb(79, 211, 46);
+  float: left;
+  margin-right: 8px;
+  margin-top: 6px;
+  border-radius: 50%;
+}
+.grant {
   width: 13px;
   height: 13px;
   background: rgb(79, 211, 46);
@@ -3235,4 +3271,8 @@ section {
   border: 0;
   outline: 0;
   background: var(--color-primary);
+}
+
+.body-space {
+  padding-top: 2em;
 }

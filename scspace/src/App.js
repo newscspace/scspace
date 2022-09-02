@@ -77,7 +77,7 @@ class App extends Component {
         <Route path="/logout" component={Logout} exact/>
 
 
-        <Route path="*" render={() => (<h1>404 error</h1>)}/>
+        <Route path="*" render={() => (<h1 className="body-space">404 error</h1>)}/>
       </Switch>
    
       
