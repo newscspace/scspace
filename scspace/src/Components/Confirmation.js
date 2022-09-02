@@ -240,7 +240,6 @@ callApi_team= async () => {
                     </div>
                 </div>
             </div>
-
             <section className="section-header">
                 <div className="contact">
                     <div className="confirm">            
@@ -306,7 +305,8 @@ callApi_team= async () => {
                                         </div>
                                     </div>
                                     <div className="text-end pdf">
-                                    <button onClick= {() => {this.props.history.push({pathname : '/reservation', state:this.state.reserveData})}}>{t('예약 수정')}</button>&nbsp;&nbsp;
+                                    <button onClick= {() => {this.props.history.push({pathname : '/reservation'})}}>{t('확인')}</button>
+                                    <button onClick= {() => {this.props.history.push({pathname : '/reservation', state:this.state.reserveData})}}>{t('예약 수정')}</button>
                                     <button onClick= {() => {this.callApi_delete() .then((res) => {this.props.history.push('/mypage')}) .catch((err) => {console.log(err)})}}>{t('예약 취소')}</button>
                                     </div>
                                     
