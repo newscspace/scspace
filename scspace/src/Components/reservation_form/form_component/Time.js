@@ -87,7 +87,7 @@ const Time = (props) => {
         <div className="col-md-6 form-group">
           {t('시작')}
           <DatePicker
-            onChange={(date) => { setStartDate(date); props.onChangeHandler('timeFrom', date) }}
+            onChange={(date) => { setStartDate(date); props.onChangeHandler('timeFrom', date); setEndDate(date); props.onChangeHandler('timeTo', date); }}
             selected={startDate}
             minDate={calcDate(new Date(), props.limitdate.mindays)}
             maxDate={calcDate(new Date(), props.limitdate.maxdays)}
@@ -108,7 +108,7 @@ const Time = (props) => {
             {t('끝')}
             <DatePicker
               onChange={(date) => { setEndDate(date); props.onChangeHandler('timeTo', date) }}
-              selected={startDate}
+              selected={endDate}
 
               // minDate={startDate}
               // maxDate={calcDate(new Date(), props.limitdate.maxdays)}
@@ -142,7 +142,7 @@ const Time = (props) => {
           <h5>{t('당일 리허설')}</h5>
           <div className="col-md-6 form-group">
             {t('시작')}<DatePicker
-              onChange={(date) => { setrehersalStartDate(date); props.onChangeHandler('rehersalFrom', date, true) }}
+              onChange={(date) => { setrehersalStartDate(date); props.onChangeHandler('rehersalFrom', date, true); setrehersalEndDate(date); props.onChangeHandler('rehersalTo', date, true) }}
               selected={rehersalStartDate}
               minDate={calcDate(new Date(), props.limitdate.mindays)}
               maxDate={calcDate(new Date(), props.limitdate.maxdays)}
@@ -163,7 +163,7 @@ const Time = (props) => {
               {t('끝')}
               <DatePicker
                 onChange={(date) => { setrehersalEndDate(date); props.onChangeHandler('rehersalTo', date, true) }}
-                selected={rehersalEndDate}
+                selected={rehersalStartDate}
 
                 // minDate={rehersalStartDate}
                 // maxDate={calcDate(new Date(), props.limitdate.maxdays)}
@@ -196,7 +196,7 @@ const Time = (props) => {
             <h5>{t('전날 리허설')}</h5>
             <div className="col-md-6 form-group">
               {t('시작')}<DatePicker
-                onChange={(date) => { setlastrehersalStartDate(date); props.onChangeHandler('rehersalLastdayFrom', date, true) }}
+                onChange={(date) => { setlastrehersalStartDate(date); props.onChangeHandler('rehersalLastdayFrom', date, true); setlastrehersalEndDate(date); props.onChangeHandler('rehersalLastdayTo', date, true) }}
                 selected={lastRehersalStartDate}
                 minDate={calcDate(new Date(), props.limitdate.mindays - 1)}
                 maxDate={calcDate(new Date(), props.limitdate.maxdays)}
@@ -216,7 +216,7 @@ const Time = (props) => {
               (<div className="col-md-6 form-group mt-3 mt-md-0">
                 {t('끝')}<DatePicker
                   onChange={(date) => { setlastrehersalEndDate(date); props.onChangeHandler('rehersalLastdayTo', date, true) }}
-                  selected={lastRehersalEndDate}
+                  selected={lastRehersalStartDate}
 
                   // minDate={lastRehersalStartDate}
                   // maxDate={calcDate(new Date(), props.limitdate.maxdays)}
