@@ -29,6 +29,14 @@ function Notice(props){
     }
 
     useEffect(() => {
+        LoginCheck()
+        .then((result) => {
+            if (result !== false)
+            {
+            setLogin(true);
+            setUserInfo(result);
+            }
+        })
         callApi()
         .then(res => {setList(res); setTPN(Math.ceil(res.length/10));} )
         .catch(err => console.log(err));
