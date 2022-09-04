@@ -49,7 +49,14 @@ function CreateNotice(props){
   }
 
   useEffect(() => {
-
+    LoginCheck()
+    .then((result) => {
+      if (result !== false)
+      {
+        setLogin(true);
+        setUserInfo(result);
+      }
+    })
     if(props.location.state) {
       props.location.state.content.mode = 'update'
       _setState(props.location.state.content);
