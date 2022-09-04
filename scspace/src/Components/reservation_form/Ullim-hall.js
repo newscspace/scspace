@@ -137,8 +137,8 @@ class Form extends Component{
 
               <h5>로비</h5>
                 <div className="form-check form-check-inline">
-                  <input className="form-check-input" type="checkbox" name = "lobby" id="inlineCheckbox1" value={true} onChange={this.handleValueChange_checkbox}/>
-                  <label className="form-check-label" for="inlineCheckbox1">{t('울림홀 앞 1층 로비를 사용합니다.')}</label>
+                  <input className="form-check-input" type="checkbox" name = "lobby" id="useLobby" value={true} onChange={this.handleValueChange_checkbox}/>
+                  <label className="form-check-label" for="useLobby">{t('울림홀 앞 1층 로비를 사용합니다.')}</label>
                 </div>
                 <hr/><br/>
 

@@ -15,8 +15,8 @@ class Form extends Component{
         <div>
            <h5></h5>
                 <div className="form-check form-check-inline">
-                  <input className="form-check-input" type="checkbox" id="inlineCheckbox1" value="agree" required/>
-                  <label className="form-check-label" for="inlineCheckbox1">{t('유의사항을 확인했으며 이에 동의합니다.')}</label>
+                  <input className="form-check-input" type="checkbox" id="AgreeToTerms" value="agree" required/>
+                  <label className="form-check-label" for="AgreeToTerms">{t('유의사항을 확인했으며 이에 동의합니다.')}</label>
                 </div>
                 <hr/><br/>
       </div>
