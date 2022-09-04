@@ -82,14 +82,13 @@ class Calendar extends React.Component {
     
     return (
       <div className="container py-5">
-<div className="calendar form-inline shadow bg-white p-5">
-
-      <React.Fragment>
-      <Dropdown >
+        <div className="calendar form-inline shadow bg-white p-5">
+          <React.Fragment>
+            <Dropdown >
               <Dropdown.Toggle className="space-filter" id="dropdown-basic" >
                 {t(spaceDict[this.state.filter])}
               </Dropdown.Toggle>
-        
+
               <Dropdown.Menu>
                 {Object.keys(spaceDict).map((space) =>{
                   return (
@@ -97,47 +96,48 @@ class Calendar extends React.Component {
                   )
                 })}
               </Dropdown.Menu>
-          </Dropdown>
-                    
-        <Scheduler
-          ref={this.scheduler}
-          timeZone="Asia/Seoul"
-          dataSource={data.filter((r)=>{return r.space===filter})}
-          views={views}
-          groups={groups}
-          crossScrollingEnabled={crossScrollingEnabled}
-          defaultCurrentView="month"
-          currentDate={currentDate}
-          startDayHour={0}
-          recurrenceEditMode="series"
-          onAppointmentContextMenu={this.onAppointmentContextMenu}
-          onAppointmentAdded={this.onAppointmentAdded}
-          onAppointmentUpdated={this.onAppointmentUpdated}
-          onAppointmentDeleted={this.onAppointmentDeleted}
-          onCellContextMenu={this.onCellContextMenu}
-          //appointmentTooltipComponent={AppointmentTooltip}
+            </Dropdown>
+                        
+            <Scheduler
+              ref={this.scheduler}
+              timeZone="Asia/Seoul"
+              dataSource={data.filter((r)=>{return r.space===filter})}
+              views={views}
+              groups={groups}
+              crossScrollingEnabled={crossScrollingEnabled}
+              defaultCurrentView="month"
+              currentDate={currentDate}
+              startDayHour={0}
+              recurrenceEditMode="series"
+              onAppointmentContextMenu={this.onAppointmentContextMenu}
+              onAppointmentAdded={this.onAppointmentAdded}
+              onAppointmentUpdated={this.onAppointmentUpdated}
+              onAppointmentDeleted={this.onAppointmentDeleted}
+              onCellContextMenu={this.onCellContextMenu}
+              //appointmentTooltipComponent={AppointmentTooltip}
 
-          customizeDateNavigatorText={this.customizeDateNavigatorText}
+              customizeDateNavigatorText={this.customizeDateNavigatorText}
 
-          editing={editing}
-          height={1200}
-        >
-          <Resource
-            dataSource={resourcesData}
-            fieldExpr="space"
-            label="Space"
-          />
-        </Scheduler>
-        <ContextMenu
-          dataSource={contextMenuItems}
-          width={200}
-          target={target}
-          disabled={disabled}
-          onItemClick={this.onContextMenuItemClick}
-          itemRender={this.AppointmentMenuTemplate}
-        />
-      </React.Fragment>
-      </div>
+              editing={editing}
+              height={1200}
+            >
+              <Resource
+                dataSource={resourcesData}
+                fieldExpr="space"
+                label="Space"
+              />
+            </Scheduler>
+            
+            <ContextMenu
+              dataSource={contextMenuItems}
+              width={200}
+              target={target}
+              disabled={disabled}
+              onItemClick={this.onContextMenuItemClick}
+              itemRender={this.AppointmentMenuTemplate}
+            />
+          </React.Fragment>
+        </div>
       </div>
     );
   }
@@ -251,14 +251,14 @@ class Calendar extends React.Component {
       disabled: false,
       contextMenuItems: [
         {
-          text: 'New Appointment',
+          text: '새 예약',
           onItemClick: () => scheduler.showAppointmentPopup(
             { startDate: cellData.startDate },
             true,
           ),
         },
         {
-          text: 'New Recurring Appointment',
+          text: '새 정기예약',
           onItemClick: () => scheduler.showAppointmentPopup(
             {
               startDate: cellData.startDate,
@@ -268,7 +268,7 @@ class Calendar extends React.Component {
           ),
         },
         {
-          text: 'Group by Room/Ungroup',
+          text: '팀 예약',
           beginGroup: true,
           onItemClick: () => {
             if (this.groups) {
@@ -287,7 +287,7 @@ class Calendar extends React.Component {
           },
         },
         {
-          text: 'Go to Today',
+          text: '오늘',
           onItemClick: () => {
             this.setState((currentState) => ({
               ...currentState,

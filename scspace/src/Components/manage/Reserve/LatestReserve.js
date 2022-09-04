@@ -140,7 +140,7 @@ class LatestReserve extends Component{
                                     <td>{contents.id}</td>
                                     <td>{moment(contents.time_from).format('MM월 DD일 HH:mm') + '~' + moment(contents.time_to).format('MM월 DD일 HH:mm')}</td>
                                     <td>{moment(contents.time_request).format('MM월 DD일 HH:mm')}</td>
-                                    <td>{this.state.handle[contents.state]}</td>
+                                    <td><div className={contents.state}/>{this.state.handle[contents.state]}</td>
                                 </tr>
                             )
                         })}
