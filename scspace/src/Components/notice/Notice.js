@@ -15,14 +15,7 @@ function Notice(props){
     const [login, setLogin] = useState(false);
     const [UserInfo, setUserInfo] = useState(null);
 
-    LoginCheck()
-    .then((result) => {
-        if (result !== false)
-        {
-            setLogin(true);
-            setUserInfo(result);
-        }
-    })
+
 
     const callApi = async () => {
         const res = await get('/api/notice/all');

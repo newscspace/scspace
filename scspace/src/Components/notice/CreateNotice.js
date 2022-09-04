@@ -49,12 +49,6 @@ function CreateNotice(props){
   }
 
   useEffect(() => {
-    LoginCheck() 
-    .then((result) => {
-      if (result === false) {props.history.push('/login'); }
-      else if (result.type === 'admin') {setuserInfo({login:true, UserInfo:result});}
-      else {props.history.push('/notice');}
-    })
 
     if(props.location.state) {
       props.location.state.content.mode = 'update'

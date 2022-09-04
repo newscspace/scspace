@@ -12,14 +12,7 @@ function ViewNotice(props){
   const [UserInfo, setUserInfo] = useState(null);
   const {t} = props;
 
-  LoginCheck()
-  .then((result) => {
-    if (result !== false)
-    {
-      setLogin(true);
-      setUserInfo(result);
-    }
-  })
+
 
   const callApi = async () => {
     const res = await get('/api/notice/id?id='+ props.match.params.id);
