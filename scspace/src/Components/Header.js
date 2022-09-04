@@ -56,7 +56,7 @@ class Header extends Component{
       <div className="container-fluid d-flex align-items-center justify-content-between">
   
         <Link to="/" className="logo d-flex align-items-center scrollto me-auto me-lg-0">
-          <img src="img/logo.svg" alt=""/>
+          <img src="/img/logo.svg" alt=""/>
           <h1>         </h1>
         </Link>
   

@@ -8,19 +8,6 @@ import {get, post} from 'axios';
 import LoginCheck from '../auth/LoginCheck';
 import {withTranslation} from "react-i18next";
 
-//individual_practice_room_1','individual_practice_room_2','individual_practice_room_3','piano_room_1','piano_room_2','multipurpose_room','seminar_room_1','seminar_room_2',
-//'dance_studio','group_practice_room','mirae_hall','ullim_hall','open_space','workshop'
-// import Individual from './spaces/Individual/Individual.js';
-// import Piano from './spaces/Piano/Piano.js';
-// import Seminar from './spaces/Seminar/Seminar.js';
-// import Practice from './spaces/Practice/Practice.js';
-// import Dance from './spaces/Dance/Dance.js';
-// import Ullim from './spaces/Ullim/Ullim.js';
-// import Mirae from './spaces/Mirae/Mirae.js';
-// import Workshop from './spaces/Workshop/Workshop.js';
-// import Openspace from './spaces/Openspace/Openspace.js';
-
-
 
 class Space extends Component{
     constructor(props){

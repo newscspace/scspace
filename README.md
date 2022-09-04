@@ -24,11 +24,12 @@ General Open Nomination for Guestspace & Granular Access Network
 - *매뉴얼 정독*
 - 비밀번호, API Key 등 secret을 **절대** 평문으로 코드에 적지 마세요.
 - 필수 기능(로그인, 예약)이 계속 작동할 수 있게 기능을 PR로 넣어주세요.
-- 본 레포의 master는 production과 동일해야 합니다. **절대 배포된 서버에만 손대지 마세요.**
+- 본 레포의 master는 production과 동일해야 합니다. **절대 백엔드에만 손대지 마세요.**
+- 회칙, 세칙 수정시 **같은 파일명으로 S3 버킷에 올려서** 교체하세요
 
 ### 배포 후 수정 방법
-1. 기능을 위한 branch를 fork한다.
+1. 기능을 위한 branch를 fork하거나, dev 브랜치로 전환한다.
 2. 로컬에서 개발한다.
-3. CI/CD 통과 확인 후 PR을 날린다.
+3. CI/CD 통과 확인 후 master에 PR을 날린다.
 4. **다른 사람이** 문제 없는지 확인 후 Merge한다.
-5. 서버에 git pull한다.
+5. 서버에 git pull한다. (벡엔드 한정, 프런트는 자동으로 됨)

@@ -12,7 +12,7 @@ class Banner extends Component{
       
   <section className="hero-static d-flex align-items-center">
   <div className="container d-flex flex-column justify-content-center align-items-center text-center position-relative">
-    <img src='./img/logo.svg' alt="" className="img-fluid main-photo"/>
+    <img src='/img/logo.svg' alt="" className="img-fluid main-photo"/>
     <br/>
     <p>{t('학생문화공간위원회 홈페이지에 오신걸 환영합니다.')}</p>
     <div className="d-flex">

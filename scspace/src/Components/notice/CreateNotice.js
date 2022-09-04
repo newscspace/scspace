@@ -94,8 +94,8 @@ function CreateNotice(props){
                     <textarea className="form-control" name="content" placeholder="공지 내용"  value={_state.content} onChange={handleValueChange} required></textarea>
                     </div>
                   <div className="form-check form-check-inline">
-                    <input className="form-check-input" name="important" type="checkbox" id="inlineCheckbox1" checked={_state.important ? true : false} onChange={onChangeValue}/>
-                    <label className="form-check-label" for="inlineCheckbox1">중요 공지</label>
+                    <input className="form-check-input" name="important" type="checkbox" id="isImportantNoticeChkbx" checked={_state.important ? true : false} onChange={onChangeValue}/>
+                    <label className="form-check-label" for="isImportantNoticeChkbx">중요 공지</label>
                   </div>
                   <div className="text-center"><button type="submit">작성하기</button></div>
                 </form>
