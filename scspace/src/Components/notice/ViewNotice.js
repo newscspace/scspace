@@ -41,6 +41,14 @@ function ViewNotice(props){
   }
 
   useEffect(() => {
+    LoginCheck()
+    .then((result) => {
+        if (result !== false)
+        {
+        setLogin(true);
+        setUserInfo(result);
+        }
+    })
     callApi()
     .then(res => setContent(res))
     .catch(err => console.log(err));
