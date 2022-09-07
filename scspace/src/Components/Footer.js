@@ -15,7 +15,8 @@ class Footer extends Component{
                   <p>
                   대전광역시 유성구 대학로 291  <br/>
                   한국과학기술원 N13-1 장영신학생회관 309호<br/><br/>
-                  평일 상근 19~21시<br/><br/>
+                  월,화,수,금 상근 19~21시<br/>
+                  목요일 상근 21~23시<br/><br/>
                     <strong>Tel:</strong> +82 042-350-0386<br/>
                     <strong>Email:</strong> scspace@kaist.ac.kr<br/>
                   </p>

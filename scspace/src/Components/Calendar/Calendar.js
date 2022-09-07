@@ -155,7 +155,6 @@ class Calendar extends React.Component {
   customizeDateNavigatorText(e){
     if (moment(this.currentDate).format('YYYY - MM') !== moment(e.startDate).format('YYYY - MM')){
       this.currentDate = e.startDate;
-      console.log(this.state.data)
       this.callApi(e.startDate)
     }
 

@@ -29,7 +29,7 @@ auth = {
                     function(err,token){
                         if(err) console.log(err);
                         else {res.cookie('scspacetoken', Buffer.from(token).toString('base64'), {
-                            domain : 'gonggan.kaist.ac.kr',
+                            domain : '.kaist.ac.kr',
                             maxAge: 60*60*1000,
                             httpOnly: true,
                             path:'/',
@@ -88,7 +88,7 @@ auth = {
     logout : (req,res) => {
 
         res.clearCookie('scspacetoken', {                            
-            domain : 'gonggan.kaist.ac.kr',
+            domain : '.kaist.ac.kr',
             httpOnly: true,
             path:'/',
             sameSite : 'Lax',

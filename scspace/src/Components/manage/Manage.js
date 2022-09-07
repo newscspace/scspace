@@ -2,9 +2,19 @@ import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
 import LatestReserv from './Reserve/LatestReserve';
 import LatestAsk from './Ask/LatestAsk';
-
+import LoginCheck from '../auth/LoginCheck';
 
 class Manage extends Component{
+
+    constructor(props){
+         super(props);
+        LoginCheck() .then((result) => { 
+         if (result === false) this.props.history.push('/login'); 
+         else if (result.type === 'admin') this.setState({login:true, UserInfo:result}); 
+         else this.props.history.push('/'); })
+
+    }
+
     render() {return (
         <main id="main">
             <div  className="breadcrumbs">

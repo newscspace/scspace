@@ -19,7 +19,16 @@ reservation = {
             p.time_to = req.body.timeTo;
             p.time_request = new Date();
             p.content = req.body.content;
-            p.state = 'wait';
+
+            
+            let autoGrantList = ['individual-practice-room1', 'individual-practice-room2', 'individual-practice-room3', 'piano-room1', 'piano-room2', 'group-practice-room', 'seminar-room1', 'seminar-room2', 'dance-studio', 'workshop']
+            if (autoGrantList.includes(p.space)){
+                p.state = 'grant'; 
+            }
+            else{
+                p.state='wait';
+            }
+
 
             db.create(p)
             .then ((result) => {
@@ -34,7 +43,7 @@ reservation = {
         db.readCalendar(p)
         .then(result => {
             result.map((reservation) => {
-                return_result.push({id:reservation.id, space:reservation.space,startDate : reservation.time_from, endDate : reservation.time_to, content : reservation.content, text:reservation.content ?reservation.content.eventName : null, description:reservation.content?reservation.content.contents : null, recurrenceRule : reservation.content ? reservation.content.recurrenceRule : null})
+                return_result.push({id:reservation.id, space:reservation.space,startDate : reservation.time_from, endDate : reservation.time_to, content : reservation.content, text:reservation.content ?(reservation.content.eventName ? reservation.content.eventName : reservation.content.organizatipnName) : null, description:reservation.content?reservation.content.contents : null, recurrenceRule : reservation.content ? reservation.content.recurrenceRule : null})
                 
             })
             res.json(return_result);
@@ -86,7 +95,7 @@ reservation = {
                 p.content['recurrenceRule'] = req.body.recurrenceRule ? req.body.recurrenceRule : null;
                 p.content['contents'] = req.body.description;
                 p.id = req.body.id
-                p.state = 'wait';
+                p.state = 'grant';
     
                 db.updateCalendar(p)
                 .then ((result) => {

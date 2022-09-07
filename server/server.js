@@ -21,7 +21,7 @@ app.use(cookieParser());
 
 //db.set_db();
 
-app.use(express.static( '/home/ec2-user/scspace/scspace/build'));
+//app.use(express.static( '/home/ec2-user/scspace/scspace/build'));
 
 app.use(cors());
 

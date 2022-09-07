@@ -5,9 +5,7 @@ import LoginCheck from '../auth/LoginCheck';
 
 function CreateNotice(props){
   const [_state, _setState] = useState({});
-  const [userInfo, setuserInfo] = useState({});
-
-
+  const [UserInfo, setUserInfo] = useState({});
   
   const sendPost = () => {
     const url = '/api/notice/' + _state.mode ;
@@ -52,7 +50,7 @@ function CreateNotice(props){
     LoginCheck() 
     .then((result) => {
       if (result === false) {props.history.push('/login'); }
-      else if (result.type === 'admin') {setuserInfo({login:true, UserInfo:result});}
+      else if (result.type === 'admin') {setUserInfo({login:true, UserInfo:result});}
       else {props.history.push('/notice');}
     })
 
@@ -110,5 +108,4 @@ function CreateNotice(props){
   )
 
 }
-
 export default CreateNotice;
