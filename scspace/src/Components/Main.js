@@ -11,5 +11,5 @@ class Main extends Component{
         </div>
       )};
 }
-/*joosuk*/
+
 export default Main;
