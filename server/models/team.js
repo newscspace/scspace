@@ -17,7 +17,7 @@ const dbModel = {
 
   readId: async (p) => {
     let conn = db.getConnection().promise();    
-    let return_result = {team_name : '', member:[]};
+    let return_result = {team_name : '', team_id : p[0], member:[]};
 
     let sql = `SELECT * FROM team WHERE id=?`;
     await conn.query(sql, p)
