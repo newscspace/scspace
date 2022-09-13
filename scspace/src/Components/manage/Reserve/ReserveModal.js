@@ -31,7 +31,7 @@ class ReservModal extends Component{
     reservationContent = () => {
         let returnResult = [];
         if (this.props.modal.reservation.team_id !== null){
-            if (this.state.teamData !== null || (this.state.teamData.team_id !==  this.props.modal.reservation.team_id)) {
+            if (this.state.teamData !== null && (this.state.teamData.team_id ===  this.props.modal.reservation.team_id)) {
                 returnResult.push(
                 <div className="wrap">
                     <p className="modal-first">팀 이름</p>
