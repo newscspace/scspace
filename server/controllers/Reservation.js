@@ -196,7 +196,19 @@ reservation = {
                 p.time_last_modified = new Date();
                 p.content = req.body.content;
                 p.id = req.body.id;
-                p.state = 'wait';
+                 
+                let autoGrantList = ['individual-practice-room1', 'individual-practice-room2', 'individual-practice-room3', 'piano-room1', 'piano-room2', 'group-practice-room', 'seminar-room1', 'seminar-room2', 'dance-studio']
+                let autoRejectList = ['workshop']
+                if (autoGrantList.includes(p.space)){
+                    p.state = 'grant'; 
+                }
+                else if (autoRejectList.includes(p.space)){
+                    p.state='rejected';
+                }
+                else{
+                    p.state='wait';
+                }
+
     
                 db.update(p)
                 .then ((result) => {
