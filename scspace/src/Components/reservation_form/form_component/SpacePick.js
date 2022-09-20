@@ -15,7 +15,7 @@ class Form extends Component{
             {Object.keys(this.props.spacelist).map((space, index) => {
                 return (
                     <div className="form-check form-check-inline">
-                    <input className="form-check-input" type="radio" name="spaceName" id={"SpaceRadio"+index} onChange={this.props.onChangeHandler} value={this.props.spacelist[space]} required/>
+                    <input className="form-check-input" type="radio" name="space" id={"SpaceRadio"+index} onChange={this.props.onChangeHandler} value={this.props.spacelist[space]} required/>
                     <label className="form-check-label" for={"SpaceRadio"+index}>{t(space)}</label>
                 </div>
                 )

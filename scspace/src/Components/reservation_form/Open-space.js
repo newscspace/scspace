@@ -21,7 +21,7 @@ class Form extends Component{
         this.state =  this.props.reserveData ? 
         this.props.reserveData :
         {
-          spaceName : 'open-space',
+          space : 'open-space',
           timeFrom : '',
           timeTo : '',
           content : {space : [], organizationName : '', eventName:'', innerNumber : 0, outerNumber : 0, character:[], eventPurpose:'',contents:'', rehersalFrom:null, rehersalTo:null}

@@ -19,7 +19,7 @@ class Form extends Component{
         super(props);
         this.state =  this.props.reserveData ? 
         this.props.reserveData :{
-            spaceName : 'mirae-hall',
+            space : 'mirae-hall',
             timeFrom : '',
             timeTo : '',
             content : {organizationName : '', eventName:'', innerNumber : 0, outerNumber : 0, eventPurpose:'',contents:'', rehersalFrom:null, rehersalTo:null, rehersalLastdayFrom : null, rehersalLastdayTo:null, equipment:[], food:''}
