@@ -16,7 +16,7 @@ class Form extends Component{
     
     this.state =  this.props.reserveData ? 
         this.props.reserveData : {
-        spaceName: 'dance-studio',
+        space: 'dance-studio',
         teamId: null, 
         timeFrom : '',
         timeTo : '',
@@ -149,8 +149,8 @@ sendPost = () => {
           <div className="col-lg-8">
             <form className="php-email-form" onSubmit={this.handleSubmit}> 
               <EventName onChangeHandler={this.handleValueChange_content} value={this.state.content.eventName}/>
-              <Team teamlist= {this.state.teamlist} onChangeHandler = {this.handleValueChange}/>
-              <Member checkboxlist = {this.state.memberlist} head="멤버" name="teamMember" onChangeHandler = {this.handleValueChange_checkbox} />
+              <Team teamlist= {this.state.teamlist ? this.state.teamlist : []} onChangeHandler = {this.handleValueChange} />
+              <Member checkboxlist = {this.state.memberlist? this.state.memberlist : []} head="멤버" name="teamMember" onChangeHandler = {this.handleValueChange_checkbox}/>
               <Time onChangeHandler = {this.handleValueChange_time} limitdate={this.limitdate}/>
               <Contents onChangeHandler = {this.handleValueChange_content} value={this.state.content.contents}/>
               <Agree/>

@@ -13,7 +13,7 @@ reservation = {
           
             p.reserver_id = result.student_id;
             p.reserver_name = result.name;
-            p.space = req.body.spaceName;
+            p.space = req.body.space;
             p.team_id = req.body.teamId;
             p.time_from = req.body.timeFrom;
             p.time_to = req.body.timeTo;
@@ -189,7 +189,7 @@ reservation = {
               
                 p.reserver_id = result.student_id;
                 p.reserver_name = result.name;
-                p.space = req.body.spaceName;
+                p.space = req.body.space;
                 p.team_id = req.body.teamId;
                 p.time_from = req.body.timeFrom;
                 p.time_to = req.body.timeTo;

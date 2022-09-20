@@ -13,24 +13,24 @@ import {withTranslation} from "react-i18next";
 class Form extends Component{
   constructor(props){
     super(props);
-    this.state =  this.props.reserveData ? 
-    this.props.reserveData :{
-        spaceName: 'group-practice-room',
-        teamId: null, 
+    this.state =  this.props.reserveData ? this.props.reserveData : {
+        space: 'group-practice-room',
+        team_id: null, 
         timeFrom : '',
         timeTo : '',
         content : {teamMember:[], contents:''},
-
         teamlist : [],
-        memberlist : {}
+        memberlist: {}
+
     }
+
 
     // 예약 가능 날짜 관련 변수
     this.limitdate = {mindays:2, maxdays:14, maxUseHour:3}
     
     this.callApi_team()
     .then(res => {
-        this.setState({teamlist:res, teamId:res[0].id})
+        this.setState({teamlist:res, team_id:res[0].id})
   
         this.callApi_member(res[0].id)
             .then(res2 => 
@@ -58,8 +58,8 @@ callApi_team= async () => {
   return body;
 }
 
-callApi_member= async (teamId) => {
-  const res = await get('/api/team/id?id='+teamId);
+callApi_member= async (team_id) => {
+  const res = await get('/api/team/id?id='+team_id);
   const body = await res.data;
   return body;
 }
@@ -148,8 +148,8 @@ sendPost = () => {
           <div className="col-lg-8">
             <form className="php-email-form" onSubmit={this.handleSubmit}> 
               <EventName onChangeHandler={this.handleValueChange_content} value={this.state.content.eventName}/>
-              <Team teamlist= {this.state.teamlist} onChangeHandler = {this.handleValueChange} value={this.props.reserveData ? this.props.reserveData.team_id : null}/>
-              <Member checkboxlist = {this.state.memberlist} head="멤버" name="teamMember" onChangeHandler = {this.handleValueChange_checkbox}/>
+              <Team teamlist= {this.state.teamlist ? this.state.teamlist : []} onChangeHandler = {this.handleValueChange} />
+              <Member checkboxlist = {this.state.memberlist? this.state.memberlist : []} head="멤버" name="teamMember" onChangeHandler = {this.handleValueChange_checkbox}/>
               <Time onChangeHandler = {this.handleValueChange_time} limitdate={this.limitdate}/>
               <Contents onChangeHandler = {this.handleValueChange_content} value={this.state.content.contents}/>
               <Agree/>
