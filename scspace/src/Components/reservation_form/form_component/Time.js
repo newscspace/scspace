@@ -56,14 +56,14 @@ const Time = (props) => {
 
   const filterTimeRehersal = (time) => {
     const startTime = new Date(rehersalStartDate);
-    const realStartTime = new Date(startDate);
+    //const realStartTime = new Date(startDate);
     const selectedTime = new Date(time);
     const limitTime =
       (props.limitdate.maxUseHour === -1 ?
         new Date(startTime.getFullYear(), startTime.getMonth(), startTime.getDate(), 24, 0)
 
         : new Date(startTime.getFullYear(), startTime.getMonth(), startTime.getDate(), startTime.getHours() + props.limitdate.maxUseHour, startTime.getMinutes()))
-    return (startTime.getTime() < selectedTime.getTime()) && (limitTime.getTime() >= selectedTime.getTime()) && (selectedTime.getTime() <= realStartTime.getTime());
+    return (startTime.getTime() < selectedTime.getTime()) && (limitTime.getTime() >= selectedTime.getTime())// && (selectedTime.getTime() <= realStartTime.getTime());
   };
 
   const filterTimeLastRehersal = (time) => {
@@ -163,7 +163,7 @@ const Time = (props) => {
               {t('끝')}
               <DatePicker
                 onChange={(date) => { setrehersalEndDate(date); props.onChangeHandler('rehersalTo', date, true) }}
-                selected={rehersalStartDate}
+                selected={rehersalEndDate}
 
                 // minDate={rehersalStartDate}
                 // maxDate={calcDate(new Date(), props.limitdate.maxdays)}
@@ -216,7 +216,7 @@ const Time = (props) => {
               (<div className="col-md-6 form-group mt-3 mt-md-0">
                 {t('끝')}<DatePicker
                   onChange={(date) => { setlastrehersalEndDate(date); props.onChangeHandler('rehersalLastdayTo', date, true) }}
-                  selected={lastRehersalStartDate}
+                  selected={lastRehersalEndDate}
 
                   // minDate={lastRehersalStartDate}
                   // maxDate={calcDate(new Date(), props.limitdate.maxdays)}

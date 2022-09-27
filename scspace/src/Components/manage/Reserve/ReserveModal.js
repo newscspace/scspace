@@ -136,7 +136,7 @@ class ReservModal extends Component{
             returnResult.push(
                 <div className="wrap">
                     <p className="modal-first">당일 리허설 시간</p>
-                    <p className="modal-second">{moment(this.props.modal.reservation.content.rehersalFrom).format('MM월 DD일 HH:mm') + '~' + moment(this.props.modal.reservation.rehersalTo).format('MM월 DD일 HH:mm')}</p>
+                    <p className="modal-second">{moment(this.props.modal.reservation.content.rehersalFrom).format('MM월 DD일 HH:mm') + '~' + moment(this.props.modal.reservation.content.rehersalTo).format('MM월 DD일 HH:mm')}</p>
                 </div>
             )
         }
@@ -144,7 +144,7 @@ class ReservModal extends Component{
             returnResult.push(
                 <div className="wrap">
                     <p className="modal-first">전날 리허설 시간</p>
-                    <p className="modal-second">{moment(this.props.modal.reservation.content.rehersalLastdayFrom).format('MM월 DD일 HH:mm') + '~' + moment(this.props.modal.reservation.rehersalLastdayFrom).format('MM월 DD일 HH:mm')}</p>
+                    <p className="modal-second">{moment(this.props.modal.reservation.content.rehersalLastdayFrom).format('MM월 DD일 HH:mm') + '~' + moment(this.props.modal.reservation.content.rehersalLastdayTo).format('MM월 DD일 HH:mm')}</p>
                 </div>
             )
         }
