@@ -153,7 +153,7 @@ class Confirmation extends Component{
             returnResult.push(
                 <div className="wrap">
                     <p className="ptitle">당일 리허설 시간</p>
-                    <p className="ptxt">{moment(this.state.reserveData.content.rehersalFrom).format('MM월 DD일 HH:mm') + '~' + moment(this.state.reserveData.rehersalTo).format('MM월 DD일 HH:mm')}</p>
+                    <p className="ptxt">{moment(this.state.reserveData.content.rehersalFrom).format('MM월 DD일 HH:mm') + '~' + moment(this.state.reserveData.content.rehersalTo).format('MM월 DD일 HH:mm')}</p>
                 </div>
             )
         }
@@ -161,7 +161,7 @@ class Confirmation extends Component{
             returnResult.push(
                 <div className="wrap">
                     <p className="ptitle">전날 리허설 시간</p>
-                    <p className="ptxt">{moment(this.state.reserveData.content.rehersalLastdayFrom).format('MM월 DD일 HH:mm') + '~' + moment(this.state.reserveData.rehersalLastdayFrom).format('MM월 DD일 HH:mm')}</p>
+                    <p className="ptxt">{moment(this.state.reserveData.content.rehersalLastdayFrom).format('MM월 DD일 HH:mm') + '~' + moment(this.state.reserveData.content.rehersalLastdayTo).format('MM월 DD일 HH:mm')}</p>
                 </div>
             )
         }
