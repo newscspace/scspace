@@ -39,6 +39,7 @@ const dbModel = {
     return return_result;
   },
 
+
   readCalendar: async (p) => {
     let conn = db.getConnection().promise();    
     let return_result;
@@ -63,6 +64,19 @@ const dbModel = {
  
     
     return return_result;
+  },
+
+  checkDuplicate: async (p) => {
+    let conn = db.getConnection().promise();    
+    let return_result;
+
+    let sql = `SELECT id FROM reservation WHERE space=? AND (? < time_to AND ? > time_from) AND state!='rejected'`
+    await conn.query(sql, [p.space, new Date(p.time_from), new Date(p.time_to)])
+      .then((result) => {return_result = result[0];})
+      .catch(err => {console.log(err); return_result =  false;});
+    
+      return return_result;
+
   },
 
   updateCalendar: async (p) => {

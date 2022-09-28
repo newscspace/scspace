@@ -64,6 +64,9 @@ class Form extends Component{
           if(res.data.reserveId){
             this.props.history.push({pathname : '/confirmation', state: res.data.reserveId });
           }
+          else if (res.data.duplicate){
+            alert('해당 시간에 이미 예약이 존재합니다.');
+          }
         })
         : alert(error) 
       }

@@ -1,6 +1,33 @@
 const db = require('../models/reservation');
 const auth = require('./Jwt');
 
+const checkDuplicate = async (space, time_from, time_to, id=null) => {
+    let p = {}
+    p.space = space;
+    p.time_from = time_from;
+    p.time_to = time_to; 
+
+
+    let return_result;
+    await db.checkDuplicate(p)
+      .then (result => {
+        if (result !== false && result.length === 0){
+            return_result = true;
+        }
+        else if (result.length === 1){
+            if (result[0].id === id) return_result = true;
+            else return_result = false;
+        }
+        else{
+            return_result = false;
+        }
+
+      })
+      .catch((err) => {console.log(err); return_result=false;})
+    return return_result;
+}
+
+
 reservation = {
     create : (req, res) => {
       if(!('scspacetoken' in req.cookies)){
@@ -20,24 +47,41 @@ reservation = {
             p.time_request = new Date();
             p.content = req.body.content;
 
+
+            checkDuplicate(p.space, p.time_from, p.time_to)
+                .then ((result)=> {
+                    if (result === false){
+                        res.json({'reserveId':false, 'duplicate':true});
+                    }
+                    else{
+                        let autoGrantList = ['individual-practice-room1', 'individual-practice-room2', 'individual-practice-room3', 'piano-room1', 'piano-room2', 'group-practice-room', 'seminar-room1', 'seminar-room2', 'dance-studio']
+                        let autoRejectList = ['workshop']
+                        if (autoGrantList.includes(p.space)){
+                            p.state = 'grant'; 
+                        }
+                        else if (autoRejectList.includes(p.space)){
+                            p.state='rejected';
+                        }
+                        else{
+                            p.state='wait';
+                        }
             
-            let autoGrantList = ['individual-practice-room1', 'individual-practice-room2', 'individual-practice-room3', 'piano-room1', 'piano-room2', 'group-practice-room', 'seminar-room1', 'seminar-room2', 'dance-studio']
-            let autoRejectList = ['workshop']
-            if (autoGrantList.includes(p.space)){
-                p.state = 'grant'; 
-            }
-            else if (autoRejectList.includes(p.space)){
-                p.state='rejected';
-            }
-            else{
-                p.state='wait';
-            }
+            
+                        db.create(p)
+                        .then ((result) => {
+                            res.json({'reserveId':result, 'duplicate':false});
+                        });
+        
+                    }
+                    
+                })
+                
 
+            
 
-            db.create(p)
-            .then ((result) => {
-                res.json({'reserveId':result});
-            });
+           
+
+          
         })
     },
 
@@ -45,7 +89,7 @@ reservation = {
         let p = new Date(req.query.date);
         let return_result = [];
         db.readCalendar(p)
-        .then(result => {
+          .then(result => {
             result.map((reservation) => {
                 return_result.push({
                     id:reservation.id, 
@@ -197,23 +241,37 @@ reservation = {
                 p.content = req.body.content;
                 p.id = req.body.id;
                  
-                let autoGrantList = ['individual-practice-room1', 'individual-practice-room2', 'individual-practice-room3', 'piano-room1', 'piano-room2', 'group-practice-room', 'seminar-room1', 'seminar-room2', 'dance-studio']
-                let autoRejectList = ['workshop']
-                if (autoGrantList.includes(p.space)){
-                    p.state = 'grant'; 
-                }
-                else if (autoRejectList.includes(p.space)){
-                    p.state='rejected';
-                }
-                else{
-                    p.state='wait';
-                }
+                checkDuplicate(p.space, p.time_from, p.time_to, p.id)
+                .then ((result)=> {
+                    if (result === false){
+                        res.json({'reserveId':false, 'duplicate':true});
+                    }
+                    else{
+                        let autoGrantList = ['individual-practice-room1', 'individual-practice-room2', 'individual-practice-room3', 'piano-room1', 'piano-room2', 'group-practice-room', 'seminar-room1', 'seminar-room2', 'dance-studio']
+                        let autoRejectList = ['workshop']
+                        if (autoGrantList.includes(p.space)){
+                            p.state = 'grant'; 
+                        }
+                        else if (autoRejectList.includes(p.space)){
+                            p.state='rejected';
+                        }
+                        else{
+                            p.state='wait';
+                        }
+            
+            
+                        db.update(p)
+                            .then ((result) => {
+                                res.json({'reserveId':result});
+                            });
+        
+                    }
+                    
+                })
+
 
     
-                db.update(p)
-                .then ((result) => {
-                    res.json({'reserveId':result});
-                });
+                
             })
   }, 
 
