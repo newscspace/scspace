@@ -3,10 +3,16 @@ import {Link} from 'react-router-dom';
 import {get, post} from 'axios';
 import ReservModal from './ReserveModal';
 import moment from 'moment'
+import LoginCheck from '../../auth/LoginCheck';
 
 class ReservationList extends Component{
     constructor(props) {
         super(props);
+        LoginCheck() .then((result) => { 
+            if (result === false) this.props.history.push('/login'); 
+            else if (result.type === 'admin') this.setState({login:true, UserInfo:result}); 
+            else this.props.history.push('/'); })
+
         this.state = {
             page_number : 1,
             list : [],
