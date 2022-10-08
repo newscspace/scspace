@@ -27,7 +27,7 @@ class Form extends Component{
         
 
       // 예약 가능 날짜 관련 변수
-      this.limitdate = {mindays:10, maxdays:45, maxUseHour:-1}
+      this.limitdate = {mindays:10, maxdays:54, maxUseHour:-1}
     }
     
 
