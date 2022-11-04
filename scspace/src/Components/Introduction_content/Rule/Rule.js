@@ -102,8 +102,7 @@ OnClickEvent = (idx, e) =>{
                   </Document>
                 </div>
                   
-                <div className="text-end"><button>
-                  <a href={this.state.file_name} download>다운받기</a></button></div>
+                <div className="text-end"><a href={this.state.file_name} download><button type="button">다운받기</button></a></div>
                 
               </form>
             </div>
