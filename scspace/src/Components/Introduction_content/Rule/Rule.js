@@ -24,6 +24,7 @@ class Rule extends Component {
       file_title: "학생문화공간위원회 회칙",
       info: [
         {which:'학생문화공간위원회 회칙', file: 'https://scspace-public.s3.ap-northeast-2.amazonaws.com/%5B%ED%95%99%EC%83%9D%EB%AC%B8%ED%99%94%EA%B3%B5%EA%B0%84%EC%9C%84%EC%9B%90%ED%9A%8C%5D+%ED%9A%8C%EC%B9%99.pdf', title: "학생문화공간위원회 회칙", clicked:true},
+        {which:'학생문화공간위원회 통합 약관', file: 'https://scspace-public.s3.ap-northeast-2.amazonaws.com/ToS.pdf' , title: "학생문화공간위원회 통합 약관", clicked:false},
         {which:'공간 운영 세칙', file: 'https://scspace-public.s3.ap-northeast-2.amazonaws.com/%5B%ED%95%99%EC%83%9D%EB%AC%B8%ED%99%94%EA%B3%B5%EA%B0%84%EC%9C%84%EC%9B%90%ED%9A%8C%5D+%EA%B3%B5%EA%B0%84+%EC%9A%B4%EC%98%81+%EC%84%B8%EC%B9%99.pdf' , title: "공간 운영 세칙", clicked:false},
         {which:'- 1. 게시물 관리 규칙', file: 'https://scspace-public.s3.ap-northeast-2.amazonaws.com/%5B%ED%95%99%EC%83%9D%EB%AC%B8%ED%99%94%EA%B3%B5%EA%B0%84%EC%9C%84%EC%9B%90%ED%9A%8C%5D+%EA%B2%8C%EC%8B%9C%EB%AC%BC+%EA%B4%80%EB%A6%AC+%EA%B7%9C%EC%A0%95.pdf', title: "게시물 관리 규칙", clicked:false},
         {which:'- 2. 세미나실 운영 규칙', file: 'https://scspace-public.s3.ap-northeast-2.amazonaws.com/%5B%ED%95%99%EC%83%9D%EB%AC%B8%ED%99%94%EA%B3%B5%EA%B0%84%EC%9C%84%EC%9B%90%ED%9A%8C%5D+%EC%84%B8%EB%AF%B8%EB%82%98%EC%8B%A4+%EC%82%AC%EC%9A%A9+%EA%B4%80%EB%A6%AC+%EC%88%98%EC%B9%99.pdf', title: "세미나실 운영 규칙", clicked:false},

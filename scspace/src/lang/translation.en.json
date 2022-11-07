@@ -66,9 +66,10 @@
     "성격" : "Nature of Event",
     "로비" : "Lobby",
     "울림홀 앞 1층 로비를 사용합니다.":"The event uses the lobby on the first floor, in front of Ullim Hall.",
-    "유의사항" : "Precautions",
+    "유의사항" : "Rules",
     "예약하기" : "Make a reservation",
-    "유의사항을 확인했으며 이에 동의합니다.":"I have checked and agreed to the precautions.",
+    "본인은 이용자 전체를 대표하여 유의사항 및 공간위 통합 약관을 확인했으며 이에 동의합니다.":"I have checked and agreed to the rules and SCSPACE terms and conditions on behalf of all users.",
+    "공간위 통합 약관 확인하기":"Check SCSPACE terms and conditions",
 
     "처리 상태" : "State",
     "전체 상태" : "State",
