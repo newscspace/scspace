@@ -8,6 +8,7 @@ const jwt = require('./jwt');
 const team = require('./team');
 const space = require('./space');
 const users = require('./users');
+//const event = require('./event');
 
 
 
@@ -34,6 +35,7 @@ router.get('/api/space/*', space.router);
 
 router.get('/api/users/*', users.router);
 router.post('/api/users/*', users.router);
+
 
 // router.get('/*', (req, res) => {res.send(express.static('../../scspace/build/index.html'))});
 router.get('*', (req, res) => {
