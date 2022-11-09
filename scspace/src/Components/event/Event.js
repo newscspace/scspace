@@ -32,44 +32,25 @@ function Event(props){
 
                 <div className="portfolio-isotope">
         
-                    <div className="row g-0 portfolio-container">
+                    <div className="container">
 
                         <div className = "row row-cols-3">
 
-                            <div className="col col-xl-3 col-lg-4 col-md-6 portfolio-item filter-app">
-                            <img src="/img/logo.svg" className="img-fluid" alt=""/>
-                                <div className="portfolio-info">
-                                    <h4>App 1</h4>
-                                    <a href="assets/img/portfolio/app-1.jpg" title="App 1" className="glightbox preview-link"><i className="bi bi-zoom-in"></i></a>
-                                    <a href="portfolio-details.html" title="More Details" className="details-link"><i className="bi bi-link-45deg"></i></a>
-                                </div>
+                            <div className="col">
+                                <a href="https://us7.proxysite.com/process.php?d=gkeaUUazMTDtLLlfHvFnkss7WKWg9tSAbMTE9hnBrHGHVNu9861OvGStIYVO3k0xkZxj6cUxfMPYUNOH5QGFg5N%2FJ4JmCWYzSPVDn6dEh6odgCyLARXLFClLkiPO3g%3D%3D&b=1"><img src="img/logo.svg"/></a>
+                                <h4>Title1</h4>
                             </div>
-
-                            <div className="col col-xl-3 col-lg-4 col-md-6 portfolio-item filter-app">
-                            <img src="/img/logo.svg" className="img-fluid" alt=""/>
-                                <div className="portfolio-info">
-                                    <h4>App 1</h4>
-                                    <a href="assets/img/portfolio/app-1.jpg" title="App 1" className="glightbox preview-link"><i className="bi bi-zoom-in"></i></a>
-                                    <a href="portfolio-details.html" title="More Details" className="details-link"><i className="bi bi-link-45deg"></i></a>
-                                </div>
+                            <div className="col">
+                                <img src="img/logo.svg"/>
+                                <h4>Title2</h4>
                             </div>
-
-                            <div className="col col-xl-3 col-lg-4 col-md-6 portfolio-item filter-app">
-                            <img src="/img/logo.svg" className="img-fluid" alt=""/>
-                                <div className="portfolio-info">
-                                    <h4>App 1</h4>
-                                    <a href="assets/img/portfolio/app-1.jpg" title="App 1" className="glightbox preview-link"><i className="bi bi-zoom-in"></i></a>
-                                    <a href="portfolio-details.html" title="More Details" className="details-link"><i className="bi bi-link-45deg"></i></a>
-                                </div>
+                            <div className="col">
+                                <img src="img/logo.svg"/>
+                                <h4>Title3</h4>
                             </div>
-
-                            <div className="col col-xl-3 col-lg-4 col-md-6 portfolio-item filter-app">
-                            <img src="/img/logo.svg" className="img-fluid" alt=""/>
-                                <div className="portfolio-info">
-                                    <h4>App 1</h4>
-                                    <a href="assets/img/portfolio/app-1.jpg" title="App 1" className="glightbox preview-link"><i className="bi bi-zoom-in"></i></a>
-                                    <a href="portfolio-details.html" title="More Details" className="details-link"><i className="bi bi-link-45deg"></i></a>
-                                </div>
+                            <div className="col">
+                                <img src="img/logo.svg"/>
+                                <h4>Title4</h4>
                             </div>
 
                         </div>
