@@ -6,16 +6,16 @@ import {withTranslation} from "react-i18next";
 function Event(props){
     const {t} = props;
 
-    const [login, setLogin] = useState(false);
-    const [UserInfo, setUserInfo] = useState(null);
+    const [login, changeLogin] = useState(false);
+    const [UserInfo, changeUserInfo] = useState(null);
 
     useEffect(() => {
         LoginCheck()
         .then((result) => {
             if (result !== false)
             {
-            setLogin(true);
-            setUserInfo(result);
+            changeLogin(true);
+            changeUserInfo(result);
             }
         })
     }, [])

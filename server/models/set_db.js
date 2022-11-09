@@ -61,6 +61,18 @@ set_db = {
           PRIMARY KEY (id)
       ); `);
 
+    conn.query(`
+    CREATE TABLE IF NOT EXISTS event (
+        id	INTEGER	NOT NULL AUTO_INCREMENT,
+        time_post	datetime	NOT NULL,
+        time_edit	datetime	NULL,
+        title	varchar(255)	NOT NULL,
+        link  varchar(512)  NOT NULL,
+        image	MEDIUMBLOB	NOT NULL,
+        hits	Integer	NOT NULL	DEFAULT 0,
+        PRIMARY KEY (id)
+    ); `);
+
     conn.query(`  CREATE TABLE IF NOT EXISTS ask (
         id	INTEGER	NOT NULL AUTO_INCREMENT,
         writer_id	char(8)	NOT NULL,
