@@ -23,6 +23,7 @@ import CreateAsk from './Components/Ask/CreateAsk';
 import ViewAsk from './Components/Ask/ViewAsk';
 import Calendar from './Components/Calendar/Calendar';
 import Event from './Components/event/Event';
+import CreateEvent from './Components/event/CreateEvent';
 
 import Login from './Components/auth/Login';
 import Logout from './Components/auth/Logout';
@@ -73,6 +74,7 @@ class App extends Component {
         <Route path="/team" component={Team} exact/>
 
         <Route path="/event" component={Event} exact></Route>
+        <Route path="/event/createevent" component={CreateEvent} exact></Route>
 
         <Route path="/manage/reservation" component={ReservationList} exact/>
 
