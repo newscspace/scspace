@@ -60,6 +60,15 @@ set_db = {
           important boolean NOT NULL DEFAULT 0,
           PRIMARY KEY (id)
       ); `);
+
+    conn.query(`
+      CREATE TABLE IF NOT EXISTS easteregg (
+          student_id	CHAR(8)	NOT NULL,
+          login_hits	Integer	NOT NULL	DEFAULT 0,
+          resv_hits	Integer	NOT NULL	DEFAULT 0,
+          PRIMARY KEY (student_id)
+      ); `);
+    
     /*
     conn.query(`
     CREATE TABLE IF NOT EXISTS event (
