@@ -62,22 +62,10 @@ function Event(props){
                             <div className = "row row-cols-3">
 
                                 <div className="col">
-                                    <a href="https://us7.proxysite.com/process.php?d=gkeaUUazMTDtLLlfHvFnkss7WKWg9tSAbMTE9hnBrHGHVNu9861OvGStIYVO3k0xkZxj6cUxfMPYUNOH5QGFg5N%2FJ4JmCWYzSPVDn6dEh6odgCyLARXLFClLkiPO3g%3D%3D&b=1"><img src="img/logo.svg"/></a>
+                                    <a href="https://docs.google.com/forms/d/1yRqLRhGucR6zWy34vNgAcXduuY0stqAssQxUUbiz8Cw/edit"><img src="img/instagram-test2.jpg"/></a>
                                     <h4>Title1</h4>
                                 </div>
-                                <div className="col">
-                                    <img src="img/logo.svg"/>
-                                    <h4>Title2</h4>
-                                </div>
-                                <div className="col">
-                                    <img src="img/logo.svg"/>
-                                    <h4>Title3</h4>
-                                </div>
-                                <div className="col">
-                                    <img src="img/logo.svg"/>
-                                    <h4>Title4</h4>
-                                </div>
-
+                                
                             </div>
                 
                         </div>
