@@ -1,3 +1,4 @@
+/*
 const express = require('express');
 const router = express.Router();
 const event = require('../controllers/Event');
@@ -14,3 +15,4 @@ router.post('/api/event/update', event.update);
 router.get('/api/event/delete', event.delete);
 
 module.exports = {router};
+*/

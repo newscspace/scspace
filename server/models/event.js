@@ -1,3 +1,4 @@
+/*
 const db =  require('../config/db_config');
 
 const dbModel = {
@@ -18,3 +19,4 @@ const dbModel = {
 };
 
 module.exports =  dbModel;
+*/

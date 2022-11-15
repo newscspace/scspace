@@ -1,3 +1,4 @@
+/*
 const db = require('../models/event');
 
 event = {
@@ -9,3 +10,4 @@ event = {
 }
 
 module.exports = event
+*/

@@ -60,7 +60,7 @@ set_db = {
           important boolean NOT NULL DEFAULT 0,
           PRIMARY KEY (id)
       ); `);
-
+    /*
     conn.query(`
     CREATE TABLE IF NOT EXISTS event (
         id	INTEGER	NOT NULL AUTO_INCREMENT,
@@ -72,7 +72,7 @@ set_db = {
         hits	Integer	NOT NULL	DEFAULT 0,
         PRIMARY KEY (id)
     ); `);
-
+    */
     conn.query(`  CREATE TABLE IF NOT EXISTS ask (
         id	INTEGER	NOT NULL AUTO_INCREMENT,
         writer_id	char(8)	NOT NULL,
