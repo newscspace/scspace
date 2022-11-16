@@ -43,6 +43,8 @@ class Confirmation extends Component {
         let hashed = this.easteregg();
 
         if(hashed.hash !== 0){
+            // 넘어온 해시값이 0이 아니면(당첨됐으면) prompt로 당첨 메시지 띄워줌
+            // prompt로 하는 이유는.... alert로는 복사가 안되더라구요....
             window.prompt(hashed.content, hashed.hash);
         }
         
