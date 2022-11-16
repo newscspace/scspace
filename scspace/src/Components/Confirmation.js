@@ -42,8 +42,8 @@ class Confirmation extends Component {
 
         let hashed = this.easteregg();
 
-        if(hashed != 1){
-            alert(hashed);
+        if(hashed.hash !== 0){
+            window.prompt(hashed.content, hashed.hash);
         }
         
 

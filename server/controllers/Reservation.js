@@ -1,6 +1,9 @@
 const db = require('../models/reservation');
 const auth = require('./Jwt');
 const east = require('./Easteregg');
+const crypto = require('crypto');
+const dotenv = require('dotenv');
+dotenv.config();
 
 const checkDuplicate = async (space, time_from, time_to, id = null) => {
     let p = {}
@@ -28,10 +31,65 @@ const checkDuplicate = async (space, time_from, time_to, id = null) => {
     return return_result;
 }
 
-const randompick = async (p) => {
-    let modelgets = await east.getresv(p);
+// 경품 추첨하는 함수
+const getPrize = function() {
+    //랜덤값 생성 (1~1000)
+    const ranNum = Math.floor((Math.random() * 999) +1);
+
+    //경품 생성
+    const gift = [1, 2, 3, 4, 0];
+    //확률 생성
+    //const pbt = [8, 10, 20, 50];
+    const pbt = [80, 100, 200, 500];
+    //리턴 경품 값
+    let res = '';
+
+    console.log('랜덤 숫자: '+ranNum);
+
+    for (let i = 0; i < gift.length; i++) {
+
+        if(pbt[i] >= ranNum){
+            res = gift[i];
+            return res;
+        }
+        else if (pbt[pbt.length - 1] < ranNum) {
+            res = gift[gift.length - 1];
+            return res;
+        }
+    }
+}
+
+const randompick = async (id, resvid) => {
+    let modelgets = await east.getresv(id);
     let hits = modelgets.resv_hits;
-    return hits;
+    let prize = getPrize();
+
+    // 한명당 랜덤픽 돌릴 수 있는 횟수를 10회로 제한
+    if(hits > 10){
+        prize = 0;
+    }
+    //상품 내용물
+    const prizecontent = ['베스타 평일 저녁 식사권', '치킨', '편의점 상품권', '육개장 6개'];
+    // 해시 키 생성
+    let hashkey = process.env.HASH_KEY1 + '-' + id + '-' + resvid + '-' + prize + '-' + process.env.HASH_KEY2;
+    console.log(hashkey);
+
+    if(prize){
+    // prize가 0이 아니면 해시함수 사용
+    // 당첨되면 sha256 base64로 해시함수 처리 후 hash값과 content를 넘겨줌
+        hashed = crypto.createHash('sha256').update(hashkey).digest('base64');
+        let alert_content =
+        `축하드립니다! 공간위 이스터에그 이벤트에 당첨되셨습니다!
+${prize}등 상품에 당첨되셨으며, 해당 상품은 ${prizecontent[prize-1]} 입니다!
+안내드리는 값을 Google Forms에 제출해 주시면 확인 후 상품 수령 관련 안내드리도록 하겠습니다.`;
+        let prize_res = {hash: hashed, content: alert_content};
+        return prize_res;
+    }
+    else{
+    // 당첨 안되면 hash값을 0으로 넘겨줌
+        let prize_res = {hash: 0, content: ''};
+        return prize_res;
+    }
 }
 
 reservation = {
@@ -75,7 +133,7 @@ reservation = {
                             
                             db.create(p)
                                 .then(async (result) => {
-                                    let hashres = await randompick(p.reserver_id);
+                                    let hashres = await randompick(p.reserver_id, result);
                                     res.json({ 'reserveId': result, 'duplicate': false, 'hashid': hashres});
                                 });
 
