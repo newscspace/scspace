@@ -41,6 +41,8 @@ const Time = (props) => {
   const [rehersalEndDate, setrehersalEndDate] = useState();
   const [lastRehersalStartDate, setlastrehersalStartDate] = useState();
   const [lastRehersalEndDate, setlastrehersalEndDate] = useState();
+  const [workStartDate, setworkStartDate] = useState();
+  const [workEndDate, setworkEndDate] = useState();
 
   const filterTime = (time) => {
     const startTime = new Date(startDate);
@@ -77,7 +79,16 @@ const Time = (props) => {
     return (startTime.getTime() < selectedTime.getTime()) && (limitTime.getTime() >= selectedTime.getTime());
   };
 
+  const filterTimeWork = (time) => {
+    const startTime = new Date(lastRehersalStartDate);
+    const selectedTime = new Date(time);
+    const limitTime =
+      (props.limitdate.maxUseHour === -1 ?
+        new Date(startTime.getFullYear(), startTime.getMonth(), startTime.getDate(), 24, 0)
 
+        : new Date(startTime.getFullYear(), startTime.getMonth(), startTime.getDate(), startTime.getHours() + props.limitdate.maxUseHour, startTime.getMinutes()))
+    return (startTime.getTime() < selectedTime.getTime()) && (limitTime.getTime() >= selectedTime.getTime());
+  }
 
 
   return (
@@ -242,13 +253,13 @@ const Time = (props) => {
           </div>) : <div></div>
       }
       
-      {props.worker ? 
+      {props.work ? 
         (<div className="row">
         <h5>{t('근로 배정')}</h5>
         <div className="col-md-6 form-group">
           {t('시작')}<DatePicker
-            onChange={(date) => { setlastrehersalStartDate(date); props.onChangeHandler('rehersalLastdayFrom', date, true); setlastrehersalEndDate(date);  }}
-            selected={lastRehersalStartDate}
+            onChange={(date) => { setworkStartDate(date); props.onChangeHandler('workFrom', date, true); setworkEndDate(date);  }}
+            selected={workStartDate}
             minDate={calcDate(new Date(), props.limitdate.mindays - 1)}
             maxDate={calcDate(new Date(), props.limitdate.maxdays)}
             dateFormat="yyyy/MM/dd h:mm aa"
@@ -263,17 +274,17 @@ const Time = (props) => {
           />
         </div>
 
-        {lastRehersalStartDate ?
+        {workStartDate ?
           (<div className="col-md-6 form-group mt-3 mt-md-0">
             {t('끝')}<DatePicker
-              onChange={(date) => { setlastrehersalEndDate(date); props.onChangeHandler('rehersalLastdayTo', date, true) }}
-              selected={lastRehersalEndDate}
+              onChange={(date) => { setworkEndDate(date); props.onChangeHandler('workTo', date, true) }}
+              selected={workEndDate}
 
               dateFormat="yyyy/MM/dd h:mm aa"
               className="form-control"
               selectsEnd
 
-              filterTime={filterTimeLastRehersal}
+              filterTime={filterTimeWork}
               timeIntervals={10}
               showTimeSelect
             />
