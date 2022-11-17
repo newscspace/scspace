@@ -120,7 +120,7 @@ class Form extends Component{
            <form className="php-email-form" onSubmit={this.handleSubmit}>
                 <OrganizationName onChangeHandler={this.handleValueChange_content} value={this.state.content.organizationName}/>
                 <EventName onChangeHandler={this.handleValueChange_content} value={this.state.content.eventName}/>
-                <Time rehersal={true} rehersalLastday={true} limitdate={this.limitdate} onChangeHandler = {this.handleValueChange_time}/>
+                <Time rehersal={true} rehersalLastday={true} limitdate={this.limitdate} onChangeHandler = {this.handleValueChange_time} worker={true}/>
                 <Number onChangeHandler={this.handleValueChange_content} type={false}/>
                 <Contents onChangeHandler = {this.handleValueChange_content} value={this.state.content.contents}/>
                 <EventPurpose onChangeHandler = {this.handleValueChange_content}value={this.state.content.eventPurpose}/>

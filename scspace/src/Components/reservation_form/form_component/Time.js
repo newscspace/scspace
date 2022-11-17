@@ -241,6 +241,53 @@ const Time = (props) => {
             }
           </div>) : <div></div>
       }
+      
+      {props.worker ? 
+        (<div className="row">
+        <h5>{t('근로 배정')}</h5>
+        <div className="col-md-6 form-group">
+          {t('시작')}<DatePicker
+            onChange={(date) => { setlastrehersalStartDate(date); props.onChangeHandler('rehersalLastdayFrom', date, true); setlastrehersalEndDate(date);  }}
+            selected={lastRehersalStartDate}
+            minDate={calcDate(new Date(), props.limitdate.mindays - 1)}
+            maxDate={calcDate(new Date(), props.limitdate.maxdays)}
+            dateFormat="yyyy/MM/dd h:mm aa"
+            className="form-control"
+            selectsStart
+            placeholderText={"근로가 없다면 생략"} // 이거 이렇게 안할래
+            timeIntervals={10}
+            // startDate={startDate}
+            // endDate={endDate}
+
+            showTimeSelect
+          />
+        </div>
+
+        {lastRehersalStartDate ?
+          (<div className="col-md-6 form-group mt-3 mt-md-0">
+            {t('끝')}<DatePicker
+              onChange={(date) => { setlastrehersalEndDate(date); props.onChangeHandler('rehersalLastdayTo', date, true) }}
+              selected={lastRehersalEndDate}
+
+              dateFormat="yyyy/MM/dd h:mm aa"
+              className="form-control"
+              selectsEnd
+
+              filterTime={filterTimeLastRehersal}
+              timeIntervals={10}
+              showTimeSelect
+            />
+          </div>
+          ) : (
+            <div className="col-md-6 form-group mt-3 mt-md-0">
+              {t('끝')}<DatePicker className="form-control" disabled/>
+            </div>
+          )
+        }
+
+        </div>): <div/>
+
+      }
       <hr /><br />
     </div>
 
