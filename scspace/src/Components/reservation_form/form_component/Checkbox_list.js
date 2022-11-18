@@ -22,7 +22,8 @@ class Form extends Component{
             </div>
             )
             })}
-        <hr/><br/>
+          {this.props.hr ? <hr/> : null}
+      <br/>
       </div>
         
       )};

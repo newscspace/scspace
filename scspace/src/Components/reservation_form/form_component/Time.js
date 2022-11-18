@@ -274,7 +274,7 @@ const Time = (props) => {
             dateFormat="yyyy/MM/dd h:mm aa"
             className="form-control"
             selectsStart
-            placeholderText={"근로가 없다면 생략"} // 이거 이렇게 안할래
+            placeholderText={""}
             timeIntervals={10}
             // startDate={startDate}
             // endDate={endDate}
