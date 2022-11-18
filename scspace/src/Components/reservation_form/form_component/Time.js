@@ -3,6 +3,7 @@ import DatePicker from 'react-datepicker';
 import { setHours, setMinutes } from "date-fns";
 import 'react-datepicker/dist/react-datepicker.css';
 import { withTranslation } from "react-i18next";
+import WorkCheckbox from './Checkbox_list'
 
 
 const calcDate = (date, days) => {
@@ -43,6 +44,7 @@ const Time = (props) => {
   const [lastRehersalEndDate, setlastrehersalEndDate] = useState();
   const [workStartDate, setworkStartDate] = useState();
   const [workEndDate, setworkEndDate] = useState();
+  const [isWork, setIsWork] = useState(false);
 
   const filterTime = (time) => {
     const startTime = new Date(startDate);
@@ -90,6 +92,7 @@ const Time = (props) => {
     return (startTime.getTime() < selectedTime.getTime()) && (limitTime.getTime() >= selectedTime.getTime());
   }
 
+  const handleValueChange_checkbox = (event) => { setIsWork(!isWork); }
 
   return (
     <div>
@@ -249,11 +252,17 @@ const Time = (props) => {
                   {t('끝')}<DatePicker className="form-control" disabled/>
                 </div>
               )
+
             }
           </div>) : <div></div>
       }
+      { props.work ?
+        (<WorkCheckbox checkboxlist = {{'': ''}} head="근로 사용" name="work" onChangeHandler={handleValueChange_checkbox} />)
+        : <div/>
+      }
       
-      {props.work ? 
+
+      { isWork ? 
         (<div className="row">
         <h5>{t('근로 배정')}</h5>
         <div className="col-md-6 form-group">
