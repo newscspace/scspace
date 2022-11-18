@@ -152,8 +152,8 @@ sendPost = () => {
             <form className="php-email-form" onSubmit={this.handleSubmit}> 
               <EventName onChangeHandler={this.handleValueChange_content} value={this.state.content.eventName}/>
               <Team teamlist= {this.state.teamlist ? this.state.teamlist : []} onChangeHandler = {this.handleValueChange} />
-              <Member checkboxlist = {this.state.memberlist? this.state.memberlist : []} head="멤버" name="teamMember" onChangeHandler = {this.handleValueChange_checkbox}/>
-              <Time onChangeHandler = {this.handleValueChange_time} limitdate={this.limitdate}/>
+              <Member checkboxlist = {this.state.memberlist? this.state.memberlist : []} head="멤버" name="teamMember" onChangeHandler = {this.handleValueChange_checkbox} hr={true}/>
+              <Time onChangeHandler = {this.handleValueChange_time} limitdate={this.limitdate} work={false} />
               <Contents onChangeHandler = {this.handleValueChange_content} value={this.state.content.contents}/>
               <Agree/>
               <div className="text-end"><button type="submit">{t('예약하기')}</button></div>

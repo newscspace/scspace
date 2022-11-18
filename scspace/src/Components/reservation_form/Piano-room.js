@@ -92,7 +92,7 @@ class Form extends Component{
         <div className="col-lg-8">
             <form className="php-email-form" onSubmit={this.handleSubmit}> 
             <SpacePick spacelist={{'피아노실 1' : 'piano-room1', '피아노실 2' : 'piano-room2'}} onChangeHandler={this.handleValueChange}  />
-            <Time onChangeHandler = {this.handleValueChange_time} limitdate={this.limitdate}/>
+            <Time onChangeHandler = {this.handleValueChange_time} limitdate={this.limitdate} work={false} />
                 <Agree/>
             <div className="text-end"><button type="submit">{t('예약하기')}</button></div>
           </form>

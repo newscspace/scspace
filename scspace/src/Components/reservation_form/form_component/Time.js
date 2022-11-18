@@ -257,14 +257,14 @@ const Time = (props) => {
           </div>) : <div></div>
       }
       { props.work ?
-        (<WorkCheckbox checkboxlist = {{'': ''}} head="근로 사용" name="work" onChangeHandler={handleValueChange_checkbox} />)
+        (<WorkCheckbox checkboxlist = {{'': ''}} head="근로 배정" name="work" onChangeHandler={handleValueChange_checkbox} />)
         : <div/>
       }
       
 
       { isWork ? 
         (<div className="row">
-        <h5>{t('근로 배정')}</h5>
+        <h5>{t('근로 사용 시간')}</h5>
         <div className="col-md-6 form-group">
           {t('시작')}<DatePicker
             onChange={(date) => { setworkStartDate(date); props.onChangeHandler('workFrom', date, true); setworkEndDate(date);  }}
