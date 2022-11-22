@@ -37,10 +37,10 @@ const getPrize = function() {
     const ranNum = Math.floor((Math.random() * 999) +1);
 
     //경품 생성
-    const gift = [1, 2, 3, 4, 0];
+    const gift = [1];
     //확률 생성
     //const pbt = [8, 10, 20, 50];
-    const pbt = [80, 100, 200, 500];
+    const pbt = [900];
     //리턴 경품 값
     let res = '';
 
@@ -68,21 +68,31 @@ const randompick = async (id, resvid) => {
     if(hits > 10){
         prize = 0;
     }
-    //상품 내용물
-    const prizecontent = ['베스타 평일 저녁 식사권', '치킨', '편의점 상품권', '육개장 6개'];
     // 해시 키 생성
     let hashkey = process.env.HASH_KEY1 + '-' + id + '-' + resvid + '-' + prize + '-' + process.env.HASH_KEY2;
     console.log(hashkey);
+
+    // 당첨됐는지 여부 검사
+    let iswinned = await east.getwinprize(id);
+    if(iswinned){
+        // 당첨됐으면 더이상 당첨안되게
+        prize = 0;
+    }
 
     if(prize){
     // prize가 0이 아니면 해시함수 사용
     // 당첨되면 sha256 base64로 해시함수 처리 후 hash값과 content를 넘겨줌
         hashed = crypto.createHash('sha256').update(hashkey).digest('base64');
         let alert_content =
-        `축하드립니다! 공간위 이스터에그 이벤트에 당첨되셨습니다!
-${prize}등 상품에 당첨되셨으며, 해당 상품은 ${prizecontent[prize-1]} 입니다!
-안내드리는 값을 Google Forms에 제출해 주시면 확인 후 상품 수령 관련 안내드리도록 하겠습니다.`;
+        `축하드립니다! 공간위 이스터에그 이벤트에 당첨되셨습니다. 상품은 베스타 평일 저녁 식사권입니다.
+아래의 코드를 복사하여 구글폼에 제출해 주시면 확인 후 상품 수령 절차 관련하여 안내드리도록 하겠습니다.
+(구글폼 링크는 공간위 홈페이지 내의 이벤트 페이지의 이스터에그 이벤트 게시물에 있습니다.)
+*아래의 코드를 복사하지 않고 창을 끄면 코드가 사라져 당첨이 취소됩니다!!! 반드시 코드를 복사한 후 나가주세요!!!*`;
         let prize_res = {hash: hashed, content: alert_content};
+        let winned = await east.setwinprize(id);
+        if(!winned){
+            console.log('something went wrong...');
+        }
         return prize_res;
     }
     else{

@@ -84,6 +84,7 @@ function CreateEvent(props){
                 </div>
                 <section id="contact" className="contact">
                     <div className="container">
+                    <h2>지금 이 페이지의 기능은 작동하지 않습니다...<br></br> 사용하면 서버에 무슨 일이 일어날 지 모르니 사용하지 말아주세요... - 관리국 분들께</h2>
                         <div className="row gy-5 gx-lg-5">
                         <div>
                             <form className="php-email-form" onSubmit={handleSubmit}>
@@ -97,7 +98,7 @@ function CreateEvent(props){
                                 <input className="form-check-input" name="important" type="checkbox" id="isImportantNoticeChkbx" checked={_state.important ? true : false} onChange={onChangeValue}/>
                                 <label className="form-check-label" for="isImportantNoticeChkbx">중요 공지</label>
                             </div>
-                            <div className="text-center"><button type="submit">작성하기</button></div>
+                            {/* <div className="text-center"><button type="submit">작성하기</button></div> 혹시 몰라서 주석으로 막아놓긴 했네요 */}
                             </form>
                         </div>
                         </div>

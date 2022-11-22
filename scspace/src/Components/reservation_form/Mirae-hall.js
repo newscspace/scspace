@@ -67,7 +67,8 @@ class Form extends Component{
       this.sendPost()
         .then((res) => {
           if(res.data.reserveId){
-            this.props.history.push({pathname : '/confirmation', state: res.data.reserveId, hashid : res.data.hashid });
+            // 이스터에그 이벤트 수정사항(울림/미래/창작/오픈스페이스 제외)
+            this.props.history.push({pathname : '/confirmation', state: res.data.reserveId, hashid : {hash: 0, content: ''} });
           }
           else if (res.data.duplicate){
             alert('해당 시간에 이미 예약이 존재합니다.');

@@ -50,7 +50,7 @@ class Confirmation extends Component {
         
 
     }
-
+    
     easteregg = () => {
         return this.props.location.hashid
     }

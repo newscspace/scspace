@@ -64,8 +64,9 @@ set_db = {
     conn.query(`
       CREATE TABLE IF NOT EXISTS easteregg (
           student_id	CHAR(8)	NOT NULL,
-          login_hits	Integer	NOT NULL	DEFAULT 0,
           resv_hits	Integer	NOT NULL	DEFAULT 0,
+          win_prize	boolean	NOT NULL	DEFAULT FALSE,
+          cancel_resv Integer NOT NULL  DEFAULT 0,
           PRIMARY KEY (student_id)
       ); `);
     

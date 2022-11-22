@@ -65,11 +65,20 @@ function Event(props){
                             <div className="row g-0 portfolio-container">
 
                                 <div className="col-xl-3 col-lg-4 col-md-6 portfolio-item filter-app">
-                                    <img src="/img/instagram-test2.jpg" className="img-fluid" alt=""/>
+                                    <img src="/img/easteregg2.jpg" className="img-fluid" alt=""/>
+                                        <div className="portfolio-info">
+                                            <h4>이스터에그 이벤트</h4>
+                                            <a href="https://www.instagram.com/p/CkChrcphRuE/" target="_blank" title="인스타그램 링크" className="glightbox preview-link"><i className="bi bi-zoom-in"></i></a>
+                                            <a href="https://forms.gle/iYmy4kVP2C3y36SL8" target="_blank" title="관련 링크" className="details-link"><i className="bi bi-link-45deg"></i></a>
+                                        </div>
+                                </div>
+
+                                <div className="col-xl-3 col-lg-4 col-md-6 portfolio-item filter-app">
+                                    <img src="/img/worldcup2.jpg" className="img-fluid" alt=""/>
                                         <div className="portfolio-info">
                                             <h4>월드컵 이벤트</h4>
-                                            <a href="https://www.instagram.com/p/CkChrcphRuE/" target="_blank" title="App 1" className="glightbox preview-link"><i className="bi bi-zoom-in"></i></a>
-                                            <a href="https://docs.google.com/forms/d/1yRqLRhGucR6zWy34vNgAcXduuY0stqAssQxUUbiz8Cw/edit" target="_blank" title="More Details" className="details-link"><i className="bi bi-link-45deg"></i></a>
+                                            <a href="https://www.instagram.com/p/ClNzE_ludaz/" target="_blank" title="인스타그램 링크" className="glightbox preview-link"><i className="bi bi-zoom-in"></i></a>
+                                            <a href="https://docs.google.com/forms/d/1yRqLRhGucR6zWy34vNgAcXduuY0stqAssQxUUbiz8Cw/edit" target="_blank" title="관련 링크" className="details-link"><i className="bi bi-link-45deg"></i></a>
                                         </div>
                                 </div>
                     
