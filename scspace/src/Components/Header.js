@@ -23,8 +23,8 @@ class Header extends Component{
           {name:'소개', sub_menu:[], menu_link : '/introduction', sub_menu_link : []}, 
           {name:'공간', sub_menu:['개인연습실', '피아노실', '합주실', '무예실', '울림홀', '미래홀', '세미나실','창작공방', '오픈스페이스'], menu_link : '#', sub_menu_link : ['/space/individual-practice-room', '/space/piano-room', '/space/group-practice-room', '/space/dance-studio', '/space/ullim-hall', '/space/mirae-hall', '/space/seminar-room','/space/workshop', '/space/open-space' ]}, 
           {name:'예약', sub_menu:['예약하기', '예약 현황'], menu_link : '#', sub_menu_link : ['/reservation', '/calendar']},
-          {name:'문의사항', sub_menu:['FAQ', '문의하기'], menu_link : '#', sub_menu_link : ['/faq', '/ask']} ], 
-          
+          {name:'문의사항', sub_menu:['FAQ', '문의하기'], menu_link : '#', sub_menu_link : ['/faq', '/ask']},
+          {name:'이벤트', sub_menu:[], menu_link: "/event", sub_menu_link: []} ]
         }
       
         LoginCheck()
