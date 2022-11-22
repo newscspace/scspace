@@ -148,7 +148,15 @@ class ReservModal extends Component{
                 </div>
             )
         }
-        
+        if (this.props.modal.reservation.content.workFrom){
+            returnResult.push(
+                <div className="wrap">
+                    <p className="modal-first">근로 배정 시간</p>
+                    <p className="modal-second">{moment(this.props.modal.reservation.content.workFrom).format('MM월 DD일 HH:mm') + '~' + moment(this.props.modal.reservation.content.workTo).format('MM월 DD일 HH:mm')}</p>
+                </div>
+            )
+        }
+
         if (this.props.modal.reservation.content.equipment){
             let equipmentList = {"light" : '조명', "sound":'음향', "projector":'프로젝터'}
             returnResult.push(

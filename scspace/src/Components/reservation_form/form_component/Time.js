@@ -82,7 +82,7 @@ const Time = (props) => {
   };
 
   const filterTimeWork = (time) => {
-    const startTime = new Date(lastRehersalStartDate);
+    const startTime = new Date(workStartDate);
     const selectedTime = new Date(time);
     const limitTime =
       (props.limitdate.maxUseHour === -1 ?
@@ -257,7 +257,9 @@ const Time = (props) => {
           </div>) : <div></div>
       }
       { props.work ?
-        (<WorkCheckbox checkboxlist = {{'': ''}} head="근로 배정" name="work" onChangeHandler={handleValueChange_checkbox} />)
+        (<WorkCheckbox checkboxlist = {{
+          '장비를 다룰 수 없는 경우 클릭': 'Click if you can\'t treat the equipment'}
+        } head="근로 배정" name="work" onChangeHandler={handleValueChange_checkbox} />)
         : <div/>
       }
       
