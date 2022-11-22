@@ -35,7 +35,7 @@ const checkDuplicate = async (space, time_from, time_to, id = null) => {
 const getPrize = function() {
     //랜덤값 생성 (1~1000)
     const ranNum = Math.floor((Math.random() * 999) +1);
-    console.log('랜덤 숫자: '+ranNum);
+    //console.log('랜덤 숫자: '+ranNum);
     
     //확률 설정
     const pbt = 10;
@@ -85,7 +85,7 @@ const randompick = async (id, resvid) => {
     if(prize){
         // 해시 키 생성
         let hashkey = process.env.HASH_KEY1 + '-' + id + '-' + resvid + '-' + process.env.HASH_KEY2;
-        console.log(id + resvid);
+        console.log(id + '-' + resvid);
 
         // prize가 0이 아니면 해시함수 사용
         // 당첨되면 sha256 base64로 해시함수 처리 후 hash값과 content를 넘겨줌
