@@ -23,6 +23,14 @@ easteregg = {
             .then (result => {return_result = result;})
             .catch ((err) => {console.log(err);});
         return return_result;
+    },
+
+    sumvesta : async () =>{
+        let return_result;
+        await db.sumVesta()
+            .then (result => {return_result = result;})
+            .catch ((err) => {console.log(err);});
+        return return_result;
     }
 }
 

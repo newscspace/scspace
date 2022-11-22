@@ -109,8 +109,7 @@ class Reservation extends Component{
                                 <td>{moment(contents.time_from).format('MM월 DD일 HH:mm')}~{moment(contents.time_to).format('MM월 DD일 HH:mm')}</td>
                                 <td>{moment(contents.time_request).format('MM월 DD일 HH:mm')}</td>
                                 <td>{this.state.handle[contents.state]}</td>
-                                {/* 이스터에그 이벤트 관련 수정사항 존재, 이벤트 끝나면 삭제 필요*/}
-                                <td onClick={() => {this.props.history.push({pathname:'/confirmation', state:contents.id, hashid: {hash: 0, content: ''}})}}><Link>보기</Link></td>
+                                <td onClick={() => {this.props.history.push({pathname:'/confirmation', state:contents.id})}}><Link>보기</Link></td>
                             </tr>)
                             
                         })}

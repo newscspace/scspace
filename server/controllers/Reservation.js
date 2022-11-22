@@ -35,59 +35,67 @@ const checkDuplicate = async (space, time_from, time_to, id = null) => {
 const getPrize = function() {
     //랜덤값 생성 (1~1000)
     const ranNum = Math.floor((Math.random() * 999) +1);
-
-    //경품 생성
-    const gift = [1];
-    //확률 생성
-    //const pbt = [8, 10, 20, 50];
-    const pbt = [900];
-    //리턴 경품 값
-    let res = '';
-
     console.log('랜덤 숫자: '+ranNum);
+    
+    //확률 설정
+    const pbt = 900;
 
-    for (let i = 0; i < gift.length; i++) {
-
-        if(pbt[i] >= ranNum){
-            res = gift[i];
-            return res;
-        }
-        else if (pbt[pbt.length - 1] < ranNum) {
-            res = gift[gift.length - 1];
-            return res;
-        }
+    if(ranNum <= pbt){
+        return 1;
+    }
+    else{
+        return 0;
     }
 }
 
-const randompick = async (id, resvid) => {
+const conditioncheck = async (id) => {
     let modelgets = await east.getresv(id);
     let hits = modelgets.resv_hits;
     let prize = getPrize();
 
-    // 한명당 랜덤픽 돌릴 수 있는 횟수를 10회로 제한
-    if(hits > 10){
-        prize = 0;
+    // 한명당 랜덤픽 돌릴 수 있는 횟수를 5회로 제한
+    if(hits > 5){
+        console.log('랜덤픽 횟수 초과');
+        return 0;
     }
-    // 해시 키 생성
-    let hashkey = process.env.HASH_KEY1 + '-' + id + '-' + resvid + '-' + prize + '-' + process.env.HASH_KEY2;
-    console.log(hashkey);
+
+    // 당첨된 사람 5명 이상인지 여부 검사
+    let winnedpeople = await east.sumvesta();
+    if(winnedpeople >= 5){
+        // 5명 이상이면 더이상 당첨안되게
+        console.log('당첨자 5명 넘음');
+        return 0;
+    }
 
     // 당첨됐는지 여부 검사
     let iswinned = await east.getwinprize(id);
     if(iswinned){
         // 당첨됐으면 더이상 당첨안되게
-        prize = 0;
+        console.log('이미 당첨된 사람');
+        return 0;
     }
 
+    return prize;
+}
+
+const randompick = async (id, resvid) => {
+
+    let prize = await conditioncheck(id);
+
     if(prize){
-    // prize가 0이 아니면 해시함수 사용
-    // 당첨되면 sha256 base64로 해시함수 처리 후 hash값과 content를 넘겨줌
+        // 해시 키 생성
+        let hashkey = process.env.HASH_KEY1 + '-' + id + '-' + resvid + '-' + process.env.HASH_KEY2;
+        console.log(hashkey);
+
+        // prize가 0이 아니면 해시함수 사용
+        // 당첨되면 sha256 base64로 해시함수 처리 후 hash값과 content를 넘겨줌
         hashed = crypto.createHash('sha256').update(hashkey).digest('base64');
         let alert_content =
         `축하드립니다! 공간위 이스터에그 이벤트에 당첨되셨습니다. 상품은 베스타 평일 저녁 식사권입니다.
 아래의 코드를 복사하여 구글폼에 제출해 주시면 확인 후 상품 수령 절차 관련하여 안내드리도록 하겠습니다.
 (구글폼 링크는 공간위 홈페이지 내의 이벤트 페이지의 이스터에그 이벤트 게시물에 있습니다.)
-*아래의 코드를 복사하지 않고 창을 끄면 코드가 사라져 당첨이 취소됩니다!!! 반드시 코드를 복사한 후 나가주세요!!!*`;
+*아래의 코드를 복사하지 않고 창을 끄면 코드가 사라져 당첨이 취소됩니다!!! 반드시 코드를 복사한 후 나가주세요!!!*
+*본 상품은 학생회비를 납부한 분들만 수령가능합니다.`;
         let prize_res = {hash: hashed, content: alert_content};
         let winned = await east.setwinprize(id);
         if(!winned){

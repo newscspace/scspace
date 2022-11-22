@@ -36,8 +36,21 @@ const dbModel = {
       await conn.query(sql, p)
         .then((result) => {return_result = result[0][0].win_prize;})
         .catch((err) => {console.log(err); return_result = null;})
-      //console.log(return_result);
+
       return return_result;
+    },
+
+    sumVesta: async () => {
+      let conn = db.getConnection().promise();
+      let return_result;
+
+      let sql = `SELECT COUNT(win_prize) FROM easteregg WHERE win_prize=true;;`;
+  
+      await conn.query(sql)
+        .then((result) => {return_result = result[0][0];})
+        .catch((err) => {console.log(err); return_result = null;})
+
+      return Object.values(return_result)[0];
     }
     
 };

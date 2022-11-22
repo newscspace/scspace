@@ -52,6 +52,9 @@ class Confirmation extends Component {
     }
     
     easteregg = () => {
+        if(this.props.location.hashid == null || this.props.location.hashid == undefined){
+            return {hash: 0, content: ''};
+        }
         return this.props.location.hashid
     }
 
