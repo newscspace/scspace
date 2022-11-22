@@ -21,7 +21,7 @@ class Form extends Component{
             space : 'ullim-hall',
             timeFrom : '',
             timeTo : '',
-            content : {organizationName : '', eventName:'', innerNumber : 0, outerNumber : 0, eventPurpose:'',contents:'', rehersalFrom:null, rehersalTo:null, rehersalLastdayFrom : null, rehersalLastdayTo:null, equipment:[], food:'', lobby:[], desk:0, chair:0}
+            content : {organizationName : '', eventName:'', innerNumber : 0, outerNumber : 0, eventPurpose:'',contents:'', rehersalFrom:null, rehersalTo:null, rehersalLastdayFrom : null, rehersalLastdayTo:null, workFrom: null, workTo:null, workComplete:null, equipment:[], food:'', lobby:[], desk:0, chair:0}
         }
         
 

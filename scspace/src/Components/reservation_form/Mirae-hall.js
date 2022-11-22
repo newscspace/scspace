@@ -22,7 +22,7 @@ class Form extends Component{
             space : 'mirae-hall',
             timeFrom : '',
             timeTo : '',
-            content : {organizationName : '', eventName:'', innerNumber : 0, outerNumber : 0, eventPurpose:'',contents:'', rehersalFrom:null, rehersalTo:null, rehersalLastdayFrom : null, rehersalLastdayTo:null, equipment:[], food:''}
+            content : {organizationName : '', eventName:'', innerNumber : 0, outerNumber : 0, eventPurpose:'',contents:'', rehersalFrom:null, rehersalTo:null, rehersalLastdayFrom:null, rehersalLastdayTo:null, workFrom:null, workTo:null, workComplete:null, equipment:[], food:''}
         }
         
 
@@ -86,6 +86,7 @@ class Form extends Component{
       let nextstate = Object.assign({}, this.state);
       rehersalOrWork ? nextstate['content'][what] = date
       : nextstate[what] = date;
+      if(what == 'workFrom') nextstate['content']['workComplete'] = false;
       this.setState(nextstate);
     }
     handleValueChange_content = (e) => {

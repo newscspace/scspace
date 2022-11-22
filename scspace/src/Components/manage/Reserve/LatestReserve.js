@@ -14,7 +14,7 @@ class LatestReserve extends Component{
             wait : 0,
             reservation : null,    
             handle: {wait: "대기중", grant: "승인", rejected: "거절"},  
-            
+            workHandle: {nowork: "근로 없음", notassigned: "배정 안됨", assigned: "배정 완료"},
         }; 
         
         
@@ -109,9 +109,15 @@ class LatestReserve extends Component{
         else{ alert('a') /* error 내용 출력 필요 */}
       }
 
-      checkSubmit = () => {
+    checkSubmit = () => {
         return true;
-      }
+    }
+
+    workStateChange = (work) => {
+        if(work === null) return "nowork";
+        if(work === false) return "notassigned";
+        return "assigned";
+    }
 
     render() {return (
         <main id="main">
@@ -129,6 +135,7 @@ class LatestReserve extends Component{
                         <th>시간</th>
                         <th>예약한 시간</th>
                         <th>상태</th>
+                        <th>근로 배정</th>
                     </thead>
 
                     <tbody>
@@ -141,6 +148,7 @@ class LatestReserve extends Component{
                                     <td>{moment(contents.time_from).format('MM월 DD일 HH:mm') + '~' + moment(contents.time_to).format('MM월 DD일 HH:mm')}</td>
                                     <td>{moment(contents.time_request).format('MM월 DD일 HH:mm')}</td>
                                     <td><div className={contents.state}/>{this.state.handle[contents.state]}</td>
+                                    <td><div className={this.workStateChange(contents.content.workComplete)}/>{this.state.workHandle[this.workStateChange(contents.content.workComplete)]}</td>
                                 </tr>
                             )
                         })}
