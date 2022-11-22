@@ -69,7 +69,7 @@ function Event(props){
                                         <div className="portfolio-info">
                                             <h4>이스터에그 이벤트</h4>
                                             <a href="https://www.instagram.com/p/ClQb721uO2_/" target="_blank" title="인스타그램 링크" className="glightbox preview-link"><i className="bi bi-zoom-in"></i></a>
-                                            <a href="https://forms.gle/iYmy4kVP2C3y36SL8" target="_blank" title="관련 링크" className="details-link"><i className="bi bi-link-45deg"></i></a>
+                                            <a href="https://forms.gle/WjM1s2e7gkJJpZ4M6" target="_blank" title="관련 링크" className="details-link"><i className="bi bi-link-45deg"></i></a>
                                         </div>
                                 </div>
 
