@@ -81,10 +81,11 @@ class Form extends Component{
       this.setState(nextstate);
     }
     
-    handleValueChange_time = (what, date, rehersal = false)=> {
+    handleValueChange_time = (what, date, rehersalOrWork = false)=> {
       let nextstate = Object.assign({}, this.state);
-      rehersal ? nextstate['content'][what] = date
+      rehersalOrWork ? nextstate['content'][what] = date
       : nextstate[what] = date;
+      if(what == 'workFrom') nextstate['content']['workComplete'] = false;
       this.setState(nextstate);
     }
     handleValueChange_content = (e) => {
