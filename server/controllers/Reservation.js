@@ -38,7 +38,7 @@ const getPrize = function() {
     console.log('랜덤 숫자: '+ranNum);
     
     //확률 설정
-    const pbt = 900;
+    const pbt = 10;
 
     if(ranNum <= pbt){
         return 1;
@@ -55,7 +55,7 @@ const conditioncheck = async (id) => {
 
     // 한명당 랜덤픽 돌릴 수 있는 횟수를 5회로 제한
     if(hits > 5){
-        console.log('랜덤픽 횟수 초과');
+        //console.log('랜덤픽 횟수 초과');
         return 0;
     }
 
@@ -63,7 +63,7 @@ const conditioncheck = async (id) => {
     let winnedpeople = await east.sumvesta();
     if(winnedpeople >= 5){
         // 5명 이상이면 더이상 당첨안되게
-        console.log('당첨자 5명 넘음');
+        //console.log('당첨자 5명 넘음');
         return 0;
     }
 
@@ -71,7 +71,7 @@ const conditioncheck = async (id) => {
     let iswinned = await east.getwinprize(id);
     if(iswinned){
         // 당첨됐으면 더이상 당첨안되게
-        console.log('이미 당첨된 사람');
+        //console.log('이미 당첨된 사람');
         return 0;
     }
 
@@ -85,7 +85,7 @@ const randompick = async (id, resvid) => {
     if(prize){
         // 해시 키 생성
         let hashkey = process.env.HASH_KEY1 + '-' + id + '-' + resvid + '-' + process.env.HASH_KEY2;
-        console.log(hashkey);
+        console.log(id + resvid);
 
         // prize가 0이 아니면 해시함수 사용
         // 당첨되면 sha256 base64로 해시함수 처리 후 hash값과 content를 넘겨줌
