@@ -68,7 +68,7 @@ const Time = (props) => {
 
         : new Date(startTime.getFullYear(), startTime.getMonth(), startTime.getDate(), startTime.getHours() + props.limitdate.maxUseHour, startTime.getMinutes()))
     return (startTime.getTime() < selectedTime.getTime()) && (limitTime.getTime() >= selectedTime.getTime())// && (selectedTime.getTime() <= realStartTime.getTime());
-  };
+  }; 
 
   const filterTimeLastRehersal = (time) => {
     const startTime = new Date(lastRehersalStartDate);
@@ -257,9 +257,12 @@ const Time = (props) => {
           </div>) : <div></div>
       }
       { props.work ?
-        (<WorkCheckbox checkboxlist = {{
-          '장비를 다룰 수 없는 경우 클릭': 'Click if you can\'t treat the equipment'}
-        } head="근로 배정" name="work" onChangeHandler={handleValueChange_checkbox} />)
+        (<div>
+          <WorkCheckbox checkboxlist = {{'전문관리인력이 없는 경우 클릭': 'Click if you don\'t have trained manager'}} head="근로 배정" name="work" onChangeHandler={handleValueChange_checkbox} />
+          <br/>
+          <p className="percent90">전문관리인력은 단체별로 존재하는 울림/미래홀의 장비 사용 가능 인력을 의미하며, 전문관리인력이 없을 시 근로 배정이 이뤄집니다.</p>
+        </div>)
+        
         : <div/>
       }
       
