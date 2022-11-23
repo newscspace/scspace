@@ -148,7 +148,15 @@ class ReservModal extends Component{
                 </div>
             )
         }
-        
+        if (this.props.modal.reservation.content.workFrom){
+            returnResult.push(
+                <div className="wrap">
+                    <p className="modal-first">근로 배정 시간</p>
+                    <p className="modal-second">{moment(this.props.modal.reservation.content.workFrom).format('MM월 DD일 HH:mm') + '~' + moment(this.props.modal.reservation.content.workTo).format('MM월 DD일 HH:mm')}</p>
+                </div>
+            )
+        }
+
         if (this.props.modal.reservation.content.equipment){
             let equipmentList = {"light" : '조명', "sound":'음향', "projector":'프로젝터'}
             returnResult.push(
@@ -250,11 +258,26 @@ class ReservModal extends Component{
                             {Object.keys(this.props.modal.handle).map((member) =>{
                                 return (
                                     <div className="form-check form-check-inline">
-                                    <input className="modal-chk" type="radio" name="state" id="inlineRadio1" onChange={this.props.onChangeHandler2} value={member} required/>
-                                    <label className="modal-second" for="inlineRadio1">{this.props.modal.handle[member]}</label>
+                                        <input className="modal-chk" type="radio" name="state" id="inlineRadio1" onChange={this.props.onChangeHandler2} value={member} required/>
+                                        <label className="modal-second" for="inlineRadio1">{this.props.modal.handle[member]}</label>
                                     </div>
                                 )
                             })}
+
+                        </div>
+
+                        <h5 className="modal-ttl">근로 배정</h5>
+                        <hr/>
+                        <div className="wrap">
+                            <p className="modal-first">근로 배정</p>
+                            <div className="form-check form-check-inline">
+                                <input className="modal-chk" type="radio" name="workComplete" id="inlineRadio1" onChange={this.props.onChangeHandler3} value="notassigned" required/>
+                                <label className="modal-second" for="inlineRadio1">{this.props.modal.workHandle["notassigned"]}</label>
+                            </div>
+                            <div className="form-check form-check-inline">
+                                <input className="modal-chk" type="radio" name="workComplete" id="inlineRadio1" onChange={this.props.onChangeHandler3} value="assigned" required/>
+                                <label className="modal-second" for="inlineRadio1">{this.props.modal.workHandle["assigned"]}</label>
+                            </div>
 
                         </div>
                         <div className="wrap">

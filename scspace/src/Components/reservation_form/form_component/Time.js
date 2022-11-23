@@ -3,6 +3,7 @@ import DatePicker from 'react-datepicker';
 import { setHours, setMinutes } from "date-fns";
 import 'react-datepicker/dist/react-datepicker.css';
 import { withTranslation } from "react-i18next";
+import WorkCheckbox from './Checkbox_list'
 
 
 const calcDate = (date, days) => {
@@ -41,6 +42,9 @@ const Time = (props) => {
   const [rehersalEndDate, setrehersalEndDate] = useState();
   const [lastRehersalStartDate, setlastrehersalStartDate] = useState();
   const [lastRehersalEndDate, setlastrehersalEndDate] = useState();
+  const [workStartDate, setworkStartDate] = useState();
+  const [workEndDate, setworkEndDate] = useState();
+  const [isWork, setIsWork] = useState(false);
 
   const filterTime = (time) => {
     const startTime = new Date(startDate);
@@ -64,7 +68,7 @@ const Time = (props) => {
 
         : new Date(startTime.getFullYear(), startTime.getMonth(), startTime.getDate(), startTime.getHours() + props.limitdate.maxUseHour, startTime.getMinutes()))
     return (startTime.getTime() < selectedTime.getTime()) && (limitTime.getTime() >= selectedTime.getTime())// && (selectedTime.getTime() <= realStartTime.getTime());
-  };
+  }; 
 
   const filterTimeLastRehersal = (time) => {
     const startTime = new Date(lastRehersalStartDate);
@@ -77,8 +81,18 @@ const Time = (props) => {
     return (startTime.getTime() < selectedTime.getTime()) && (limitTime.getTime() >= selectedTime.getTime());
   };
 
+  const filterTimeWork = (time) => {
+    const startTime = new Date(workStartDate);
+    const selectedTime = new Date(time);
+    const limitTime =
+      (props.limitdate.maxUseHour === -1 ?
+        new Date(startTime.getFullYear(), startTime.getMonth(), startTime.getDate(), 24, 0)
 
+        : new Date(startTime.getFullYear(), startTime.getMonth(), startTime.getDate(), startTime.getHours() + props.limitdate.maxUseHour, startTime.getMinutes()))
+    return (startTime.getTime() < selectedTime.getTime()) && (limitTime.getTime() >= selectedTime.getTime());
+  }
 
+  const handleValueChange_checkbox = (event) => { setIsWork(!isWork); }
 
   return (
     <div>
@@ -238,8 +252,66 @@ const Time = (props) => {
                   {t('끝')}<DatePicker className="form-control" disabled/>
                 </div>
               )
+
             }
           </div>) : <div></div>
+      }
+      { props.work ?
+        (<div>
+          <WorkCheckbox checkboxlist = {{'전문관리인력이 없는 경우 클릭': 'Click if you don\'t have trained manager'}} head="근로 배정" name="work" onChangeHandler={handleValueChange_checkbox} />
+          <br/>
+          <p className="percent90">전문관리인력은 단체별로 존재하는 울림/미래홀의 장비 사용 가능 인력을 의미하며, 전문관리인력이 없을 시 근로 배정이 이뤄집니다.</p>
+        </div>)
+        
+        : <div/>
+      }
+      
+
+      { isWork ? 
+        (<div className="row">
+        <h5>{t('근로 사용 시간')}</h5>
+        <div className="col-md-6 form-group">
+          {t('시작')}<DatePicker
+            onChange={(date) => { setworkStartDate(date); props.onChangeHandler('workFrom', date, true); setworkEndDate(date);  }}
+            selected={workStartDate}
+            minDate={calcDate(new Date(), props.limitdate.mindays - 1)}
+            maxDate={calcDate(new Date(), props.limitdate.maxdays)}
+            dateFormat="yyyy/MM/dd h:mm aa"
+            className="form-control"
+            selectsStart
+            placeholderText={""}
+            timeIntervals={10}
+            // startDate={startDate}
+            // endDate={endDate}
+
+            showTimeSelect
+          />
+        </div>
+
+        {workStartDate ?
+          (<div className="col-md-6 form-group mt-3 mt-md-0">
+            {t('끝')}<DatePicker
+              onChange={(date) => { setworkEndDate(date); props.onChangeHandler('workTo', date, true) }}
+              selected={workEndDate}
+
+              dateFormat="yyyy/MM/dd h:mm aa"
+              className="form-control"
+              selectsEnd
+
+              filterTime={filterTimeWork}
+              timeIntervals={10}
+              showTimeSelect
+            />
+          </div>
+          ) : (
+            <div className="col-md-6 form-group mt-3 mt-md-0">
+              {t('끝')}<DatePicker className="form-control" disabled/>
+            </div>
+          )
+        }
+
+        </div>): <div/>
+
       }
       <hr /><br />
     </div>

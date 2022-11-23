@@ -91,7 +91,7 @@ class Form extends Component{
         <div className="col-lg-8">
             <form className="php-email-form" onSubmit={this.handleSubmit}>
             <OrganizationName onChangeHandler={this.handleValueChange_content}value={this.state.content.organizationName}/>
-            <Time onChangeHandler = {this.handleValueChange_time} limitdate={this.limitdate}/>
+            <Time onChangeHandler = {this.handleValueChange_time} limitdate={this.limitdate} work={false}/>
             <Number onChangeHandler={this.handleValueChange_content} type={true}/>
             <Contents onChangeHandler = {this.handleValueChange_content} value={this.state.content.contents}/>
             <Agree/>

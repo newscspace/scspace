@@ -14,7 +14,7 @@ class LatestReserve extends Component{
             wait : 0,
             reservation : null,    
             handle: {wait: "대기중", grant: "승인", rejected: "거절"},  
-            
+            workHandle: {nowork: "근로 없음", notassigned: "배정 안됨", assigned: "배정 완료"},
         }; 
         
         
@@ -33,7 +33,6 @@ class LatestReserve extends Component{
             'workshop': '창작공방',
             'open-space': '오픈스페이스'
           }
-        
     }
 
     componentDidMount(){
@@ -71,8 +70,19 @@ class LatestReserve extends Component{
                 })
             } )
             .catch(err => console.log(err));
-    
-      
+        
+    }
+
+    workStateChange = (work) => {
+        if(work === null || work === undefined) return "nowork";
+        if(work === false) return "notassigned";
+        return "assigned";
+    }
+
+    workStateChangeInverse = (work) => {
+        if(work === "nowork") return null;
+        if(work === "notassigned") return false;
+        if(work === "assigned")return true;
     }
 
     handleValueChange = (e) => {
@@ -81,6 +91,11 @@ class LatestReserve extends Component{
         this.setState(nextstate);
     }
 
+    handleValueChange_work = (e) => {
+        let nextstate = Object.assign({}, this.state);
+        nextstate['reservation']['content'][e.target.name] = this.workStateChangeInverse(e.target.value);
+        this.setState(nextstate);
+    }
 
     sendPost = () => {
         const url = '/api/reservation/comment/create';
@@ -89,29 +104,26 @@ class LatestReserve extends Component{
             'Content-Type' : 'application/json'
           }
         }
-      
         return post(url, JSON.stringify(this.state.reservation), config);
       }
 
-      
-   
-      handleSubmit = (e) =>{
-        e.preventDefault()
-        const errmsg = ''
-        if(this.checkSubmit()){
-            this.sendPost()
-            .then((res) => {
-              this.setState({showHide:!this.state.showHide})
-            })
-  
-        } 
-       
-        else{ alert('a') /* error 내용 출력 필요 */}
-      }
+    handleSubmit = (e) =>{
+    e.preventDefault()
+    const errmsg = ''
+    if(this.checkSubmit()){
+        this.sendPost()
+        .then((res) => {
+            this.setState({showHide:!this.state.showHide})
+        })
 
-      checkSubmit = () => {
+    } 
+    
+    else{ alert('a') /* error 내용 출력 필요 */}
+    }
+
+    checkSubmit = () => {
         return true;
-      }
+    }
 
     render() {return (
         <main id="main">
@@ -129,6 +141,7 @@ class LatestReserve extends Component{
                         <th>시간</th>
                         <th>예약한 시간</th>
                         <th>상태</th>
+                        <th>근로 배정</th>
                     </thead>
 
                     <tbody>
@@ -141,6 +154,8 @@ class LatestReserve extends Component{
                                     <td>{moment(contents.time_from).format('MM월 DD일 HH:mm') + '~' + moment(contents.time_to).format('MM월 DD일 HH:mm')}</td>
                                     <td>{moment(contents.time_request).format('MM월 DD일 HH:mm')}</td>
                                     <td><div className={contents.state}/>{this.state.handle[contents.state]}</td>
+                                    {contents.content === null ? <td><div className="nowork"/>근로 없음</td> :
+                                    <td><div className={this.workStateChange(contents.content.workComplete)}/>{this.state.workHandle[this.workStateChange(contents.content.workComplete)]}</td>}
                                 </tr>
                             )
                         })}
@@ -162,7 +177,7 @@ class LatestReserve extends Component{
                         </ul>
                     </div>
                 </div>
-            <ReservModal modal={this.state} onClickHandler={this.handleModalShowHide} handleSubmit={this.handleSubmit}onChangeHandler2={this.handleValueChange} onChangeHandler3={this.handleValueChange}/>
+            <ReservModal modal={this.state} onClickHandler={this.handleModalShowHide} handleSubmit={this.handleSubmit}onChangeHandler2={this.handleValueChange} onChangeHandler3={this.handleValueChange_work}/>
 
       </main>
       )};

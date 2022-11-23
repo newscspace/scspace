@@ -96,7 +96,7 @@ class Form extends Component{
               
             <SpacePick spacelist={{'세미나실 1' : 'seminar-room1', '세미나실 2': 'seminar-room2'}} onChangeHandler={this.handleValueChange}  />
             <OrganizationName onChangeHandler={this.handleValueChange_content} value={this.state.content.organizationName}/>
-            <Time onChangeHandler = {this.handleValueChange_time} limitdate={this.limitdate}/>
+            <Time onChangeHandler = {this.handleValueChange_time} limitdate={this.limitdate} work={false}/>
             <Number onChangeHandler={this.handleValueChange_content} type={true}/>
                 <Contents onChangeHandler = {this.handleValueChange_content} value={this.state.content.contents}/>
             <Agree/>

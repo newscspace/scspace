@@ -119,11 +119,11 @@ class Form extends Component{
                 <Checkbox checkboxlist = {{옥상:"rooftop", '커뮤니티 마당':"community", 전시계단:"stair", '미디어 스페이스':'media', '2층 로비':"second_lobby", '3층 로비':"third_lobby", 모임터:'meeting'}} head="장소" name="space" onChangeHandler = {this.handleValueChange_checkbox}/>
                 <OrganizationName onChangeHandler={this.handleValueChange_content} value={this.state.content.organizationName}/>
                 <EventName onChangeHandler={this.handleValueChange_content} value={this.state.content.eventName}/>
-                <Time rehersal={true} limitdate={this.limitdate} onChangeHandler = {this.handleValueChange_time}/>
+                <Time rehersal={true} limitdate={this.limitdate} onChangeHandler = {this.handleValueChange_time} work={false}/>
                 <Number onChangeHandler={this.handleValueChange_content} type={false}/>
                 <Contents onChangeHandler = {this.handleValueChange_content} value={this.state.content.contents}/>
                 <EventPurpose onChangeHandler = {this.handleValueChange_content} value={this.state.content.eventPurpose}/>
-                <Checkbox checkboxlist = {{종교적:"religion", 영리성:"rentability", 정치적:"politic"}} head="성격" name="character" onChangeHandler = {this.handleValueChange_checkbox}/>
+                <Checkbox checkboxlist = {{종교적:"religion", 영리성:"rentability", 정치적:"politic"}} head="성격" name="character" onChangeHandler = {this.handleValueChange_checkbox} hr={true}/>
                 <Food onChangeHandler={this.handleValueChange_content} value={this.state.content.food}/>
                 <Agree/>
                 
