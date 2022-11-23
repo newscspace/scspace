@@ -39,7 +39,7 @@ class Reservation extends Component{
     }
     
     workStateChange = (work) => {
-        if(work === null || workState === undefined) return "nowork";
+        if(work === null || work === undefined) return "nowork";
         if(work === false) return "notassigned";
         return "assigned";
     }
