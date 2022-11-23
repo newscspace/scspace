@@ -162,7 +162,6 @@ const dbModel = {
   createComment: async (p) => {
     let conn = db.getConnection().promise();
     let return_result;
-<<<<<<< HEAD
     if(p.content === null){
       let sql = `UPDATE reservation SET comment=?, state=? WHERE id=?`;
       await conn.query(sql, [p.comment, p.state, p.id])
@@ -177,14 +176,6 @@ const dbModel = {
     }
     
     
-=======
-
-    let sql = `UPDATE reservation SET comment=?, state=? WHERE id=?`;
-    await conn.query(sql, [p.comment, p.state, p.id])
-      .then(() => { return_result = true; })
-      .catch(err => { console.log(err); return_result = false; });
-
->>>>>>> abcf56efedc6c36aeb5c7e3c9c2f4d90f21fecef
     return return_result;
   },
 };
