@@ -14,7 +14,8 @@ class Reservation extends Component{
             page_number : 1,
             list : [],
             selectedList : [],
-            handle: {wait: "대기중", grant: "승인됨", rejected: "거절됨"},  
+            handle: {wait: "대기중", grant: "승인됨", rejected: "거절됨"}, 
+            workHandle: {nowork: "근로 없음", notassigned: "배정 안됨", assigned: "배정 완료"}, 
         };  
 
         this.spaceDict = {
@@ -37,6 +38,17 @@ class Reservation extends Component{
     
     }
     
+    workStateChange = (work) => {
+        if(work === null) return "nowork";
+        if(work === false) return "notassigned";
+        return "assigned";
+    }
+
+    workStateChangeInverse = (work) => {
+        if(work === "nowork") return null;
+        if(work === "notassigned") return false;
+        if(work === "assigned")return true;
+    }
 
     handleChange = (e) => {
         let nextstate = Object.assign({}, this.state);
@@ -99,6 +111,7 @@ class Reservation extends Component{
                                 <option value="wait">{t('대기중')}</option>
                             </select>
                         </form></th>
+                        <th>{t('근로 배정')}</th>
                         <th>{t('확인서')}</th>
                     </thead>
 
@@ -109,6 +122,8 @@ class Reservation extends Component{
                                 <td>{moment(contents.time_from).format('MM월 DD일 HH:mm')}~{moment(contents.time_to).format('MM월 DD일 HH:mm')}</td>
                                 <td>{moment(contents.time_request).format('MM월 DD일 HH:mm')}</td>
                                 <td>{this.state.handle[contents.state]}</td>
+                                {contents.content === null ? <td>근로 없음</td> : 
+                                <td>{this.state.workHandle[this.workStateChange(contents.content.workComplete)]}</td>}
                                 <td onClick={() => {this.props.history.push({pathname:'/confirmation', state:contents.id})}}><Link>보기</Link></td>
                             </tr>)
                             

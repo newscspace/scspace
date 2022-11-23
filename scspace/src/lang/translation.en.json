@@ -74,6 +74,7 @@
 
     "처리 상태" : "State",
     "전체 상태" : "State",
+    "근로 배정" : "Worker",
     "해결됨" : "Solved",
     "대기중" : "Waiting",
     "거절됨" : "Rejected",

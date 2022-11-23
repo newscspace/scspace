@@ -172,6 +172,12 @@ class Confirmation extends Component{
                     <p className="ptxt">{moment(this.state.reserveData.content.workFrom).format('MM월 DD일 HH:mm') + '~' + moment(this.state.reserveData.content.workTo).format('MM월 DD일 HH:mm')}</p>
                 </div>
             )
+            returnResult.push(
+                <div className="wrap">
+                    <p className="ptitle">근로 배정 여부</p>
+                    <p className="ptxt">{this.state.reserveData.content.workComplete ? "배정 완료" : "배정 안됨"}</p>
+                </div>
+            )
         }
         
         if (this.state.reserveData.content.equipment){
