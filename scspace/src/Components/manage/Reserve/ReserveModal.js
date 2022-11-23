@@ -271,11 +271,11 @@ class ReservModal extends Component{
                         <div className="wrap">
                             <p className="modal-first">근로 배정</p>
                             <div className="form-check form-check-inline">
-                                <input className="modal-chk" type="radio" name="state" id="inlineRadio1" onChange={this.props.onChangeHandler3} value="notassigned" required/>
+                                <input className="modal-chk" type="radio" name="workComplete" id="inlineRadio1" onChange={this.props.onChangeHandler3} value="notassigned" required/>
                                 <label className="modal-second" for="inlineRadio1">{this.props.modal.workHandle["notassigned"]}</label>
                             </div>
                             <div className="form-check form-check-inline">
-                                <input className="modal-chk" type="radio" name="state" id="inlineRadio1" onChange={this.props.onChangeHandler3} value="assigned" required/>
+                                <input className="modal-chk" type="radio" name="workComplete" id="inlineRadio1" onChange={this.props.onChangeHandler3} value="assigned" required/>
                                 <label className="modal-second" for="inlineRadio1">{this.props.modal.workHandle["assigned"]}</label>
                             </div>
 

@@ -22,7 +22,7 @@ class ReservationList extends Component{
             spaceFilter : 'all',
             stateFilter : 'all',
             handle: {wait: "대기중", grant: "승인됨", rejected: "거절됨"},  
-            
+            workHandle: {nowork: "근로 없음", notassigned: "배정 안됨", assigned: "배정 완료"},
         }; 
         
         
@@ -84,9 +84,27 @@ class ReservationList extends Component{
       
     }
 
+    workStateChange = (work) => {
+        if(work === null) return "nowork";
+        if(work === false) return "notassigned";
+        return "assigned";
+    }
+
+    workStateChangeInverse = (work) => {
+        if(work === "nowork") return null;
+        if(work === "notassigned") return false;
+        if(work === "assigned")return true;
+    }
+
     handleValueChange = (e) => {
         let nextstate = Object.assign({}, this.state);
         nextstate['reservation'][e.target.name] = e.target.value;
+        this.setState(nextstate);
+    }
+
+    handleValueChange_work = (e) => {
+        let nextstate = Object.assign({}, this.state);
+        nextstate['reservation']['content'][e.target.name] = this.workStateChangeInverse(e.target.value);
         this.setState(nextstate);
     }
 
@@ -179,6 +197,7 @@ class ReservationList extends Component{
                                 <option value="rejected">거절</option>
                                 <option value="wait">대기 중</option>
                             </select></th>
+                        <th>근로 배정</th>
                     </thead>
 
                     <tbody>
@@ -191,6 +210,9 @@ class ReservationList extends Component{
                                     <td>{moment(contents.time_from).format('MM월 DD일 HH:mm') + '~' + moment(contents.time_to).format('MM월 DD일 HH:mm')}</td>
                                     <td>{moment(contents.time_request).format('MM월 DD일 HH:mm')}</td>
                                     <td><div className={contents.state}/>{this.state.handle[contents.state]}</td>
+                                    {contents.content === null ? <td><div className="nowork"/>근로 없음</td> :
+                                        <td><div className={this.workStateChange(contents.content.workComplete)}/>{this.state.workHandle[this.workStateChange(contents.content.workComplete)]}</td>
+                                    }
                                 </tr>
                             )
                         })}
@@ -212,7 +234,7 @@ class ReservationList extends Component{
                         </ul>
                     </div>
                 </section>
-                <ReservModal modal={this.state} onClickHandler={this.handleModalShowHide} handleSubmit={this.handleSubmit}onChangeHandler2={this.handleValueChange} onChangeHandler3={this.handleValueChange}/>
+                <ReservModal modal={this.state} onClickHandler={this.handleModalShowHide} handleSubmit={this.handleSubmit}onChangeHandler2={this.handleValueChange} onChangeHandler3={this.handleValueChange_work}/>
 
       </main>
       )};

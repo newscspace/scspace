@@ -93,9 +93,8 @@ class LatestReserve extends Component{
 
     handleValueChange_work = (e) => {
         let nextstate = Object.assign({}, this.state);
-        nextstate['reservation']['content']['workComplete'] = this.workStateChangeInverse(e.target.value);
+        nextstate['reservation']['content'][e.target.name] = this.workStateChangeInverse(e.target.value);
         this.setState(nextstate);
-        console.log(this.state.list);
     }
 
     sendPost = () => {
@@ -155,7 +154,9 @@ class LatestReserve extends Component{
                                     <td>{moment(contents.time_from).format('MM월 DD일 HH:mm') + '~' + moment(contents.time_to).format('MM월 DD일 HH:mm')}</td>
                                     <td>{moment(contents.time_request).format('MM월 DD일 HH:mm')}</td>
                                     <td><div className={contents.state}/>{this.state.handle[contents.state]}</td>
+                                    {contents.content === null ? <td>근로 없음</td> :
                                     <td><div className={this.workStateChange(contents.content.workComplete)}/>{this.state.workHandle[this.workStateChange(contents.content.workComplete)]}</td>
+                                    }
                                 </tr>
                             )
                         })}
