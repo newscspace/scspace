@@ -38,7 +38,7 @@ const getPrize = function() {
     //console.log('랜덤 숫자: '+ranNum);
     
     //확률 설정
-    const pbt = 35;
+    const pbt = 70;
 
     if(ranNum <= pbt){
         return 1;
