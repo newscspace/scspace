@@ -74,7 +74,7 @@ class LatestReserve extends Component{
     }
 
     workStateChange = (work) => {
-        if(work === null) return "nowork";
+        if(work === null || work === undefined) return "nowork";
         if(work === false) return "notassigned";
         return "assigned";
     }
