@@ -33,7 +33,6 @@ class LatestReserve extends Component{
             'workshop': '창작공방',
             'open-space': '오픈스페이스'
           }
-        
     }
 
     componentDidMount(){
@@ -71,8 +70,19 @@ class LatestReserve extends Component{
                 })
             } )
             .catch(err => console.log(err));
-    
-      
+        
+    }
+
+    workStateChange = (work) => {
+        if(work === null) return "nowork";
+        if(work === false) return "notassigned";
+        return "assigned";
+    }
+
+    workStateChangeInverse = (work) => {
+        if(work === "nowork") return null;
+        if(work === "notassigned") return false;
+        if(work === "assigned")return true;
     }
 
     handleValueChange = (e) => {
@@ -81,6 +91,12 @@ class LatestReserve extends Component{
         this.setState(nextstate);
     }
 
+    handleValueChange_work = (e) => {
+        let nextstate = Object.assign({}, this.state);
+        nextstate['reservation']['content']['workComplete'] = this.workStateChangeInverse(e.target.value);
+        this.setState(nextstate);
+        console.log(this.state.list);
+    }
 
     sendPost = () => {
         const url = '/api/reservation/comment/create';
@@ -89,34 +105,25 @@ class LatestReserve extends Component{
             'Content-Type' : 'application/json'
           }
         }
-      
         return post(url, JSON.stringify(this.state.reservation), config);
       }
 
-      
-   
-      handleSubmit = (e) =>{
-        e.preventDefault()
-        const errmsg = ''
-        if(this.checkSubmit()){
-            this.sendPost()
-            .then((res) => {
-              this.setState({showHide:!this.state.showHide})
-            })
-  
-        } 
-       
-        else{ alert('a') /* error 내용 출력 필요 */}
-      }
+    handleSubmit = (e) =>{
+    e.preventDefault()
+    const errmsg = ''
+    if(this.checkSubmit()){
+        this.sendPost()
+        .then((res) => {
+            this.setState({showHide:!this.state.showHide})
+        })
+
+    } 
+    
+    else{ alert('a') /* error 내용 출력 필요 */}
+    }
 
     checkSubmit = () => {
         return true;
-    }
-
-    workStateChange = (work) => {
-        if(work === null) return "nowork";
-        if(work === false) return "notassigned";
-        return "assigned";
     }
 
     render() {return (
@@ -170,7 +177,7 @@ class LatestReserve extends Component{
                         </ul>
                     </div>
                 </div>
-            <ReservModal modal={this.state} onClickHandler={this.handleModalShowHide} handleSubmit={this.handleSubmit}onChangeHandler2={this.handleValueChange} onChangeHandler3={this.handleValueChange}/>
+            <ReservModal modal={this.state} onClickHandler={this.handleModalShowHide} handleSubmit={this.handleSubmit}onChangeHandler2={this.handleValueChange} onChangeHandler3={this.handleValueChange_work}/>
 
       </main>
       )};

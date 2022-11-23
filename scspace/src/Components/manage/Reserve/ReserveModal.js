@@ -258,11 +258,26 @@ class ReservModal extends Component{
                             {Object.keys(this.props.modal.handle).map((member) =>{
                                 return (
                                     <div className="form-check form-check-inline">
-                                    <input className="modal-chk" type="radio" name="state" id="inlineRadio1" onChange={this.props.onChangeHandler2} value={member} required/>
-                                    <label className="modal-second" for="inlineRadio1">{this.props.modal.handle[member]}</label>
+                                        <input className="modal-chk" type="radio" name="state" id="inlineRadio1" onChange={this.props.onChangeHandler2} value={member} required/>
+                                        <label className="modal-second" for="inlineRadio1">{this.props.modal.handle[member]}</label>
                                     </div>
                                 )
                             })}
+
+                        </div>
+
+                        <h5 className="modal-ttl">근로 배정</h5>
+                        <hr/>
+                        <div className="wrap">
+                            <p className="modal-first">근로 배정</p>
+                            <div className="form-check form-check-inline">
+                                <input className="modal-chk" type="radio" name="state" id="inlineRadio1" onChange={this.props.onChangeHandler3} value="notassigned" required/>
+                                <label className="modal-second" for="inlineRadio1">{this.props.modal.workHandle["notassigned"]}</label>
+                            </div>
+                            <div className="form-check form-check-inline">
+                                <input className="modal-chk" type="radio" name="state" id="inlineRadio1" onChange={this.props.onChangeHandler3} value="assigned" required/>
+                                <label className="modal-second" for="inlineRadio1">{this.props.modal.workHandle["assigned"]}</label>
+                            </div>
 
                         </div>
                         <div className="wrap">

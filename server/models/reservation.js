@@ -135,7 +135,7 @@ const dbModel = {
     let conn = db.getConnection().promise();    
     let return_result;
 
-    let sql = `SELECT * FROM reservation WHERE (time_request BETWEEN DATE_ADD(NOW(),INTERVAL -1 MONTH ) AND NOW()) AND state='wait' ORDER BY time_request DESC;`;
+    let sql = `SELECT * FROM reservation WHERE (time_request BETWEEN DATE_ADD(NOW(),INTERVAL -1 MONTH ) AND NOW()) AND (state ='wait' OR (state ='grant' AND content IS NOT NULL AND content->'$.workComplete' IS NOT NULL AND content->'$.workComplete' =false)) ORDER BY time_request DESC;`;
     await conn.query(sql)
     .then((result) => {return_result = result[0];})
     .catch(err => {console.log(err); return_result = null;});
