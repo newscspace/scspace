@@ -8,6 +8,7 @@ const jwt = require('./jwt');
 const team = require('./team');
 const space = require('./space');
 const users = require('./users');
+const easteregg = require('./easteregg');
 //const event = require('./event');
 
 
@@ -36,6 +37,10 @@ router.get('/api/space/*', space.router);
 router.get('/api/users/*', users.router);
 router.post('/api/users/*', users.router);
 
+router.get('api/easteregg/*', easteregg.router);
+
+//router.get('/api/event/*', event.router);
+//router.post('/api/event/*', event.router);
 
 // router.get('/*', (req, res) => {res.send(express.static('../../scspace/build/index.html'))});
 router.get('*', (req, res) => {
