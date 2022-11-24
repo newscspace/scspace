@@ -3276,3 +3276,39 @@ and (min-width: 1000px) {
 .body-space {
   padding-top: 2em;
 }
+
+/*--------------------------------------------------------------
+# Chanyeol
+--------------------------------------------------------------*/
+
+.percent90{
+  font-size: 90%;
+}
+
+.nowork{
+  width: 13px;
+  height: 13px;
+  background: rgb(150, 150, 150);
+  float: left;
+  margin-right: 8px;
+  margin-top: 6px;
+  border-radius: 50%;
+}
+.notassigned{
+  width: 13px;
+  height: 13px;
+  background: rgb(0, 43, 80);
+  float: left;
+  margin-right: 8px;
+  margin-top: 6px;
+  border-radius: 50%;
+}
+.assigned{
+  width: 13px;
+  height: 13px;
+  background: rgb(113, 197, 197);
+  float: left;
+  margin-right: 8px;
+  margin-top: 6px;
+  border-radius: 50%;
+}

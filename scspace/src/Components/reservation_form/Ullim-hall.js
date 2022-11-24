@@ -21,7 +21,7 @@ class Form extends Component{
             space : 'ullim-hall',
             timeFrom : '',
             timeTo : '',
-            content : {organizationName : '', eventName:'', innerNumber : 0, outerNumber : 0, eventPurpose:'',contents:'', rehersalFrom:null, rehersalTo:null, rehersalLastdayFrom : null, rehersalLastdayTo:null, equipment:[], food:'', lobby:[], desk:0, chair:0}
+            content : {organizationName : '', eventName:'', innerNumber : 0, outerNumber : 0, eventPurpose:'',contents:'', rehersalFrom:null, rehersalTo:null, rehersalLastdayFrom : null, rehersalLastdayTo:null, workFrom: null, workTo:null, workComplete:null, equipment:[], food:'', lobby:[], desk:0, chair:0}
         }
         
 
@@ -81,10 +81,11 @@ class Form extends Component{
       this.setState(nextstate);
     }
     
-    handleValueChange_time = (what, date, rehersal = false)=> {
+    handleValueChange_time = (what, date, rehersalOrWork = false)=> {
       let nextstate = Object.assign({}, this.state);
-      rehersal ? nextstate['content'][what] = date
+      rehersalOrWork ? nextstate['content'][what] = date
       : nextstate[what] = date;
+      if(what == 'workFrom') nextstate['content']['workComplete'] = false;
       this.setState(nextstate);
     }
     handleValueChange_content = (e) => {
@@ -119,7 +120,7 @@ class Form extends Component{
            <form className="php-email-form" onSubmit={this.handleSubmit}>
                 <OrganizationName onChangeHandler={this.handleValueChange_content} value={this.state.content.organizationName}/>
                 <EventName onChangeHandler={this.handleValueChange_content} value={this.state.content.eventName}/>
-                <Time rehersal={true} rehersalLastday={true} limitdate={this.limitdate} onChangeHandler = {this.handleValueChange_time}/>
+                <Time rehersal={true} rehersalLastday={true} limitdate={this.limitdate} onChangeHandler = {this.handleValueChange_time} work={true}/>
                 <Number onChangeHandler={this.handleValueChange_content} type={false}/>
                 <Contents onChangeHandler = {this.handleValueChange_content} value={this.state.content.contents}/>
                 <EventPurpose onChangeHandler = {this.handleValueChange_content} value={this.state.content.eventPurpose}/>
