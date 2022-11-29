@@ -110,6 +110,33 @@ const randompick = async (id, resvid) => {
     }
 }
 
+const createReservateionJSON = (reservation, startDate, endDate, postfix="") => {
+    const isAccepted = reservation.state === "grant" ? "" : " (미승인)"
+    if (reservation.content) {
+        return { // 울림미래홀
+            id: reservation.id,
+            space: reservation.space,
+            state: reservation.state,
+            startDate: startDate,
+            endDate: endDate,
+            content: reservation.content,
+            text: reservation.content.eventName ? reservation.content.eventName + postfix + isAccepted : reservation.content.organizationName + postfix + isAccepted,
+            description: reservation.content.contents,
+            recurrenceRule: reservation.content.recurrenceRule
+        };
+    } else return {
+        id: reservation.id,
+        space: reservation.space,
+        state: reservation.state,
+        startDate: startDate,
+        endDate: endDate,
+        content: null,
+        text: null,
+        description: null,
+        recurrenceRule: null
+    };
+}
+
 reservation = {
     create: (req, res) => {
         if (!('scspacetoken' in req.cookies)) {
@@ -174,41 +201,14 @@ reservation = {
         db.readCalendar(p)
             .then(result => {
                 result.map((reservation) => {
-                    return_result.push({
-                        id: reservation.id,
-                        space: reservation.space,
-                        startDate: reservation.time_from,
-                        endDate: reservation.time_to,
-                        content: reservation.content,
-                        text: reservation.content ? (reservation.content.eventName ? reservation.content.eventName : reservation.content.organizationName) : null,
-                        description: reservation.content ? reservation.content.contents : null,
-                        recurrenceRule: reservation.content ? reservation.content.recurrenceRule : null
-                    })
-                    if (reservation.content && (reservation.content.rehersalFrom || reservation.content.rehersalLastdayFrom)) {
+                    
+                    return_result.push(createReservateionJSON(reservation, reservation.time_from, reservation.time_to))
+                    if (reservation.content) {
                         if (reservation.content.rehersalFrom) {
-                            return_result.push({
-                                id: reservation.id,
-                                space: reservation.space,
-                                startDate: reservation.content.rehersalFrom,
-                                endDate: reservation.content.rehersalTo,
-                                content: reservation.content,
-                                text: (reservation.content.eventName ? reservation.content.eventName + ' 리허설' : reservation.content.organizationName + ' 리허설'),
-                                description: reservation.content ? reservation.content.contents : null,
-                                recurrenceRule: reservation.content ? reservation.content.recurrenceRule : null
-                            })
+                            return_result.push(createReservateionJSON(reservation, reservation.content.rehersalFrom, reservation.content.rehersalTo, " 리허설"))
                         }
                         if (reservation.content.rehersalLastdayFrom) {
-                            return_result.push({
-                                id: reservation.id,
-                                space: reservation.space,
-                                startDate: reservation.content.rehersalLastdayFrom,
-                                endDate: reservation.content.rehersalLastdayTo,
-                                content: reservation.content.rehersalLastdayFrom,
-                                text: (reservation.content.eventName ? reservation.content.eventName + ' 리허설' : reservation.content.organizationName + ' 리허설'),
-                                description: reservation.content ? reservation.content.contents : null,
-                                recurrenceRule: reservation.content ? reservation.content.recurrenceRule : null
-                            })
-
+                            return_result.push(createReservateionJSON(reservation, reservation.content.rehersalLastdayFrom, reservation.content.rehersalLastdayTo, " 리허설"))
                         }
 
                     }
