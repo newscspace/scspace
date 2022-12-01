@@ -17,7 +17,7 @@ const appointmentClassName = '.dx-scheduler-appointment';
 const cellClassName = '.dx-scheduler-date-table-cell';
 
 
-// 꺄악 상수라니
+// 이거 이따구로 짜도 되겠지 ??
 const resourcesData = [
   {text: '개인연습실 1', id: 'individual-practice-room1', color: '#D81159',}, 
   {text: '개인연습실 2', id: 'individual-practice-room2', color: '#D81159',},
@@ -32,11 +32,28 @@ const resourcesData = [
   {text: '세미나실 2', id: 'seminar-room2',color: '#B0228C',},
   {text: '창작공방', id: 'workshop',color: '#858786',},
   {text: '오픈스페이스', id: 'open-space',color: '#221E22',},
+  {text: '개인연습실 1 (미승인)', id: 'individual-practice-room1-unaccepted', color: '#EB88AC',}, 
+  {text: '개인연습실 2 (미승인)', id: 'individual-practice-room2-unaccepted', color: '#EB88AC',},
+  {text: '개인연습실 3 (미승인)', id: 'individual-practice-room3-unaccepted', color: '#EB88AC',},  
+  {text: '피아노실 1 (미승인)', id: 'piano-room1-unaccepted', color: '#FFBB9E',}, 
+  {text: '피아노실 2 (미승인)', id: 'piano-room2-unaccepted', color: '#FFBB9E',}, 
+  {text: '합주실 (미승인)', id: 'group-practice-room-unaccepted', color: '#A5B1A4',}, 
+  {text: '무예실 (미승인)', id: 'dance-studio-unaccepted', color: '#B8BEE1',}, 
+  {text: '울림홀 (미승인)', id: 'ullim-hall-unaccepted', color: '#86D8E8',},
+  {text: '미래홀 (미승인)', id: 'mirae-hall-unaccepted',color: '#8C94A8',},
+  {text: '세미나실 1 (미승인)', id: 'seminar-room1-unaccepted',color: '#D790C5',},
+  {text: '세미나실 2 (미승인)', id: 'seminar-room2-unaccepted',color: '#D790C5',},
+  {text: '창작공방 (미승인)', id: 'workshop-unaccepted',color: '#C2C3C2',},
+  {text: '오픈스페이스 (미승인)', id: 'open-space-unaccepted',color: '#908E90',},
 ];
 
 const spaceDict = {};
 resourcesData.forEach(resource => {
   spaceDict[resource.id] = resource.text;
+} );
+const spaceDictAccepted = {};
+resourcesData.slice(0, 13).forEach(resource => {
+  spaceDictAccepted[resource.id] = resource.text;
 } );
 
 class Calendar extends React.Component {
@@ -56,6 +73,7 @@ class Calendar extends React.Component {
       filter : 'individual-practice-room1',
       data : []
     };
+    this.changeSpace = this.changeSpace.bind(this)
     this.onAppointmentContextMenu = this.onAppointmentContextMenu.bind(this);
     this.onContextMenuItemClick = this.onContextMenuItemClick.bind(this);
     this.onCellContextMenu = this.onCellContextMenu.bind(this);
@@ -86,13 +104,13 @@ class Calendar extends React.Component {
           <React.Fragment>
             <Dropdown >
               <Dropdown.Toggle className="space-filter" id="dropdown-basic" >
-                {t(spaceDict[this.state.filter])}
+                {t(spaceDictAccepted[this.state.filter])}
               </Dropdown.Toggle>
 
               <Dropdown.Menu>
-                {Object.keys(spaceDict).map((space) =>{
+                {Object.keys(spaceDictAccepted).map((space) =>{
                   return (
-                    <Dropdown.Item onClick={() =>{this.setState({filter:space}) }}>{t(spaceDict[space])}</Dropdown.Item>
+                    <Dropdown.Item onClick={() =>{this.setState({filter:space}) }}>{t(spaceDictAccepted[space])}</Dropdown.Item>
                   )
                 })}
               </Dropdown.Menu>
@@ -101,7 +119,7 @@ class Calendar extends React.Component {
             <Scheduler
               ref={this.scheduler}
               timeZone="Asia/Seoul"
-              dataSource={data.filter((r)=>{return r.space===filter})}
+              dataSource={data.filter((r)=>{return (r.space === filter || r.space === filter+"-unaccepted") })}
               views={views}
               groups={groups}
               crossScrollingEnabled={crossScrollingEnabled}
@@ -135,7 +153,7 @@ class Calendar extends React.Component {
               disabled={disabled}
               onItemClick={this.onContextMenuItemClick}
               itemRender={this.AppointmentMenuTemplate}
-            />
+              />
           </React.Fragment>
         </div>
       </div>
@@ -146,10 +164,18 @@ class Calendar extends React.Component {
     
     await get('/api/reservation/calendar/read?date='+date)
     .then((res) => {
-      this.setState({data:res.data})
-      
+      let newData = this.changeSpace(res.data)
+      this.setState({data:newData})
     })
     .catch((err) => {console.log(err)})
+  }
+
+  changeSpace = (data) => {
+
+    return data.map((r) => {
+      r.space = (r.state === 'wait' ? r.space+"-unaccepted" : r.space)
+      return r
+    })
   }
 
   customizeDateNavigatorText(e){
@@ -173,7 +199,12 @@ class Calendar extends React.Component {
         'Content-Type' : 'application/json'
       }
     }
-  
+    
+    if(appointmentData.space.indexOf("-unaccepted") != -1){
+      const removePos = appointmentData.space.indexOf("-unaccepted")
+      appointmentData.space = appointmentData.space.substring(0, removePos)
+    }
+
     post(url, JSON.stringify(appointmentData), config)
     .then((res) => {res.data ? alert('예약이 정상적으로 처리되었습니다.') : alert('예약이 처리되지 않았습니다.');  this.callApi(new Date())})
   }
