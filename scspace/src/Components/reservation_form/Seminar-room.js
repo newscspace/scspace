@@ -94,7 +94,7 @@ class Form extends Component{
         <div className="col-lg-8">
             <form className="php-email-form" onSubmit={this.handleSubmit}>
             
-            <h3>시험기간 동안 세미나실 예약을 진행하지 않습니다. 자세한 내용은 학생문화공간위원회 인스타그램 <a href="https://www.instagram.com/p/CjmIBZwJRpA/" target="_blank" title="인스타그램 링크">게시물</a>을 참고해주세요.</h3>
+            <h3>시험기간 동안 세미나실 예약을 진행하지 않습니다. 자세한 내용은 학생문화공간위원회 인스타그램 <a href="https://www.instagram.com/p/Cl0nI2YJ1UJ/" target="_blank" title="인스타그램 링크">게시물</a>을 참고해주세요.</h3>
             {/*
             <SpacePick spacelist={{'세미나실 1' : 'seminar-room1', '세미나실 2': 'seminar-room2'}} onChangeHandler={this.handleValueChange}  />
             <OrganizationName onChangeHandler={this.handleValueChange_content} value={this.state.content.organizationName}/>
