@@ -47,7 +47,7 @@ class Scspace extends Component{
                         <hr></hr>
                         <div>
                             <h3>CI 소개</h3>
-                            <p className="intro"><b><a href="https://forms.gle/LTF2PZNNAeqYqtB5A" target="_blank">학생문화공간위원회</a> CI는 학생, 문화, 그리고 공간의 세 가치를 담았습니다.</b></p>
+                            <p className="intro"><b>학생문화공간위원회 CI는 학생, 문화, 그리고 공간의 세 가치를 담았습니다.</b></p>
                             <p>학생, 문화, 그리고 공간. 저희 단체가 항상 노력하는 세 가지를 각각 푸르른 청춘, 붉은 장영신학생회관, 그리고 깨끗한 푸른빛 백색에 담아 제작하였습니다.<br/>
                                 장영신학생회관을 형상화한 로고에서 하이라이트된 ㄱㄱㅇ 모양은 해당 장소와 같이 성장해온 저희 단체의 이야기를 말해줍니다.
                             </p>
