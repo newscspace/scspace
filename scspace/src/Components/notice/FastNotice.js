@@ -4,7 +4,7 @@ import {Link} from 'react-router-dom';
 function FastNotice(props){
 
   const [fastNotice, changeFastNotice] = useState([
-    {link:"https://forms.gle/LTF2PZNNAeqYqtB5A", title:"학생문화공간위원회 홈페이지 개편", content:"홈페이지 사용과 관련 문의사항이 있다면 이메일 혹은 문의하기를 통해 연락해주세요. "},
+    {link:"#", title:"학생문화공간위원회 홈페이지 개편", content:"홈페이지 사용과 관련 문의사항이 있다면 이메일 혹은 문의하기를 통해 연락해주세요. "},
     {link:"https://forms.gle/Qm2gLrpCFukRRXuM6", title:"홈페이지 버그 관련 공지", content:"현재 홈페이지는 베타 버전입니다. 만약 홈페이지에 버그가 발생한다면 클릭해 제보해주시면 빠른 조치 취하겠습니다."},
     {link:"https://forms.gle/aKmqZcfgQSVqeemg8", title:"신학관 게시물 부착 관련 공지", content:"신학관 내외부에 게시물을 부착하기 위해서는 게시물 신고대장을 작성해야 합니다. 클릭하면 신고대장 양식으로 넘어갑니다.  "},
     {link:"https://docs.google.com/document/d/1iaHYLSHobzjnzDbwi4nagN0XSlpAaNAezSdpwASngWo/edit?usp=sharing", title:"물품 대여 공지", content:"물품 대여 확인서 작성 후 물품 대여가 가능합니다. 클릭하면 확인서 양식으로 넘어갑니다."},

@@ -18,12 +18,16 @@
 /*--------------------------------------------------------------
 # 1. HeroBiz template variables 
 --------------------------------------------------------------*/
+@import url(//fonts.googleapis.com/earlyaccess/jejugothic.css);
+@import url(//fonts.googleapis.com/earlyaccess/jejuhallasan.css);
+@import url(https://hangeul.pstatic.net/hangeul_static/css/nanum-square-round.css);
+
 :root {
 
   /* Fonts */
-  --font-default: 'Open Sans', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-  --font-primary: 'Source Sans Pro', sans-serif;
-  --font-secondary: 'Poppins', sans-serif;
+  --font-default: 'NanumSquareRound', 'Open Sans', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  --font-primary: 'NanumSquareRound', 'Source Sans Pro', sans-serif;
+  --font-secondary: 'NanumSquareRound', 'Poppins', sans-serif;
 
   /* Colors */
   /* The *-rgb color names are simply the RGB converted value of the corresponding color for use in the rgba() function */
@@ -46,9 +50,12 @@
   --color-primary-dark-rgb: 192, 7, 25;
 
   /* Secondary colors */
-  --color-secondary: #485664;
+  /*--color-secondary: #485664;
   --color-secondary-light: #8f9fae;
-  --color-secondary-dark: #3a4753;
+  --color-secondary-dark: #3a4753;*/
+  --color-secondary: #644848;
+  --color-secondary-light: #ae8f8f;
+  --color-secondary-dark: #3a2929;
 
   --color-secondary-rgb: 72, 86, 100;
   --color-secondary-light-rgb: 143, 159, 174;
