@@ -222,15 +222,14 @@ class ReservationList extends Component{
             <section className="blog">
                     <div className="blog-pagination">
                         <ul className="justify-content-center">
-
                             {
                                 [...Array(this.state.total_page_number)].map((v,i) => i+1).map((page_num) => {
-                                    return(<li className={this.state.page_number === page_num ? "active" : ""}onClick={() => {this.setState({page_number : page_num})}}><Link to="#" >{page_num}</Link></li>)
+                                    return(<li className={this.state.page_number === page_num ? "active" : ""} onClick={() => {this.setState({page_number : page_num})}}>
+                                        {Math.abs(this.state.page_number - page_num) <= 4 ? <Link to="#">{page_num}</Link> : <div/>}
+                                    </li>)
 
-                                })
-                                
+                                })   
                             }
-                            
                         </ul>
                     </div>
                 </section>
