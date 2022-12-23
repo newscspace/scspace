@@ -39,6 +39,7 @@ const getPrize = function() {
     
     //확률 설정
     const pbt = 0;
+    //풀리퀘 테스트
 
     if(ranNum <= pbt){
         return 1;
