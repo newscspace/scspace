@@ -14,7 +14,7 @@ class LatestReserve extends Component{
             wait : 0,
             reservation : null,    
             handle: {wait: "대기중", grant: "승인", rejected: "거절"},  
-            workHandle: {nowork: "근로 없음", notassigned: "배정 안됨", assigned: "배정 완료"},
+            workHandle: {nowork: "필요 없음", notassigned: "근로 필요", assigned: "근로 배정됨"},
         }; 
         
         

@@ -3297,7 +3297,7 @@ and (min-width: 1000px) {
 .notassigned{
   width: 13px;
   height: 13px;
-  background: rgb(0, 43, 80);
+  background: rgb(255, 127, 39);
   float: left;
   margin-right: 8px;
   margin-top: 6px;
