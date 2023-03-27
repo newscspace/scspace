@@ -56,7 +56,7 @@ function Event(props){
                 </div>
                 <br/>
 
-                <div className="container-fluid" data-aos-delay="200">
+                <div className="container-fluid" data-aos-delay="200"> {/* 주석 */}
 
                     <div className="portfolio-isotope">
             
