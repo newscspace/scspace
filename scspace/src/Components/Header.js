@@ -9,7 +9,7 @@ import '../static/vendor/bootstrap-icons/bootstrap-icons.css'
 import '../static/vendor/aos/aos.css'
 import '../static/vendor/glightbox/css/glightbox.min.css'
 import '../static/vendor/swiper/swiper-bundle.min.css'
-import '../static/css/variables-red.css'
+import '../static/css/variables.css'
 import '../static/css/main.css'
 
 
