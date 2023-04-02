@@ -8,6 +8,7 @@ import Agree from './form_component/Agree';
 import SpacePick from './form_component/SpacePick';
 import OrganizationName from './form_component/Organization_name';
 import Number from './form_component/Number';
+import Recurrence from './form_component/Recurrence';
 
 class Form extends Component{
     constructor(props){
@@ -97,8 +98,9 @@ class Form extends Component{
             <SpacePick spacelist={{'세미나실 1' : 'seminar-room1', '세미나실 2': 'seminar-room2'}} onChangeHandler={this.handleValueChange}  />
             <OrganizationName onChangeHandler={this.handleValueChange_content} value={this.state.content.organizationName}/>
             <Time onChangeHandler = {this.handleValueChange_time} limitdate={this.limitdate} work={false}/>
+            <Recurrence/>
             <Number onChangeHandler={this.handleValueChange_content} type={true}/>
-                <Contents onChangeHandler = {this.handleValueChange_content} value={this.state.content.contents}/>
+            <Contents onChangeHandler = {this.handleValueChange_content} value={this.state.content.contents}/>
             <Agree/>
             <div className="text-end"><button type="submit">{t('예약하기')}</button></div>
           </form>

@@ -6,6 +6,7 @@ import {withTranslation} from "react-i18next";
 import Time from './form_component/Time';
 import Agree from './form_component/Agree';
 import SpacePick from './form_component/SpacePick';
+import Recurrence from './form_component/Recurrence';
 
 class Form extends Component{
     constructor(props){
@@ -93,7 +94,8 @@ class Form extends Component{
             <form className="php-email-form" onSubmit={this.handleSubmit}> 
             <SpacePick spacelist={{'피아노실 1' : 'piano-room1', '피아노실 2' : 'piano-room2'}} onChangeHandler={this.handleValueChange}  />
             <Time onChangeHandler = {this.handleValueChange_time} limitdate={this.limitdate} work={false} />
-                <Agree/>
+            <Recurrence/>
+            <Agree/>
             <div className="text-end"><button type="submit">{t('예약하기')}</button></div>
           </form>
         </div>

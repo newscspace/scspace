@@ -7,6 +7,7 @@ import Contents from './form_component/Contents';
 import Agree from './form_component/Agree';
 import OrganizationName from './form_component/Organization_name';
 import Number from './form_component/Number';
+import Recurrence from './form_component/Recurrence';
 
 class Form extends Component{
     constructor(props){
@@ -92,6 +93,7 @@ class Form extends Component{
             <form className="php-email-form" onSubmit={this.handleSubmit}>
             <OrganizationName onChangeHandler={this.handleValueChange_content}value={this.state.content.organizationName}/>
             <Time onChangeHandler = {this.handleValueChange_time} limitdate={this.limitdate} work={false}/>
+            <Recurrence/>
             <Number onChangeHandler={this.handleValueChange_content} type={true}/>
             <Contents onChangeHandler = {this.handleValueChange_content} value={this.state.content.contents}/>
             <Agree/>

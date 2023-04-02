@@ -7,6 +7,7 @@ import Time from './form_component/Time';
 import Contents from './form_component/Contents';
 import Agree from './form_component/Agree';
 import EventName from './form_component/Event_name';
+import Recurrence from './form_component/Recurrence';
 
 import {withTranslation} from "react-i18next";
 
@@ -154,6 +155,7 @@ sendPost = () => {
               <Team teamlist= {this.state.teamlist ? this.state.teamlist : []} onChangeHandler = {this.handleValueChange} />
               <Member checkboxlist = {this.state.memberlist? this.state.memberlist : []} head="멤버" name="teamMember" onChangeHandler = {this.handleValueChange_checkbox} hr={true}/>
               <Time onChangeHandler = {this.handleValueChange_time} limitdate={this.limitdate} work={false} />
+              <Recurrence/>
               <Contents onChangeHandler = {this.handleValueChange_content} value={this.state.content.contents}/>
               <Agree/>
               <div className="text-end"><button type="submit">{t('예약하기')}</button></div>

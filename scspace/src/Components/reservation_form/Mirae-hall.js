@@ -12,6 +12,7 @@ import EventName from './form_component/Event_name';
 import EventPurpose from './form_component/Event_purpose'
 import Food from './form_component/Food';
 import Equipment from './form_component/Checkbox_list'
+import Recurrence from './form_component/Recurrence';
 
 
 class Form extends Component{
@@ -122,6 +123,7 @@ class Form extends Component{
                 <OrganizationName onChangeHandler={this.handleValueChange_content} value={this.state.content.organizationName}/>
                 <EventName onChangeHandler={this.handleValueChange_content} value={this.state.content.eventName}/>
                 <Time rehersal={true} rehersalLastday={true} limitdate={this.limitdate} onChangeHandler = {this.handleValueChange_time} work={true}/>
+                <Recurrence/>
                 <Number onChangeHandler={this.handleValueChange_content} type={false}/>
                 <Contents onChangeHandler = {this.handleValueChange_content} value={this.state.content.contents}/>
                 <EventPurpose onChangeHandler = {this.handleValueChange_content}value={this.state.content.eventPurpose}/>
