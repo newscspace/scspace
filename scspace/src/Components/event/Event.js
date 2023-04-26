@@ -56,13 +56,22 @@ function Event(props){
                 </div>
                 <br/>
 
-                <div className="container-fluid" data-aos-delay="200">
+                <div className="container-fluid" data-aos-delay="200"> {/* 주석 */}
 
                     <div className="portfolio-isotope">
             
                         <div className="container">
 
                             <div className="row g-0 portfolio-container">
+
+                                <div className="col-xl-3 col-lg-4 col-md-6 portfolio-item filter-app">
+                                    <img src="/img/findtreasure2.jpg" className="img-fluid" alt=""/>
+                                        <div className="portfolio-info">
+                                            <h4>신학관 보물찾기</h4>
+                                            <a href="https://www.instagram.com/p/CqCSxTkr5oH/" target="_blank" title="인스타그램 링크" className="glightbox preview-link"><i className="bi bi-zoom-in"></i></a>
+                                            <a href="https://forms.gle/T4yu2NyKrbfSBtJQ7" target="_blank" title="관련 링크" className="details-link"><i className="bi bi-link-45deg"></i></a>
+                                        </div>
+                                </div>
 
                                 <div className="col-xl-3 col-lg-4 col-md-6 portfolio-item filter-app">
                                     <img src="/img/easteregg2.jpg" className="img-fluid" alt=""/>

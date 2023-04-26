@@ -22,7 +22,7 @@ class ReservationList extends Component{
             spaceFilter : 'all',
             stateFilter : 'all',
             handle: {wait: "대기중", grant: "승인됨", rejected: "거절됨"},  
-            workHandle: {nowork: "근로 없음", notassigned: "배정 안됨", assigned: "배정 완료"},
+            workHandle: {nowork: "필요 없음", notassigned: "근로 필요", assigned: "근로 배정됨"},
         }; 
         
         
