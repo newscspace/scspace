@@ -67,6 +67,10 @@ class Form extends Component{
       nextstate['content'][e.target.name] = e.target.value;
       this.setState(nextstate);
     }
+    handleValueChange_recur = (e) => {
+      let nextstate = Object.assign({}, this.state);
+      this.setState(nextstate);
+    }
     
     handleValueChange_checkbox = (e) => {
       let nextstate = Object.assign({}, this.state);
@@ -94,7 +98,7 @@ class Form extends Component{
             <form className="php-email-form" onSubmit={this.handleSubmit}> 
             <SpacePick spacelist={{'피아노실 1' : 'piano-room1', '피아노실 2' : 'piano-room2'}} onChangeHandler={this.handleValueChange}  />
             <Time onChangeHandler = {this.handleValueChange_time} limitdate={this.limitdate} work={false} />
-            <Recurrence/>
+            {this.props.UserInfo.type === "admin" ? <Recurrence onChangeHandler = {this.handleValueChange_recur}/> : <div/>}
             <Agree/>
             <div className="text-end"><button type="submit">{t('예약하기')}</button></div>
           </form>

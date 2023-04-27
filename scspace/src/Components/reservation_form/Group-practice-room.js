@@ -124,6 +124,10 @@ handleValueChange_content = (e) => {
   nextstate['content'][e.target.name] = e.target.value;
   this.setState(nextstate);
 }
+handleValueChange_recur = (e) => {
+  let nextstate = Object.assign({}, this.state);
+  this.setState(nextstate);
+}
 
 handleValueChange_checkbox = (e) => {
   let nextstate = Object.assign({}, this.state);
@@ -155,7 +159,7 @@ sendPost = () => {
               <Team teamlist= {this.state.teamlist ? this.state.teamlist : []} onChangeHandler = {this.handleValueChange} />
               <Member checkboxlist = {this.state.memberlist? this.state.memberlist : []} head="멤버" name="teamMember" onChangeHandler = {this.handleValueChange_checkbox} hr={true}/>
               <Time onChangeHandler = {this.handleValueChange_time} limitdate={this.limitdate} work={false} />
-              <Recurrence/>
+              {this.props.UserInfo.type === "admin" ? <Recurrence onChangeHandler = {this.handleValueChange_recur}/> : <div/>}
               <Contents onChangeHandler = {this.handleValueChange_content} value={this.state.content.contents}/>
               <Agree/>
               <div className="text-end"><button type="submit">{t('예약하기')}</button></div>

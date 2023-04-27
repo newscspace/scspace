@@ -18,15 +18,13 @@ class Form extends Component{
           timeFrom : '',
           timeTo : '',
           content : null
-  
-          
+           
       }
 
 
       // 예약 가능 날짜 관련 변수
       this.limitdate = {mindays:1, maxdays:14, maxUseHour:2}
-
-
+      console.log(this.props.UserInfo.type);
     }
     
     checkSubmit = () =>{
@@ -99,7 +97,7 @@ class Form extends Component{
             <form className="php-email-form" onSubmit={this.handleSubmit}> 
                 <SpacePick spacelist={{'개인연습실 1' : 'individual-practice-room1', '개인연습실 2' : 'individual-practice-room2', '개인연습실 3' : 'individual-practice-room3'}} onChangeHandler={this.handleValueChange}  />
                 <Time onChangeHandler = {this.handleValueChange_time} limitdate={this.limitdate} work={false}/>
-                <Recurrence onChangeHandler = {this.handleValueChange_recur}/>
+                {this.props.UserInfo.type === "admin" ? <Recurrence onChangeHandler = {this.handleValueChange_recur}/> : <div/>}
                 <Agree/>
             <div className="text-end"><button type="submit">{t('예약하기')}</button></div>
           </form>

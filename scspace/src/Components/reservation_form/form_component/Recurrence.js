@@ -194,7 +194,7 @@ const Recurrence = (props) => {
                     <div className="width-margin-block1"/>
                         <DropdownButton
                         className="yearday-block"
-                        id="dropdown-yearly"
+                        id="dropdown-monthly"
                         drop="down"
                         title={String(byMonthDay) + "일"}
                         onSelect={handleValueByMonthDayInYear}>
