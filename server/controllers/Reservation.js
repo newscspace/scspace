@@ -332,7 +332,7 @@ reservation = {
                         }
                         else {
                             let autoGrantList = ['individual-practice-room1', 'individual-practice-room2', 'individual-practice-room3', 'piano-room1', 'piano-room2', 'group-practice-room', 'seminar-room1', 'seminar-room2', 'dance-studio']
-                            let autoRejectList = ['workshop']
+                            let autoRejectList = []
                             if (autoGrantList.includes(p.space)) {
                                 p.state = 'grant';
                             }
