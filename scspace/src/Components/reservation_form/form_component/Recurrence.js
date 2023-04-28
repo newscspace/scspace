@@ -18,34 +18,61 @@ const Recurrence = (props) => {
 
     const handleIsRecur = () => {
         setIsRecurrence(!isRecurrence);
+        props.onChangeHandler("TOGGLE", 0);
     }
 
     const handleFreq = (event) => {
-        setFreq(event.target.textContent);
+        let newFreq = event.target.textContent;
+        setFreq(newFreq);
+        props.onChangeHandler("FREQ", newFreq);
+        if(newFreq === 'weekly'){
+            setByday([2]);
+        }
+        if(newFreq === 'monthly'){
+            setByMonthDay(1);
+        }
+        if(newFreq === 'yearly'){
+            setByMonthDay(1);
+            setByMonth(1);
+        }
     }
 
     const handleValue = (event) => {
-        if(!isNaN(event.target.value) && event.target.value !== "") setInterval(parseInt(event.target.value));
+        if(!isNaN(event.target.value) && event.target.value !== ""){
+            setInterval(parseInt(event.target.value));
+            props.onChangeHandler("INTERVAL", event.target.value);
+        }
     }
 
     const decreaseInterval = () => {
-        if(interval > 1) setInterval(interval - 1);
+        if(interval > 1){
+            setInterval(interval - 1);
+            props.onChangeHandler("INTERVAL", interval - 1);
+        }
     }
 
     const increaseInterval = () => {
         setInterval(interval + 1);
+        props.onChangeHandler("INTERVAL", interval + 1);
     }
 
     const handleValueCount = (event) => {
-        if(!isNaN(event.target.value) && event.target.value !== "") setRecurCount(parseInt(event.target.value));
+        if(!isNaN(event.target.value) && event.target.value !== ""){
+            setRecurCount(parseInt(event.target.value));
+            props.onChangeHandler("COUNT", event.target.value);
+        }
     }
 
     const decreaseIntervalCount = () => {
-        if(recurCount > 1) setRecurCount(recurCount - 1);
+        if(recurCount > 1){
+            setRecurCount(recurCount - 1);
+            props.onChangeHandler("COUNT", recurCount - 1);
+        }
     }
 
     const increaseIntervalCount = () => {
         setRecurCount(recurCount + 1);
+        props.onChangeHandler("COUNT", recurCount + 1);
     }
 
     const handleCheckbox = (event) => {
@@ -53,14 +80,20 @@ const Recurrence = (props) => {
         if(event.target.value === "never"){
             setRecurUntil(null);
             setRecurCount(null);
+            props.onChangeHandler("UNTIL", -1);
+            props.onChangeHandler("COUNT", -1);
         }
         if(event.target.value === "until"){
             setRecurUntil(new Date());
             setRecurCount(null);
+            props.onChangeHandler("UNTIL", new Date());
+            props.onChangeHandler("COUNT", -1);
         }
         if(event.target.value === "count"){
             setRecurUntil(null);
             setRecurCount(1);
+            props.onChangeHandler("UNTIL", -1);
+            props.onChangeHandler("COUNT", 1);
         }
     }
 
@@ -75,26 +108,38 @@ const Recurrence = (props) => {
             new_byday.push(x);
             setByday(new_byday);
         }
+        props.onChangeHandler("BYDAY", new_byday);
     }
 
     const handleValueMonthDay = (event) => {
-        if(!isNaN(event.target.value) && event.target.value !== "") setByMonthDay(parseInt(event.target.value));
+        if(!isNaN(event.target.value) && event.target.value !== ""){
+            setByMonthDay(parseInt(event.target.value));
+            props.onChangeHandler("BYMONTHDAY", event.target.value);
+        }
     }
 
     const decreaseIntervalMonthDay = () => {
-        if(byMonthDay > 1) setByMonthDay(byMonthDay - 1);
+        if(byMonthDay > 1){
+            setByMonthDay(byMonthDay - 1);
+            props.onChangeHandler("BYMONTHDAY", byMonthDay - 1);
+        }
     }
 
     const increaseIntervalMonthDay = () => {
-        if(byMonthDay < 31) setByMonthDay(byMonthDay + 1);
+        if(byMonthDay < 31){
+            setByMonthDay(byMonthDay + 1);
+            props.onChangeHandler("BYMONTHDAY", byMonthDay + 1);
+        }
     }
 
     const handleValueByMonthInYear = (eventKey) => {
         setByMonth(eventKey);
+        props.onChangeHandler("BYMONTH", eventKey);
     }
 
     const handleValueByMonthDayInYear = (eventKey) => {
         setByMonthDay(eventKey);
+        props.onChangeHandler("BYMONTHDAY", eventKey);
     }
 
     return(
@@ -233,14 +278,13 @@ const Recurrence = (props) => {
                 {recurRule === "until"?(
                 <div className="recur-until-timebox">
                     <DatePicker
-                        onChange={(date) => {setRecurUntil(date)}}
+                        onChange={(date) => {setRecurUntil(date); props.onChangeHandler("UNTIL", date);}}
                         selected={recurUntil}
-                        dateFormat="yyyy/MM/dd h:mm aa"
+                        dateFormat="yyyy/MM/dd"
                         className="form-control"
                         selectsStart
                         placeholderText="종료 시각"
                         timeIntervals={10}
-                        showTimeSelect
                     />
                 </div>
                 ):<div/>}
