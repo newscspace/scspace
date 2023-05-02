@@ -146,7 +146,7 @@ const Recurrence = (props) => {
         <div>
             <div className="form-check form-check-inline">
               <input className="form-check-input" type="checkbox" onChange={handleIsRecur}/>
-              <label className="form-check-label">정기예약 할거임?</label>
+              <label className="form-check-label">정기예약</label>
             </div>
             {isRecurrence ? (
             <div className="container features" id="features">
@@ -205,7 +205,7 @@ const Recurrence = (props) => {
 
                 {freq === "monthly"?(
                 <div className="mid-align">
-                    <h5 className="top-margin1">매월 며칠?</h5>
+                    <h5 className="top-margin1">일자 선택</h5>
                     <div className="monthday-block"> {/* interval-block 이랑 count-block이 색깔 차이밖에 없으면 어떻게 좀 바꿀까 */}
                         <button type="button" onClick={decreaseIntervalMonthDay}>-</button>
                         <input type="text" value={byMonthDay} inputMode="decimal" min="1" max="undef" step="1" onChange={handleValueMonthDay}/>
@@ -222,7 +222,7 @@ const Recurrence = (props) => {
 
                 {freq === "yearly"?(
                 <div className="mid-align">
-                    <h5 className="top-margin1">매년 몇월 며칠?</h5>
+                    <h5 className="top-margin1">월과 날짜 선택</h5>
                     <div className="yearday">
                         <DropdownButton
                         className="yearday-block"
@@ -230,7 +230,7 @@ const Recurrence = (props) => {
                         drop="down"
                         title={String(byMonth) + "월"}
                         onSelect={handleValueByMonthInYear}>
-                            <div className="sexsexbojital">
+                            <div className="selectbar">
                             {[...Array(12).keys()].map((month) => {return(
                                 <Dropdown.Item eventKey={month+1}>{month + 1}</Dropdown.Item>
                             )})}
@@ -243,7 +243,7 @@ const Recurrence = (props) => {
                         drop="down"
                         title={String(byMonthDay) + "일"}
                         onSelect={handleValueByMonthDayInYear}>
-                            <div className="sexsexbojital">
+                            <div className="selectbar">
                             {[...Array(month2day[byMonth - 1]).keys()].map((day) => {return(
                                 <Dropdown.Item eventKey={day+1}>{day + 1}</Dropdown.Item>
                             )})}
@@ -260,7 +260,7 @@ const Recurrence = (props) => {
                 ):<div/>}
 
                 <div className="mid-align recur-checkbox">
-                    <h5>언제 끝남?</h5>
+                    <h5>종료 시점 선택</h5>
                     <div className="form-check form-check-inline">
                         <input className="form-check-input" name="repeatuntil" type="checkbox" id="MemberChkBx1" checked={recurRule === "never"} value="never" onChange={handleCheckbox}/>
                         <label className="form-check-label" for="MemberChkBx1">영구</label>
