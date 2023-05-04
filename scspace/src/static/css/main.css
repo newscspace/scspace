@@ -3313,20 +3313,22 @@ and (min-width: 1000px) {
   border-radius: 50%;
 }
 .freq-button {
+  border-radius: 15px;
   width: 100px;
   height: 50px;
   background-color: #e3e3e3;
-  border: 2px solid rgb(0, 0, 0);
+  border: 2px solid rgb(255, 255, 255);
   padding: 10px;
   margin-left: 40px;
   margin-top: 20px;
   font-weight: bold;
 }
 .active-freq-button {
+  border-radius: 15px;
   width: 100px;
   height: 50px;
-  background-color: #f78b92;
-  border: 2px solid rgb(0, 0, 0);
+  background-color: #a5cff2;
+  border: 2px solid rgb(255, 255, 255);
   padding: 10px;
   margin-left: 40px;
   margin-top: 20px;
@@ -3347,7 +3349,7 @@ and (min-width: 1000px) {
   margin: 0 20% 0 20%;
 }
 .interval-block button {
-  background-color: #4CAF50;
+  background-color: #a5cff2;
   border: none;
   color: white;
   cursor: pointer;
@@ -3357,14 +3359,14 @@ and (min-width: 1000px) {
   margin-right: 10px;
 }
 .interval-block button:active{
-  background-color: #2c6a56;
+  background-color: #7198b8;
 }
 .interval-block input{
   text-align: center;
   font-size: 120%;
 }
 .count-block {
-  border-radius: 5px;
+  border-radius: 20px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -3372,7 +3374,7 @@ and (min-width: 1000px) {
   margin: 0 20% 0 20%;
 }
 .count-block button {
-  background-color: #4c5caf;
+  background-color: #a5cff2;
   border: none;
   color: white;
   cursor: pointer;
@@ -3382,14 +3384,14 @@ and (min-width: 1000px) {
   margin-right: 10px;
 }
 .count-block button:active{
-  background-color: #382c6a;
+  background-color: #7198b8;
 }
 .count-block input{
   text-align: center;
   font-size: 120%;
 }
 .monthday-block {
-  border-radius: 5px;
+  
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -3397,7 +3399,7 @@ and (min-width: 1000px) {
   margin: 0 20% 0 20%;
 }
 .monthday-block button {
-  background-color: #a7af4c;
+  background-color: #a5cff2;
   border: none;
   color: white;
   cursor: pointer;
@@ -3407,7 +3409,7 @@ and (min-width: 1000px) {
   margin-right: 10px;
 }
 .monthday-block button:active{
-  background-color: #506a2c;
+  background-color: #7198b8;
 }
 .monthday-block input{
   text-align: center;
@@ -3430,14 +3432,17 @@ and (min-width: 1000px) {
 .selectday button{
   width: calc(200% / 21);
   margin: 10px 1.5% 0 1.5%;
-  border: solid 2px black;
+  border: solid 2px rgb(255, 255, 255);
   font-weight: bold;
+  height: 43px;
 }
 .selectday .active_day{
-  background-color: #ffaf69;
+  background-color: #a5cff2;
+  border-radius: 15px;
 }
 .selectday .inactive_day{
   background-color: #e3e3e3;
+  border-radius: 15px;
 }
 .inline{
   display: inline;
