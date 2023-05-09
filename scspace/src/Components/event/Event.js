@@ -65,6 +65,15 @@ function Event(props){
                             <div className="row g-0 portfolio-container">
 
                                 <div className="col-xl-3 col-lg-4 col-md-6 portfolio-item filter-app">
+                                    <img src="/img/championsleague2.jpg" className="img-fluid" alt=""/>
+                                        <div className="portfolio-info">
+                                            <h4></h4>
+                                            <a href="https://www.instagram.com/p/Cry1FEDhxxr/" target="_blank" title="인스타그램 링크" className="glightbox preview-link"><i className="bi bi-zoom-in"></i></a>
+                                            <a href="https://forms.gle/TmSdqVe6gMQK2ou77" target="_blank" title="관련 링크" className="details-link"><i className="bi bi-link-45deg"></i></a>
+                                        </div>
+                                </div>
+
+                                <div className="col-xl-3 col-lg-4 col-md-6 portfolio-item filter-app">
                                     <img src="/img/findtreasure2.jpg" className="img-fluid" alt=""/>
                                         <div className="portfolio-info">
                                             <h4>신학관 보물찾기</h4>
