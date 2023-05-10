@@ -5,18 +5,6 @@ const Password = (props) => {
 
     const [GRPPassword, setGRPPassword] = useState();
 
-    // const sendPost = () => {
-    //     let state = {"1":  "2"};
-    //     const url = '/api/etc/somewhat' + state ;
-    //     const config = {
-    //       headers : {
-    //         'Content-Type' : 'application/json'
-    //       }
-    //     }
-        
-    //     return post(url, JSON.stringify(state), config); // 아직 state가 없다!
-    // }
-
     const callApi = async () => {
         const res = await get('/api/etc/get_grp');
         const body = await res.data;

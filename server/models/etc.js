@@ -13,6 +13,19 @@ const dbModel = {
       .catch(err => {console.log(err); return_result = null;});
     
     return return_result;
+  },
+
+  new_grp: async (p) => {
+    let conn = db.getConnection().promise();    
+    let return_result;
+   
+    let sql = `INSERT INTO etc(grp_password) VALUES (?);`;
+    await conn.query(sql, p)
+      .then(() => {return_result = true;})
+      .catch(err => {console.log(err); return_result = false;});
+   
+    
+    return return_result;
   }
 
 };

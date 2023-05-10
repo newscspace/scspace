@@ -3480,3 +3480,17 @@ and (min-width: 1000px) {
 .password-container h2{
   margin: 0;
 }
+.changepw-button{
+  text-align: right;
+  margin: 5px 3% 5px 5%;
+}
+.changepw-button button{
+  width: 180px;
+  height: 40px;
+  font-size: 110%;
+  border: 2px solid black;
+  background-color: rgb(230, 109, 217);
+}
+.changepw-button button:active{
+  background-color: rgb(168, 78, 159);
+}

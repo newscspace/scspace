@@ -9,7 +9,15 @@ etc = {
                 res.send(return_result['grp_password']);
             })
             .catch ((err) => {console.log(err);});
-        return return_result;
+    },
+
+    new_grp : async (req, res) => {
+        let ran = Math.floor(Math.random() * 10000);
+        ran = ran.toString();
+        while(ran.length < 4) ran = "0" + ran;
+
+        await db.new_grp(ran)
+            .then (result => { result ? res.send(true) : res.send(false)});
     },
 }
 
