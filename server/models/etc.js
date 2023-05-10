@@ -26,6 +26,18 @@ const dbModel = {
    
     
     return return_result;
+  },
+
+  check_reserved: async (p) => {
+    let conn = db.getConnection().promise();    
+    let return_result;
+   
+    let sql = `SQLSQLSQL;`; // ???
+    await conn.query(sql)
+      .then((result) => {return_result = result[0]} )
+      .catch(err => {console.log(err); return_result = null;});
+    
+    return return_result;
   }
 
 };

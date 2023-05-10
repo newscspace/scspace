@@ -19,6 +19,16 @@ etc = {
         await db.new_grp(ran)
             .then (result => { result ? res.send(true) : res.send(false)});
     },
+
+    check_reserved : async (req, res) => {
+        let return_result;
+        await db.check_reserved()
+            .then (result => {
+                return_result = result[0];
+                res.send(true); // ???
+            })
+            .catch ((err) => {console.log(err);});
+    },
 }
 
 module.exports = etc
