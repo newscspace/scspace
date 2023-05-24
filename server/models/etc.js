@@ -32,8 +32,8 @@ const dbModel = {
     let conn = db.getConnection().promise();    
     let return_result;
    
-    let sql = `SQLSQLSQL;`; // ???
-    await conn.query(sql)
+    let sql = `SELECT reserver_id, time_from, time_to FROM reservation WHERE space='group-practice-room' and reserver_id=?;`;
+    await conn.query(sql, p)
       .then((result) => {return_result = result[0]} )
       .catch(err => {console.log(err); return_result = null;});
     

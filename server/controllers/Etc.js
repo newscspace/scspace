@@ -21,11 +21,20 @@ etc = {
     },
 
     check_reserved : async (req, res) => {
-        let return_result;
-        await db.check_reserved()
+        let p = req.query.id;
+        let return_result = false;
+        let present, show_start, show_end;
+        await db.check_reserved(p)
             .then (result => {
-                return_result = result[0];
-                res.send(true); // ???
+                present = new Date();
+                for(let r of result){
+                    show_start = r.time_from.setMinutes(r.time_from.getMinutes() - 30);
+                    show_end   = r.time_to;
+                    if(show_start <= present && present <= show_end){
+                        return_result = true;
+                    }
+                }
+                res.send(return_result);
             })
             .catch ((err) => {console.log(err);});
     },
