@@ -12,9 +12,9 @@ etc = {
     },
 
     new_grp : async (req, res) => {
-        let ran = Math.floor(Math.random() * 10000);
+        let ran = Math.floor(Math.random() * 1000000);
         ran = ran.toString();
-        while(ran.length < 4) ran = "0" + ran;
+        while(ran.length < 6) ran = "0" + ran;
 
         await db.new_grp(ran)
             .then (result => { result ? res.send(true) : res.send(false)});
