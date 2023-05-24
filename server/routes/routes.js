@@ -10,6 +10,7 @@ const space = require('./space');
 const users = require('./users');
 const easteregg = require('./easteregg');
 //const event = require('./event');
+const etc = require('./etc');
 
 
 
@@ -38,6 +39,9 @@ router.get('/api/users/*', users.router);
 router.post('/api/users/*', users.router);
 
 router.get('api/easteregg/*', easteregg.router);
+
+router.post('/api/etc/*', etc.router);
+router.get('/api/etc/*', etc.router);
 
 //router.get('/api/event/*', event.router);
 //router.post('/api/event/*', event.router);

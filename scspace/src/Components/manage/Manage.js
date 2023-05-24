@@ -3,6 +3,7 @@ import {Link} from 'react-router-dom';
 import LatestReserv from './Reserve/LatestReserve';
 import LatestAsk from './Ask/LatestAsk';
 import LoginCheck from '../auth/LoginCheck';
+import ChangePW from './ChangePW';
 
 class Manage extends Component{
 
@@ -31,6 +32,7 @@ class Manage extends Component{
 
             <LatestReserv/>
             <LatestAsk history={this.props.history}/>
+            <ChangePW space="GRP"></ChangePW>
             
         </main>
       )};
