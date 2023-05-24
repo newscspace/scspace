@@ -113,28 +113,36 @@ const randompick = async (id, resvid) => {
 
 const createReservateionJSON = (reservation, startDate, endDate, postfix="") => {
     const isAccepted = reservation.state === "grant" ? "" : " (미승인)"
-    if (reservation.content) {
-        return { // 울림미래홀
-            id: reservation.id,
-            space: reservation.space,
-            state: reservation.state,
-            startDate: startDate,
-            endDate: endDate,
-            content: reservation.content,
-            text: reservation.content.eventName ? reservation.content.eventName + postfix + isAccepted : reservation.content.organizationName + postfix + isAccepted,
-            description: reservation.content.contents,
-            recurrenceRule: reservation.content.recurrenceRule
-        };
-    } else return {
+    if (reservation.space === "ullim-hall" || reservation.space === "mirae-hall") return { // 울림미래홀
         id: reservation.id,
         space: reservation.space,
         state: reservation.state,
         startDate: startDate,
         endDate: endDate,
-        content: null,
+        content: reservation.content,
+        text: reservation.content.eventName ? reservation.content.eventName + postfix + isAccepted : reservation.content.organizationName + postfix + isAccepted,
+        description: reservation.content.contents,
+        recurrenceRule: reservation.content.recurrenceRule
+    }; else if(reservation.space === "group-practice-room" || reservation.space === "dance-studio") return {
+        id: reservation.id,
+        space: reservation.space,
+        state: reservation.state,
+        startDate: startDate,
+        endDate: endDate,
+        content: reservation.content,
+        text: reservation.content.eventName,
+        description: reservation.content.contents,
+        recurrenceRule: reservation.content.recurrenceRule
+    }; else return {
+        id: reservation.id,
+        space: reservation.space,
+        state: reservation.state,
+        startDate: startDate,
+        endDate: endDate,
+        content: reservation.content,
         text: null,
         description: null,
-        recurrenceRule: null
+        recurrenceRule: reservation.content.recurrenceRule
     };
 }
 
@@ -165,7 +173,7 @@ reservation = {
                         }
                         else {
                             let autoGrantList = ['individual-practice-room1', 'individual-practice-room2', 'individual-practice-room3', 'piano-room1', 'piano-room2', 'group-practice-room', 'seminar-room1', 'seminar-room2', 'dance-studio']
-                            let autoRejectList = ['workshop']
+                            let autoRejectList = [];
                             if (autoGrantList.includes(p.space)) {
                                 p.state = 'grant';
                             }
