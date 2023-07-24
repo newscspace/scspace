@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import Password from './Password';
+import EmergencyNotice from './notice/EmergencyNotice'
 import Banner from './Banner'
 import FastNotice from './notice/FastNotice';
 import FAQ from './faq/FAQ'
@@ -33,7 +34,10 @@ const Main = (props) => {
 
     return (
         <div>
-            {gprValid === true ? <Password/> : null};
+            <div class="top-margin2">
+                {gprValid === true ? <Password/> : null}
+                <EmergencyNotice/>
+            </div>
             <Banner/>
             <FastNotice/>
             <FAQ main={true} history={props.history}/>

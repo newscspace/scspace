@@ -3391,7 +3391,6 @@ and (min-width: 1000px) {
   font-size: 120%;
 }
 .monthday-block {
-  
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -3470,8 +3469,10 @@ and (min-width: 1000px) {
   max-height: 400px;
   overflow-y: auto;
 }
-.password-container{
+.top-margin2{
   margin-top: 78px;
+}
+.password-container{
   background-color: black;
   color: white;
   text-align: center;
@@ -3493,4 +3494,14 @@ and (min-width: 1000px) {
 }
 .changepw-button button:active{
   background-color: rgb(168, 78, 159);
+}
+.emernotice-container{
+  background-color: rgb(0, 0, 0);
+  color: white;
+  text-align: center;
+  padding: 15px 0 15px 0;
+}
+.emernotice-container p{
+  margin: 0;
+  font-size: 120%
 }
