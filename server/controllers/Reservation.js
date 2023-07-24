@@ -165,7 +165,7 @@ reservation = {
                         }
                         else {
                             let autoGrantList = ['individual-practice-room1', 'individual-practice-room2', 'individual-practice-room3', 'piano-room1', 'piano-room2', 'group-practice-room', 'seminar-room1', 'seminar-room2', 'dance-studio']
-                            let autoRejectList = ['workshop']
+                            let autoRejectList = []
                             if (autoGrantList.includes(p.space)) {
                                 p.state = 'grant';
                             }
@@ -174,6 +174,17 @@ reservation = {
                             }
                             else {
                                 p.state = 'wait';
+                            }
+
+                            banReservFrom = new Date("2023-08-03T13:00:00.000Z")
+                            banReservTo   = new Date("2023-08-03T17:00:00.000Z")
+                            timeFromDate  = new Date(p.time_from);
+                            timeToDate    = new Date(p.time_to);
+                            if(timeFromDate <= banReservFrom && banReservFrom <= timeToDate){
+                                p.state = 'rejected';
+                            }
+                            if(timeFromDate <= banReservTo && banReservTo <= timeToDate){
+                                p.state = 'rejected';
                             }
 
                             
