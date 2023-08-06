@@ -36,7 +36,7 @@ const Main = (props) => {
         <div>
             <div class="top-margin2">
                 {gprValid === true ? <Password/> : null}
-                <EmergencyNotice/>
+                {/* <EmergencyNotice/> */}
             </div>
             <Banner/>
             <FastNotice/>
