@@ -111,6 +111,12 @@ set_db = {
         PRIMARY KEY (id)
     );`);
 
+    conn.query(`  CREATE TABLE IF NOT EXISTS etc(
+      id INTEGER NOT NULL AUTO_INCREMENT,
+      grp_password VARCHAR(20),
+      PRIMARY KEY (id)
+    );`)
+
 
 spaceList = ['individual-practice-room', 'piano-room', 'dance-studio', 'seminar-room', 'group-practice-room', 'ullim-hall', 'mirae-hall', 'open-space', 'workshop'];
 spaceList.map((space) => {
