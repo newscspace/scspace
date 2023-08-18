@@ -11,11 +11,16 @@ const PhaserComponent = () => {
             type: Phaser.AUTO,
             width: 800,
             height: 800,
-            scene: [square],
+            scene: [square.waitScene, square.playScene],
             parent: 'gamediv',
             backgroundColor: '#eeeeee'
         };
         game = new Phaser.Game(config);
+        game.scene.start("square_waitScene", {
+            state: "init",
+            n: 3,
+            m: 1,
+        });
 
     }, []);
 
