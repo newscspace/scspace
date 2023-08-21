@@ -18,8 +18,8 @@ function makeEmptyList(s){
 function makeRect(game, x, y, size, state){
     let color;
     if(state === "none" || state === "hide") color = 0xd7d7d7;
-    if(state === "show") color = 0x5dd661;
-    if(state === "wrong") color = 0xd6615d;
+    if(state === "show") color = 0x528c37;
+    if(state === "wrong") color = 0xab1e1e;
     return game.add.rectangle(100 + (x+0.5)*size, 170 + (y+0.5)*size, 0.9*size, 0.9*size, color);
 };
 
@@ -45,11 +45,15 @@ function setProblem(list, count){
 
 class waitScene extends Phaser.Scene{
     constructor(){
-        super({key: "square_waitScene"});
+        super({key: "hardSquare_waitScene"});
         
     };
     init(data){
-        this.add.rectangle(400, 400, 800, 800, 0xeeeeee);
+        if(data.state === "timeOver") this.add.rectangle(400, 400, 800, 800, 0x856565);
+        else this.add.rectangle(400, 400, 800, 800, 0xeeeeee);
+        this.add.rectangle(400, 470, 600, 600, 0xeeeeee);
+        this.add.rectangle(400, 80, 600, 80, 0xeeeeee);
+
         this.n = data.n;
         this.m = data.m;
         this.tick = 0;
@@ -58,14 +62,14 @@ class waitScene extends Phaser.Scene{
             this.rectList = makeEmptyList(this);
             this.text = "Click to start";
         }
-        if(data.state === "over"){
+        if(data.state === "over" || data.state === "timeOver"){
             this.rectList = data.rectList;
             this.rectList.map((rect) => {
                 if(rect.state === "hide") rect.state = "show";
                 rect.obj.destroy();
                 rect.obj = makeRect(this, rect.x, rect.y, 600 / this.n, rect.state);
             });
-            this.text = "Game over!"
+            this.text = data.state === 'over' ? "Game over!" : "Time over!";
         }
     }
     create(){
@@ -91,7 +95,7 @@ class waitScene extends Phaser.Scene{
                     rect.obj.destroy();
                 });
                 let newRectList = setProblem(makeEmptyList(this), 3);
-                this.scene.start("square_playScene", {
+                this.scene.start("hardSquare_playScene", {
                     rectList: newRectList,
                     n: 3,
                     m: 1,
@@ -104,19 +108,27 @@ class waitScene extends Phaser.Scene{
 
 class playScene extends Phaser.Scene{
     constructor(){
-        super({key: "square_playScene"});
+        super({key: "hardSquare_playScene"});
     };
     init(data){
+
+        this.add.rectangle(400, 470, 600, 600, 0xeeeeee);
+        this.add.rectangle(400, 80, 600, 80, 0xeeeeee);
+
         this.rectList = data.rectList;
         this.n = data.n;
         this.m = data.m;
         this.tick = 0;
+        this.tick2 = 40;
         this.get = 0;
         this.rectList.map((rect) => {
             rect.obj.destroy();
             rect.obj = makeRect(this, rect.x, rect.y, 600/this.n, rect.state);
         });
         this.notice = null;
+        this.showRectList = [];
+        this.timeRect = this.add.rectangle(400, -400, 800, 800, 0x856565);
+        this.clear = false;
     };
     environ(game){
         game.add.rectangle(400, 470, 600, 600, 0xeeeeee);
@@ -126,7 +138,7 @@ class playScene extends Phaser.Scene{
             game.n++;
             game.m = 1;
         }
-        game.rectList = setProblem(makeEmptyList(game), game.n + game.m - 1);
+        game.rectList = setProblem(makeEmptyList(game), game.n + 2*game.m - 2);
         game.rectList.map((rect) => {
             rect.obj.destroy();
             rect.obj = makeRect(game, rect.x, rect.y, 600/game.n, rect.state);
@@ -140,7 +152,15 @@ class playScene extends Phaser.Scene{
         });
         game.notice.setPosition(400 - game.notice.width/2, 80 - game.notice.height/2);
         game.tick = 0;
+        game.tick2 = 40;
         game.get = 0;
+        game.timeRect.setPosition(400, -400);
+
+        game.showRectList.map((rect) => {
+            rect.destroy();
+            rect = makeRect(game, rect.x, rect.y, 600 / game.n, rect.state);
+        });
+        game.clear = false;
     };
     create(){
         let border = this.add.rectangle(400, 400, 800, 800);
@@ -153,10 +173,19 @@ class playScene extends Phaser.Scene{
             align: "center",
         });
         this.notice.setPosition(400 - this.notice.width/2, 80 - this.notice.height/2);
+        this.rectList.map((rect) => {
+            this.showRectList.push(makeRect(this, rect.x, rect.y, 600 / this.n, rect.state))
+        })
     };
-    update(){
+    update(a, b){
         this.tick++;
-        if(this.tick === 20 * this.n){
+
+        this.timeRect.destroy();
+        this.timeRect = this.add.rectangle(400, (40 - this.tick2) * 800/40 - 400, 800, 800, 0x856565);
+        this.timeRect.setDepth(-1);
+
+        if(this.tick2 > 0 && this.tick > 30 && !this.clear) this.tick2--;
+        if(this.tick === 30){
             this.rectList.map((rect) => {
                 rect.obj.setFillStyle(0xd7d7d7);
                 if(rect.state === "show") rect.state = "hide";
@@ -166,31 +195,48 @@ class playScene extends Phaser.Scene{
             this.notice.setPosition(400 - this.notice.width/2, 80 - this.notice.height/2);
         }
 
+        this.showRectList.map((rect) => {
+            rect.destroy();
+            rect = makeRect(this, rect.x, rect.y, 600 / this.n, rect.state);
+        })
+
         this.rectList.map((rect) =>{
             rect.obj.on("pointerdown", () => {
                 if(rect.state === "hide"){
                     rect.state = "show";
-                    rect.obj.fillColor = 0x5dd661;
+                    rect.obj.fillColor = 0x528c37;
                     rect.obj.disableInteractive();
                     this.get++;
-                    if(this.get === this.n + this.m - 1){
+                    this.tick2 = 40;
+                    if(this.get === this.n + 2*this.m - 2){
                         this.notice.setText("Good!");
                         this.notice.setPosition(400 - this.notice.width/2, 80 - this.notice.height/2);
                         this.rectList.map((rect2) => {rect2.obj.disableInteractive()});
+                        this.clear = true;
+                        if(this.tick2 === 0) this.tick2 = 1;
                         setTimeout(this.environ, 750, this);
                     }
                 }
                 if(rect.state === "none"){
                     rect.state = "wrong";
-                    this.scene.start("square_waitScene", {
+                    this.scene.start("hardSquare_waitScene", {
                         state: "over",
                         n: this.n,
                         m: this.m,
                         rectList: this.rectList
-                    })
+                    });
                 }
-            })
+            });
         });
+
+        if(this.tick2 === 0){
+            this.scene.start("hardSquare_waitScene", {
+                state: "timeOver",
+                n: this.n,
+                m: this.m,
+                rectList: this.rectList
+            });
+        }
 
         let prograssBar1 = this.add.rectangle(400, 160, 600, 4, 0xd7d7d7);
         let prograssBar2 = this.add.rectangle(0, 0, 600 * (this.m - 1)/(this.n - 1), 4, 0xd6615d);
@@ -199,9 +245,9 @@ class playScene extends Phaser.Scene{
     }
 }
 
-const square = {
+const hardSquare = {
     waitScene: waitScene,
     playScene: playScene,
 }
 
-export default square;
+export default hardSquare;

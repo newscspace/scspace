@@ -1,6 +1,8 @@
 import Phaser from 'phaser';
 import React, {useEffect, useRef} from 'react';
-import square from './square'
+import main from './main';
+import square from './square';
+import hardSquare from './hardSquare';
 
 const PhaserComponent = () => {
     const gameContainer = useRef(null);
@@ -11,16 +13,12 @@ const PhaserComponent = () => {
             type: Phaser.AUTO,
             width: 800,
             height: 800,
-            scene: [square.waitScene, square.playScene],
+            scene: [main, square.waitScene, square.playScene, hardSquare.waitScene, hardSquare.playScene],
             parent: 'gamediv',
             backgroundColor: '#eeeeee'
         };
         game = new Phaser.Game(config);
-        game.scene.start("square_waitScene", {
-            state: "init",
-            n: 3,
-            m: 1,
-        });
+        game.scene.start("main");
 
     }, []);
 
