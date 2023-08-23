@@ -24,6 +24,7 @@ import ViewAsk from './Components/Ask/ViewAsk';
 import Calendar from './Components/Calendar/Calendar';
 import Event from './Components/event/Event';
 import CreateEvent from './Components/event/CreateEvent';
+import ScsGame from './Components/game/ScsGame';
 
 import Login from './Components/auth/Login';
 import Logout from './Components/auth/Logout';
@@ -80,6 +81,7 @@ class App extends Component {
 
         <Route path="/login" component={Login} exact/>
         <Route path="/logout" component={Logout} exact/>
+        <Route path="/game" component={ScsGame} exact/>
 
 
         <Route path="*" render={() => (<h1 className="body-space">404 error</h1>)}/>
