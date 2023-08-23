@@ -84,8 +84,14 @@ class waitScene extends Phaser.Scene{
         prograssBar2.setOrigin(0, 0);
         prograssBar2.setPosition(100, 158);
 
-        this.input.on('pointerdown', () => {
-            if(this.tick > 50 || this.data.state === "init"){
+        let back_points = new Phaser.Geom.Polygon([15, -15,  -15, 0,  15, 15]);
+        let back_button = this.add.polygon(60, 60, back_points.points, 0x000000);
+
+        this.input.on('pointerdown', (pos) => {
+            if(back_points.contains(pos.x - 45, pos.y - 45)){
+                this.scene.start("main");
+            }
+            else if(this.tick > 50 || this.data.state === "init"){
                 this.n = 3;
                 this.rectList.map((rect) => {
                     rect.obj.destroy();
@@ -99,7 +105,7 @@ class waitScene extends Phaser.Scene{
             }
         });
     };
-    update(){this.tick++;}
+    update(a, b){this.tick++}
 }
 
 class playScene extends Phaser.Scene{
@@ -153,6 +159,16 @@ class playScene extends Phaser.Scene{
             align: "center",
         });
         this.notice.setPosition(400 - this.notice.width/2, 80 - this.notice.height/2);
+        
+        let back_points = new Phaser.Geom.Polygon([15, -15,  -15, 0,  15, 15]);
+        let back_button = this.add.polygon(60, 60, back_points.points, 0x000000);
+        this.input.on('pointerdown', (pos) => {
+            if(back_points.contains(pos.x - 45, pos.y - 45)){
+                this.scene.start("main");
+            }
+        });
+
+        
     };
     update(){
         this.tick++;
@@ -182,6 +198,9 @@ class playScene extends Phaser.Scene{
                 }
                 if(rect.state === "none"){
                     rect.state = "wrong";
+                    this.rectList.map((rect2) => {
+                        rect2.obj.destroy();
+                    });
                     this.scene.start("square_waitScene", {
                         state: "over",
                         n: this.n,

@@ -66,7 +66,6 @@ class waitScene extends Phaser.Scene{
             this.rectList = data.rectList;
             this.rectList.map((rect) => {
                 if(rect.state === "hide") rect.state = "show";
-                rect.obj.destroy();
                 rect.obj = makeRect(this, rect.x, rect.y, 600 / this.n, rect.state);
             });
             this.text = data.state === 'over' ? "Game over!" : "Time over!";
@@ -88,8 +87,14 @@ class waitScene extends Phaser.Scene{
         prograssBar2.setOrigin(0, 0);
         prograssBar2.setPosition(100, 158);
 
-        this.input.on('pointerdown', () => {
-            if(this.tick > 50 || this.data.state === "init"){
+        let back_points = new Phaser.Geom.Polygon([15, -15,  -15, 0,  15, 15]);
+        let back_button = this.add.polygon(60, 60, back_points.points, 0x000000);
+
+        this.input.on('pointerdown', (pos) => {
+            if(back_points.contains(pos.x - 45, pos.y - 45)){
+                this.scene.start("main");
+            }
+            else if(this.tick > 50 || this.data.state === "init"){
                 this.n = 3;
                 this.rectList.map((rect) => {
                     rect.obj.destroy();
@@ -119,7 +124,7 @@ class playScene extends Phaser.Scene{
         this.n = data.n;
         this.m = data.m;
         this.tick = 0;
-        this.tick2 = 40;
+        this.tick2 = 40 * 3;
         this.get = 0;
         this.rectList.map((rect) => {
             rect.obj.destroy();
@@ -152,7 +157,7 @@ class playScene extends Phaser.Scene{
         });
         game.notice.setPosition(400 - game.notice.width/2, 80 - game.notice.height/2);
         game.tick = 0;
-        game.tick2 = 40;
+        game.tick2 = 37 * (game.n + 2*game.m - 2);
         game.get = 0;
         game.timeRect.setPosition(400, -400);
 
@@ -175,13 +180,22 @@ class playScene extends Phaser.Scene{
         this.notice.setPosition(400 - this.notice.width/2, 80 - this.notice.height/2);
         this.rectList.map((rect) => {
             this.showRectList.push(makeRect(this, rect.x, rect.y, 600 / this.n, rect.state))
-        })
+        });
+
+        let back_points = new Phaser.Geom.Polygon([15, -15,  -15, 0,  15, 15]);
+        let back_button = this.add.polygon(60, 60, back_points.points, 0x000000);
+        this.input.on('pointerdown', (pos) => {
+            if(back_points.contains(pos.x - 45, pos.y - 45)){
+                this.scene.start("main");
+            }
+        });
     };
     update(a, b){
         this.tick++;
 
+        let timeFull = 37 * (this.n + 2*this.m - 2)
         this.timeRect.destroy();
-        this.timeRect = this.add.rectangle(400, (40 - this.tick2) * 800/40 - 400, 800, 800, 0x856565);
+        this.timeRect = this.add.rectangle(400, (timeFull - this.tick2) * 800/timeFull - 400, 800, 800, 0x856565);
         this.timeRect.setDepth(-1);
 
         if(this.tick2 > 0 && this.tick > 30 && !this.clear) this.tick2--;
@@ -207,7 +221,6 @@ class playScene extends Phaser.Scene{
                     rect.obj.fillColor = 0x528c37;
                     rect.obj.disableInteractive();
                     this.get++;
-                    this.tick2 = 40;
                     if(this.get === this.n + 2*this.m - 2){
                         this.notice.setText("Good!");
                         this.notice.setPosition(400 - this.notice.width/2, 80 - this.notice.height/2);
@@ -219,6 +232,9 @@ class playScene extends Phaser.Scene{
                 }
                 if(rect.state === "none"){
                     rect.state = "wrong";
+                    this.rectList.map((rect2) => {
+                        rect2.obj.destroy();
+                    });
                     this.scene.start("hardSquare_waitScene", {
                         state: "over",
                         n: this.n,
@@ -230,6 +246,9 @@ class playScene extends Phaser.Scene{
         });
 
         if(this.tick2 === 0){
+            this.rectList.map((rect2) => {
+                rect2.obj.destroy();
+            });
             this.scene.start("hardSquare_waitScene", {
                 state: "timeOver",
                 n: this.n,
