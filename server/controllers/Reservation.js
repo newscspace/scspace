@@ -112,8 +112,21 @@ const randompick = async (id, resvid) => {
 }
 
 const createReservateionJSON = (reservation, startDate, endDate, postfix="") => {
-    const isAccepted = reservation.state === "grant" ? "" : " (미승인)"
-    if (reservation.content) {
+    const isAccepted = reservation.state === "grant" ? "" : " (미승인)";
+    if (reservation.space.slice(0, -1) === "individual-practice-room" || reservation.space.slice(0, -1) === "piano-room"){
+        return {
+            id: reservation.id,
+            space: reservation.space,
+            state: reservation.state,
+            startDate: startDate,
+            endDate: endDate,
+            content: null,
+            text: null,
+            description: null,
+            recurrenceRule: reservation.content.recurrenceRule
+        };
+    }
+    else if (reservation.content) {
         return { // 울림미래홀
             id: reservation.id,
             space: reservation.space,
@@ -125,7 +138,8 @@ const createReservateionJSON = (reservation, startDate, endDate, postfix="") => 
             description: reservation.content.contents,
             recurrenceRule: reservation.content.recurrenceRule
         };
-    } else return {
+    }
+    else return {
         id: reservation.id,
         space: reservation.space,
         state: reservation.state,
