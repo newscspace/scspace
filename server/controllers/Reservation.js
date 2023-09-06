@@ -112,8 +112,21 @@ const randompick = async (id, resvid) => {
 }
 
 const createReservateionJSON = (reservation, startDate, endDate, postfix="") => {
-    const isAccepted = reservation.state === "grant" ? "" : " (미승인)"
-    if (reservation.content) {
+    const isAccepted = reservation.state === "grant" ? "" : " (미승인)";
+    if (reservation.space.slice(0, -1) === "individual-practice-room" || reservation.space.slice(0, -1) === "piano-room"){
+        return {
+            id: reservation.id,
+            space: reservation.space,
+            state: reservation.state,
+            startDate: startDate,
+            endDate: endDate,
+            content: null,
+            text: null,
+            description: null,
+            recurrenceRule: reservation.content.recurrenceRule
+        };
+    }
+    else if (reservation.content) {
         return { // 울림미래홀
             id: reservation.id,
             space: reservation.space,
@@ -125,7 +138,8 @@ const createReservateionJSON = (reservation, startDate, endDate, postfix="") => 
             description: reservation.content.contents,
             recurrenceRule: reservation.content.recurrenceRule
         };
-    } else return {
+    }
+    else return {
         id: reservation.id,
         space: reservation.space,
         state: reservation.state,
@@ -138,71 +152,132 @@ const createReservateionJSON = (reservation, startDate, endDate, postfix="") => 
     };
 }
 
+const getByDay = (time) => {
+    let newTime = new Date(time);
+    newTime.setHours(newTime.getHours() + 9);
+    let day = newTime.getDay();
+    if(day === 0) day = 7;
+    return day;
+}
+
 reservation = {
     create: (req, res) => {
         if (!('scspacetoken' in req.cookies)) {
             res.send(false)
         }
+        let timeFrom = new Date(req.body.timeFrom);
+        let timeTo = new Date(req.body.timeTo);
+        let representId = 0;
+        req.body.recurrence.byday.sort((a, b) => a - b);
 
         auth.get_data(req.cookies.scspacetoken)
             .then((result) => {
-                let p = {};
-                
-                p.reserver_id = result.student_id;
-                p.reserver_name = result.name;
-                p.space = req.body.space;
-                p.team_id = req.body.teamId;
-                p.time_from = req.body.timeFrom;
-                p.time_to = req.body.timeTo;
-                p.time_request = new Date();
-                p.content = req.body.content;
+                if(req.body.recurrence.isRecurrence) {
+                    while(timeFrom <= new Date(req.body.recurrence.until)){
+                        for(let t of req.body.recurrence.byday) {
+                            let timeFromDay = getByDay(timeFrom);
+                            let diff = t - timeFromDay;
 
+                            timeFrom.setDate(timeFrom.getDate() + diff);
+                            timeTo.setDate(timeTo.getDate() + diff);
 
-                checkDuplicate(p.space, p.time_from, p.time_to)
-                    .then((result) => {
-                        if (result === false) {
-                            res.json({ 'reserveId': false, 'duplicate': true });
+                            if(timeFrom > new Date(req.body.recurrence.until)) break;
+                            let p = {};
+                            p.reserver_id = result.student_id;
+                            p.reserver_name = result.name;
+                            p.space = req.body.space;
+                            p.team_id = req.body.teamId;
+                            p.time_from = timeFrom.toISOString();
+                            p.time_to = timeTo.toISOString();
+                            p.time_request = new Date();
+                            p.content = req.body.content;
+
+                            timeFrom.setDate(timeFrom.getDate() - diff);
+                            timeTo.setDate(timeTo.getDate() - diff);
+                            
+
+                            checkDuplicate(p.space, p.time_from, p.time_to)
+                            .then((result) => {
+                                if (result === false) {
+                                    res.json({ 'reserveId': false, 'duplicate': true });
+                                }
+                                else {
+                                    let autoGrantList = ['individual-practice-room1', 'individual-practice-room2', 'individual-practice-room3', 'piano-room1', 'piano-room2', 'group-practice-room', 'seminar-room1', 'seminar-room2', 'dance-studio']
+                                    let autoRejectList = []
+                                    if (autoGrantList.includes(p.space)) {
+                                        p.state = 'grant';
+                                    }
+                                    else if (autoRejectList.includes(p.space)) {
+                                        p.state = 'rejected';
+                                    }
+                                    else {
+                                        p.state = 'wait';
+                                    }
+        
+                                    // banReservFrom = new Date("2023-08-03T13:00:00.000Z")
+                                    // banReservTo   = new Date("2023-08-03T17:00:00.000Z")
+                                    // timeFromDate  = new Date(p.time_from);
+                                    // timeToDate    = new Date(p.time_to);
+                                    // if(timeFromDate <= banReservFrom && banReservFrom <= timeToDate){
+                                    //     p.state = 'rejected';
+                                    // }
+                                    // if(timeFromDate <= banReservTo && banReservTo <= timeToDate){
+                                    //     p.state = 'rejected';
+                                    // }
+        
+                                    db.create(p)
+                                        .then(async (result) => {
+                                            if(representId === 0) representId = result;
+                                            // let hashres = await randompick(p.reserver_id, result);
+                                            // res.json({ 'reserveId': result, 'duplicate': false, 'hashid': hashres});
+                                        });
+        
+                                }
+                            })
                         }
-                        else {
-                            let autoGrantList = ['individual-practice-room1', 'individual-practice-room2', 'individual-practice-room3', 'piano-room1', 'piano-room2', 'group-practice-room', 'seminar-room1', 'seminar-room2', 'dance-studio']
-                            let autoRejectList = []
-                            if (autoGrantList.includes(p.space)) {
-                                p.state = 'grant';
-                            }
-                            else if (autoRejectList.includes(p.space)) {
-                                p.state = 'rejected';
+                        timeFrom.setDate(timeFrom.getDate() + 7 * req.body.recurrence.interval);
+                        timeTo.setDate(timeTo.getDate() + 7 * req.body.recurrence.interval);
+                    }
+                    res.json({'reserveId': representId});
+                }
+                else{
+                    let p = {};
+                    
+                    p.reserver_id = result.student_id;
+                    p.reserver_name = result.name;
+                    p.space = req.body.space;
+                    p.team_id = req.body.teamId;
+                    p.time_from = req.body.timeFrom;
+                    p.time_to = req.body.timeTo;
+                    p.time_request = new Date();
+                    p.content = req.body.content;
+    
+                    checkDuplicate(p.space, p.time_from, p.time_to)
+                        .then((result) => {
+                            if (result === false) {
+                                res.json({ 'reserveId': false, 'duplicate': true });
                             }
                             else {
-                                p.state = 'wait';
+                                let autoGrantList = ['individual-practice-room1', 'individual-practice-room2', 'individual-practice-room3', 'piano-room1', 'piano-room2', 'group-practice-room', 'seminar-room1', 'seminar-room2', 'dance-studio']
+                                let autoRejectList = []
+                                if (autoGrantList.includes(p.space)) {
+                                    p.state = 'grant';
+                                }
+                                else if (autoRejectList.includes(p.space)) {
+                                    p.state = 'rejected';
+                                }
+                                else {
+                                    p.state = 'wait';
+                                }
+                                db.create(p)
+                                    .then(async (result) => {
+                                        let hashres = await randompick(p.reserver_id, result);
+                                        res.json({ 'reserveId': result, 'duplicate': false, 'hashid': hashres});
+                                    });
+    
                             }
-
-                            // banReservFrom = new Date("2023-08-03T13:00:00.000Z")
-                            // banReservTo   = new Date("2023-08-03T17:00:00.000Z")
-                            // timeFromDate  = new Date(p.time_from);
-                            // timeToDate    = new Date(p.time_to);
-                            // if(timeFromDate <= banReservFrom && banReservFrom <= timeToDate){
-                            //     p.state = 'rejected';
-                            // }
-                            // if(timeFromDate <= banReservTo && banReservTo <= timeToDate){
-                            //     p.state = 'rejected';
-                            // }
-
-                            
-                            db.create(p)
-                                .then(async (result) => {
-                                    let hashres = await randompick(p.reserver_id, result);
-                                    res.json({ 'reserveId': result, 'duplicate': false, 'hashid': hashres});
-                                });
-
-                        }
-
                     })
-
-
-
-
-
-
+                }
 
             })
     },
