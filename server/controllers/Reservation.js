@@ -127,6 +127,8 @@ const createReservateionJSON = (reservation, startDate, endDate, postfix="") => 
         };
     }
     else if (reservation.content) {
+        let text = reservation.content.organizationName ? reservation.content.organizationName + postfix + isAccepted : null;
+        if(reservation.team_id) text = reservation.team_id;
         return { // 울림미래홀
             id: reservation.id,
             space: reservation.space,
@@ -134,7 +136,7 @@ const createReservateionJSON = (reservation, startDate, endDate, postfix="") => 
             startDate: startDate,
             endDate: endDate,
             content: reservation.content,
-            text: reservation.content.organizationName ? reservation.content.organizationName + postfix + isAccepted : null,
+            text: text,
             description: reservation.content.contents,
             recurrenceRule: reservation.content.recurrenceRule
         };
