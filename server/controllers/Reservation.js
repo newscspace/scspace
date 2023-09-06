@@ -134,7 +134,7 @@ const createReservateionJSON = (reservation, startDate, endDate, postfix="") => 
             startDate: startDate,
             endDate: endDate,
             content: reservation.content,
-            text: reservation.content.eventName ? reservation.content.eventName + postfix + isAccepted : reservation.content.organizationName + postfix + isAccepted,
+            text: reservation.content.organizationName ? reservation.content.organizationName + postfix + isAccepted : null,
             description: reservation.content.contents,
             recurrenceRule: reservation.content.recurrenceRule
         };
