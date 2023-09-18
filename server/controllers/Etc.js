@@ -28,7 +28,7 @@ etc = {
             .then (result => {
                 present = new Date();
                 for(let r of result){
-                    show_start = r.time_from.setMinutes(r.time_from.getMinutes() - 30);
+                    show_start = r.time_from.setMinutes(r.time_from.getMinutes() - 120);
                     show_end   = r.time_to;
                     if(show_start <= present && present <= show_end){
                         return_result = true;
