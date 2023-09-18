@@ -23,9 +23,7 @@ function Event(props){
         AOS.init();
     }, [])
 
-    const [s, changeS] = useState([
-        
-    ])
+    const [s, changeS] = useState([])
 
     return(
         <div id="main">
@@ -63,6 +61,15 @@ function Event(props){
                         <div className="container">
 
                             <div className="row g-0 portfolio-container">
+
+                                <div className="col-xl-3 col-lg-4 col-md-6 portfolio-item filter-app">
+                                    <img src="/img/dinosaur.png" className="img-fluid" alt=""/>
+                                        <div className="portfolio-info">
+                                            <h4>공룡간식 이벤트</h4>
+                                            <a href="https://www.instagram.com/p/CxUykS0LYx6/" target="_blank" title="인스타그램 링크" className="glightbox preview-link"><i className="bi bi-zoom-in"></i></a>
+                                            <a href="/" target="_blank" title="관련 링크" className="details-link"><i className="bi bi-link-45deg"></i></a>
+                                        </div>
+                                </div>
 
                                 <div className="col-xl-3 col-lg-4 col-md-6 portfolio-item filter-app">
                                     <img src="/img/championsleague2.jpg" className="img-fluid" alt=""/>
