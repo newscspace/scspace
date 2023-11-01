@@ -17,7 +17,6 @@ const appointmentClassName = '.dx-scheduler-appointment';
 const cellClassName = '.dx-scheduler-date-table-cell';
 
 
-// 이거 이따구로 짜도 되겠지 ??
 const resourcesData = [
   {text: '개인연습실 1', id: 'individual-practice-room1', color: '#D81159',}, 
   {text: '개인연습실 2', id: 'individual-practice-room2', color: '#D81159',},

@@ -44,7 +44,7 @@ const dbModel = {
     let conn = db.getConnection().promise();
     let return_result;
 
-    let sql = `SELECT id, space, state, time_from, time_to, content FROM reservation WHERE (((MONTH(time_from) = MONTH(?) AND YEAR(time_from) = YEAR(?)) OR (MONTH(time_to) = MONTH(?) AND YEAR(time_to) = YEAR(?))) OR JSON_EXTRACT(content, '$.recurrenceRule') IS NOT NULL) AND state!='rejected' `;
+    let sql = `SELECT id, reserver_id, space, state, time_from, time_to, content FROM reservation WHERE (((MONTH(time_from) = MONTH(?) AND YEAR(time_from) = YEAR(?)) OR (MONTH(time_to) = MONTH(?) AND YEAR(time_to) = YEAR(?))) OR JSON_EXTRACT(content, '$.recurrenceRule') IS NOT NULL) AND state!='rejected' `;
     await conn.query(sql, [new Date(p).toISOString().slice(0, 19).replace('T', ' '), new Date(p).toISOString().slice(0, 19).replace('T', ' '), new Date(p).toISOString().slice(0, 19).replace('T', ' '), new Date(p).toISOString().slice(0, 19).replace('T', ' ')])
       .then((result) => { return_result = result[0]; })
       .catch(err => { console.log(err); return_result = null; });

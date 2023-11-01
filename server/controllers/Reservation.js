@@ -31,117 +31,90 @@ const checkDuplicate = async (space, time_from, time_to, id = null) => {
     return return_result;
 }
 
-// 경품 추첨하는 함수
-const getPrize = function() {
-    //랜덤값 생성 (1~1000)
-    const ranNum = Math.floor((Math.random() * 999) +1);
-    //console.log('랜덤 숫자: '+ranNum);
+// 아래는 손X량의 코드
+// const getPrize = function() {
+//     //랜덤값 생성 (1~1000)
+//     const ranNum = Math.floor((Math.random() * 999) +1);
+//     //console.log('랜덤 숫자: '+ranNum);
     
-    //확률 설정
-    const pbt = 0;
-    //풀리퀘 테스트
+//     //확률 설정
+//     const pbt = 0;
+//     //풀리퀘 테스트
 
-    if(ranNum <= pbt){
-        return 1;
-    }
-    else{
-        return 0;
-    }
-}
+//     if(ranNum <= pbt){
+//         return 1;
+//     }
+//     else{
+//         return 0;
+//     }
+// }
 
-const conditioncheck = async (id) => {
-    let modelgets = await east.getresv(id);
-    let hits = modelgets.resv_hits;
-    let prize = getPrize();
+// const conditioncheck = async (id) => {
+//     let modelgets = await east.getresv(id);
+//     let hits = modelgets.resv_hits;
+//     let prize = getPrize();
 
-    // 한명당 랜덤픽 돌릴 수 있는 횟수를 5회로 제한
-    if(hits > 5){
-        //console.log('랜덤픽 횟수 초과');
-        return 0;
-    }
+//     // 한명당 랜덤픽 돌릴 수 있는 횟수를 5회로 제한
+//     if(hits > 5){
+//         //console.log('랜덤픽 횟수 초과');
+//         return 0;
+//     }
 
-    // 당첨된 사람 5명 이상인지 여부 검사
-    let winnedpeople = await east.sumvesta();
-    if(winnedpeople >= 5){
-        // 5명 이상이면 더이상 당첨안되게
-        //console.log('당첨자 5명 넘음');
-        return 0;
-    }
+//     // 당첨된 사람 5명 이상인지 여부 검사
+//     let winnedpeople = await east.sumvesta();
+//     if(winnedpeople >= 5){
+//         // 5명 이상이면 더이상 당첨안되게
+//         //console.log('당첨자 5명 넘음');
+//         return 0;
+//     }
 
-    // 당첨됐는지 여부 검사
-    let iswinned = await east.getwinprize(id);
-    if(iswinned){
-        // 당첨됐으면 더이상 당첨안되게
-        //console.log('이미 당첨된 사람');
-        return 0;
-    }
+//     // 당첨됐는지 여부 검사
+//     let iswinned = await east.getwinprize(id);
+//     if(iswinned){
+//         // 당첨됐으면 더이상 당첨안되게
+//         //console.log('이미 당첨된 사람');
+//         return 0;
+//     }
 
-    return prize;
-}
+//     return prize;
+// }
 
-const randompick = async (id, resvid) => {
+// const randompick = async (id, resvid) => {
 
-    let prize = await conditioncheck(id);
+//     let prize = await conditioncheck(id);
 
-    if(prize){
-        // 해시 키 생성
-        let hashkey = process.env.HASH_KEY1 + '-' + id + '-' + resvid + '-' + process.env.HASH_KEY2;
-        console.log(id + '-' + resvid);
+//     if(prize){
+//         // 해시 키 생성
+//         let hashkey = process.env.HASH_KEY1 + '-' + id + '-' + resvid + '-' + process.env.HASH_KEY2;
+//         console.log(id + '-' + resvid);
 
-        // prize가 0이 아니면 해시함수 사용
-        // 당첨되면 sha256 base64로 해시함수 처리 후 hash값과 content를 넘겨줌
-        hashed = crypto.createHash('sha256').update(hashkey).digest('base64');
-        let alert_content =
-        `축하드립니다! 공간위 이스터에그 이벤트에 당첨되셨습니다. 상품은 베스타 평일 저녁 식사권입니다.
-아래의 코드를 복사하여 구글폼에 제출해 주시면 확인 후 상품 수령 절차 관련하여 안내드리도록 하겠습니다.
-(구글폼 링크는 공간위 홈페이지 내의 이벤트 페이지의 이스터에그 이벤트 게시물에 있습니다.)
-*아래의 코드를 복사하지 않고 창을 끄면 코드가 사라져 당첨이 취소됩니다!!! 반드시 코드를 복사한 후 나가주세요!!!*
-*본 상품은 학생회비를 납부한 분들만 수령가능합니다.`;
-        let prize_res = {hash: hashed, content: alert_content};
-        let winned = await east.setwinprize(id);
-        if(!winned){
-            console.log('something went wrong...');
-        }
-        return prize_res;
-    }
-    else{
-    // 당첨 안되면 hash값을 0으로 넘겨줌
-        let prize_res = {hash: 0, content: ''};
-        return prize_res;
-    }
-}
+//         // prize가 0이 아니면 해시함수 사용
+//         // 당첨되면 sha256 base64로 해시함수 처리 후 hash값과 content를 넘겨줌
+//         hashed = crypto.createHash('sha256').update(hashkey).digest('base64');
+//         let alert_content =
+//         `축하드립니다! 공간위 이스터에그 이벤트에 당첨되셨습니다. 상품은 베스타 평일 저녁 식사권입니다.
+// 아래의 코드를 복사하여 구글폼에 제출해 주시면 확인 후 상품 수령 절차 관련하여 안내드리도록 하겠습니다.
+// (구글폼 링크는 공간위 홈페이지 내의 이벤트 페이지의 이스터에그 이벤트 게시물에 있습니다.)
+// *아래의 코드를 복사하지 않고 창을 끄면 코드가 사라져 당첨이 취소됩니다!!! 반드시 코드를 복사한 후 나가주세요!!!*
+// *본 상품은 학생회비를 납부한 분들만 수령가능합니다.`;
+//         let prize_res = {hash: hashed, content: alert_content};
+//         let winned = await east.setwinprize(id);
+//         if(!winned){
+//             console.log('something went wrong...');
+//         }
+//         return prize_res;
+//     }
+//     else{
+//     // 당첨 안되면 hash값을 0으로 넘겨줌
+//         let prize_res = {hash: 0, content: ''};
+//         return prize_res;
+//     }
+// }
 
-const createReservateionJSON = (reservation, startDate, endDate, postfix="") => {
+const createReservationJSON = (reservation, startDate, endDate, postfix="") => {
     const isAccepted = reservation.state === "grant" ? "" : " (미승인)";
-    if (reservation.space.slice(0, -1) === "individual-practice-room" || reservation.space.slice(0, -1) === "piano-room"){
-        return {
-            id: reservation.id,
-            space: reservation.space,
-            state: reservation.state,
-            startDate: startDate,
-            endDate: endDate,
-            content: null,
-            text: null,
-            description: null,
-            recurrenceRule: reservation.content.recurrenceRule
-        };
-    }
-    else if (reservation.content) {
-        let text = reservation.content.organizationName ? reservation.content.organizationName + postfix + isAccepted : null;
-        if(reservation.team_id) text = reservation.team_id;
-        return { // 울림미래홀
-            id: reservation.id,
-            space: reservation.space,
-            state: reservation.state,
-            startDate: startDate,
-            endDate: endDate,
-            content: reservation.content,
-            text: text,
-            description: reservation.content.contents,
-            recurrenceRule: reservation.content.recurrenceRule
-        };
-    }
-    else return {
+
+    result = {
         id: reservation.id,
         space: reservation.space,
         state: reservation.state,
@@ -150,8 +123,20 @@ const createReservateionJSON = (reservation, startDate, endDate, postfix="") => 
         content: null,
         text: null,
         description: null,
-        recurrenceRule: null
-    };
+        recurrenceRule: null,
+    }
+    if(reservation.content){
+        result.content = reservation.content
+        result.description = reservation.content.description
+    }
+    if(reservation.space === "group-practice-room" || reservation.space === "dance-studio") result.text = reservation.reserver_id;
+    if(reservation.space === "ullim-hall") result.text = reservation.content.organizationName;
+    if(reservation.space === "mirae-hall") result.text = reservation.content.organizationName;
+    if(reservation.space === "workshop")   result.text = reservation.content.organizationName;
+    if(reservation.space === "open-space") result.text = reservation.content.organizationName;
+    if(reservation.space.slice(0, -1) === "seminar-room") result.text = reservation.content.organizationName;
+    
+    return result
 }
 
 const getByDay = (time) => {
@@ -291,13 +276,13 @@ reservation = {
             .then(result => {
                 result.map((reservation) => {
                     
-                    return_result.push(createReservateionJSON(reservation, reservation.time_from, reservation.time_to))
+                    return_result.push(createReservationJSON(reservation, reservation.time_from, reservation.time_to))
                     if (reservation.content) {
                         if (reservation.content.rehersalFrom) {
-                            return_result.push(createReservateionJSON(reservation, reservation.content.rehersalFrom, reservation.content.rehersalTo, " 리허설"))
+                            return_result.push(createReservationJSON(reservation, reservation.content.rehersalFrom, reservation.content.rehersalTo, " 리허설"))
                         }
                         if (reservation.content.rehersalLastdayFrom) {
-                            return_result.push(createReservateionJSON(reservation, reservation.content.rehersalLastdayFrom, reservation.content.rehersalLastdayTo, " 리허설"))
+                            return_result.push(createReservationJSON(reservation, reservation.content.rehersalLastdayFrom, reservation.content.rehersalLastdayTo, " 리허설"))
                         }
 
                     }
