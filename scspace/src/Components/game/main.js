@@ -24,24 +24,6 @@ class main extends Phaser.Scene{
                 m: 1,
             })
         });
-
-        let game02 = this.add.rectangle(200, 160, 300, 60, 0xead9c8);
-        let text02 = this.add.text(0, 0, "어려운 네모 게임", {
-            fill: "0x000000",
-            fontFamily: "Gulim",
-            fontSize: "24px",
-            align: "center",
-        });
-        game02.setStrokeStyle(3, 0x000000);
-        text02.setPosition(200 - text02.width / 2, 160 - text02.height / 2);
-        game02.setInteractive();
-        game02.on('pointerdown', () => {
-            this.scene.start("hardSquare_waitScene", {
-                state: "init",
-                n: 3,
-                m: 1,
-            })
-        });
     }
 }
 

@@ -13,7 +13,7 @@ const PhaserComponent = () => {
             type: Phaser.AUTO,
             width: 800,
             height: 800,
-            scene: [main, square.waitScene, square.playScene, hardSquare.waitScene, hardSquare.playScene],
+            scene: [main, square.waitScene, square.playScene],
             parent: 'gamediv',
             backgroundColor: '#eeeeee'
         };
