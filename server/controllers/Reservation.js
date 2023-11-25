@@ -216,7 +216,7 @@ reservation = {
                                         .then(async (result) => {
                                             if(representId === 0) representId = result;
                                             // let hashres = await randompick(p.reserver_id, result);
-                                            // res.json({ 'reserveId': result, 'duplicate': false, 'hashid': hashres});
+                                            res.json({ 'reserveId': result, 'duplicate': false});
                                         });
         
                                 }
@@ -225,7 +225,6 @@ reservation = {
                         timeFrom.setDate(timeFrom.getDate() + 7 * req.body.recurrence.interval);
                         timeTo.setDate(timeTo.getDate() + 7 * req.body.recurrence.interval);
                     }
-                    res.json({'reserveId': representId});
                 }
                 else{
                     let p = {};
@@ -258,8 +257,9 @@ reservation = {
                                 }
                                 db.create(p)
                                     .then(async (result) => {
-                                        let hashres = await randompick(p.reserver_id, result);
-                                        res.json({ 'reserveId': result, 'duplicate': false, 'hashid': hashres});
+                                        if(representId === 0) representId = result;
+                                        // let hashres = await randompick(p.reserver_id, result);
+                                        res.json({ 'reserveId': result, 'duplicate': false});
                                     });
     
                             }

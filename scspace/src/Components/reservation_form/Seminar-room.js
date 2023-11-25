@@ -47,7 +47,7 @@ class Form extends Component{
       error === true ? 
       this.sendPost()
         .then((res) => {
-          if(res.data.reserveId >= 0){
+          if(res.data.reserveId){
             this.props.history.push({pathname : '/confirmation', state: res.data.reserveId, hashid : res.data.hashid });
           }
           else if (res.data.duplicate){
@@ -99,7 +99,6 @@ class Form extends Component{
     sendPost = () => {
       let mode = this.props.reserveData ? 'update' : 'create';
       const url = '/api/reservation/'+ mode;
-      console.log(url);
       const config = {
         headers : {
           'Content-Type' : 'application/json'
