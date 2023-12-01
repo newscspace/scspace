@@ -200,17 +200,23 @@ reservation = {
                                     else {
                                         p.state = 'wait';
                                     }
+
+                                    // 세미나실 예약 막는 코드. 시간 조정해서 쓰세요
         
-                                    // banReservFrom = new Date("2023-08-03T13:00:00.000Z")
-                                    // banReservTo   = new Date("2023-08-03T17:00:00.000Z")
-                                    // timeFromDate  = new Date(p.time_from);
-                                    // timeToDate    = new Date(p.time_to);
-                                    // if(timeFromDate <= banReservFrom && banReservFrom <= timeToDate){
-                                    //     p.state = 'rejected';
-                                    // }
-                                    // if(timeFromDate <= banReservTo && banReservTo <= timeToDate){
-                                    //     p.state = 'rejected';
-                                    // }
+                                    banReservFrom = new Date("2023-12-03T15:00:00.000Z")
+                                    banReservTo   = new Date("2023-12-15T15:00:00.000Z")
+                                    timeFromDate  = new Date(p.time_from);
+                                    timeToDate    = new Date(p.time_to);
+                                    if(p.space === "seminar-room"){
+                                        if(timeFromDate <= banReservFrom && banReservFrom <= timeToDate){
+                                            p.state = 'rejected';
+                                        }
+                                        if(timeFromDate <= banReservTo && banReservTo <= timeToDate){
+                                            p.state = 'rejected';
+                                        }
+                                    }
+                                    
+                                    ////////////////////////////////////////////////////
         
                                     db.create(p)
                                         .then(async (result) => {
