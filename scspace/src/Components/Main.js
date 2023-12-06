@@ -10,8 +10,8 @@ import {get} from 'axios';
 
 const Main = (props) => {
 
+    const [studentID, setStudentID] = useState(null);
     const [gprValid, setGprValid] = useState(false);
-    let studentID = null;
 
     const callApi = async () => {
         const res = await get('/api/etc/check_reserved?id=' + studentID);
@@ -22,7 +22,8 @@ const Main = (props) => {
     useEffect(() => {
         LoginCheck()
         .then((result) => {
-            studentID = result.student_id;
+            setStudentID(result.student_id);
+            console.log(studentID === "20230544")
             if (result === false) setGprValid(false);
             else if (result.type === 'admin') setGprValid(true);
             else{
@@ -36,7 +37,7 @@ const Main = (props) => {
         <div>
             <div class="top-margin2">
                 {gprValid === true ? <Password/> : null}
-                {/* <EmergencyNotice/> */}
+                <EmergencyNotice isLJM={studentID === "20230544"}/>
             </div>
             <Banner/>
             <FastNotice/>
