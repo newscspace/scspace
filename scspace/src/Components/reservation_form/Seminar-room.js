@@ -47,7 +47,7 @@ class Form extends Component{
       error === true ? 
       this.sendPost()
         .then((res) => {
-          if(res.data.reserveId){
+          if(res.data.reserveId >= 0){
             this.props.history.push({pathname : '/confirmation', state: res.data.reserveId, hashid : res.data.hashid });
           }
           else if (res.data.duplicate){
@@ -99,6 +99,7 @@ class Form extends Component{
     sendPost = () => {
       let mode = this.props.reserveData ? 'update' : 'create';
       const url = '/api/reservation/'+ mode;
+      console.log(url);
       const config = {
         headers : {
           'Content-Type' : 'application/json'
@@ -114,10 +115,6 @@ class Form extends Component{
         return (
 
         <div className="col-lg-8">
-            <div className = "mid-align">
-              <p>회칙에 따라, 12월 4일 ~ 12월 15일에 세미나실 예약이 불가능합니다.</p>
-              <p>사용자 여러분의 양해 부탁드립니다.</p>
-            </div>
             <form className="php-email-form" onSubmit={this.handleSubmit}>
             
             <SpacePick spacelist={{'세미나실 1' : 'seminar-room1', '세미나실 2': 'seminar-room2'}} onChangeHandler={this.handleValueChange}  />
