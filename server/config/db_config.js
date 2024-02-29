@@ -1,6 +1,6 @@
 const mysql = require('mysql2');
 const dotenv = require('dotenv');
-dotenv.config();
+dotenv.config({path: "/home/ec2-user/scspace/server/.env"});
 
 const db_info = {
     host : process.env.DB_HOST,
