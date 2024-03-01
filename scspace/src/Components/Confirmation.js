@@ -40,21 +40,23 @@ class Confirmation extends Component {
             'open-space': '오픈스페이스'
         }
 
-        // let hashed = this.easteregg();
+        let hashed = this.easteregg();
 
-        // if(hashed.hash !== 0){
-        //     window.prompt(hashed.content, hashed.hash);
-        // }
+        if(hashed.hash !== 0){
+            // 넘어온 해시값이 0이 아니면(당첨됐으면) prompt로 당첨 메시지 띄워줌
+            // prompt로 하는 이유는.... alert로는 복사가 안되더라구요....
+            window.prompt(hashed.content, hashed.hash);
+        }
         
 
     }
     
-    // easteregg = () => {
-    //     if(this.props.location.hashid == null || this.props.location.hashid == undefined){
-    //         return {hash: 0, content: ''};
-    //     }
-    //     return this.props.location.hashid
-    // }
+    easteregg = () => {
+        if(this.props.location.hashid == null || this.props.location.hashid == undefined){
+            return {hash: 0, content: ''};
+        }
+        return this.props.location.hashid
+    }
 
     reservationContent = () => {
         let returnResult = [];
