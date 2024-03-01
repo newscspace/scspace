@@ -23,7 +23,7 @@ class Form extends Component{
             space : 'mirae-hall',
             timeFrom : '',
             timeTo : '',
-            content : {organizationName : '', eventName:'', innerNumber : 0, outerNumber : 0, eventPurpose:'',contents:'', rehersalFrom:null, rehersalTo:null, rehersalLastdayFrom:null, rehersalLastdayTo:null, workFrom:null, workTo:null, workComplete:null, equipment:[], food:''}
+            content : {organizationName : '', eventName:'', innerNumber : 0, outerNumber : 0, eventPurpose:'',contents:'', rehersalFrom:null, rehersalTo:null, workFrom:null, workTo:null, workComplete:null, equipment:[], food:''}
         }
         
 
@@ -50,16 +50,6 @@ class Form extends Component{
         }
         else if(new Date(this.state.content.rehersalFrom).getTime() >= new Date(this.state.content.rehersalTo).getTime()){
           return '당일 리허설 시작 시간과 종료 시간을 올바르게 선택해주세요';
-        }
-
-      }
-      if (this.state.content.rehersalLastdayFrom !== null || this.state.content.rehersalLastdayTo !== null){
-        if (new Date(this.state.timeFrom.getFullYear(),this.state.timeFrom.getMonth(), this.state.timeFrom.getDate() - 1).getDate() !== new Date(this.state.content.rehersalLastdayFrom.getFullYear(),this.state.content.rehersalLastdayFrom.getMonth(), this.state.content.rehersalLastdayFrom.getDate()).getDate()){
-          return '리허설 시간을 확인해주세요';
-        }  
-      
-        else if(new Date(this.state.content.rehersalLastdayFrom).getTime() >= new Date(this.state.content.rehersalLastdayTo).getTime()){
-          return '전날 리허설 시작 시간과 종료 시간을 올바르게 선택해주세요';
         }
 
       }
@@ -144,7 +134,7 @@ class Form extends Component{
            <form className="php-email-form" onSubmit={this.handleSubmit}>
                 <OrganizationName onChangeHandler={this.handleValueChange_content} value={this.state.content.organizationName}/>
                 <EventName onChangeHandler={this.handleValueChange_content} value={this.state.content.eventName}/>
-                <Time rehersal={true} rehersalLastday={true} limitdate={this.limitdate} onChangeHandler = {this.handleValueChange_time} work={true}/>
+                <Time rehersal={true} limitdate={this.limitdate} onChangeHandler = {this.handleValueChange_time} work={true}/>
                 {this.props.UserInfo.type === "admin" ? <Recurrence onChangeHandler = {this.handleValueChange_recur}/> : <div/>}
                 <Number onChangeHandler={this.handleValueChange_content} type={false}/>
                 <Contents onChangeHandler = {this.handleValueChange_content} value={this.state.content.contents}/>

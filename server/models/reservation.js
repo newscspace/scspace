@@ -96,16 +96,24 @@ const dbModel = {
 
     let conn = db.getConnection().promise();
     let return_result;
+    let rehersalFrom = null;
+    let rehersalTo = null;
+    if(p.content.rehersalFrom){
+      rehersalFrom = p.content.rehersalFrom;
+      rehersalTo = p.content.rehersalTo;
+      p.content.rehersalFrom = null;
+      p.content.rehersalTo = null;
+    }
 
     let sql = `INSERT INTO reservation (reserver_id, reserver_name, space, team_id, time_to, time_from, time_request, content, state) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);`;
     await conn.query(sql, [p.reserver_id, p.reserver_name, p.space, p.team_id, new Date(p.time_to), new Date(p.time_from), p.time_request, JSON.stringify(p.content), p.state])
       .then((result) => { return_result = result[0].insertId; })
       .catch(err => { console.log(err); return_result = false; });
 
-    // 이스터에그 이벤트용 query (예약했을 때 easteregg 테이블에 없으면 학번 추가)
-    sql = `INSERT INTO easteregg (student_id, resv_hits, win_prize, cancel_resv) VALUES (?, 1, 0, 0) ON DUPLICATE KEY UPDATE resv_hits = easteregg.resv_hits + 1`;
-    await conn.query(sql, p.reserver_id)
-      .catch(err => {console.log(err);});
+    if(rehersalFrom){
+      sql = `INSERT INTO reservation (reserver_id, reserver_name, space, team_id, time_to, time_from, time_request, content, state) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);`;
+      conn.query(sql, [p.reserver_id, p.reserver_name, p.space, p.team_id, new Date(rehersalTo), new Date(rehersalFrom), p.time_request, JSON.stringify(p.content), p.state]);
+    }
     
     return return_result;
   },
