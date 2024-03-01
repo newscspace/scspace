@@ -129,6 +129,8 @@ const createReservationJSON = (reservation, startDate, endDate, postfix="") => {
         result.content = reservation.content
         result.description = reservation.content.description
     }
+    if(reservation.space.slice(0, -1) === "individual-practice-room") result.text = reservation.reserver_id;
+    if(reservation.space.slice(0, -1) === "piano-room") result.text = reservation.reserver_id;
     if(reservation.space === "group-practice-room" || reservation.space === "dance-studio") result.text = reservation.reserver_id;
     if(reservation.space === "ullim-hall") result.text = reservation.content.organizationName;
     if(reservation.space === "mirae-hall") result.text = reservation.content.organizationName;
