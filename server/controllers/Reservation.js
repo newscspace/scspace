@@ -5,15 +5,10 @@ const crypto = require('crypto');
 const dotenv = require('dotenv');
 dotenv.config();
 
-const checkDuplicate = async (space, time_from, time_to, id = null) => {
-    let p = {}
-    p.space = space;
-    p.time_from = time_from;
-    p.time_to = time_to;
-
-
+const checkDuplicate = async (p, id = null) => {
     let return_result;
-    await db.checkDuplicate(p)
+    let p2 = Object.assign({}, p);
+    await db.checkDuplicate(p2)
         .then(result => {
             if (result !== false && result.length === 0) {
                 return_result = true;
@@ -28,10 +23,32 @@ const checkDuplicate = async (space, time_from, time_to, id = null) => {
 
         })
         .catch((err) => { console.log(err); return_result = false; })
-    return return_result;
+    if(return_result === false) return false;
+    
+    if(p2.content && p2.content.rehersalFrom){
+        p2.time_from = p2.content.rehersalFrom;
+        p2.time_to = p2.content.rehersalTo;
+        await db.checkDuplicate(p2)
+            .then(result => {
+                if (result !== false && result.length === 0) {
+                    return_result = true;
+                }
+                else if (result.length === 1) {
+                    if (result[0].id === id) return_result = true;
+                    else return_result = false;
+                }
+                else {
+                    return_result = false;
+                }
+
+            })
+            .catch((err) => { console.log(err); return_result = false; })
+        return return_result;
+    }
+    else return true;
 }
 
-// 아래는 손X량의 코드
+// 아래는 손XX의 코드
 // const getPrize = function() {
 //     //랜덤값 생성 (1~1000)
 //     const ranNum = Math.floor((Math.random() * 999) +1);
@@ -129,6 +146,8 @@ const createReservationJSON = (reservation, startDate, endDate, postfix="") => {
         result.content = reservation.content
         result.description = reservation.content.description
     }
+    if(reservation.space.slice(0, -1) === "individual-practice-room") result.text = reservation.reserver_id;
+    if(reservation.space.slice(0, -1) === "piano-room") result.text = reservation.reserver_id;
     if(reservation.space === "group-practice-room" || reservation.space === "dance-studio") result.text = reservation.reserver_id;
     if(reservation.space === "ullim-hall") result.text = reservation.content.organizationName;
     if(reservation.space === "mirae-hall") result.text = reservation.content.organizationName;
@@ -183,7 +202,7 @@ reservation = {
                             timeTo.setDate(timeTo.getDate() - diff);
                             
 
-                            checkDuplicate(p.space, p.time_from, p.time_to)
+                            checkDuplicate(p)
                             .then((result) => {
                                 if (result === false) {
                                     res.json({ 'reserveId': false, 'duplicate': true });
@@ -216,7 +235,7 @@ reservation = {
                                         .then(async (result) => {
                                             if(representId === 0) representId = result;
                                             // let hashres = await randompick(p.reserver_id, result);
-                                            // res.json({ 'reserveId': result, 'duplicate': false, 'hashid': hashres});
+                                            res.json({ 'reserveId': result, 'duplicate': false});
                                         });
         
                                 }
@@ -239,7 +258,7 @@ reservation = {
                     p.time_request = new Date();
                     p.content = req.body.content;
     
-                    checkDuplicate(p.space, p.time_from, p.time_to)
+                    checkDuplicate(p)
                         .then((result) => {
                             if (result === false) {
                                 res.json({ 'reserveId': false, 'duplicate': true });
@@ -256,12 +275,11 @@ reservation = {
                                 else {
                                     p.state = 'wait';
                                 }
+                                
                                 db.create(p)
-                                    .then(async (result) => {
-                                        let hashres = await randompick(p.reserver_id, result);
-                                        res.json({ 'reserveId': result, 'duplicate': false, 'hashid': hashres});
-                                    });
-    
+                                .then(async (result) => {
+                                    res.json({'reserveId': result, 'duplicate': false});
+                                });
                             }
                     })
                 }
@@ -398,7 +416,7 @@ reservation = {
                 p.content = req.body.content;
                 p.id = req.body.id;
 
-                checkDuplicate(p.space, p.time_from, p.time_to, p.id)
+                checkDuplicate(p)
                     .then((result) => {
                         if (result === false) {
                             res.json({ 'reserveId': false, 'duplicate': true });
