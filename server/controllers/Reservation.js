@@ -276,6 +276,17 @@ reservation = {
                                     p.state = 'wait';
                                 }
                                 
+                                if(p.space.slice(0, -1) === 'seminar-room'){
+                                    banReservFrom = new Date("2024-03-09T15:00:00.000Z")
+                                    banReservTo   = new Date("2025-03-09T15:00:00.000Z")
+                                    timeFromDate  = new Date(p.time_from);
+                                    timeToDate    = new Date(p.time_to);
+                                    console.log(timeFromDate, timeToDate)
+                                    if(banReservFrom < timeFromDate || timeToDate < banReservTo){
+                                        p.state = 'rejected';
+                                    }
+                                }
+                                
                                 db.create(p)
                                 .then(async (result) => {
                                     res.json({'reserveId': result, 'duplicate': false});
