@@ -99,7 +99,6 @@ class Form extends Component{
     sendPost = () => {
       let mode = this.props.reserveData ? 'update' : 'create';
       const url = '/api/reservation/'+ mode;
-      console.log(url);
       const config = {
         headers : {
           'Content-Type' : 'application/json'
