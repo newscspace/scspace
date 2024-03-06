@@ -28,7 +28,7 @@ const dbModel = {
     return return_result;
   },
 
-  check_reserved: async (p) => {
+  check_reserved_grp: async (p) => {
     let conn = db.getConnection().promise();    
     let return_result;
    
@@ -38,7 +38,19 @@ const dbModel = {
       .catch(err => {console.log(err); return_result = null;});
     
     return return_result;
-  }
+  },
+
+  check_reserved_ws: async (p) => {
+    let conn = db.getConnection().promise();    
+    let return_result;
+   
+    let sql = `SELECT reserver_id, time_from, time_to FROM reservation WHERE space='workshop' and reserver_id=?;`;
+    await conn.query(sql, p)
+      .then((result) => {return_result = result[0]} )
+      .catch(err => {console.log(err); return_result = null;});
+    
+    return return_result;
+  },
 
 };
 
