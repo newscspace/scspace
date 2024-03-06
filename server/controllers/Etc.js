@@ -20,11 +20,30 @@ etc = {
             .then (result => { result ? res.send(true) : res.send(false)});
     },
 
-    check_reserved : async (req, res) => {
+    check_reserved_grp : async (req, res) => {
         let p = req.query.id;
         let return_result = false;
         let present, show_start, show_end;
-        await db.check_reserved(p)
+        await db.check_reserved_grp(p)
+            .then (result => {
+                present = new Date();
+                for(let r of result){
+                    show_start = r.time_from.setMinutes(r.time_from.getMinutes() - 120);
+                    show_end   = r.time_to;
+                    if(show_start <= present && present <= show_end){
+                        return_result = true;
+                    }
+                }
+                res.send(return_result);
+            })
+            .catch ((err) => {console.log(err);});
+    },
+
+    check_reserved_ws : async (req, res) => {
+        let p = req.query.id;
+        let return_result = false;
+        let present, show_start, show_end;
+        await db.check_reserved_ws(p)
             .then (result => {
                 present = new Date();
                 for(let r of result){

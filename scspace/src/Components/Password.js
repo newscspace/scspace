@@ -4,6 +4,14 @@ import {get, post} from "axios";
 const Password = (props) => {
 
     const [GRPPassword, setGRPPassword] = useState();
+    
+    const encrypt_ws = (x) => {
+        x = (parseInt(x * 91335078 / 10))   % 1000000;
+        x = (parseInt(x * 32746609 / 1000)) % 1000000;
+        x = (parseInt(x * 20186447 / 100))  % 1000000;
+        console.log(x);
+        return x;
+    }
 
     const callApi = async () => {
         const res = await get('/api/etc/get_grp');
@@ -18,10 +26,20 @@ const Password = (props) => {
     }, [])
 
     return(
-        <div className="password-container">
-            <h2>합주실 비밀번호</h2>
-            <h2>{GRPPassword}</h2>
+        <div>
+            {props.space === "grp" ? (
+                <div className="password-container">
+                    <h2>합주실 비밀번호</h2>
+                    <h2>{GRPPassword}</h2>
+                </div>
+            ) : (
+                <div className="password-container">
+                    <h2>창작공방 비밀번호</h2>
+                    <h2>{encrypt_ws(GRPPassword)}</h2>
+                </div>
+            )}
         </div>
+        
     )
 }
 
