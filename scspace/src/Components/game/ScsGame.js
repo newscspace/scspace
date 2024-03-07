@@ -3,6 +3,7 @@ import React, {useEffect, useRef} from 'react';
 import main from './main';
 import square from './square';
 import hardSquare from './hardSquare';
+import chamcham from './chamcham'
 
 const PhaserComponent = () => {
     const gameContainer = useRef(null);
@@ -13,7 +14,7 @@ const PhaserComponent = () => {
             type: Phaser.AUTO,
             width: 800,
             height: 800,
-            scene: [main, square.waitScene, square.playScene],
+            scene: [main, square.waitScene, square.playScene, chamcham.mainScene],
             parent: 'gamediv',
             backgroundColor: '#eeeeee'
         };
