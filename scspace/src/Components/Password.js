@@ -9,7 +9,7 @@ const Password = (props) => {
         x = (parseInt(x * 91335078 / 10))   % 1000000;
         x = (parseInt(x * 32746609 / 1000)) % 1000000;
         x = (parseInt(x * 20186447 / 100))  % 1000000;
-        console.log(x);
+        x = (parseInt(x * 65840178 / 100))  % 1000000;
         return x;
     }
 
@@ -23,6 +23,7 @@ const Password = (props) => {
         callApi()
         .then((result) => {setGRPPassword(result);})
         .catch(err => console.log(err));
+        console.log()
     }, [])
 
     return(
