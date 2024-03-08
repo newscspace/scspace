@@ -14,9 +14,10 @@ const PhaserComponent = () => {
             type: Phaser.AUTO,
             width: 800,
             height: 800,
-            scene: [main, square.waitScene, square.playScene, chamcham.mainScene],
+            scene: [main, square.waitScene, square.playScene, chamcham.waitScene, chamcham.playScene],
             parent: 'gamediv',
-            backgroundColor: '#eeeeee'
+            backgroundColor: '#eeeeee',
+            autoDestroy: true
         };
         game = new Phaser.Game(config);
         game.scene.start("main");
