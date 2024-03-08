@@ -36,11 +36,7 @@ class main extends Phaser.Scene{
         text02.setPosition(200 - text02.width / 2, 160 - text02.height / 2);
         game02.setInteractive();
         game02.on('pointerdown', () => {
-            this.scene.start("chamcham_mainScene", {
-                state: "init",
-                n: 3,
-                m: 1,
-            })
+            this.scene.start("chamcham_waitScene", {try: 0})
         });
     }
 }
