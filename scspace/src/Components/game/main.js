@@ -38,6 +38,20 @@ class main extends Phaser.Scene{
         game02.on('pointerdown', () => {
             this.scene.start("chamcham_waitScene", {try: 0})
         });
+
+        let game03 = this.add.rectangle(200, 260, 300, 60, 0xead9c8);
+        let text03 = this.add.text(0, 0, "체스", {
+            fill: "0x000000",
+            fontFamily: "Gulim",
+            fontSize: "24px",
+            align: "center",
+        });
+        game03.setStrokeStyle(3, 0x000000);
+        text03.setPosition(200 - text03.width / 2, 260 - text03.height / 2);
+        game03.setInteractive();
+        game03.on('pointerdown', () => {
+            this.scene.start("chess_whiteScene");
+        });
     }
 }
 
