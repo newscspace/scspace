@@ -2,8 +2,9 @@ import Phaser from 'phaser';
 import React, {useEffect, useRef} from 'react';
 import main from './main';
 import square from './square';
-import hardSquare from './hardSquare';
+// import hardSquare from './hardSquare';
 import chamcham from './chamcham'
+import chess from './chess'
 
 const PhaserComponent = () => {
     const gameContainer = useRef(null);
@@ -14,7 +15,10 @@ const PhaserComponent = () => {
             type: Phaser.AUTO,
             width: 800,
             height: 800,
-            scene: [main, square.waitScene, square.playScene, chamcham.waitScene, chamcham.playScene],
+            scene: [main,
+                    square.waitScene, square.playScene,
+                    chamcham.waitScene, chamcham.playScene,
+                    chess.whiteScene, chess.blackScene, chess.gameoverScene],
             parent: 'gamediv',
             backgroundColor: '#eeeeee',
             autoDestroy: true
