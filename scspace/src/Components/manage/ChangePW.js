@@ -27,7 +27,7 @@ const ChangePW = (props) => {
         <div>
             <div className="mid-align"><b>{isClicked ? "변경 완료!" : " "}</b></div>
             <div className="changepw-button">
-                <button onClick={handleValue}>합주실 비밀번호 변경</button>
+                <button onClick={handleValue}>합주실 / 창작공방 비밀번호 변경</button>
             </div>
         </div>
     );
