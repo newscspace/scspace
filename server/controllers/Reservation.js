@@ -340,6 +340,13 @@ reservation = {
                 p.time_to = new Date(req.body.endDate);
                 p.time_request = new Date();
                 p.content = { 'eventName': req.body.text, 'contents': req.body.description };
+                
+                if(p.space === "ullim-hall") p.content.organizationName = req.body.text;
+                if(p.space === "mirae-hall") p.content.organizationName = req.body.text;
+                if(p.space === "workshop")   p.content.organizationName = req.body.text;
+                if(p.space === "open-space") p.content.organizationName = req.body.text;
+                if(p.space.slice(0, -1) === "seminar-room") p.content.organizationName = req.body.text;
+
                 p.state = 'grant';
 
                 db.createCalendar(p)
