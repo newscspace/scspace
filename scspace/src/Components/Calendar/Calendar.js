@@ -68,10 +68,12 @@ class Calendar extends React.Component {
         allowAdding: false,
         allowDeleting: false,
         allowUpdating: false,
-      }, 
-      filter : 'individual-practice-room1',
+      },
       data : []
     };
+    
+    if(sessionStorage.getItem('filter') === null) sessionStorage.setItem('filter', 'individual-practice-room1');
+
     this.changeSpace = this.changeSpace.bind(this)
     this.onAppointmentContextMenu = this.onAppointmentContextMenu.bind(this);
     this.onContextMenuItemClick = this.onContextMenuItemClick.bind(this);
@@ -93,8 +95,9 @@ class Calendar extends React.Component {
 
   render() {
     const {
-      contextMenuItems, target, disabled, currentDate, groups, crossScrollingEnabled, editing, filter, data
+      contextMenuItems, target, disabled, currentDate, groups, crossScrollingEnabled, editing, data
     } = this.state;
+    const filter = sessionStorage.getItem('filter');
     const {t} = this.props;
     
     return (
@@ -103,13 +106,13 @@ class Calendar extends React.Component {
           <React.Fragment>
             <Dropdown >
               <Dropdown.Toggle className="space-filter" id="dropdown-basic" >
-                {t(spaceDictAccepted[this.state.filter])}
+                {t(spaceDictAccepted[sessionStorage.getItem('filter')])}
               </Dropdown.Toggle>
 
               <Dropdown.Menu>
                 {Object.keys(spaceDictAccepted).map((space) =>{
                   return (
-                    <Dropdown.Item onClick={() =>{this.setState({filter:space}) }}>{t(spaceDictAccepted[space])}</Dropdown.Item>
+                    <Dropdown.Item onClick={() =>{ sessionStorage.setItem('filter', space); this.setState({});}}>{t(spaceDictAccepted[space])}</Dropdown.Item>
                   )
                 })}
               </Dropdown.Menu>
@@ -125,7 +128,7 @@ class Calendar extends React.Component {
               defaultCurrentView="month"
               currentDate={currentDate}
               startDayHour={0}
-              recurrenceEditMode="series"
+              // recurrenceEditMode="series"
               onAppointmentContextMenu={this.onAppointmentContextMenu}
               onAppointmentAdded={this.onAppointmentAdded}
               onAppointmentUpdated={this.onAppointmentUpdated}
@@ -284,16 +287,6 @@ class Calendar extends React.Component {
           text: '새 예약',
           onItemClick: () => scheduler.showAppointmentPopup(
             { startDate: cellData.startDate },
-            true,
-          ),
-        },
-        {
-          text: '새 정기예약',
-          onItemClick: () => scheduler.showAppointmentPopup(
-            {
-              startDate: cellData.startDate,
-              recurrenceRule: 'FREQ=DAILY',
-            },
             true,
           ),
         },

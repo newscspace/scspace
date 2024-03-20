@@ -140,7 +140,6 @@ const createReservationJSON = (reservation, startDate, endDate, postfix="") => {
         content: null,
         text: null,
         description: null,
-        recurrenceRule: null,
     }
     if(reservation.content){
         result.content = reservation.content
@@ -340,7 +339,14 @@ reservation = {
                 p.time_from = new Date(req.body.startDate);
                 p.time_to = new Date(req.body.endDate);
                 p.time_request = new Date();
-                p.content = { 'eventName': req.body.text, 'recurrenceRule': req.body.recurrenceRule ? req.body.recurrenceRule : null, 'contents': req.body.description };
+                p.content = { 'eventName': req.body.text, 'contents': req.body.description };
+                
+                if(p.space === "ullim-hall") p.content.organizationName = req.body.text;
+                if(p.space === "mirae-hall") p.content.organizationName = req.body.text;
+                if(p.space === "workshop")   p.content.organizationName = req.body.text;
+                if(p.space === "open-space") p.content.organizationName = req.body.text;
+                if(p.space.slice(0, -1) === "seminar-room") p.content.organizationName = req.body.text;
+
                 p.state = 'grant';
 
                 db.createCalendar(p)
@@ -364,7 +370,6 @@ reservation = {
                 p.time_last_modified = new Date();
                 p.content = req.body.content ? req.body.content : {};
                 p.content['eventName'] = req.body.text;
-                p.content['recurrenceRule'] = req.body.recurrenceRule ? req.body.recurrenceRule : null;
                 p.content['contents'] = req.body.description;
                 p.id = req.body.id
                 p.state = 'grant';
