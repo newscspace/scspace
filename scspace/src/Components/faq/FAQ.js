@@ -39,7 +39,13 @@ class FAQ extends Component{
 
   callApi= async () => {
     const res = await get('/api/faq/all');
-    const body = await res.data;
+    let body = await res.data;
+
+    if(this.state.login === false) body = body.filter(d => d.id !== 13);
+    if(this.state.login === true){
+      if(this.state.UserInfo.type !== 'admin') body = body.filter(d => d.id !== 13);
+    }
+    
     return body;
   }
 
