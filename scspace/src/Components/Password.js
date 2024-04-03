@@ -4,6 +4,7 @@ import {get, post} from "axios";
 const Password = (props) => {
 
     const [GRPPassword, setGRPPassword] = useState();
+    const [WSPassword, setWSPassword] = useState();
     
     const encrypt_ws = (x) => {
         x = (parseInt(x * 91335078 / 10))   % 1000000;
@@ -13,17 +14,24 @@ const Password = (props) => {
         return x;
     }
 
-    const callApi = async () => {
+    const callApi_grp = async () => {
         const res = await get('/api/etc/get_grp');
+        const body = await res.data;
+        return body;
+    }
+    const callApi_ws = async () => {
+        const res = await get('/api/etc/get_ws');
         const body = await res.data;
         return body;
     }
 
     useEffect(() => {
-        callApi()
+        callApi_grp()
         .then((result) => {setGRPPassword(result);})
         .catch(err => console.log(err));
-        console.log()
+        callApi_ws()
+        .then((result) => {setWSPassword(result);})
+        .catch(err => console.log(err));
     }, [])
 
     return(
@@ -36,7 +44,7 @@ const Password = (props) => {
             ) : (
                 <div className="password-container">
                     <h2>창작공방 비밀번호</h2>
-                    <h2>{encrypt_ws(GRPPassword)}</h2>
+                    <h2>{WSPassword}</h2>
                 </div>
             )}
         </div>

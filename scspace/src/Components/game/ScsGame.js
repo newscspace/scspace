@@ -1,10 +1,10 @@
-import Phaser from 'phaser';
-import React, {useEffect, useRef} from 'react';
-import main from './main';
-import square from './square';
-// import hardSquare from './hardSquare';
+import Phaser from 'phaser'
+import React, {useEffect, useRef} from 'react'
+import main from './main'
+import square from './square'
 import chamcham from './chamcham'
 import chess from './chess'
+import nubzuk from './nubzuk'
 
 const PhaserComponent = () => {
     const gameContainer = useRef(null);
@@ -18,10 +18,18 @@ const PhaserComponent = () => {
             scene: [main,
                     square.waitScene, square.playScene,
                     chamcham.waitScene, chamcham.playScene,
-                    chess.whiteScene, chess.blackScene, chess.gameoverScene],
+                    chess.whiteScene, chess.blackScene, chess.gameoverScene,
+                    nubzuk.waitScene],
+            physics: {
+                default: 'arcade',
+            },
+            fps: {
+                target: 60,
+                forceSetTimeOut: true
+            },
             parent: 'gamediv',
             backgroundColor: '#eeeeee',
-            autoDestroy: true
+            autoDestroy: true,
         };
         game = new Phaser.Game(config);
         game.scene.start("main");
