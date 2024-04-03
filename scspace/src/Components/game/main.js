@@ -52,6 +52,20 @@ class main extends Phaser.Scene{
         game03.on('pointerdown', () => {
             this.scene.start("chess_whiteScene");
         });
+
+        // let game04 = this.add.rectangle(200, 360, 300, 60, 0xead9c8);
+        // let text04 = this.add.text(0, 0, "넙죽이 게임", {
+        //     fill: "0x000000",
+        //     fontFamily: "Gulim",
+        //     fontSize: "24px",
+        //     align: "center",
+        // });
+        // game04.setStrokeStyle(3, 0x000000);
+        // text04.setPosition(200 - text04.width / 2, 360 - text04.height / 2);
+        // game04.setInteractive();
+        // game04.on('pointerdown', () => {
+        //     this.scene.start("nubzuk_waitScene");
+        // });
     }
 }
 

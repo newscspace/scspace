@@ -114,6 +114,7 @@ set_db = {
     conn.query(`  CREATE TABLE IF NOT EXISTS etc(
       id INTEGER NOT NULL AUTO_INCREMENT,
       grp_password VARCHAR(20),
+      ws_password VARCHAR(20),
       PRIMARY KEY (id)
     );`)
 

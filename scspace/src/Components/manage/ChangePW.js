@@ -5,8 +5,18 @@ const ChangePW = (props) => {
 
     const [isClicked, setIsClicked] = useState(false);
 
-    const sendPost = () => {
+    const sendPost_GRP = () => {
         const url = '/api/etc/new_grp';
+        const config = {
+            headers : {
+            'Content-Type' : 'application/json'
+            }
+        }
+        
+        return post(url, JSON.stringify({}), config);
+    }
+    const sendPost_WS = () => {
+        const url = '/api/etc/new_ws';
         const config = {
             headers : {
             'Content-Type' : 'application/json'
@@ -18,16 +28,25 @@ const ChangePW = (props) => {
 
     const handleValue = () => {
         if(props.space === "GRP"){
-            sendPost()
+            sendPost_GRP()
             .then((res) => {setIsClicked(true);})
         }
+        if(props.space === "WS"){
+            sendPost_WS()
+            .then((res) => {setIsClicked(true);})
+        }
+    }
+
+    const kor = (space) => {
+        if(space === "GRP") return "합주실";
+        if(space === "WS")  return "창작공방"
     }
 
     return(
         <div>
             <div className="mid-align"><b>{isClicked ? "변경 완료!" : " "}</b></div>
             <div className="changepw-button">
-                <button onClick={handleValue}>합주실 / 창작공방 비밀번호 변경</button>
+                <button onClick={handleValue}>{kor(props.space)} 비밀번호 변경</button>
             </div>
         </div>
     );
