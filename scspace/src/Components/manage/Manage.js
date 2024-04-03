@@ -32,7 +32,8 @@ class Manage extends Component{
 
             <LatestReserv/>
             <LatestAsk history={this.props.history}/>
-            <ChangePW space="GRP"></ChangePW>
+            <ChangePW space="GRP"/>
+            <ChangePW space="WS"/>
             
         </main>
       )};

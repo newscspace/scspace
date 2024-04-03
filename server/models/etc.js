@@ -3,7 +3,7 @@ const db =  require('../config/db_config');
 
 const dbModel = {
 
-  get_grp: async () => {
+  get: async () => {
     let conn = db.getConnection().promise();    
     let return_result;
    
@@ -18,9 +18,32 @@ const dbModel = {
   new_grp: async (p) => {
     let conn = db.getConnection().promise();    
     let return_result;
+    let ws;
+
+    let sql = `SELECT ws_password FROM etc ORDER BY id DESC LIMIT 1;`;
+    await conn.query(sql)
+      .then((result) => {ws = result[0][0].ws_password})
+    
+    sql = `INSERT INTO etc(grp_password, ws_password) VALUES (?, ?);`;
+    await conn.query(sql, [p, ws])
+      .then(() => {return_result = true;})
+      .catch(err => {console.log(err); return_result = false;});
    
-    let sql = `INSERT INTO etc(grp_password) VALUES (?);`;
-    await conn.query(sql, p)
+    
+    return return_result;
+  },
+
+  new_ws: async (p) => {
+    let conn = db.getConnection().promise();    
+    let return_result;
+    let grp;
+
+    let sql = `SELECT grp_password FROM etc ORDER BY id DESC LIMIT 1;`;
+    await conn.query(sql)
+      .then((result) => {grp = result[0][0].grp_password})
+   
+    sql = `INSERT INTO etc(grp_password, ws_password) VALUES (?, ?);`;
+    await conn.query(sql, [grp, p])
       .then(() => {return_result = true;})
       .catch(err => {console.log(err); return_result = false;});
    

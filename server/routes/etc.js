@@ -5,7 +5,11 @@ const etc = require('../controllers/Etc');
 
 router.get('/api/etc/get_grp', etc.get_grp);
 
+router.get('/api/etc/get_ws', etc.get_ws);
+
 router.post('/api/etc/new_grp', etc.new_grp);
+
+router.post('/api/etc/new_ws', etc.new_ws);
 
 router.get('/api/etc/check_reserved_grp', etc.check_reserved_grp);
 
