@@ -36,6 +36,7 @@ const App = () => {
       <h1>확인 불가능한 이슈로 현재 점검중입니다...</h1>
       <h1>기존에 예약하신 분들 께서는 다시 한 번 예약해주시기 바랍니다.</h1>
       <a href='https://docs.google.com/spreadsheets/d/1mraiMzUZq_KzS_yhjb2bdWshTPPHDRfoKrNU9Wp5n8M/edit?usp=sharing'> 예약 스프레스시트 확인하기 </a>
+      <br></br>
       <a href='https://forms.gle/Q3KtZxWYD2cxxjLm8'> 예약 신청 구글폼 </a>
     </div>
    
