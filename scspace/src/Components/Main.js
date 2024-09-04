@@ -48,7 +48,6 @@ const Main = (props) => {
       <div class="top-margin2">
         {gprValid === true ? <Password space="grp" /> : null}
         {wsValid === true ? <Password space="ws" /> : null}
-        <EmergencyNotice />
       </div>
       <Banner />
       <FastNotice />
