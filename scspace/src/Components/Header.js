@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import LoginCheck from "./auth/LoginCheck";
 import Dropdown from "react-bootstrap/Dropdown";
 import { withTranslation } from "react-i18next";
+import EmergencyNotice from "./notice/EmergencyNotice";
 
 import "../static/vendor/bootstrap/css/bootstrap.min.css";
 import "../static/vendor/bootstrap-icons/bootstrap-icons.css";
@@ -113,9 +114,8 @@ class Header extends Component {
             <img src="/img/logo.svg" alt="" />
             <h1>         </h1>
           </Link>
-
+          <EmergencyNotice />
           <nav id="navbar" className="navbar">
-            <EmergencyNotice />
             <ul>
               {this.state.menu.map((menu, idx) => {
                 return menu.sub_menu.length === 0 ? (
