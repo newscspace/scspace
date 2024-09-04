@@ -114,7 +114,7 @@ class Header extends Component {
             <img src="/img/logo.svg" alt="" />
             <h1>         </h1>
           </Link>
-          <EmergencyNotice />
+
           <nav id="navbar" className="navbar">
             <ul>
               {this.state.menu.map((menu, idx) => {
@@ -194,6 +194,7 @@ class Header extends Component {
             </Link>
           )}
         </div>
+        <EmergencyNotice />
       </header>
     );
   }
